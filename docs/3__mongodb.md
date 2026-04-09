@@ -5,7 +5,7 @@ title: "Bases de Datos NoSQL"
 Seguramente **MongoDB** es el más famoso de los Sistemas Gestoras de Bases de Datos
 **NoSQL**.
  
-El número de **MongoDB** proviene de la palabra inglesa _hu**mongo**us_, que
+El nombre de **MongoDB** proviene de la palabra inglesa _hu**mongo**us_, que
 significa enorme, que es el propósito de esta Base de Datos: guardar grandes
 cantidades de información. Es de código abierto y está programada en C++. Lo va
 crear la empresa **10gen** (actualmente **MongoDB Inc.**)
