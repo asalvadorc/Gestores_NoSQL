@@ -253,6 +253,7 @@ p {
     margin: 0 4px;
     padding: 6px 12px !important;
     opacity: 0.8;
+    font-weight: bold !important;
 }
 
 /* Efecto al pasar el ratón (iluminación) */
