@@ -1,27 +1,24 @@
-# **Implementación de Relaciones en MongoDB**
+# 12 - Relaciones en MongoDB
 
-
-MongoDB, al ser una **base de datos NoSQL**, **no maneja relaciones de la misma manera que SQL**. Sin embargo, permite representar relaciones entre documentos utilizando dos enfoques principales:
+MongoDB, al ser una base de datos NoSQL, no maneja relaciones de la misma forma que SQL. Sin embargo, permite representar relaciones entre documentos utilizando dos enfoques principales:
 
 1️⃣ Relaciones mediante documentos embebidos.  
 2️⃣ Relaciones mediante referencias.
 
 Cada enfoque tiene ventajas y desventajas, según el caso de uso.
 
----
-
-## 3.1. Relación con Documentos Embebidos
-Este enfoque **anida los datos relacionados dentro del mismo documento**.  
-Se usa cuando los datos relacionados se consultan frecuentemente juntos y no crecen demasiado en tamaño.
+## 12.1 - Relación con Documentos Embebidos
+Este enfoque **anida las datos relacionados dentro del mismo documento**.  
+Se usa cuando las datos relacionados se consultan frecuentemente juntos y no crecen demasiado en tamaño.
 
 **<u>Ejemplo</u>:** Cliente con sus Pedidos embebidos
 
     {
       "_id": 1,
-      "nombre": "Juan",
+      "número": "Juan",
       "email": "juan@email.com",
       "pedidos": [
-        { "producto": "Laptop", "total": 1200 },
+        { "producto": "Laptop", "total": 1200},
         { "producto": "Mouse", "total": 25 }
       ]
     }
@@ -29,19 +26,19 @@ Se usa cuando los datos relacionados se consultan frecuentemente juntos y no cre
 
 ✅ **Ventajas**  
 ✔ Rápida recuperación de datos (no requiere `JOINs`).  
-✔ Menos consultas a la base de datos.  
-✔ Buena opción si los datos no crecen demasiado.  
+✔ Menos consultas en la base de datos.  
+✔ Buena opción si las datos no crecen demasiado.  
 
 ❌ **Desventajas**  
 ✖ Si los pedidos crecen mucho, el documento se hace muy grande.  
 ✖ No se pueden actualizar pedidos de forma independiente sin modificar el cliente.  
 
----
+None
 
-## 3.2. Relación con Referencias
+## 12.2 - Relación con Referencias
 En este enfoque, los documentos **almacenan solo referencias (IDs) de documentos en otras colecciones**.  
-Se usa cuando los datos son reutilizados en múltiples documentos o crecen mucho en tamaño.  
-Estas referencias pueden ser de dos tipos; referencias manuales o por DBRefs.
+Se usa cuando las datos son reutilizados en múltiples documentos o crecen mucho en tamaño.  
+Estas referencias pueden ser de dos tipos; referencias manuales o miedo DBRefs.
 
 **<u>Ejemplo</u>:** Cliente y Pedidos en colecciones separadas con referencia 
 
@@ -49,9 +46,9 @@ Estas referencias pueden ser de dos tipos; referencias manuales o por DBRefs.
 
     {
       "_id": 1,
-      "nombre": "Juan",
+      "número": "Juan",
       "email": "juan@email.com",
-      "pedidos": [101, 102]  // Referencias a pedidos
+      pedidos: [101, 102] // Referencias a pedidos
     }
 
 
@@ -69,21 +66,21 @@ Estas referencias pueden ser de dos tipos; referencias manuales o por DBRefs.
 ✔ Se pueden actualizar las referencias sin modificar el documento original.  
 
 ❌ **Desventajas**  
-✖ Se necesitan consultas adicionales (`$lookup`) para traer los datos completos.  
+✖ Se necesitan consultes adicionales (`$lookup`) para sacar las datos completos.  
 ✖ Puede ser más lento en consultas frecuentes.  
 
----
+None
 
 !!!Tip "Regla general" 
-    - **Si los datos relacionados son de uso frecuente y pequeños →** Usa documentos embebidos.  
-    - **Si los datos crecen mucho o se usan en varias colecciones →** Usa referencias con `$lookup`.  
+    - **Si las datos relacionados son de uso frecuente y pequeños →** Usa documentos embebidos.  
+    - **Si las datos crecen mucho o se usan en varias colecciones →** Usa referencias con `$lookup`.  
 
----
+None
 
-## 3.3. Relaciones en MongoDB con `$lookup`
+## 12.3 - Relaciones en MongoDB con `$lookup`
 
 En **MongoDB**, la agregación con **$lookup** permite realizar joins entre colecciones.  
-Es útil cuando seguimos un enfoque de **modelado de datos con referencias**, donde almacenamos solo el **ObjectId** en lugar de los documentos embebidos.
+Es útil cuando seguimos un enfoque de **modelado de datos con referencias**, donde almacenamos sólo el **ObjectId** en lugar de los documentos embebidos.
 
 !!!Note "Sintaxis"
         {   
@@ -100,8 +97,8 @@ Es útil cuando seguimos un enfoque de **modelado de datos con referencias**, do
 * **Colección `usuarios`**  
 
         [
-          { "_id": 1, "nombre": "Carlos", "email": "carlos@example.com" },
-          { "_id": 2, "nombre": "Ana", "email": "ana@example.com" }
+          { "_id": 1, "número": "Carlos", "email": "carlos@example.com" },
+          { "_id": 2, "número": "Ana", "email": "ana@example.com" }
         ]
 
 * **Colección `pedidos`**
@@ -118,10 +115,10 @@ Es útil cuando seguimos un enfoque de **modelado de datos con referencias**, do
         db.usuarios.aggregate([
           {
             "$lookup": {
-              "from": "pedidos",         // Colección a unir
-              "localField": "_id",       // Campo en la colección actual (usuarios)
+              "from": "pedidos", // Colección a unir
+              "localField": "_id", // Campo en la colección actual (usuarios)
               "foreignField": "usuario_id", // Campo en la otra colección (pedidos)
-              "as": "pedidos"            // Nombre del campo de salida con los pedidos
+              "as": "pedidos" // Número del campo de salida con los pedidos
             }
           }
         ])
@@ -131,7 +128,7 @@ Es útil cuando seguimos un enfoque de **modelado de datos con referencias**, do
         [
           {
             "_id": 1,
-            "nombre": "Carlos",
+            "número": "Carlos",
             "email": "carlos@example.com",
             "pedidos": [
               { "_id": 101, "usuario_id": 1, "producto": "Laptop", "precio": 1200 },
@@ -140,7 +137,7 @@ Es útil cuando seguimos un enfoque de **modelado de datos con referencias**, do
           },
           {
             "_id": 2,
-            "nombre": "Ana",
+            "número": "Ana",
             "email": "ana@example.com",
             "pedidos": [
               { "_id": 103, "usuario_id": 2, "producto": "Teclado", "precio": 80 }
@@ -156,7 +153,7 @@ Es útil cuando seguimos un enfoque de **modelado de datos con referencias**, do
 
         // Primera instrucción
         db.authors.insertOne({
-          name: "Diego",
+          número: "Diego",
           email: "dcortes@example.com",
           age: 25
         });
@@ -168,7 +165,7 @@ Es útil cuando seguimos un enfoque de **modelado de datos con referencias**, do
             author_id: ObjectId("id_of_author")
           },
           {
-            name: "Secret of programming",
+            nombre: "Secreto de programación",
             author_id: ObjectId("id_of_author")
           }
         ]);  
@@ -214,8 +211,8 @@ Siguiendo con el ejemplo de usuarios y sus pedidos, si cada pedido tiene detalle
 * **Colección `usuarios`**
 
         [
-          { "_id": 1, "nombre": "Carlos", "email": "carlos@example.com" },
-          { "_id": 2, "nombre": "Ana", "email": "ana@example.com" }
+          { "_id": 1, "número": "Carlos", "email": "carlos@example.com" },
+          { "_id": 2, "número": "Ana", "email": "ana@example.com" }
         ]
 
 * **Colección `pedidos`**
@@ -229,9 +226,9 @@ Siguiendo con el ejemplo de usuarios y sus pedidos, si cada pedido tiene detalle
 * **Colección `detalles_pedido`**
 
         [
-          { "_id": 201, "pedido_id": 101, "cantidad": 1, "garantia": "2 años" },
-          { "_id": 202, "pedido_id": 102, "cantidad": 2, "garantia": "1 año" },
-          { "_id": 203, "pedido_id": 103, "cantidad": 1, "garantia": "3 años" }
+          { "_id": 201, "pedido_id": 101, "cantidad": 1, "garantía": "2 años" },
+          { "_id": 202, "pedido_id": 102, "cantidad": 2, "garantía": "1 año" },
+          { "_id": 203, "pedido_id": 103, "cantidad": 1, "garantía": "3 años" }
         ]
 
 * Consulta con **`$lookup` anidado** 
@@ -240,29 +237,29 @@ La idea es obtener una lista de usuarios con sus pedidos, y dentro de cada pedid
 
           db.usuarios.aggregate([
           {
-            "$lookup": {
-              "from": "pedidos",
+            "$búsqueda": {
+              "de": "órdenes",
               "localField": "_id",
-              "foreignField": "usuario_id",
-              "as": "pedidos"
+              "foreignField": "user_id",
+              "como": "órdenes"
             }
           },
           {
-            "$unwind": "$pedidos"  // Descompone el array de pedidos
+            "$unwind": "$orders" // Desenrolla la matriz de pedidos
           },
           {
-            "$lookup": {
-              "from": "detalles_pedido",
+            "$búsqueda": {
+              "de": "order_detail",
               "localField": "pedidos._id",
-              "foreignField": "pedido_id",
-              "as": "pedidos.detalles"
+              "foreignField": "order_id",
+              "como": "pedidos.detalles"
             }
           },
           {
-            "$group": {
+            "$grupo": {
               "_id": "$_id",
-              "nombre": { "$first": "$nombre" },
-              "email": { "$first": "$email" },
+              "número": { "$primero": "$número" },
+              "correo electrónico": { "$primero": "$correo electrónico" },
               "pedidos": { "$push": "$pedidos" }
             }
           }
@@ -273,7 +270,7 @@ La idea es obtener una lista de usuarios con sus pedidos, y dentro de cada pedid
         [
           {
             "_id": 1,
-            "nombre": "Carlos",
+            "número": "Carlos",
             "email": "carlos@example.com",
             "pedidos": [
               {
@@ -281,8 +278,8 @@ La idea es obtener una lista de usuarios con sus pedidos, y dentro de cada pedid
                 "usuario_id": 1,
                 "producto": "Laptop",
                 "precio": 1200,
-                "detalles": [
-                  { "_id": 201, "pedido_id": 101, "cantidad": 1, "garantia": "2 años" }
+                detalles: [
+                  { "_id": 201, "pedido_id": 101, "cantidad": 1, "garantía": "2 años" }
                 ]
               },
               {
@@ -290,15 +287,15 @@ La idea es obtener una lista de usuarios con sus pedidos, y dentro de cada pedid
                 "usuario_id": 1,
                 "producto": "Mouse",
                 "precio": 50,
-                "detalles": [
-                  { "_id": 202, "pedido_id": 102, "cantidad": 2, "garantia": "1 año" }
+                detalles: [
+                  { "_id": 202, "pedido_id": 102, "cantidad": 2, "garantía": "1 año" }
                 ]
               }
             ]
           },
           {
             "_id": 2,
-            "nombre": "Ana",
+            "número": "Ana",
             "email": "ana@example.com",
             "pedidos": [
               {
@@ -306,8 +303,8 @@ La idea es obtener una lista de usuarios con sus pedidos, y dentro de cada pedid
                 "usuario_id": 2,
                 "producto": "Teclado",
                 "precio": 80,
-                "detalles": [
-                  { "_id": 203, "pedido_id": 103, "cantidad": 1, "garantia": "3 años" }
+                detalles: [
+                  { "_id": 203, "pedido_id": 103, "cantidad": 1, "garantía": "3 años" }
                 ]
               }
             ]
@@ -318,22 +315,21 @@ La idea es obtener una lista de usuarios con sus pedidos, y dentro de cada pedid
 🎯 Explicación del Pipeline  
 
 
-- $lookup (usuarios → pedidos): Une los pedidos a cada usuario.
-- $unwind (pedidos): Descompone la lista de pedidos para poder hacer otro $lookup.
-- $lookup (pedidos → detalles_pedido): Une los detalles a cada pedido.
-- $group: Vuelve a agrupar los datos para reconstruir la estructura.
+Podríamos haber ejecutado directamente **redis-server** haciéndole doble-clic desde
+de un explorador de archivos, por ejemplo, pero entonces no podríamos pararlo y en
+definitiva controlarlo tan cómodamente.
 
 ### El operador `$unwind`
   
 El operador **$unwind** en MongoDB descompone un array dentro de un documento en múltiples documentos, cada uno con un solo elemento del array.
 
-Es especialmente útil cuando trabajamos con **$lookup**, porque las consultas de agregación en MongoDB manejan arrays, y a veces es necesario convertirlos en documentos individuales para hacer más joins o transformaciones.
+Es especialmente útil cuando trabajamos con **$lookup**, porque las consultas de agregación en MongoDB manejan arrays, ya veces es necesario convertirlos en documentos individuales para hacer más joins o transformaciones.
 
 **¿Cuándo se usa $unwind?**  
 
   ✔ Cuando necesitas descomponer arrays en documentos individuales.  
   ✔ Para hacer joins en múltiples niveles (como unir detalles_pedido a cada pedido).  
-  ✔ Para hacer cálculos en elementos individuales de un array, como contar cuántos productos ha comprado un usuario.
+  ✔ Para realizar cálculos en elementos individuales de un array, como contar cuántos productos ha comprado un usuario.
 
 !!!Note "Ejemplo sin $unwind"
           db.usuarios.aggregate([
@@ -352,7 +348,7 @@ Es especialmente útil cuando trabajamos con **$lookup**, porque las consultas d
             [
               {
                 "_id": 1,
-                "nombre": "Carlos",
+                "número": "Carlos",
                 "pedidos": [
                   { "_id": 101, "usuario_id": 1, "producto": "Laptop", "precio": 1200 },
                   { "_id": 102, "usuario_id": 1, "producto": "Mouse", "precio": 50 }
@@ -360,7 +356,7 @@ Es especialmente útil cuando trabajamos con **$lookup**, porque las consultas d
               },
               {
                 "_id": 2,
-                "nombre": "Ana",
+                "número": "Ana",
                 "pedidos": [
                   { "_id": 103, "usuario_id": 2, "producto": "Teclado", "precio": 80 }
                 ]
@@ -389,17 +385,17 @@ Cada usuario tiene un array con sus pedidos, pero si queremos hacer un segundo $
             [
               {
                 "_id": 1,
-                "nombre": "Carlos",
+                "número": "Carlos",
                 "pedidos": { "_id": 101, "usuario_id": 1, "producto": "Laptop", "precio": 1200 }
               },
               {
                 "_id": 1,
-                "nombre": "Carlos",
+                "número": "Carlos",
                 "pedidos": { "_id": 102, "usuario_id": 1, "producto": "Mouse", "precio": 50 }
               },
               {
                 "_id": 2,
-                "nombre": "Ana",
+                "número": "Ana",
                 "pedidos": { "_id": 103, "usuario_id": 2, "producto": "Teclado", "precio": 80 }
               }
             ]
@@ -407,37 +403,37 @@ Cada usuario tiene un array con sus pedidos, pero si queremos hacer un segundo $
 Ahora, cada usuario tiene múltiples documentos, uno por cada pedido, lo que permite realizar otro $lookup con detalles_pedido.
 
 ----
-## :pencil2: Exercici 3
+## 12.4 - Ejercicios de Relaciones
 
-Intenta implementar en MongoDB part de la Base de Dades relacional [**factures**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/),  concretament, comença per les taules CATEGORIA i ARTICLE, que les hauràs de
-representar com a documents de 2 col·leccions (col·lecció **categoria** i col·lecció **articulo**).
-En els documents de la col·lecció **categoria**, el codi de categoria serà el
-**_id** , mentre que en els documents de la col·lecció **articulo**, el codi de
-l'article serà el **_id**.
+Intenta implementar en MongoDB parte de la Base de Datos relacional [**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/), concretamente, comienza por las tablas CATEGORÍA y ARTÍCULO, que las tendrás que
+representar como documentos de 2 colecciones (colección **categoría** y colección **articulo**).
+En los documentos de la colección **categoría**, el código de categoría será el
+**_id** , mientras que en los documentos de la colección **articulo**, el código de
+el artículo será el **_id**.
 
-  1. Insereix els documents corresponents a les categories de l'exercici **Ex_1** ([**factures**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)).
-  2. Insereix els documents corresponents als articles de l'exercici **Ex_2** ([**factures**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)).
-  3. Fes una consulta en què apareguen tots els articles amb la seua descripció i també la descripció de la seua categoria.
-  4. Modifica l'anterior per a que apareguen només les descripcions de l'article i de la categoria.
-    * Com que les dades del document reunit, que en aquest cas és categoria, podem utilitzar **$unwind** per a "desconstruir" aquest array.
-    * Una vegada desconstruït l'array és quan podrem projectar sobre la descripció de l'article (directament) i sobre la descripció de la categoria reanomenant el camp i subcamp.
-  5. Fes una consulta on aparega la descripció de cada categoria, amb el número d'articles de cada categoria i el preu mitjà.
-  6. Insereix els documents corresponents als clients de l'exercici **Ex_3** ([**factures**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)). No ens importarà el codi de població.
-  7. Insereix les factures corresponents als exercicis **Ex_4** ([**factures**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)) i **Ex_5** ([**factures**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)). Observa que la millor manera d'introduir les línies de factura és dins de la mateixa factura, en un array.
-  8. Fes una consulta per a traure el número de factura i el seu total.
+  1. Inserta los documentos correspondiente a las categorías del ejercicio **Ex_1** ([**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)).
+  2. Inserta los documentos correspondiente a los artículos del ejercicio **Ex_2** ([**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)).
+  3. Haz una consulta en la que aparezcan todos los artículos con su descripción y también la descripción de su categoría.
+  4. Modifica lo anterior para que aparezcan sólo las descripciones del artículo y de la categoría.
+    * Debido a que las datos del documento reunido, que en este caso es categoría, podemos utilizar **$unwind** para "desconstruir" este array.
+    * Una vez deconstruido el array es cuando podremos proyectar sobre la descripción del artículo (directamente) y sobre la descripción de la categoría renombrando el campo y subcampo.
+  5. Realiza una consulta donde aparezca la descripción de cada categoría, con el número de artículos de cada categoría y el precio medio.
+  6. Inserta los documentos correspondiente a los clientes del ejercicio **Ex_3** ([**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)). No nos importará el código de población.
+  7. Inserta las facturas correspondiente a los ejercicios **Ex_4** ([**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)) y **Ex_5** ([**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)). Observa que la mejor forma de introducir las líneas de factura está dentro de la misma, en un array.
+  8. Haz una consulta para sacar el número de factura y su total.
 
       ![](T8_Exer_8_1.png)
 
-  9. Modifica l'anterior per a traure també el nom del client de la factura
+  9. Modifica lo anterior para sacar también el número del cliente de la factura
 
       ![](T8_Exer_8_2.png)
 
-  10. Trau un llistat de clients, com a mínim amb el seu nom, i dels articles que ha comprat, com a mínim amb la descripció de l'article
+  10. Saca un listado de clientes, al menos con su número, y de los artículos que ha comprado, al menos con la descripción del artículo
 
     ![](T8_Exer_8_3.png)
 
-Llicenciat sota la  [Llicència Creative Commons Reconeixement NoComercial
-SenseObraDerivada 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/)
+Licenciado bajo la [Licencia Creative Commons Reconocimiento NoComercial
+SinObraDerivada 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/)
    
 
 

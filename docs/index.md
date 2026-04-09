@@ -1,10 +1,10 @@
 ---
-title:  "Baes de Dades -- Bases de Dades NoSQL"
+title: "Bases de Datos NoSQL"
 ---
 
 ![ref1](T8_Portada2.png)
 
-Llicenciat sota la  [Llicència Creative Commons Reconeixement CompartirIgual
+Licenciado bajo la [Licencia Creative Commons Reconocimiento CompartirIgual
 2.5](http://creativecommons.org/licenses/by-sa/2.5/)
 
 

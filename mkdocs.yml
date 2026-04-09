@@ -1,36 +1,61 @@
-site_name: BBDD - Bases de Dades
+site_name: BBDD - NoSQL
+
+theme:
+  name: material
+  logo: assets/logocaminas.png
+  favicon: img/favicon.ico
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+    - toc.integrate
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
 
 extra_css:
   - css/extra.css
-  - img/favicon.ico 
-
-theme: 
-  name: readthedocs
-  highlightjs: true
-  logo: assets/logocaminas.png
-  features:
-    - content.code.copy  # Habilita el botón de copiar en bloques de código
 
 markdown_extensions:
   - admonition
-  - pymdownx.emoji
- # - pymdownx.extra
- # - pymdownx.superfences 
- # - pymdownx.highlight # Resalta sintaxis
-  - pymdownx.superfences # Permite bloques de código avanzados
   - tables    
   - attr_list
-  
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
 nav:
-
-- BD NoSQL:
-  - 1 - Introducció: 1__introducci.md
-##- REDIS:  
-  ##- 2 - Bases de Dades Clau-Valor (Redis): 2__bases_de_dades_clauvalor.md
-  ## - Exercicis: exercicis_redis.md
-- MONGO:  
-  - 2 - MongoDB : 3__mongodb.md
-  ## - Exercicis: exercicis_mongo.md
-  - 3 - Relacions en MongoDB: 4_relaciones_mongo.md
-  - Práctica Mongo: 5_actividad_mongo.md
+  - BBDD NoSQL: 1__introducci.md
+   # - 1 - BBDD CLAVE-VALOR:
+   # - BBDD Clave-Valor: 2__bases_de_dades_clauvalor.md
+   # - Ejercicios Redis: exercicis_redis.md
+  - MONGODB:
+    - 1 - Introducción a MongoDB: 3__mongodb.md
+    - 2 - Estructura JSON: 3.2__estructura_json.md
+    - 3 - Instalación de MongoDB: 3.3__instalacion.md
+    - 4 - Utilización de variables: 3.4__variables.md
+    - 5 - Tipo de datos: 3.5__tipo_datos.md
+    - 6 - Operaciones CRUD Básicas: 3.6__crud.md
+    - 7 - Operadores de actualización: 3.7__operadores_actualizacion.md
+    - 8 - Operadores de consulta: 3.8__operadores_consulta.md
+    - 9 - Agregación: 3.9__agregacion.md
+    - 10 - Resumen Comandos: 3.10__resumen.md
+    - 11 - Ejercicios: exercicis_mongo.md
+    - 12 - Relaciones en MongoDB: 4_relaciones_mongo.md
+    - 13 - Práctica Mongo: 5_actividad_mongo.md

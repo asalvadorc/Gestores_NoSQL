@@ -1,76 +1,78 @@
-# 2 - Bases de Dades Clau-Valor
 
-Dins dels diferents tipus de **Bases de Dades NoSQL**, les **Bases de Dades Clau-Valor** són les més fàcils de comprendre. Aquest model es basa en parelles **clau-valor**, on cada clau representa un identificador únic i el seu valor associat.  
+# 12 - Práctica Mongo  
 
-**🔑 Característica principal:** La clau ha de ser **única**, ja que en cas contrari no es podria recuperar correctament la informació.  
+**🔑 Característica principal:** La clave debe ser **única**, ya que de lo contrario no se podría recuperar correctamente la información.  
 
-✅ **Avantatge:** No requereix definició de taules ni estructures complexes. Simplement es guarden parelles clau-valor i es recupera la informació mitjançant la clau corresponent.  
+Es un SGBD **Documental** , es decir, que servirá para guardar documentos. La
+forma interna de guardarlos es en formato **BSON** (Binary JSON) que en
+esencia es una variante del JSON para poder guardar físicamente las datos
+de forma más eficiente.  
 
----
+None
 
-**🔥 Redis: Un exemple de Base de Dades Clau-Valor**{.azul}
+**🔥 Redis: Un ejemplo de Base de Datos Clave-Valor**{.azul}
 
-L'exemple més conegut d'aquest tipus de bases de dades és **Redis**, famosa per la seva **potència i eficiència**.  
+El ejemplo más conocido de este tipo de bases de datos es **Redis**, famoso por su **potencia y eficiencia**.  
 
-En Redis, les **claus** sempre són de tipus **String**, mentre que els **valors** poden ser de diferents tipus:  
+En Redis, las **clavas** siempre son de tipo **String**, mientras que los **valores** pueden ser de diferentes tipos:  
 
-**📌 Tipus de valors en Redis:**{.azul}  
+**📌 Tipo de valores en Redis:**{.azul}  
 
-* **Cadenes de caràcters (String)**  
-    - Exemple: nom_1 → "Albert"  
+* **Cadenas de caracteres (String)**  
+    - Ejemplo: número_1 → "Albert"  
 
-* **Mapes (Hashes)** *(semblants a un registre amb subcamps)*  
-    - Exemple: empleat_1 → { nom="Albert", departament="10", sou="1000.0" }  
+* **Mapas (Hashes)** *(similares a un registro con subcampos)*  
+    - Ejemplo: empleado_1 → { número="Albert", departamento="10", sueldo="1000.0" }  
 
-* **Llistes (Lists)** *(conjunts ordenats de valors)*  
-    - Exemple: llista_1 → ["Primer", "Segon", "Tercer"]  
+* **Listas (Lists)** *(conjuntos ordenados de valores)*  
+    - Ejemplo: lista_1 → ["Primero", "Segundo", "Tercero"]  
 
-* **Conjunts (Sets)** *(conjunts desordenats de valors, l'ordre és imprevisible)*  
-    - Exemple: colors → {"Blau", "Verd", "Roig"}  
+* **Conjuntos (Sets)** *(conjuntos desordenados de valores, el orden es imprevisible)*  
+    - Ejemplo: colores → {"Azul", "Verde", "Rojo"}  
 
-* **Conjunts ordenats (Sorted Sets)** *(semblants als Sets, però amb ordre definit)*  
-    - Es diferencia de les **llistes** per la forma en què Redis gestiona l'ordenació interna.  
+* **Conjuntos ordenados (Sorted Sets)** *(similares a los Sets, pero con orden definido)*  
+    - Se diferencia de las **listas** por la forma en que Redis gestiona la ordenación interna.  
 
----
+None
 
-**⚙️ Característiques principals de Redis**{.azul}  
+**⚙️ Características principales de Redis**{.azul}  
 
-🔹 **Arquitectura Client-Servidor**  
-Redis segueix un model **client-servidor**, on múltiples clients poden connectar-se a un servidor Redis per llegir i escriure dades.  
+🔹 **Arquitectura Cliente-Servidor**  
+Redis es un modelo **cliente-servidor**, donde múltiples clientes pueden conectarse a un servidor Redis para leer y escribir datos.  
 
-🔹 **Alta eficiència i velocitat**  
-Redis és extraordinàriament ràpid, especialment quan pot carregar tota la base de dades a **memòria**.  
-- Tot i que prioritza la velocitat en memòria, també permet sincronització constant a disc per garantir la **persistència** de les dades.  
+🔹 **Alta eficiencia y velocidad**  
+Redis es extraordinariamente rápido, especialmente cuando puede cargar toda la base de datos en **memoria**.  
+- Aunque prioriza la velocidad en memoria, también permite sincronización constante a disco para garantizar la persistencia de las datos.  
 
-🔹 **Replicació Master-Slave per alta disponibilitat**  
-- Per suportar alts volums de lectura, Redis permet **replicació** (`master/slave`).  
-- Un servidor actua com a **master** i els altres com a **slaves** (rèpliques del master).  
-- Els esclaus poden gestionar consultes de lectura per reduir la càrrega sobre el **master**.  
+🔹 **Replicación Master-Slave por alta disponibilidad**  
+- Para soportar altos volumenes de lectura, Redis permite **replicación** (`master/slave`).  
+- Un servidor actúa como **master** y los demás como **slaves** (réplicas del master).  
+- Los esclavos pueden gestionar consultas de lectura para reducir la carga sobre el **master**.  
 
----
+None
 
-## 2.1 - Instal·lació de Redis
+## 2.1 - Instalación de Redis
 
-Redis està construït per a Linux. També funciona, però, des de Windows com
-veurem una miqueta més avant.
+Redis está construido para Linux. También funciona, sin embargo, desde Windows como
+veremos un poquito más adelante.
 
-### 🐧Instal·lació en Linux
+### 🐧Instalación en Linux
 
-El lloc des d'on baixar-lo és la pàgina oficial:
+El sitio desde donde descargarlo es la página oficial:
 
 <https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-from-source/>
 
-En el moment de fer aquestos apunts, l'última versió estable és la **7.4.1**.  
+En el momento de realizar estos apuntes, la última versió estable es la **7.4.1**.  
 
-Per obtenir els fitxers font de la darrera versió estable de Redis des del lloc de descàrregues de Redis, executeu:
+Para obtener los archivos fuente de la última versión estable de Redis desde el sitio de descargas de Redis, ejecute:
 
     wget https://download.redis.io/redis-stable.tar.gz
 
 
 **Compilando Redis**
 
-Suposarem que el fitxer està col·locat en el lloc on volem que estiga instal·lat de forma definitiva.
-Per compilar Redis, primer extrae el fitxer tar, canvia al directori arrel i després executa make:
+Supondremos que el archivo está colocado en el sitio donde queremos que esté instalado de forma definitiva.
+Para compilar Redis, primero extrae el archivo tar, cambia al directorio raíz y después ejecuta make:
 
 
     tar -xzvf redis-stable.tar.gz
@@ -78,146 +80,153 @@ Per compilar Redis, primer extrae el fitxer tar, canvia al directori arrel i des
     make
 
 
-Amb açò s'haurien d'haver generat els executables, i ja hauria de funcionar.
+Con esto deberían haberse generado los ejecutables, y ya debería funcionar.
 
-**Executar Servidor i Client Redis**
+**Ejecutar Servidor y Cliente Redis**
 
-Per a posar en marxa el servidor, quasi que el més còmode serà obrir un
-terminal, situar-nos en el directori **redis-stable/src** i des d'ahi executar
-**redis-server**. Hauria d'eixir una finestra similar a la següent, amb més o
-menys avisos (observeu que al principi de la imatge estàn les ordres donades per a executar el servidor).
+Para poner en marcha el servidor, casi lo más cómodo será abrir un
+terminal, situarnos en el directorio **redis-stable/src** y desde ahí ejecutar
+**redis-server**. Debería salir una ventana similar a la siguiente, con más o
+menos avisos (observe que al principio de la imagen están los comandos dados para ejecutar el servidor).
 
 
 ![](redis-server.png)
 
-Entre altres coses diu que el servidor està en marxa esperant connexions al
-port 6379, que és el port per defecte de Redis. Aquesta finestra del terminal
-l'haurem de deixar en marxa. Quan vulguem detenir Redis, senzillament fem
-**ctrl-c** , i detindrem l'execució de forma ordenada (guardant-se les dades
-no guardades)
+Entre otras cosas dice que el servidor está en marcha esperando conexiones al
+puerto 6379, que es el puerto por defecto de Redis. Esta ventana del terminal
+deberemos dejarlo en marcha. Cuando queramos detener a Redis, simplemente hacemos
+**ctrl-c** , y detendremos la ejecución de forma ordenada (guardándose las datos
+no guardadas)
 
-Podríem haver executat directament **redis-server** fent-li doble-clic des
-d'un explorador d'arxius, per exemple, però aleshores no podríem parar-lo i en
-definitiva controlar-lo tan còmodament.
+Podríamos haber ejecutado directamente **redis-server** haciéndole doble-clic desde
+de un explorador de archivos, por ejemplo, pero entonces no podríamos pararlo y en
+definitiva controlarlo tan cómodamente.
 
-Per a fer una connexió des d'un client, també des d'un terminal (un altre)
-executem **redis-cli** :
+Para realizar una conexión desde un cliente, también desde un terminal (otro)
+ejecutamos **redis-cli** :
 
 ![](redis-cli.png)
 
-Ja ha fet la connexió, concretament a localhost (127.0.0.1) i al port 6379,
-que havíem quedat que és el port per defecte.
+Ya ha realizado la conexión, concretamente a localhost (127.0.0.1) y al puerto 6379,
+que habíamos quedado en que es el puerto por defecto.
 
-Comprovem que sí que funciona. Encara no hi ha dades, perquè l'acabem
-d'instal·lar. I recordeu que és una Base de Dades clau-valor. Per crear una
-entrada posarem **set clau valor**. Per a obtenir-la posarem **get clau**. En
-la imatge es pot comprovar:
+Comprobamos que sí funciona. Aunque no hay datos, porque acabamos
+de instalar. Y recuerdo que es una Base de Datos clave-valor. Para crear una
+entrada pondremos **siete clave valor**. Para obtenerla pondremos **get clave**. En
+la imagen se puede comprobar:
 
 ![](redis-primera.png)
 
-Hem creat una clau anomenada **clau_1** amb el valor **primera** , com es pot
-comprovar en el moment d'obtenir-la amb **get**.
+Hemos creado una clave llamada **clave_1** con el valor **primera** , como se puede
+comprobar en el momento de obtenerla con **get**.
 
-**Conexió a un servidor Redis extern**
+**Conexión a un servidor Redis extern**
 
-Si al programa **redis-cli** no li posem paràmetres, intentarà fer una
-connexió local (localhost). Si volem connectar a un servidor situat en una
-altra adreça, li la posem amb el paràmetre **-h adreça** , per exemple:
-
-
-    redis-cli -h 192.168.1.26
+Si en el programa **redis-cli** no le ponemos parámetros, intentará realizar una
+conexión local (localhost). Si queremos conectar a un servidor situado en una
+otra dirección, se la ponemos con el parámetro **-h dirección** , por ejemplo:
 
 
-!!! note "Connexió al servidor de l'Institut"
-    En el servidor de dades de l'Institut també tenim instal·lat redis. Però per a
-    no tenir accessos no desitjats, cal una autenticació. Senzillament és posar el
-    comando **auth** amb la contrasenya que ja hem utilitzat en altres ocasions:
+    db.getCollection("authors").aggregate([{
+          $lookup: {
+            from: "books",
+            localField: "_id",
+            foreignField: "author_id",
+            as: "books"
+          }
+        }]);
+
+
+!!! note "Conexión al servidor del Instituto"
+    En el servidor de datos del Instituto también tenemos instalado redios. Pero para
+    no tener accesos no deseados, es necesaria una autenticación. Sencillamente se poner el
+    comando **auth** con la contraseña que ya hemos utilizado en otras ocasiones:
     **auth ieselcaminas.ad**
 
-En la següent imatge es veu com sí que hem pogut connectar
+En la siguiente imagen se viene cómo sí que hemos podido conectar
 
 ![](redis-auth.png)
 
-### 🖥️Instal·lació en Windows
+### 🖥️Instalación en Windows
 
-Encara que Redis està construït per a Linux, hi ha versions per a Windows,
-preferiblement de 64 bits.
+Aunque Redis está construido para Linux, existen versiones para Windows,
+preferiblemente de 64 bits.
 
-El lloc on poder baixar els fitxers de Redis per a Windows de 64 bits és: <https://github.com/MSOpenTech/redis/releases>
+El lugar donde descargar los archivos de Redis para Windows de 64 bits es: <https://github.com/MSOpenTech/redis/releases>
 
 !!!Tip ""
-    Redis Insight està disponible per a altres sistemes operatius.
+    Redis Insight está disponible para otros sistemas operativos.
 
 ![](redis_5.png)
 
-Ens baixem el zip, el descomprimim, i ja ho tindrem disponible (sense fer
-**make** ni res). Observeu com en la carpeta resultat de descomprimir ja tenim
-els executables **redis-server** i **redis-cli** que són els que ens
-interessen:
+Nos bajamos el zip, lo descomprimimos, y ya lo tendremos disponible (sin hacer
+**make** ni nada). Observe cómo en la carpeta resultado de descomprimir ya tenemos
+los ejecutables **redis-server** y **redis-cli** que son los que nos
+interesan:
 
 ![](redis_6.png)
 
-Executem **redis-server** directament i ja el tindrem en marxa:
+Ejecutamos **redis-server** directamente y ya lo tendremos en marcha:
 
 ![](redis_7.png)
 
-Executem també el **redis-cli** i el resultat serà el mateix que en Linux.
+Ejecutamos también el **redis-cli** y el resultado será el mismo que en Linux.
 
-##  2.2 - Entorn gràfic: Redis Insight
+## 2.2 - Entorno gráfico: Redis Insight
 
-Com hem comprovat en el punt anterior, la connexió que fem des del client és a
-través de consola. Per tant haurem de posar comandos i ens contestarà la seua
-execució.
+Como hemos comprobado en el punto anterior, la conexión que hacemos desde el cliente está en
+través de consola. Por tanto tendremos que poner comandos y nos contestará su
+ejecución.
 
-Podem instal·lar-nos una aplicació gràfica que faça un poc més atractiva la
-presentació.
+Podemos instalarnos una aplicación gráfica que haga algo más atractiva la
+presentación.
 
-La instal·lació d'aquesta eina és **totalment optativa**, no cal que la feu.
-De fet, ens els exemples que es mostraran en tot el tema només s'utilitzarà el
-mode consola.
+La instalación de esta herramienta es **totalmente optativa**, no hace falta que la haga.
+De hecho, en los ejemplos que se mostrarán en todo el tema sólo se utilizará el
+modo consola.
 
-És completament independent del servidor, i podem instal·lar-la perfectament
-sense tenir el servidor, utilitzant-la aleshores per a connectar a un servidor
-remot.
+Es completamente independiente del servidor, y podemos instalarla perfectamente
+sin tener el servidor, utilizándola entonces para conectar a un servidor
+remoto.
 
-El podem baixar lliurement de la pàgina oficial
-[redis.io/insight](https://redis.io/insight/) on podrem comprovar que tenim per a totes
-les plataformes:
+Lo podemos descargar libremente de la página oficial
+[redis.io/insight](https://redis.io/insight/) donde podremos comprobar que tenemos para todas
+las plataformas:
 
 ![](redis_1.png)
 
 
-**🖥️Instal·lació en Windows de 64 bits**{.azul}
+**🖥️Instalación en Windows de 64 bits**{.azul}
 
-En Windows el que ens baixarem és un exe. L'executem (permetent l'execució
-quan ho pregunta Windows) i li podem donar a totes les opcions per defecte.
+En Windows lo que nos bajamos es un exe. La ejecutamos (permitiendo la ejecución
+cuando lo pregunta Windows) y podemos darle a todas las opciones por defecto.
 
-Quan l'executem, ens eixirà la següent pantalla:
+Cuando lo ejecute, nos saldrá la siguiente pantalla:
 
 ![](redis_2.png)
 
-Podem comprovar que tenim el botó per a afegir una BD Redis (+ Add Redis database). Per a
-connectar al servidor local la conexió serà **redis://default@127.0.0.1:6379**. En la imatge
-s'ha fet el test de connexió.
+Podemos comprobar que tenemos el botón para añadir una BD Redis (+Add Redis database). Para
+conectar al servidor local la conexión será **redis://default@127.0.0.1:6379**. En la imagen
+se ha realizado el test de conexión.
 
 ![](redis_3.png)
 
-Per a connectar a un remot, posarem la seua adreça.
+Para conectar a un remoto, pondremos su dirección.
 
 ![](redis_4.png)
 
-En aquesta imatge es veu com hem connectat perfectament als dos servidors. 
+En esta imagen se viene cómo hemos conectado perfectamente a ambos servidores. 
 
 
 
-## 2.3 - Utilització de Redis
+## 2.3 - Utilización de Redis
 
-Anam a veure la utilització de Redis, Ens connectarem com a clients i
-intentarem fer operacions.
+Vamos a ver la utilización de Redis, Nos conectaremos como clientes y
+intentaremos realizar operaciones.
 
-  * Les primeres seran les més senzilles, utilitzant únicament el tipus de dades **String**.
-  * Posteriorment mirarem com treballar amb les claus: buscar-ne una, veure si existeix, buscar unes quantes, ...
-  * Després ja anirem a pels tipus de dades més complicats: 
+  * Las primeras serán las más sencillas, utilizando únicamente el tipo de datos **String**.
+  * Posteriormente miraremos cómo trabajar con las claves: buscar una, ver si existe, buscar unas cuantas, ...
+  * Después ya iremos a por los tipos de datos más complicados: 
     * **Hash**
     * **List**
     * **Set**
@@ -227,32 +236,32 @@ intentarem fer operacions.
 
 ### 2.3.1 - Strings
 
-És el tipus de dades més senzill, més bàsic. Serà una cadena de caràcters de
-tipus _**binary**_**safe** en la qual normalment guardarem les habituals
-cadenes de caràcters, però que també podríem guardar imatges o objectes
-serialitzats. La grandària màxima és de 512Mb.
+Es el tipo de datos más sencillo, más básico. Será una cadena de caracteres de
+tipo _**binary**_**safe** en la que normalmente guardaremos las habituales
+cadenas de caracteres, pero que también podríamos guardar imágenes u objetos
+serializados. El tamaño máximo es de 512Mb.
 
-Ara veurem els comandos més habituals que afecten a aquest tipus. Com a norma
-general, hem de ser conscients que els comandos no són sensibles a majúscules
-o minúscules, però les claus i els valors sí que ho són. És a dir, el comando
-**get** també es pot escriure **GET** o **Get**. Però la clau **Hola** és
-diferent de la clau **hola**.
+Ahora veremos los comandos más habituales que afectan a este tipo. Como norma
+general, debemos ser conscientes de que los comandos no son sensibles a mayúsculas
+o minúsculas, pero las claves y valores sí que lo son. Es decir, el comando
+**get** también se puede escribir **GET** o **Get**. Pero la clave **Hola** es
+diferente a la clave **hola**.
 
 #### GET {.azul}
 
 <u>_Sintaxi_</u>
 
-    get clau
+    get clave
 
-Torna el valor de la clau especificada, sempre que siga de tipus **String**.
-Si la clau és d'un altre tipus, donarà error. I si la clau no existeix,
-tornarà el valor especial **_nil_** .
+Devuelve el valor de la clave especificada, siempre que sea de tipo **String**.
+Si la clave es de otro tipo, dará error. Y si la clave no existe,
+volverá el valor especial **_nil_** .
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> get clau_1  
+    127.0.0.1:6379> get clave_1  
     "primera"  
-    127.0.0.1:6379> get clau_2  
+    127.0.0.1:6379> get clave_2  
     (nil)
 
 
@@ -261,183 +270,183 @@ tornarà el valor especial **_nil_** .
 <u>_Sintaxi_</u>
 
 
-    set clau valor
+    set clave valor
 
-Assigna a la clau especificada com a primer paràmetre el valor especificat com
-a segon paràmetre. Si el valor consta de més d'una paraula, haurà d'anar entre
-cometes dobles.
+Asigna a la clave especificada como primer parámetro el valor especificado como
+a segundo parámetro. Si el valor consta de más de una palabra, deberá ir entre
+comillas dobles.
 
-Redis sempre guardarà el valor com a string, encara que nosaltres pensem que
-li passem un valor enter o real.
+Redis siempre guardará el valor como string, aunque nosotros pensemos que
+le pasamos un valor entero o real.
 
-I una altra característica és que si la clau existeix ja, matxacarà el seu
-contingut, com era de esperar.
+Y otra característica es que si la clave existe ya, machacará el suyo
+contenido, como era de esperar.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> set clau_2 segona  
+    127.0.0.1:6379> set clau_2 segunda  
     OK  
-    127.0.0.1:6379> set text "Un text amb més d'una paraula"  
+    127.0.0.1:6379> set text "Un texto con más de una palabra"  
     OK
 
 
-    127.0.0.1:6379> set quatre 4  
+    127.0.0.1:6379> siete cuatro 4  
     OK  
-    127.0.0.1:6379> get quatre  
+    127.0.0.1:6379> get cuatro  
     "4"  
-    127.0.0.1:6379> set pi 3.14159265359  
+    127.0.0.1:6379> siete pi 3.14159265359  
     OK  
     127.0.0.1:6379> get pi  
     "3.14159265359"
 
-----
+None
 
 !!! note "Nota"
-    Si poseu algun accent, en tornar el valor (fent get) us semblarà que no s'ha
-    guardat bé. Sí que s'haurà guardat bé, el que passa és que posteriorment no es
-    visualitza bé en fer el get. Es pot comprovar entrant en el client amb l'opció
-    _**raw**_ , és a dir **redis-cli --raw**
+    Si pone algún acento, al volver el valor (fent get) le parecerá que no se ha
+    guardado bien. Sí se habrá guardado bien, lo que ocurre es que posteriormente no se
+    visualiza bien al realizar el get. Se puede comprobar entrando en el cliente con la opción
+    _**raw**_ , es decir **redis-cli --raw**
 
 ----
-El comando **SET** té una opció molt interessant, que servirà per a donar un
-temps de vida a la clau, transcorregut el qual desapareix la clau (amb el seu
-valor clar). Açò s'anomena _**temps d'expiració**_ i s'aconsegueix amb el
-paràmetre **EX** del comando **SET** seguit del número de segons que volem que
-dure la clau.
+El comando **SET** tiene una opción muy interesante, que servirá para dar un
+tiempo de vida en la clave, transcurrido el cual desaparece la clave (con el suyo
+valor claro). Esto se llama _**tiempo de expiración**_ y se consigue con el
+parámetro **EX** del comando **SET** seguido del número de segundos que queremos que
+dure la llave.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> set clau_3 tercera ex 10  
+    127.0.0.1:6379> set clave_3 tercera ex 10  
     OK  
-    127.0.0.1:6379> get clau_3  
+    127.0.0.1:6379> get clave_3  
     "tercera"  
-    127.0.0.1:6379> get clau_3  
+    127.0.0.1:6379> get clave_3  
     (nil)
 
-Primer sí que existeix, però al cap de 10 segons ha deixat d'existir.
+Primero sí existe, pero al cabo de 10 segundos ha dejado de existir.
 
-De forma equivalent es pot expressar el temps en milisegons, amb el paràmetre
-**PX** en compte de **EX**.
+De forma equivalente se puede expresar el tiempo en milisegundos, con el parámetro
+**PX** en lugar de **EX**.
 
-Havíem comentat al principi, que si en el moment de fer el **SET** la clau ja
-existia, es reemplaçarà el seu contingut. Podem modificar aquest comportament
-amb el paràmetre **NX** (Not eXists): si no existia la clau, la crearà amb el
-valor, però si ja existia, la deixarà com estava. Ens ho indicarà dient OK en
-cas de crear-la i NIL en cas de no crear-la perquà ja existia.
+Habíamos comentado al principio, que si en el momento de hacer el **SET** la clave ya
+existía, se reemplazará su contenido. Podemos modificar este comportamiento
+con el parámetro **NX** (Not eXists): si no existía la clave, la creará con el
+valor, pero si ya existía, la dejará como estaba. Nos lo indicará diciendo OK en
+en caso de crearla y NIL en caso de no crearla porque ya existía.
 
-    127.0.0.1:6379> set clau_4 quarta nx  
+    127.0.0.1:6379> set clave_4 cuarta nx  
     OK  
-    127.0.0.1:6379> set clau_1 quarta nx  
+    127.0.0.1:6379> set clave_1 cuarta nx  
     (nil)  
-    127.0.0.1:6379> get clau_4  
-    "quarta"  
-    127.0.0.1:6379> get clau_1  
+    127.0.0.1:6379> get clave_4  
+    "cuarta"  
+    127.0.0.1:6379> get clave_1  
     "primera"
 
-I de forma inversa, si posem el paràmetre **XX** , si ja existeix la clau,
-reemplaçarà el valor, però si no existia, no farà res.
+Y de forma inversa, si ponemos el parámetro **XX** , si ya existe la clave,
+reemplazará el valor, pero si no existía, no hará nada.
 
 #### SETEX {.azul}
 
 <u>_Sintaxi_</u>
 
-    setex clau segons valor
+    setex clave según valor
 
-Funciona igual que el **SET** amb el paràmetre **EX** : crearà la clau amb el
-valor, però tindrà una existència dels segons indicats.
+Funciona igual que el **SET** con el parámetro **EX** : creará la clave con el
+pero tendrá una existencia de los segundos indicados.
 
-#### PSETEX {.azul}
+{ "x" : null }
 
 <u>_Sintaxi_</u>
 
-    psetex clau milisegons valor
+    psetex clave milisegundos valor
 
-Funciona igual que l'anterior, però el que especifiquem són els milisegons
-d'existència.
+Funciona igual que el anterior, pero lo que especificamos son los milisegundos
+de existencia.
 
 #### MGET {.azul} 
 
 <u>_Sintaxi_</u>
 
-    mget clau1 clau2 clauN
+    mget clave1 clave2 claveN
 
-Torna una llista de valors, els de les claus indicades.
+Devuelve una lista de valores, los de las claves indicadas.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> set mes1 gener  
+    127.0.0.1:6379> siete mes1 enero  
     OK  
-    127.0.0.1:6379> set mes2 febrer  
+    127.0.0.1:6379> siete mes2 febrero  
     OK  
-    127.0.0.1:6379> set mes3 març  
+    127.0.0.1:6379> sep mes3 marzo  
     OK  
     127.0.0.1:6379> mget mes1 mes2 mes3  
-    1) "gener"  
-    2) "febrer"  
+    1) "enero"  
+    2) "febrero"  
     3) "mar\xc3\xa7"
 
 ----
 !!! note "Nota"
-    Recordeu que els caràcters com vocals accentuades, ç, ñ, ... s'han introduït
-    bé, però potser no es visualiten bé. Es pot evitar entrant en el client
-    d'aquesta manera **redis-cli --raw**
+    Recuerde que los caracteres como vocales acentuadas, ç, ñ, ... se han introducido
+    bueno, pero puede que no se visualicen bien. Se puede evitar entrando en el cliente
+    de este modo **redis-cli --raw**
 ----
-Si alguna de les claus no exiteix, tornarà **nil** en el seu lloc
+Si alguna de las claves no existe, volverá **nil** en su sitio
 
 #### MSET {.azul}
 
 <u>_Sintaxi_</u>
 
-    mset clau1 valor1 clau2 valor2 clauN valorN
+    mset clave1 valor1 clave2 valor2 claveN valorN
 
-Assigna els valors corresponents a les claus. És una operació atòmica: es
-posen (o canvien) tots els valors a l'hora.
+Asigna los valores correspondiente a las claves. Es una operación atómica: se
+ponen (o cambian) todos los valores a la vez.
 
-    127.0.0.1:6379> mset mes4 abril mes5 maig mes6 juny mes7 juliol  
+    127.0.0.1:6379> mset mes4 abril mes5 mayo mes6 junio mes7 julio  
     OK  
     127.0.0.1:6379> mget mes1 mes2 mes3 mes4 mes5 mes6 mes7  
-    1) "gener"  
-    2) "febrer"  
+    1) "enero"  
+    2) "febrero"  
     3) "mar\xc3\xa7"  
     4) "abril"  
-    5) "maig"  
-    6) "juny"  
-    7) "juliol"
+    5) "mayo"  
+    6) "junio"  
+    7) "julio"
 
-Si no vulguérem reemplaçar valors, podríem utilitzar el comando **MSETNX** ,
-totalment equivalent, però hauríem de tenir en compte que si alguna ja
-existeix i per tant no pot canviar el valor, no faria l'operació, és a dir,
-tampoc crearia les altres.
+Si no quisiéramos reemplazar valores, podríamos utilizar el comando **MSETNX** ,
+totalmente equivalente, pero deberíamos tener en cuenta que si alguna ya
+existe y por tanto no puede cambiar el valor, no haría la operación, es decir,
+tampoco crearía las demás.
 
-#### APPEND {.azul}
+{ x : "Hola, ¿qué tal?"}
 
 <u>_Sintaxi_</u>
 
-    append clau1 valor1
+    append clave1 valor1
 
-Si la clau no existeix la crea assignant-li el valor (com el **SET**), però si
-ja existeix, concatena el valor al final de la cadena que ja hi havia.
+Si la clave no existe la crea asignándole el valor (como el **SET**), pero si
+ya existe, concatena el valor al final de la cadena que ya existía.
 
-    127.0.0.1:6379> append salutacio Hola  
+    127.0.0.1:6379> append saludo Hola  
     (integer) 4  
-    127.0.0.1:6379> get salutacio  
+    127.0.0.1:6379> get saludacio  
     "Hola"  
-    127.0.0.1:6379> append salutacio ", com va?"  
+    127.0.0.1:6379> append saludo ", ¿cómo va?"  
     (integer) 13  
-    127.0.0.1:6379> get salutacio  
-    "Hola, com va?"
+    127.0.0.1:6379> get saludacio  
+    "Hola, ¿cómo va?"
 
 
 #### STRLEN {.azul}
 
 <u>_Sintaxi_</u>
 
-    strlen clau1
+    strlen clave1
 
-Torna el número de caràcters que hi ha en el valor de la clau. Si la clau no
-existeix, tornarà 0. Si la clau és d'un altre tipus, tornarà error.
+Devuelve el número de caracteres que hay en el valor de la clave. Si la clave no
+existe, volverá 0. Si la clave es de otro tipo, volverá error.
 
-    127.0.0.1:6379> strlen salutacio  
+    127.0.0.1:6379> strlen saludo  
     (integer) 13  
     127.0.0.1:6379> strlen sal  
     (integer) 0
@@ -447,60 +456,60 @@ existeix, tornarà 0. Si la clau és d'un altre tipus, tornarà error.
 
 <u>_Sintaxi_</u>
 
-    getrange clau1 inici final
+    getrange clave1 inicio final
 
-Extrau una subcadena del valor de la clau (ha de ser de tipus **String**) des
-del número de caràcter d'inici fins al número del final (ambdós inclosos). El
-primer caràcter és el 0. Si posem de final un número major que l'últim, igual
-ho traurà fins el final.
+Extrae una subcadena del valor de la clave (debe ser de tipo **String**) desde
+del número de carácter de inicio hasta el número del final (ambos inclusive). El
+primer carácter es el 0. Si ponemos de final un número mayor que el último, igual
+lo sacará hasta el final.
 
-Es poden posar també valor negatius que ens ajuden a agafar la cadena des del
-final. El -1 és l'últim caràcter, el -2 el penúltim, ... I es poden barrejar
-números positius i negatius. Així el rang 0 -1 és tota la cadena.
+Se pueden poner también valor negativos que nos ayudan a tomar la cadena desde el
+final. El -1 es el último carácter, el -2 el penúltimo,... Y se pueden mezclar
+números positivos y negativos. Así el rango 0-1 es toda la cadena.
 
-    127.0.0.1:6379> getrange salutacio 1 3  
+    127.0.0.1:6379> getrange saludo 1 3  
     "ola"  
-    127.0.0.1:6379> getrange salutacio 6 50  
-    "com va?"  
-    127.0.0.1:6379> getrange salutacio 6 -1  
-    "com va?"  
-    127.0.0.1:6379> getrange salutacio -7 -5  
-    "com"
+    127.0.0.1:6379> getrange saludo 6 50  
+    "cómo va?"  
+    127.0.0.1:6379> getrange saludo 6 -1  
+    "cómo va?"  
+    127.0.0.1:6379> getrange saludo -7 -5  
+    "cómo"
 
 #### SETRANGE {.azul}
 
 <u>_Sintaxi_</u>
 
-    setrange clau1 desplaçament valor
+    setrange clave1 desplazamiento valor
 
-Substitueix part del valor de la cadena, a partir del desplaçament, amb el
-vaolr proporcionat. No s'admenten en desplaçament valors negatius.
+Sustituye parte del valor de la cadena, a partir del desplazamiento, con el
+valor proporcionado. No se admiten en desplazamiento valores negativos.
 
-    127.0.0.1:6379> get salutacio  
-    "Hola, com va?"  
-    127.0.0.1:6379> setrange salutacio 4 ". C"  
+    127.0.0.1:6379> get saludacio  
+    "Hola, ¿cómo va?"  
+    127.0.0.1:6379> setrange saludo 4 ". C"  
     (integer) 13  
-    127.0.0.1:6379> get salutacio  
-    "Hola. Com va?"
+    127.0.0.1:6379> get saludacio  
+    "Hola. ¿Cómo va?"
 
 
 #### INCR {.azul}
 
 <u>_Sintaxi_</u>
 
-    incr clau1
+    incr clave1
 
-A pesar de que Redis guarda els strings com a tals, com a cadenes de
-caràcters, en algunes ocasions és capaç de transformar la cadena a un número.
-És el cas del comando **INCR** , que converteix la cadena en un enter (si pot)
-i incrementa aquest valor en una unitat.
+A pesar de que Redis guarda los strings como tales, como cadenas de
+caracteres, en algunas ocasiones es capaz de transformar la cadena a un número.
+Es el caso del comando **INCR** , que convierte la cadena en un entero (si puede)
+e incrementa este valor en una unidad.
 
-Si la clau no existeix la crea assumint que valia 0, i per tant després valdrà
+Si la clave no existe la crea asumiendo que valía 0, y luego después valdrá
 1.
 
-Si el valor de la clau no era un número enter, donarà un error.
+Si el valor de la clave no era un número entero, dará un error.
 
-    127.0.0.1:6379> set compt1 20  
+    127.0.0.1:6379> sept cont1 20  
     OK  
     127.0.0.1:6379> get compt1  
     "20"  
@@ -512,24 +521,24 @@ Si el valor de la clau no era un número enter, donarà un error.
     (integer) 1  
     127.0.0.1:6379> get compt2  
     "1"  
-    127.0.0.1:6379> incr clau_1  
-    (error) ERR value is not an integer or out of range  
+    127.0.0.1:6379> incr clave_1  
+    (error) ERR value no está integrado or out of range  
     127.0.0.1:6379> set compt3 4.25  
     OK  
     127.0.0.1:6379> incr compt3  
-    (error) ERR value is not an integer or out of range
+    (error) ERR value no está integrado or out of range
 
 #### DECR {.azul}
 
 <u>_Sintaxi_</u>
 
-    decr clau1
+    decr clave1
 
-Decrementa en una unitat el valor de la clau (senpre que siga un enter).
+Decrementa en una unidad el valor de la clave (siempre que sea un entero).
 
-Pot agafar valors negatius.
+Puede tomar valores negativos.
 
-Si la clau no existeix la crea assumint que valia 0, i per tant després valdrà
+Si la clave no existe la crea asumiendo que valía 0, y luego después valdrá
 -1.
 
     127.0.0.1:6379> decr compt2  
@@ -543,10 +552,10 @@ Si la clau no existeix la crea assumint que valia 0, i per tant després valdrà
 
 <u>_Sintaxi_</u>
 
-    incrby clau1 increment
+    incrby clave1 incremento
 
-Incrementa el valor de la clau en el número d'unitats indicat en **increment**
-(el valor ha de ser enter). L'increment pot ser negatiu.
+Incrementa el valor de la clave en el número de unidades indicado en **increment**
+(el valor debe ser entero). El incremento puede ser negativo.
 
     127.0.0.1:6379> incrby compt1 10  
     (integer) 31  
@@ -558,9 +567,9 @@ Incrementa el valor de la clau en el número d'unitats indicat en **increment**
 
 <u>_Sintaxi_</u>
 
-    decrby clau1 decrement
+    decrby clave1 decremento
 
-Decrementa el valor de la clau el número d'unitat indicat en **decrement**.
+Decrementa el valor de la clave el número de unidad indicado en **decremento**.
 
     127.0.0.1:6379> decrby compt1 5  
     (integer) 6
@@ -568,72 +577,72 @@ Decrementa el valor de la clau el número d'unitat indicat en **decrement**.
 
 ### 2.3.2 - Keys
 
-Ara anem a veure comandos que ens permeten treballar amb les claus, per a
-buscar-les, veure si existeixen, etc. No importarà el tipus de les claus (de
-moment només hem treballat amb claus de tipus **String** , però si ja en
-tinguérem dels altres tipus també es veurien afectades). En cap cas d'aquestos
-comandos accedirem al valor de les claus.
+Ahora vamos a ver comandos que nos permiten trabajar con las claves, para
+buscarlas, ver si existen, etc. No importará el tipo de las claves (de
+momento sólo hemos trabajado con claves de tipo **String**, pero si ya en
+tuvimos de los otros tipos también se verían afectadas). En ningún caso de éstos
+comandos accederemos al valor de las claves.
 
 #### KEYS {.azul}
 
 <u>_Sintaxi_</u>
 
-    keys patró
+    keys patrón
 
-Torna totes les claus que coincideixen amb el patró. En el patró podem posar
-caràcters comodí:
+Devuelve todas las claves que coinciden con el patrón. En el patrón podemos poner
+caracteres comodín:
 
-  * ***** : equival a 0 o més caràcters. Per exemple "Mar*a" podria tornar "Mara", "Maria", "Marta", "Margarita", ...
-  * **?** : equival exactament a un caràcter. Per exemple "Mar?a" podria tornar "Maria" o "Marta", però no "Mara", "Margarita", ...
-  * **[ab]** : serà cert si en el lloc corresponent hi ha un dels caràcters especificats entre els claudàtors. Per exemple "Mar[it]a" podria tornar "Maria" o "Marta", però no "Marga"
+  * ***** : equivale a 0 o más caracteres. Por ejemplo "Mar*a" podría volver "Mara", "María", "Marta", "Margarita", ...
+  * **?** : equivale exactamente a un carácter. Por ejemplo "Mara" podría volver "María" o "Marta", pero no "Mara", "Margarita", ...
+  * **[ab]** : será cierto si en el lugar correspondiente hay uno de los caracteres especificados entre los corchetes. Por ejemplo "Mar[it]a" podría volver "María" o "Marta", pero no "Marga"
 
-Per a tornar totes les claus utilitzarem **keys ***
+Para volver todas las claves utilizaremos **keys ***
 
     127.0.0.1:6379> keys *  
-    1) "compt3"  
+    1) "cont3"  
     2) "mes5"  
     3) "mes3"  
     4) "comp3"  
     5) "mes7"  
     6) "mes2"  
     1) "mes6"  
-    2) "salutacio"  
+    2) "salutación"  
     3) "mes4"  
-    4)  "mes1"  
-    5)  "clau_1"  
-    6)  "compt1"  
-    7)  "compt2"  
-    127.0.0.1:6379> keys mes?  
+    4) "mes1"  
+    5) "clave_1"  
+    6) "cont1"  
+    7) "cont2"  
+    127.0.0.1:6379> ¿keys mas?  
     1) "mes5"  
     2) "mes3"  
-    3)  "mes7"  
-    4)  "mes2"  
-    5)  "mes6"  
-    6)  "mes4"  
-    7)  "mes1"  
+    3) "mes7"  
+    4) "mes2"  
+    5) "mes6"  
+    6) "mes4"  
+    7) "mes1"  
     127.0.0.1:6379> keys c*  
-    1)  "compt3"  
-    2)  "comp3"  
-    3)  "clau_1"  
-    4)  "compt1"  
-    5)  "compt2"  
+    1) "cont3"  
+    2) "comp3"  
+    3) "clave_1"  
+    4) "cont1"  
+    5) "cont2"  
     127.0.0.1:6379> keys mes[125]  
-    1)  "mes5"  
-    2)  "mes2"  
-    3)  "mes1"
+    1) "mes5"  
+    2) "mes2"  
+    3) "mes1"
 
-#### EXISTS {.azul}
+#### EXISTOS {.azul}
 
 <u>_Sintaxi_</u>
 
-    exists clau
+    exists clave
 
-Torna 1 si la clau existeix, i 0 si no existeix. No importa de quin tipus siga
-la clau.
+Devuelve 1 si la clave existe, y 0 si no existe. No importa de qué tipo sea
+la clave.
 
-    127.0.0.1:6379> exists clau_1  
+    127.0.0.1:6379> exists clave_1  
     (integer) 1  
-    127.0.0.1:6379> exists clau_25  
+    127.0.0.1:6379> exists clave_25  
     (integer) 0
 
 
@@ -641,35 +650,35 @@ la clau.
 
 <u>_Sintaxi_</u>
 
-    del clau1 clau2 clauN
+    del clave1 clave2 claveN
 
-Elimina la clau o claus especificades. Si posem més d'una clau i alguna no
-existeix, la ignorarà i sí que esborrarà les altres.
+Elimina la clave o claves especificadas. Si ponemos más de una llave y alguna no
+existe, la ignorará y sí borrará a las demás.
 
-    127.0.0.1:6379> del compt2  
+    127.0.0.1:6379> del cont2  
     (integer) 1  
     127.0.0.1:6379> del mes6 mes7 mes8 mes9  
     (integer) 2
 
-Observeu que ens indica quantes claus ha esborrat. En el primer exemple ha
-esborrat la clau especificada, i en el segon diu que ha esborrat 2, que seran
-**mes6** i **mes7** , ja que **mes8** i **mes9** no existien.
+Observe que nos indica cuántas claves ha borrado. En el primer ejemplo debe
+borrado la clave especificada, y en el segundo dice que ha borrado 2, que serán
+**mes6** y **mes7** , ya que **mes8** y **mes9** no existían.
 
 #### TYPE {.azul}
 
 <u>_Sintaxi_</u>
 
-    type clau
+    type clave
 
-Torna el tipus de la clau especificada. Els valors possibles són:
+Devuelve el tipo de la clave especificada. Los valores posibles son:
 
   * string
   * hash
   * list
-  * set
-  * zset (conjunt ordenat)
+  * sed
+  * zset (conjunto ordenado)
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
     127.0.0.1:6379> type clau_1  
     string  
@@ -679,22 +688,22 @@ Torna el tipus de la clau especificada. Els valors possibles són:
 
 <u>_Sintaxi_</u>
 
-    rename clau novaclau
+    rename clave novaclave
 
-Canvia el nom de la clau a la clau nova, conservant el valor. Dóna error si la
-clau antiga no existeix. Si la clau nova ja existia reemplaçarà el seu valor.
+Cambia el número de la clave en la clave nueva, conservando el valor. Da error si la
+clave antigua no existe. Si la clave nueva ya existía reemplazará su valor.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> get salutacio  
-    "Hola. Com va?"  
-    127.0.0.1:6379> rename salutacio saludar  
+    127.0.0.1:6379> get saludacio  
+    "Hola. ¿Cómo va?"  
+    127.0.0.1:6379> rename saludo saludar  
     OK  
-    127.0.0.1:6379> get salutacio  
+    127.0.0.1:6379> get saludacio  
     (nil)  
     127.0.0.1:6379> get saludar  
-    "Hola. Com va?"  
-    127.0.0.1:6379> rename clau_22 clau_23  
+    "Hola. ¿Cómo va?"  
+    127.0.0.1:6379> rename clave_22 clave_23  
     (error) ERR no such key
 
 
@@ -702,50 +711,52 @@ clau antiga no existeix. Si la clau nova ja existia reemplaçarà el seu valor.
 
 <u>_Sintaxi_</u>
 
-    renamenx clau novaclau
+    renamenx clave nueva clave
 
-Igual que l'anterior però únicament si la clau nova no existia. Si ja existia
-no fa res (tornant 0 per a indicar-h0).
+Al igual que el anterior pero únicamente si la clave nueva no existía. Si ya existía
+no hace nada (volviendo 0 para indicarlo h0).
 
-**<u>Exemples</u>**
+- db.collection.**find()**
+ 
+recuperará todos los documentos de la colección, aunque podremos poner criterios para que nos devuelva todos los documentos que cumplan estos criterios (lo veremos más adelante).
 
     127.0.0.1:6379> renamenx compt1 compt3  
     (integer) 0  
     127.0.0.1:6379> get compt1  
     "9"
 
-Estem suposant que la clau **compt3** ja existeix
+Estamos suponiendo que la clave **compt3** ya existe
 
 #### EXPIRE {.azul}
 
 <u>_Sintaxi_</u>
 
-    expire clau segons
+    caducar segundos clave
 
-Assigna com a temps d'expiració de la clau els segons especificats. Si ja
-tenia temps d'expiració, el modifica posant-li aquest valor especificat.
+Asigna como tiempo de expiración de la clave los segundos especificados. Si ya
+tenía tiempo de expiración, lo modifica poniéndole ese valor especificado.
 
-En cas que a una clau amb temps d'expiració li canviem el nom amb **RENAME** ,
-continuarà amb temps d'expiració que li quedava.
+En caso de que en una clave con tiempo de expiración le cambiemos el número con **RENAME** ,
+continuará con tiempo de expiración que le quedaba.
 
 #### PEXPIRE {.azul}
 
 <u>_Sintaxi_</u>
 
-    pexpire clau milisegons
+    pexpire clave milisegundos
 
-El mateix però en milisegons
+Lo mismo pero en milisegundos
 
 #### TTL {.azul}
 
 <u>_Sintaxi_</u>
 
-    ttl clau
+    ttl clave
 
-Torna el temps de vida (fins l'expiració) d'una clau. Si la clau no té temps
-d'expiració, torna -1.
+Vuelve el tiempo de vida (hasta la expiración) de una clave. Si la clave no tiene tiempo
+de expiración, vuelve -1.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
     127.0.0.1:6379> expire compt3 10  
     (integer) 1  
@@ -763,22 +774,22 @@ d'expiració, torna -1.
 
 <u>_Sintaxi_</u>
 
-    pttl clau
+    pttl clave
 
-Igual que l'anterior, però ens torna el temps en milisegons.
+Al igual que el anterior, pero nos devuelve el tiempo en milisegundos.
 
 #### PERSIST {.azul}
 
 <u>_Sintaxi_</u>
 
-    persist clau
+    persisto clave
 
-Elimina el temps d'expiració d'una clau, si és que en tenia. Ara la clau no
-expirarà mai.
+Elimina el tiempo de expiración de una llave, si es que la tenía. Ahora la clave no
+expirará nunca.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> expire compt1 20  
+    127.0.0.1:6379> expire cont1 20  
     (integer) 1  
     127.0.0.1:6379> ttl compt1  
     (integer) 12  
@@ -793,44 +804,44 @@ expirarà mai.
 
 ### 2.3.3 - Hash
 
-Ja havíem comentat que el tipus **Hash** és una espècie de registre, amb
-subcamps (en realitat hauríem de dir sub-claus). Pot tenir qualsevol número de
-subcamps que són de tipus String.
+Ya habíamos comentado que el tipo **Hash** es una especie de registro, como
+subcampos (en realidad deberíamos llamar subclaves). Puede tener cualquier número de
+subcampos que son de tipo String.
 
-**Redis** és molt eficient en quant a l'espai que ocupen els **Hash** , i
-sobretot en el temps de recuperació de les dades.
+**Redis** es muy eficiente en cuanto al espacio que ocupan los **Hash** , y
+sobre todo en el tiempo de recuperación de las datos.
 
-Els comandos que vam veure per al **String** no es poden aplicar al **Hash**.
-Tanmateix els comandos del **Hash** són molt similars a aquells, començant
-sempre per **H**.
+Los comandos que vimos para **String** no se pueden aplicar al **Hash**.
+Sin embargo los comandos del **Hash** son muy similares a aquellos, empezando
+siempre por **H**.
 
 #### HSET {.azul}
 
 <u>_Sintaxi_</u>
 
-    hset clau camp valor
+    hset clave campo valor
 
-Assigna al camp especificat de la clau especificada el valor especificat. Si
-el valor consta de més d'una paraula, haurà d'anar entre cometes dobles.
+Asigna al campo especificado de la clave especificada el valor especificado. Si
+el valor consta de más de una palabra, deberá ir entre comillas dobles.
 
-Si la clau no existia, la crearà, i si ja existia, senzillament afegirà el
-camp. I si d'aquesta clau ja existia el camp, modificarà el seu valor.
+Si la clave no existía, la creará, y si ya existía, sencillamente añadirá el
+campo. Y si de esa clave ya existía el campo, modificará su valor.
 
-Evidentment, en claus diferents poden haver camps amb els mateixos noms.
+Evidentemente, en claves diferentes puede haber campos con los mismos números.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
 
-    127.0.0.1:6379> hset empleat_1 nom Andreu  
+    127.0.0.1:6379> hset empleado_1 número Andrés  
     (integer) 1  
-    127.0.0.1:6379> hset empleat_1 departament 10  
+    127.0.0.1:6379> hset empleado_1 departamento 10  
     (integer) 1  
-    127.0.0.1:6379> hset empleat_1 sou 1000.0  
+    127.0.0.1:6379> hset empleado_1 sueldo 1000.0  
     (integer) 1
 
-    127.0.0.1:6379> hset empleat_2 nom Berta  
+    127.0.0.1:6379> hset empleado_2 número Berta  
     (integer) 1  
-    127.0.0.1:6379> hset empleat_2 sou 1500.0  
+    127.0.0.1:6379> hset empleado_2 sueldo 1500.0  
     (integer) 1
 
 
@@ -838,41 +849,41 @@ Evidentment, en claus diferents poden haver camps amb els mateixos noms.
 
 <u>_Sintaxi_</u>
 
-    hget clau camp
+    hget clave campo
 
-Torna el valor del camp de la clau. Si no existia (el camp o la clau) torna
-**nil**. Només podem especificar un camp.
+Devuelve el valor del campo de la clave. Si no existía (el campo o la clave) vuelve
+**nil**. Sólo podemos especificar un campo.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> hget empleat_1 nom  
+    127.0.0.1:6379> hget empleado_1 número  
     "Andreu"  
-    127.0.0.1:6379> hget empleat_1 departament  
+    127.0.0.1:6379> hget empleado_1 departamento  
     "10"  
-    127.0.0.1:6379> hget empleat_2 nom  
+    127.0.0.1:6379> hget empleado_2 número  
     "Berta"  
-    127.0.0.1:6379> hget empleat_2 departament  
+    127.0.0.1:6379> hget empleado_2 departamento  
     (nil)
 
 
-#### HGETALL {.azul}
+#### HGETAL {.azul}
 
 <u>_Sintaxi_</u>
 
-    hgetall clau
+    hgetall clave
 
-Torna una llista amb tots els camps i els seus valors de la clau. La seqüència
-és: camp1 valor1 camp2 valor2 ... Però no ens podem fiar que l'ordre siga el
-mateix ordre que quan el vam definir.
+Devuelve una lista con todos los campos y sus valores de la clave. La secuencia
+es: campo1 valor1 campo2 valor2 ... Pero no podemos fiarnos de que el orden sea el
+mismo orden que cuando lo definimos.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-  127.0.0.1:6379> hgetall empleat_1  
-    1) "nom"  
+  127.0.0.1:6379> hgetall empleado_1  
+    1) "número"  
     2) "Andreu"  
-    3) "departament"  
+    3) "departamento"  
     4) "10"  
-    5) "sou"  
+    5) "sueldo"  
     6) "1000.0"
 
 
@@ -880,19 +891,19 @@ mateix ordre que quan el vam definir.
 
 <u>_Sintaxi_</u>
 
-    hdel clau camp1 camp2 campN
+    hdel clave camp1 camp2 campN
 
-Elimina el o els camps especificats. Si no existeixen algun d'ells,
-senzillament l'ignora i si que elimina els altres.
+Elimina el o los campos especificados. Si no existen alguno de ellos,
+sencillamente lo ignora y si que elimina a los demás.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> hdel empleat_1 departament  
+    127.0.0.1:6379> hdel empleado_1 departamento  
     (integer) 1  
-    127.0.0.1:6379> hgetall empleat_1  
-    1) "nom"  
+    127.0.0.1:6379> hgetall empleado_1  
+    1) "número"  
     2) "Andreu"  
-    3) "sou"  
+    3) "sueldo"  
     4) "1000.0"
 
 
@@ -900,332 +911,332 @@ senzillament l'ignora i si que elimina els altres.
 
 <u>_Sintaxi_</u>
 
-    hkeys clau
+    hkeys clave
 
-Torna una llista amb els camps de la clau. Si la clau no existia, torna una
-llista buida
+Devuelve una lista con los campos de la clave. Si la clave no existía, devuelve una
+lista vacía
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> hkeys empleat_1  
-    1) "nom"  
-    2) "sou"
+    127.0.0.1:6379> hkeys empleado_1  
+    1) "número"  
+    2) "sueldo"
 
 
 #### HVALS {.azul}
 
 <u>_Sintaxi_</u>
 
-    hvals clau
+    hvales clave
 
-Torna una llista amb els valors (únicament els valors) de tots els camps de la
-clau. Si la clau no existia, torna una llista buida
+Vuelve una lista con los valores (únicamente los valores) de todos los campos de la
+clave. Si la clave no existía, devuelve una lista vacía
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> hvals empleat_1  
+    127.0.0.1:6379> hvals empleado_1  
     1) "Andreu"  
     2) "1000.0"
 
-#### Altres Comandos
+#### Otros Comandos
 
-També existeixen altres comandos, de funcionament com cabria esperar (els hem
-vist tots en el cas de **String**):
+También existen otros comandos, de funcionamiento como cabría esperar (los hemos
+visto todos en el caso de **String**):
 
-  * **hmget** : Torna més d'un camp de la clau
-  * **hmset** : assigna més d'un camp a una clau
-  * **hexists** : indica si existeix el subcamp de la clau
-  * **hsetnx** : assigna únicament en cas de que no existisca el camp.
-  * **hincrby** : incrementa el camp de la clau
+  * **hmget** : Vuelve más de un campo de la clave
+  * **hmset** : asigna más de un campo a una clave
+  * **hexists** : indica si existe el subcampo de la clave
+  * **hsetnx** : asigna únicamente en caso de que no exista el campo.
+  * **hincrby** : incrementa el campo de la clave
 
 
-### 2.3.4 - List
+### 2.3.4 - Lista
 
-Les **Llistes** en **Redis** són llistes de Strings ordenades, on cada element
-està associat a un índex de la llista. Es poden recuperar els elements tant de
-forma ordenada (per l'índex) com accedint directament a una posició.
+Las **Listas** en **Redis** son listas de Strings ordenadas, donde cada elemento
+está asociado a un índice de la lista. Se pueden recuperar los elementos tanto de
+forma ordenada (por el índice) como accediendo directamente a una posición.
 
-- Els elements es poden afegir al principi, al final o també en una posició
+- Los elementos se pueden añadir al principio, al final o también en una posición
 determinada.
 
-- La llista es crea en el moment en què s'insereix el primer element, i
-desapareix quan llevem l'últim element que quede.
+- La lista se crea en el momento en que se inserta el primer elemento, y
+desaparece cuando levantamos el último elemento que quede.
 
-- Estan molt ben optimitzades per a la inserció i per a la consulta.
+- Están muy bien optimizadas para la inserción y consulta.
 
-- Els comandos que afecten a les llistes comencen quasi tots per **L** , excepte
-alguns que comencen per **R** indicant que fan l'operació per la dreta.
+- Los comandos que afectan a las listas comienzan casi todos por **L**, excepto
+algunos que comienzan por **R** indicando que realizan la operación por la derecha.
 
-- Els valors dels elements es poden repetir.
+- Los valores de los elementos se pueden repetir.
 
 #### LPUSH {.azul}
 
 <u>_Sintaxi_</u>
 
-    lpush clau valor1 valor2 valorN
+    lpush clave valor1 valor2 valorN
 
-Introdueix els valors a la llista (creant la clau si és necessari). Les
-insereix en la primera posició, o també podríem dir que per l'esquerra (**Left
-PUSH**), imaginant que els elements estan ordenats d'esquerra a dreta. Si
-posem més d'un valor, s'aniran introduint sempre en la primera posició. El
-comando tornarà el número d'elements (strings) de la llista després de la
-inserció.
+Introduce los valores en la lista (creando la clave si es necesario). Las
+inserta en la primera posición, o también podríamos decir que por la izquierda (**Left
+PUSH**), imaginando que los elementos están ordenados de izquierda a derecha. Si
+ponemos más de un valor, se irán introduciendo siempre en la primera posición. El
+comando volverá el número de elementos (strings) de la lista después de la
+inserción.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> lpush llista1 primera segona tercera  
-    (integer) 3  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "tercera"  
-    2) "segona"  
-    3) "primera"  
-    127.0.0.1:6379> lpush llista1 quarta cinquena  
-    (integer) 5  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "cinquena"  
-    2) "quarta"  
-    3) "tercera"  
-    4) "segona"  
-    5) "primera"  
+    127.0.0.1:6379> lpush list1 primer segundo tercero  
+    (entero) 3  
+    127.0.0.1:6379> lista de rangos1 0 -1  
+    1) "tercero"  
+    2) "segundo"  
+    3) "primero"  
+    127.0.0.1:6379> lpush list1 cuarto quinto  
+    (entero) 5  
+    127.0.0.1:6379> lista de rangos1 0 -1  
+    1) "cinco"  
+    2) "cuarto"  
+    3) "tercero"  
+    4) "segundo"  
+    5) "primero"  
 
 
-!!! note "Nota"
-    Per a veure el contingut de la llista utilitzarem el comando **lrange llista 0
-    -1** , que torna la llista sencera. Veurem de forma més completa aquest
-    comando amb posterioritat.
+!!! nota "Nota"
+    Para ver el contenido de la lista utilizaremos el comando **lrange list 0
+    -1**, que devuelve la lista completa. Analizaremos más a fondo éste.
+    comando más tarde.
 
 #### RPUSH {.azul}
 
 
 <u>_Sintaxi_</u>
 
-    rpush clau valor1 valor2 valorN
+    rpush clave valor1 valor2 valorN
 
-Introdueix els valors a la llista (creant la clau si és necessari). Les
-insereix en l'última posició, o també podríem dir que per la dreta (**Right
-PUSH**), imaginant que els elements estan ordenats d'esquerra a dreta. El
-comando tornarà el número d'elements (strings) de la llista després de la
-inserció.
+Introduce los valores en la lista (creando la clave si es necesario). Las
+inserta en la última posición, o también podríamos decir que por la derecha (**Right
+PUSH**), imaginando que los elementos están ordenados de izquierda a derecha. El
+comando volverá el número de elementos (strings) de la lista después de la
+inserción.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> rpush llista1 sisena setena  
+    127.0.0.1:6379> rpush lista1 sexta séptima  
     (integer) 7  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "cinquena"  
-    2) "quarta"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "quinta"  
+    2) "cuarta"  
     3) "tercera"  
-    4) "segona"  
+    4) "segunda"  
     5) "primera"  
-    6) "sisena"  
-    7) "setena"  
+    6) "sexta"  
+    7) "séptima"  
 
 
 #### LPOP {.azul}
 
 <u>_Sintaxi_</u>
 
-    lpop clau
+    lpop clave
 
-Torna i elimina el primer element (el de més a l'esquerra).
+Vuelve y elimina el primer elemento (el de más a la izquierda).
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> lpop llista1  
-    "cinquena"  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
-    2) "tercera"  
-    3) "segona"  
-    4) "primera"  
-    5) "sisena"  
-    6) "setena"  
+    127.0.0.1:6379> lista lpop1  
+    "cinco"  
+    127.0.0.1:6379> lista de rangos1 0 -1  
+    1) "cuarto"  
+    2) "tercero"  
+    3) "segundo"  
+    4) "primero"  
+    5) "sexto"  
+    6) "séptimo"  
 
 
 #### RPOP {.azul}
 
 <u>_Sintaxi_</u>
 
-    rpop clau
+    rpop clave
 
-Torna i elimina l'últim element (el de més a la dreta).
+Vuelve y elimina el último elemento (el de más a la derecha).
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> rpop llista1  
-    "setena"  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
+    127.0.0.1:6379> rpop lista1  
+    "séptima"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
     2) "tercera"  
-    3) "segona"  
+    3) "segunda"  
     4) "primera"  
-    5) "sisena"  
+    5) "sexta"  
 
 
 #### LSET {.azul}
 
 <u>_Sintaxi_</u>
 
-    lset clau index valor
+    lset clave índice valor
 
-Substitueix el valor de la posició indicada per l'índex. Tant la clau com
-l'element de la posició indicada han d'existir, sinó donarà error. Ara la
-**L** no significa **Left** sinó **List**.
+Sustituye el valor de la posición indicada por el índice. Tanto la clave como
+el elemento de la posición indicada deben existir, sino dará error. Ahora la
+**L** no significa **Left** sino **List**.
 
-La primera posició és la 0. I també es poden posar números negatius: -1 és
-l'últim, -2 el penúltim, ...
+La primera posición es la 0. Y también se pueden poner números negativos: -1 es
+el último, -2 el penúltimo, ...
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> lset llista1 2 quarta  
+    127.0.0.1:6379> lset lista1 2 cuarta  
     OK  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
     2) "tercera"  
-    3) "quarta"  
+    3) "cuarta"  
     4) "primera"  
-    5) "sisena"  
-    127.0.0.1:6379> lset llista1 -1 cinquena  
+    5) "sexta"  
+    127.0.0.1:6379> lset lista1 -1 quinta  
     OK  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
     2) "tercera"  
-    3) "quarta"  
+    3) "cuarta"  
     4) "primera"  
-    5) "cinquena"  
+    5) "quinta"  
 
 
-Observeu com es poden repetir els valors
+Observe cómo se pueden repetir los valores
 
-#### LINDEX {.azul}
+#### LÍNDICE {.azul}
 
 <u>_Sintaxi_</u>
 
-    lindex clau index
+    elindex clave índice
 
-Torna l'element situat en la posició indicada per l'índex, **però sense
-eliminar-lo de la llista**.
+Vuelve el elemento situado en la posición indicada por el índice, **pero sin
+eliminarlo de la lista**.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
     2) "tercera"  
-    3) "quarta"  
+    3) "cuarta"  
     4) "primera"  
-    5) "cinquena"  
-    127.0.0.1:6379> lindex llista1 0  
-    "quarta"  
-    127.0.0.1:6379> lindex llista1 3  
+    5) "quinta"  
+    127.0.0.1:6379> lindex lista1 0  
+    "cuarta"  
+    127.0.0.1:6379> lindex lista1 3  
     "primera"  
-    127.0.0.1:6379> lindex llista1 -1  
-    "cinquena"  
-    127.0.0.1:6379> lrange llista1 0 -1 
-    1) "quarta"  
+    127.0.0.1:6379> lindex lista1 -1  
+    "quinta"  
+    127.0.0.1:6379> lange lista1 0 -1 
+    1) "cuarta"  
     2) "tercera"  
-    3) "quarta"  
+    3) "cuarta"  
     4) "primera"  
-    5) "cinquena"  
+    5) "quinta"  
 
 
 #### LINSERT {.azul}
 
 <u>_Sintaxi_</u>
 
-    linsert clau BEFORE | AFTER valor1 valor2
+    inserto clave BEFORE | AFTER valor1 valor2
 
-Insereix el valor2 abans o després (segons el que triem) de la primera vegada
-que troba el valor1. No substitueix, sinó que insereix en una determinada
-posició. Els elements que van després de l'element introduït veuran
-actualitzat el seu índex.
+Inserta el valor2 antes o después (según lo que elegimos) de la primera vez
+que encuentra el valor1. No sustituye, sino que inserta en una determinada
+posición. Los elementos que van después del elemento introducido verán
+actualizado su índice.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
     2) "tercera"  
-    3) "quarta"  
+    3) "cuarta"  
     4) "primera"  
-    5) "cinquena"  
-    127.0.0.1:6379> linsert llista1 AFTER quarta segona  
+    5) "quinta"  
+    127.0.0.1:6379> linsert lista1 AFTER cuarta segunda  
     (integer) 6  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
-    2) "segona"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
+    2) "segunda"  
     3) "tercera"  
-    4) "quarta"  
+    4) "cuarta"  
     5) "primera"  
-    6) "cinquena"  
-    127.0.0.1:6379> linsert llista1 BEFORE cinquena sisena  
+    6) "quinta"  
+    127.0.0.1:6379> linsert lista1 BEFORE quinta sexta  
     (integer) 7  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
-    2) "segona"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
+    2) "segunda"  
     3) "tercera"  
-    4) "quarta"  
+    4) "cuarta"  
     5) "primera"  
-    6) "sisena"  
-    7) "cinquena"  
-    127.0.0.1:6379> lrange llista1 0 -1    
+    6) "sexta"  
+    7) "quinta"  
+    127.0.0.1:6379> lange lista1 0 -1    
 
-Si intentem inserir abans o després un element que no existeix, tornarà -1
-indicant que no l'ha trobat i no farà la inserció.
+Si intentamos insertar antes o después un elemento que no existe, volverá -1
+indicando que no lo ha encontrado y no realizará la inserción.
 
-    127.0.0.1:6379> linsert llista1 BEFORE desena setena  
+    127.0.0.1:6379> linsert lista1 BEFORE décima séptima  
     (integer) -1  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
-    2) "segona"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
+    2) "segunda"  
     3) "tercera"  
-    4) "quarta"  
+    4) "cuarta"  
     5) "primera"  
-    6) "sisena"  
-    7) "cinquena"  
+    6) "sexta"  
+    7) "quinta"  
   
 
 #### LRANGE {.azul}
 
   <u>_Sintaxi_</u>
   
-      lrange clau inici final
+      larange clave inicio final
   
-  Torna els elements de la llista inclosos entre els index inici i final, ambdós
-  inclosos. El primer element és el 0. Es poden posar valors negatius, sent -1
-  l'últim, -2 el penúltim, ...
+  Devuelve los elementos de la lista incluidos entre los índices inicio y final, ambos
+  incluidos. El primer elemento es el 0. Se pueden poner valores negativos, siendo -1
+  el último, -2 el penúltimo, ...
 
-  **<u>Exemples</u>**
+  **<u>Ejemplos</u>**
   
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
-    2) "segona"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
+    2) "segunda"  
     3) "tercera"  
-    4) "quarta"  
+    4) "cuarta"  
     5) "primera"  
-    6) "sisena"  
-    7) "cinquena"  
-    127.0.0.1:6379> lrange llista1 2 4  
+    6) "sexta"  
+    7) "quinta"  
+    127.0.0.1:6379> lrange lista1 2 4  
     1) "tercera"  
-    2) "quarta"  
+    2) "cuarta"  
     3) "primera"  
-    127.0.0.1:6379> lrange llista1 1 -2  
-    4) "segona"  
+    127.0.0.1:6379> lrange lista1 1 -2  
+    4) "segunda"  
     5) "tercera"  
-    6) "quarta"  
+    6) "cuarta"  
     7) "primera"  
-    8) "sisena"  
-    127.0.0.1:6379> lrange llista1 4 4  
+    8) "sexta"  
+    127.0.0.1:6379> lrange lista1 4 4  
     1) "primera"  
 
 
-#### LLEN {.azul}
+#### LEN {.azul}
 
 <u>_Sintaxi_</u>
 
-    llen clau
+    tiran clave
 
-Torna el número d'elements de la llista
+Devuelve el número de elementos de la lista
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
     127.0.0.1:6379> llen llista1  
     (integer) 7  
@@ -1235,96 +1246,96 @@ Torna el número d'elements de la llista
 
 <u>_Sintaxi_</u>
 
-    lrem clau número valor
+    lrem clave número valor
 
-Elimina elements de la llista que coincidisquen amb el valor proporcionat. Ja
-sabem que els valors es poden repetir. Amb el número indiquem quants elements
-volem que s'esborrencomençant per l'esquerra: si posem 1 s'esborrarà el primer
-element amb aquest valor, si posem 2 s'esborraran els dos primers elements
-(els de més a l'esquerra) que tingen aquest valor. Si posem 0 s'esborraran
-tots els elements amb aquest valor
+Elimina elementos de la lista que coincidan con el valor proporcionado. Ya
+sabemos que los valores pueden repetirse. Con el número indicamos cuántos elementos
+queremos que se borren empezando por la izquierda: si ponemos 1 se borrará el primero
+elemento con este valor, si ponemos 2 se borrarán los dos primeros elementos
+(los de más a la izquierda) que tengan ese valor. Si ponemos 0 se borrarán
+todos los elementos con este valor
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> rpush llista1 segona  
+    127.0.0.1:6379> rpush lista1 segunda  
     (integer) 8  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
-    2) "segona"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
+    2) "segunda"  
     3) "tercera"  
-    4) "quarta"  
+    4) "cuarta"  
     5) "primera"  
-    6) "sisena"  
-    7) "cinquena"  
-    8) "segona"  
-    127.0.0.1:6379> lrem llista1 1 segona  
+    6) "sexta"  
+    7) "quinta"  
+    8) "segunda"  
+    127.0.0.1:6379> lrem lista1 1 segunda  
     (integer) 1  
-    127.0.0.1:6379> lrange llista1 0 -1  
-    1) "quarta"  
+    127.0.0.1:6379> lange lista1 0 -1  
+    1) "cuarta"  
     2) "tercera"  
-    3) "quarta"  
+    3) "cuarta"  
     4) "primera"  
-    5) "sisena"  
-    6) "cinquena"  
-    7) "segona"  
-    127.0.0.1:6379> lrem llista1 0 quarta  
+    5) "sexta"  
+    6) "quinta"  
+    7) "segunda"  
+    127.0.0.1:6379> lrem lista1 0 cuarta  
     (integer) 2  
-    127.0.0.1:6379> lrange llista1 0 -1 
+    127.0.0.1:6379> lange lista1 0 -1 
     8) "tercera"  
     9) "primera"  
-    10) "sisena"  
-    11) "cinquena"  
-    12) "segona"  
+    10) "sexta"  
+    11) "quinta"  
+    12) "segunda"  
 
 
 #### LTRIM {.azul}
 
 <u>_Sintaxi_</u>
 
-    ltrim clau inici final
+    ltrim clave inicio final
 
-Elimina els elements que queden fora dels índex inici i final, és a dir
-elimina els que estiguen a l'esquerra d'inici, i els que estiguen a la dreta
+Elimina los elementos que quedan fuera de los índices inicio y final, es decir
+elimina los que extiende a la izquierda de inicio, y los que extiende a la derecha
 de final.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> ltrim llista1 1 -2  
+    127.0.0.1:6379> ltrim lista1 1 -2  
     OK  
-    127.0.0.1:6379> lrange llista1 0 -1  
+    127.0.0.1:6379> lange lista1 0 -1  
     1) "primera"  
-    2) "sisena"  
-    3) "cinquena"  
+    2) "sexta"  
+    3) "quinta"  
 
-### 2.3.5 - Set
+### 2.3.5 - Siete
 
-Els **Sets** de **Redis** són conjunts de valors de tipus String no ordenats.
-Podrem afegir, actualitzar i esborrar aquestos elements de forma còmoda i
-eficient. No es permetran els valors duplicats.
+Los **Sets** de **Redis** son conjuntos de valores de tipo String no ordenados.
+Podremos añadir, actualizar y borrar estos elementos de forma cómoda y
+eficiente. No se permitirán valores duplicados.
 
-A més **Redis** ens ofereix operacions interessants com la unió, intersecció i
-diferència de conjunts.
+Además **Redis** nos ofrece operaciones interesantes como la unión, intersección y
+diferencia de conjuntos.
 
-Com sempre, els comandos són específics, és a dir no ens valen els de Strings,
-List o Hash. Tots els comandos comencen per **S**.
+Como siempre, los comandos son específicos, es decir no nos valen los de Strings,
+List o Hash. Todos los comandos comienzan por **S**.
 
 #### SADD {.azul}
 
 <u>_Sintaxi_</u>
 
-    sadd clau valor1 valor2 valorN
+    sadd clave valor1 valor2 valorN
 
-Afegeix els valors al conjunt (creant la clau si és necessari). Recordem que
-l'ordre no és important, i que no es poden repetir els valors; si intentem
-introduir un repetit, no donarà error, però no l'introduirà. El comando
-tornarà el número d'elements que realment s'han afegit.
+Añade los valores al conjunto (creando la clave si es necesario). Recordemos que
+el orden no es importante, y que no se pueden repetir los valores; si intentamos
+introducir un repetido, no dará error, pero no lo introducirá. El comando
+volverá el número de elementos que realmente se han añadido.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> sadd colors roig verd blau  
-    (integer) 3  
-    127.0.0.1:6379> sadd colors verd groc  
-    (integer) 1
+    127.0.0.1:6379> colores tristes rojo verde azul  
+    (entero) 3  
+    127.0.0.1:6379> colores tristes verde amarillo  
+    (entero) 1
 
 
 
@@ -1332,34 +1343,34 @@ tornarà el número d'elements que realment s'han afegit.
 
 <u>_Sintaxi_</u>
 
-    smembers clau
+    smembers clave
 
-Torna tots els valors del conjunt. Si la clau no existeix tornarà un conjunt
-buit. Recordeu que l'ordre dels elements no és predecible
+Devuelve todos los valores del conjunto. Si la clave no existe, volverá un conjunto.
+vacío Recuerda que el orden de los elementos no es predictible
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> smembers colors  
-    1) "groc"  
-    2) "verd"  
-    3) "roig"  
-    4) "blau"
+    127.0.0.1:6379> smembers colores  
+    1) "amarillo"  
+    2) "verde"  
+    3) "rojo"  
+    4) "azul"
 
 
 #### SISMEMBER {.azul} 
 
 <u>_Sintaxi_</u>
 
-    sismember clau valor
+    seísmo clave valor
 
-Comprova si el valor està en el conjunt, tornant 1 en cas afirmatiu i 0 en cas
-negatiu.
+Comprueba si el valor está en el conjunto, devolviendo 1 en caso afirmativo y 0 en caso
+negativo.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> sismember colors verd  
+    127.0.0.1:6379> sismember colores verde  
     (integer) 1  
-    127.0.0.1:6379> sismember colors negre  
+    127.0.0.1:6379> sismember colores negro  
     (integer) 0
 
 
@@ -1367,311 +1378,311 @@ negatiu.
 
 <u>_Sintaxi_</u>
 
-    sard clau
+    sardo clave
 
-Torna la cardinalitat, és a dir, el número d'elements del conjunt en
-l'actualitat.
+Vuelve la cardinalidad, es decir, el número de elementos del conjunto en
+la actualidad.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
     127.0.0.1:6379> scard colors  
     (integer) 4
 
 
-#### SREM {.azul}
+Donde en posición podremos poner:
 
 <u>_Sintaxi_</u>
 
-    srem clau valor1 valor2 valorN
+    seremos clave valor1 valor2 valorN
 
-Elimina els valors del conjunt. Si el conjunt es queda buit, eliminarà la clau
-també. Si algun dels valor no és cap element del conjunt, senzillament
-s'ignorarà. El comando torna el número d'elements realment eliminat.
+Elimina los valores del conjunto. Si el conjunto se queda vacío, eliminará la clave
+también. Si alguno de los valores no es ningún elemento del conjunto, sencillamente
+se ignorará. El comando devuelve el número de elementos realmente eliminado.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> srem colors verd negre  
+    127.0.0.1:6379> srem colores verde negro  
     (integer) 1  
-    127.0.0.1:6379> smembers colors  
-    1) "groc"  
-    2) "roig"  
-    3) "blau"
+    127.0.0.1:6379> smembers colores  
+    1) "amarillo"  
+    2) "rojo"  
+    3) "azul"
 
 
 #### SPOP {.azul}
 
 <u>_Sintaxi_</u>
 
-    spop clau
+    spop clave
 
-Torna i elimina un valor aleatori del conjunt. Recordeu que a més de tornar-
-lo, l'elimina del conjunt.
+Vuelve y elimina un valor aleatorio del conjunto. Recuerde que además de volverlo
+lo, lo elimina del conjunto.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> smembers colors  
-    1) "groc"  
-    2) "roig"  
-    3) "blau"  
+    127.0.0.1:6379> smembers colores  
+    1) "amarillo"  
+    2) "rojo"  
+    3) "azul"  
     127.0.0.1:6379> spop colors  
-    "groc"  
-    127.0.0.1:6379> smembers colors  
-    1) "roig"  
-    2) "blau"
+    "amarillo"  
+    127.0.0.1:6379> smembers colores  
+    1) "rojo"  
+    2) "azul"
 
 
 #### SRANDMEMBER {.azul}
 
 <u>_Sintaxi_</u>
 
-    srandmember clau
+    srandmember clave
 
-Molt paregut a l'anterior. Torna un valor aleatori del conjunt, però en
-aquesta ocasió no l'elimina del conjunt.
+Muy parecido a lo anterior. Vuelve un valor aleatorio del conjunto, pero en
+esta ocasión no le elimina del conjunto.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> srandmember colors  
-    "blau"  
-    127.0.0.1:6379> smembers colors  
-    1) "roig"  
-    2) "blau"
+    127.0.0.1:6379> srandmember colores  
+    "azul"  
+    127.0.0.1:6379> smembers colores  
+    1) "rojo"  
+    2) "azul"
 
 
 #### SUNION {.azul}
 
 <u>_Sintaxi_</u>
 
-    sunion clau1 clau2 clauN
+    sunion clave1 clave2 claveN
 
-Torna la unió dels elements dels conjunts especificats. És una unió correcta,
-és a dir, no es repetirà cap valor.
+Devuelve la unión de los elementos de los conjuntos especificados. Es una unión correcta,
+es decir, no se repetirá ningún valor.
 
-No modifica cap conjunt, i el resultat únicament es torna, no es guarda en cap
-lloc de forma permanent.
+No modifica ningún conjunto, y el resultado únicamente se devuelve, no se guarda en ningún
+puesto de forma permanente.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> smembers colors  
-    1) "roig"  
-    2) "blau"  
-    127.0.0.1:6379> sadd colors1 verd roig groc  
+    127.0.0.1:6379> smembers colores  
+    1) "rojo"  
+    2) "azul"  
+    127.0.0.1:6379> sadd colors1 verde rojo amarillo  
     (integer) 3  
     127.0.0.1:6379> smembers colors1  
-    1) "groc"  
-    2) "roig"  
-    3) "verd"  
-    127.0.0.1:6379> sunion colors colors1  
-    1) "verd"  
-    2) "groc"  
-    3) "roig"  
-    4) "blau"
+    1) "amarillo"  
+    2) "rojo"  
+    3) "verde"  
+    127.0.0.1:6379> sunion colores colores1  
+    1) "verde"  
+    2) "amarillo"  
+    3) "rojo"  
+    4) "azul"
 
 #### SUNIONSTORE {.azul}
 <u>_Sintaxi_</u>
 
-    sunionstore clau_destí clau1 clau2 clauN
+    sunionstore clave_destino clave1 clave2 claveN
 
-Igual que l'anterior, però ara sí que es guarda el resultat de la unió en un
-conjunt, clau_destí (el primer especificat). Si la clau_destí ja existia,
-substituirà el contingut.
+Al igual que el anterior, pero ahora sí se guarda el resultado de la unión en un
+conjunto, clave_destino (el primero especificado). Si la clave_destino ya existía,
+sustituirá el contenido.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> smembers colors  
-    1) "roig"  
-    2) "blau"  
+    127.0.0.1:6379> smembers colores  
+    1) "rojo"  
+    2) "azul"  
     127.0.0.1:6379> smembers colors1  
-    1) "groc"  
-    2) "roig"  
-    3) "verd"  
-    127.0.0.1:6379> sunionstore colors2 colors colors1  
+    1) "amarillo"  
+    2) "rojo"  
+    3) "verde"  
+    127.0.0.1:6379> sunionstore colores2 colores colores1  
     (integer) 4  
     127.0.0.1:6379> smembers colors2  
-    1) "verd"  
-    2) "groc"  
-    3) "roig"  
-    4) "blau"
+    1) "verde"  
+    2) "amarillo"  
+    3) "rojo"  
+    4) "azul"
 
 #### SDIFF {.azul}
 
 <u>_Sintaxi_</u>
 
-    sdiff clau1 clau2 clauN
+    sdiff clave1 clave2 claveN
 
-Torna la diferència dels elements del primer conjunt respecte de la unió de
-tots els altres. És a dir, torna els elements del primer conjunt que no
-pertanyen acap dels altres.
+Vuelve la diferencia de los elementos del primer conjunto respecto a la unión de
+todos los demás. Es decir, devuelve los elementos del primer conjunto que no
+pertenecen a ninguno de los demás.
 
-No modifica cap conjunt, i el resultat únicament es torna, no es guarda en cap
-lloc de forma permanent.
+No modifica ningún conjunto, y el resultado únicamente se devuelve, no se guarda en ningún
+puesto de forma permanente.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> smembers colors  
-    1) "roig"  
-    2) "blau"  
+    127.0.0.1:6379> smembers colores  
+    1) "rojo"  
+    2) "azul"  
     127.0.0.1:6379> smembers colors1  
-    1) "groc"  
-    2) "roig"  
-    3) "verd"  
-    127.0.0.1:6379> sdiff colors1 colors  
-    1) "verd"  
-    2) "groc"
+    1) "amarillo"  
+    2) "rojo"  
+    3) "verde"  
+    127.0.0.1:6379> sdiff colors1 colores  
+    1) "verde"  
+    2) "amarillo"
 
 
 #### SDIFFSTORE {.azul}
 
 <u>_Sintaxi_</u>
 
-    sdiffstore clau_destí clau1 clau2 clauN
+    sdiffstore clave_destino clave1 clave2 claveN
 
-Igual que l'anterior, però ara sí que es guarda el resultat de la diferència
-en un conjunt, clau_destí (el primer especificat). Si la clau_destí ja
-existia, substituirà el contingut.
+Al igual que el anterior, pero ahora se guarda el resultado de la diferencia.
+en un conjunto, clave_destino (la primera especificada). Si la clave_destino ya
+existía, reemplazará el contenido.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> smembers colors  
-    1) "roig"  
-    2) "blau"  
+    127.0.0.1:6379> smembers colores  
+    1) "rojo"  
+    2) "azul"  
     127.0.0.1:6379> smembers colors1  
-    1) "groc"  
-    2) "roig"  
-    3) "verd"  
-    127.0.0.1:6379> sdiffstore colors3 colors1 colors  
+    1) "amarillo"  
+    2) "rojo"  
+    3) "verde"  
+    127.0.0.1:6379> sdiffstore colores3 colores1 colores  
     (integer) 2  
     127.0.0.1:6379> smembers colors3  
-    1) "verd"  
-    2) "groc"
+    1) "verde"  
+    2) "amarillo"
 
 
 #### SINTER {.azul}
 
 <u>_Sintaxi_</u>
 
-    sinter clau1 clau2 clauN
+    sinter clave1 clave2 claveN
 
-Torna la intersecció dels elements dels conjunts. És a dir, torna els elements
-que pertanyen a tots els conjunts especificats.
+Devuelve la intersección de los elementos de los conjuntos. Es decir, devuelve los elementos
+que pertenecen a todos los conjuntos especificados.
 
-No modifica cap conjunt, i el resultat únicament es torna, no es guarda en cap
-lloc de forma permanent.
+No modifica ningún conjunto, y el resultado únicamente se devuelve, no se guarda en ningún
+puesto de forma permanente.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> smembers colors  
-    1) "roig"  
-    2) "blau"  
+    127.0.0.1:6379> smembers colores  
+    1) "rojo"  
+    2) "azul"  
     127.0.0.1:6379> smembers colors1  
-    1) "groc"  
-    2) "roig"  
-    3) "verd"  
+    1) "amarillo"  
+    2) "rojo"  
+    3) "verde"  
     127.0.0.1:6379> sinter colors colors1  
-    1) "roig"
+    1) "rojo"
 
 
 #### SINTERSTORE {.azul}
 
 <u>_Sintaxi_</u>
 
-    sinterstore clau_destí clau1 clau2 clauN
+    sinterstore clave_destino clave1 clave2 claveN
 
-Igual que l'anterior, però ara sí que es guarda el resultat de la intersecció
-en un conjunt, clau_destí (el primer especificat). Si la clau_destí ja
-existia, substituirà el contingut.
+Al igual que el anterior, pero ahora sí se guarda el resultado de la intersección
+en un conjunto, clave_destino (el primero especificado). Si la clave_destino ya
+existía, sustituirá el contenido.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> smembers colors  
-    1) "roig"  
-    2) "blau"  
+    127.0.0.1:6379> smembers colores  
+    1) "rojo"  
+    2) "azul"  
     127.0.0.1:6379> smembers colors1  
-    3) "groc"  
-    4) "roig"  
-    5) "verd"  
-    127.0.0.1:6379> sinterstore colors4 colors colors1  
+    3) "amarillo"  
+    4) "rojo"  
+    5) "verde"  
+    127.0.0.1:6379> sinterstore colors4 colores colores1  
     (integer) 1  
     127.0.0.1:6379> smembers colors4  
-    6) "roig"
+    6) "rojo"
 
 
 #### SMOVE {.azul}
 
 <u>_Sintaxi_</u>
 
-    smove clau_font clau_destí valor
+    smove clave_fuente clave_destino valor
 
-Meneja el valor del conjunt orígen (el primer conjunt) al conjunt destí (el
-segon). Això suposarà eliminar-lo del primer i afegir-lo al segon. Tornarà 1
-si l'ha menejat, i 0 si no l'ha menejat.
+Maneja el valor del conjunto orígen (el primer conjunto) en el conjunto destino (el
+segundo). Esto supondrá eliminarlo del primero y añadirlo al segundo. Volverá 1
+si lo ha mineado, y 0 si no lo ha meneado.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> smembers colors  
-    1) "roig"  
-    2) "blau"  
+    127.0.0.1:6379> smembers colores  
+    1) "rojo"  
+    2) "azul"  
     127.0.0.1:6379> smembers colors1  
-    1) "groc"  
-    2) "roig"  
-    3) "verd"  
-    127.0.0.1:6379> smove colors1 colors verd  
+    1) "amarillo"  
+    2) "rojo"  
+    3) "verde"  
+    127.0.0.1:6379> smove colors1 colores verde  
     (integer) 1  
-    127.0.0.1:6379> smembers colors  
-    1) "verd"  
-    2) "roig"  
-    3) "blau"  
+    127.0.0.1:6379> smembers colores  
+    1) "verde"  
+    2) "rojo"  
+    3) "azul"  
     127.0.0.1:6379> smembers colors1  
-    1) "groc"  
-    2) "roig"
+    1) "amarillo"  
+    2) "rojo"
 
-### 2.3.6 - Set ordenat
+### 2.3.6 - Siete ordenado
 
-Els **Sets Ordenats** (**Sorted Set**) de **Redis** són Sets que a més de
-guardar els valors, guarden també una **puntuació** (**score**) per a cada
-valor, i **Redis** mantindrà el conjunt **ordenat** per aquesta puntuació.
+Los **Sets Ordenados** (**Sorted Set**) de **Redis** son Sets que además de
+guardar los valores, guardan también una **puntuación** (**score**) para cada
+valor, y **Redis** mantendrá el conjunto **ordenado** por esta puntuación.
 
-Els valors no es podran repetir, però sí les puntuacions.
+Los valores no podrán repetirse, pero sí las puntuaciones.
 
-Molts dels comandos seran iguals que els del **Set** , ja que un conjunt
-ordenat no deixa de ser un conjunt, però amb la informació de la puntuació. En
-aquesta ocasió començaran per **Z**
+Muchos de los comandos serán iguales que los del **Set**, ya que un conjunto
+ordenado no deja de ser un conjunto pero con la información de la puntuación. En
+esta ocasión empezarán por **Z**
 
 #### ZADD {.azul}
 
 <u>_Sintaxi_</u>
 
-    zadd clau puntuació1 valor1 puntuació2 valor2 puntuacióN valorN
+    zadd clave puntuación1 valor1 puntuación2 valor2 puntuaciónN valorN
 
-Afegeix els valors al conjunt (creant la clau si és necessari) amb les
-puntuacions corresponents. Les puntuacions seran Strings de valors reals
-(float). No es poden repetir els valors, però sí les puntuacions. Si intentem
-introduir un valor repetit, el que farà serà actualitzar la puntuació. El
-comando tornarà el número d'elements que realment s'han afegit.
+Añade los valores al conjunto (creando la clave si es necesario) con las
+puntuaciones correspondiente. Las puntuaciones serán Strings de valores reales
+(float). No se pueden repetir los valores, pero sí las puntuaciones. Si intentamos
+introducir un valor repetido, lo que va a hacer será actualizar la puntuación. El
+comando volverá el número de elementos que realmente se han añadido.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> zadd puntuacions 1 Nom1 2 Nom2 5 Nom3 4 Nom4  
+    127.0.0.1:6379> zadd puntuaciones 1 Número1 2 Número2 5 Número3 4 Número4  
     (integer) 4
-    127.0.0.1:6379> zrange puntuacions 0 -1  
-    1) "Nom1"  
-    2) "Nom2"  
-    3) "Nom4"  
-    4) "Nom3"
+    127.0.0.1:6379> zrange puntuaciones 0 -1  
+    1) "Número1"  
+    2) "Número2"  
+    3) "Número4"  
+    4) "Número3"
 
 
 #### ZCARD {.azul}
 
 <u>_Sintaxi_</u>
 
-    zcard clau
+    zcard clave
 
-Torna la cardinalitat, és a dir, el número d'elements del conjunt ordenat en
-l'actualitat.
+Vuelve la cardinalidad, es decir, el número de elementos del conjunto ordenado en
+la actualidad.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> zcard puntuacions  
+    127.0.0.1:6379> zcard puntuaciones  
     (integer) 4
 
 
@@ -1679,16 +1690,16 @@ l'actualitat.
 
 <u>_Sintaxi_</u>
 
-    zscore clau valor
+    zscore clave valor
 
-Torna la puntuació (score) del valor especificat del conjunt ordenat. Si no
-existeix el valor o no existaix la clao, torna nil.
+Devuelve la puntuación (score) del valor especificado del conjunto ordenado. Si no
+existe el valor o no existe la clao, vuelve nilo.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> zscore puntuacions Nom3  
+    127.0.0.1:6379> zscore puntuaciones Número3  
     "5"  
-    127.0.0.1:6379> zscore puntuacions Nom7  
+    127.0.0.1:6379> zscore puntuaciones Número7  
     (nil)
 
 
@@ -1696,14 +1707,14 @@ existeix el valor o no existaix la clao, torna nil.
 
 <u>_Sintaxi_</u>
 
-    zcount clau min max
+    zcount clave min max
 
-Torna el número de valors que estan entre les puntuacions especificades
-(ambdues incloses).
+Devuelve el número de valores que están entre las puntuaciones especificadas
+(ambas incluidas).
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> zcount puntuacions 2 5  
+    127.0.0.1:6379> zcount puntuaciones 2 5  
     (integer) 3
 
 
@@ -1712,42 +1723,42 @@ Torna el número de valors que estan entre les puntuacions especificades
 
 <u>_Sintaxi_</u>
 
-    zrange clau inici final [withscores]
+    zrange clave inicio final [withscores]
 
-Torna els elements del conjunt ordenat inclosos entre els index inici i final,
-ambdós inclosos. I es trauen per ordre ascentent de puntuació. El primer
-element és el 0. Es poden posar valors negatius, sent -1 l'últim, -2 el
-penúltim, ... Opcionalment podem posar **WITHSCORES** per a que ens torne
-també la puntuació de cada element
+Devuelve los elementos del conjunto ordenado incluidos entre los índices inicio y final,
+ambos incluidos. Y se sacan por orden acentente de puntuación. El primero
+elemento es el 0. Se pueden poner valores negativos, siendo -1 el último, -2 el
+penúltimo, ... Opcionalmente podemos poner **WITHSCORES** para que nos devuelva
+también la puntuación de cada elemento
 
-**<u>Exemples</u>**
+**$or**{.azul}
 
-    127.0.0.1:6379> zrange puntuacions 0 -1  
-    1) "Nom1"  
-    2) "Nom2"  
-    3) "Nom4"  
-    4) "Nom3"  
-    127.0.0.1:6379> zrange puntuacions 0 -1 withscores  
-    1) "Nom1"  
+    127.0.0.1:6379> zrange puntuaciones 0 -1  
+    1) "Número1"  
+    2) "Número2"  
+    3) "Número4"  
+    4) "Número3"  
+    127.0.0.1:6379> zrange puntuaciones 0 -1 withscores  
+    1) "Número1"  
     2) "1"  
-    3) "Nom2"  
+    3) "Número2"  
     4) "2"  
-    5) "Nom4"  
+    5) "Número4"  
     6) "4"  
-    7) "Nom3"  
+    7) "Número3"  
     8) "5"
 
-Si vulguérem traure el conjunt en ordre invers de puntuació, utilitzaríem el
+Si quisiéramos sacar el conjunto en orden inverso de puntuación, utilizaríamos el
 comando **ZREVRANGE** (**reverse range**).
 
-    127.0.0.1:6379> zrevrange puntuacions 0 -1 withscores  
-    1) "Nom3"  
+    127.0.0.1:6379> zrevrange puntuaciones 0 -1 withscores  
+    1) "Número3"  
     2) "5"  
-    3) "Nom4"  
+    3) "Número4"  
     4) "4"  
-    5) "Nom2"  
+    5) "Número2"  
     6) "2"  
-    7) "Nom1"  
+    7) "Número1"  
     8) "1"
 
 
@@ -1755,47 +1766,47 @@ comando **ZREVRANGE** (**reverse range**).
 
 <u>_Sintaxi_</u>
 
-    zrangebyscore clau min max [withscores]
+    zrangebyscore clave min max [withscores]
 
-Torna els elements del conjunt ordenat que tenen una puntuació compresa entre
-**min** i **max** (ambdues incloses). I es trauen per ordre ascentent de
-puntuació. Opcionalment podem posar **WITHSCORES** per a que ens torne també
-la puntuació de cada element. ****
+Vuelve los elementos del conjunto ordenado que tienen una puntuación comprendida entre
+**min** y **max** (ambas incluidas). Y se sacan por orden acentente de
+puntuación. Opcionalmente podemos poner **WITHSCORES** para que nos devuelva también
+la puntuación de cada elemento. ****
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> zrangebyscore puntuacions 2 5  
-    1) "Nom2"  
-    2) "Nom4"  
-    3) "Nom3"  
-    127.0.0.1:6379> zrangebyscore puntuacions 2 5 withscores  
-    1) "Nom2"  
+    127.0.0.1:6379> zrangebyscore puntuaciones 2 5  
+    1) "Número2"  
+    2) "Número4"  
+    3) "Número3"  
+    127.0.0.1:6379> zrangebyscore puntuaciones 2 5 withscores  
+    1) "Número2"  
     2) "2"  
-    3) "Nom4"  
+    3) "Número4"  
     4) "4"  
-    5) "Nom3"  
+    5) "Número3"  
     6) "5"
    
-Si vulguérem que les puntuacions foren estrictament majors que la puntiuació
-mínima i/o estrictament menor que la puntuació màxima, posaríem un parèntesi
-davany de **min** i/o **max** :
+Si quisiéramos que las puntuaciones fueran estrictamente mayores que la puntuación
+mínima y/o estrictamente menor que la puntuación máxima, pondríamos un paréntesis
+daño de **min** y/o **max** :
 
-    127.0.0.1:6379> zrangebyscore puntuacions 2 (5 withscores  
-    1) "Nom2"  
+    127.0.0.1:6379> zrangebyscore puntuaciones 2 (5 withscores  
+    1) "Número2"  
     2) "2"  
-    3) "Nom4"  
+    3) "Número4"  
     4) "4"
 
-I si vulguérem traure el conjunt en ordre invers de puntuació, utilitzaríem el
-comando **ZREVRANGEBYSCORE** (**reverse range**). Cuideu que com va en ordre
-invers, ara el valor màxim ha de ser el primer, i el mínim el segon.
+Y si quisiéramos sacar el conjunto en orden inverso de puntuación, utilizaríamos el
+comando **ZREVRANGEBYSCORE** (**reverse range**). Cuidado que cómo va en orden
+inverso, ahora el valor máximo debe ser el primero y el mínimo el segundo.
 
-    127.0.0.1:6379> zrevrangebyscore puntuacions 5 2 withscores  
-    1) "Nom3"  
+    127.0.0.1:6379> zrevrangebyscore puntuaciones 5 2 withscores  
+    1) "Número3"  
     2) "5"  
-    3) "Nom4"  
+    3) "Número4"  
     4) "4"  
-    5) "Nom2"  
+    5) "Número2"  
     6) "2"
 
 
@@ -1803,26 +1814,26 @@ invers, ara el valor màxim ha de ser el primer, i el mínim el segon.
 
 <u>_Sintaxi_</u>
 
-    zrank clau valor
+    zrank clave valor
 
-Torna el número d'ordre de l'element amb el valor especificat. El primer valor
-és el 0. Si no existeix, torna **nil**.
+Devuelve el número de orden del elemento con el valor especificado. El primer valor
+es el 0. Si no existe, vuelve **nil**.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> zrank puntuacions Nom1  
+    127.0.0.1:6379> zrank puntuaciones Número1  
     (integer) 0  
-    127.0.0.1:6379> zrank puntuacions Nom4  
+    127.0.0.1:6379> zrank puntuaciones Número4  
     (integer) 2  
-    127.0.0.1:6379> zrank puntuacions Nom7  
+    127.0.0.1:6379> zrank puntuaciones Número7  
     (nil)
 
-Si volem saber el número d'ordre però des del final de la llista (en ordre
-invers), hem d'utilitzar **ZREVRANK** :
+Si queremos saber el número de orden pero desde el final de la lista (en orden
+inverso), debemos utilizar **ZREVRANK** :
 
-    127.0.0.1:6379> zrevrank puntuacions Nom1  
+    127.0.0.1:6379> zrevrank puntuaciones Número1  
     (integer) 3  
-    127.0.0.1:6379> zrevrank puntuacions Nom4  
+    127.0.0.1:6379> zrevrank puntuaciones Número4  
     (integer) 1  
  
 
@@ -1830,41 +1841,41 @@ invers), hem d'utilitzar **ZREVRANK** :
 
 <u>_Sintaxi_</u>
 
-    zrem clau valor1 valor2 valorN
+    zrem clave valor1 valor2 valorN
 
-Elimina els elements amb els valors especificats. Si algun valor no existeix,
-senzillament l'ignora. Torna el número d'elements realment eliminats.
+Elimina los elementos con los valores especificados. Si algún valor no existe,
+sencillamente lo ignora. Devuelve el número de elementos realmente eliminados.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> zrem puntuacions Nom1  
+    127.0.0.1:6379> zrem puntuaciones Número1  
     (integer) 1  
-    127.0.0.1:6379> zrange puntuacions 0 -1 withscores  
-    1) "Nom2"  
+    127.0.0.1:6379> zrange puntuaciones 0 -1 withscores  
+    1) "Número2"  
     2) "2"  
-    3) "Nom4"  
+    3) "Número4"  
     4) "4"  
-    5) "Nom3"  
+    5) "Número3"  
     6) "5"
 
 #### ZREMRANGEBYSCORE {.azul}
 <u>_Sintaxi_</u>
 
-    zremrangebyscore clau min max
+    zremrangebyscore clave min max
 
-Elimina els elements amb puntuació compresa entre el mínim i el màxim de forma
-inclusiva.els valors especificats. Si volem fer-ho de forma excusiva (sense
-incloure les puntuacions dels extrems) posarem un parèntesi avant del mínim
-i/o el màxim. Torna el número d'elements realment eliminats.
+Elimina los elementos con puntuación comprendida entre el mínimo y el máximo de forma
+inclusiva.los valores especificados. Si queremos hacerlo de forma excusiva (sin
+incluir las puntuaciones de los extremos) pondremos un paréntesis frente al mínimo
+y/o el máximo. Devuelve el número de elementos realmente eliminados.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> zremrangebyscore puntuacions (2 4  
+    127.0.0.1:6379> zremrangebyscore puntuaciones (2 4  
     (integer) 1  
-    127.0.0.1:6379> zrange puntuacions 0 -1 withscores  
-    1) "Nom2"  
+    127.0.0.1:6379> zrange puntuaciones 0 -1 withscores  
+    1) "Número2"  
     2) "2"  
-    3) "Nom3"  
+    3) "Número3"  
     4) "5"
 
 
@@ -1872,78 +1883,78 @@ i/o el màxim. Torna el número d'elements realment eliminats.
 
 <u>_Sintaxi_</u>
 
-    zincrby clau increment valor
+    zincrby clave incremento valor
 
-Incrementa la puntuació de l'element especificat. El valor de la puntuació a
-incrementar és un número real. Torna el valor la puntuació final de l'element.
-Si l'element no existia, l'inserirà, assumint una puntuació inicial de 0.
+Incrementa la puntuación del elemento especificado. El valor de la puntuación en
+incrementar es un número real. Devuelve el valor la puntuación final del elemento.
+Si el elemento no existía, le insertará, asumiendo una puntuación inicial de 0.
 
-**<u>Exemples</u>**
+**<u>Ejemplos</u>**
 
-    127.0.0.1:6379> zincrby puntuacions 1.5 Nom2  
+    127.0.0.1:6379> zincrby puntuaciones 1.5 Número2  
     "3.5"  
-    127.0.0.1:6379> zincrby puntuacions 2.75 Nom5  
+    127.0.0.1:6379> zincrby puntuaciones 2.75 Número5  
     "2.75"  
-    127.0.0.1:6379> zrange puntuacions 0 -1 withscores  
-    1) "Nom5"  
+    127.0.0.1:6379> zrange puntuaciones 0 -1 withscores  
+    1) "Número5"  
     2) "2.75"  
-    3) "Nom2"  
+    3) "Número2"  
     4) "3.5"  
-    5) "Nom3"  
+    5) "Número3"  
     6) "5"
 
-## 2.4 - Resum de comandos (PDF)
+## 2.4 - Resumen de comandos (PDF)
 
-Al següent enllaç disposeu d'un document **pdf** amb un resum de les comandes de Redis classificades per l'operació CRUD que realitzen.
+En el siguiente enlace dispone de un documento **pdf** con un resumen de los pedidos de Redis clasificados por la operación CRUD que realizan.
 
 !!!Tip ""
-    [Resum comandos Redis](Redis_resum.pdf)
+    [Resumen comandos Redis](Redis_resum.pdf)
 
----
+None
 
-## :pencil2: Exercici 1
+## :pencil2: Ejercicio 1
 
-Sobre la Base de Dades **REDIS** del Servidor de l'Institut (adreça
-**89.36.214.106**) fer les següents operacions, tant per a guardar una sèrie
-de dades, com per a recuperar-les. Sempre posarem a les claus el prefix
-**9999x_** , on com sempre heu de substituir 9999 per les 4 últimes xifres del
-vostre DNI, i la x per la letra del NIF. Copia-les en un únic fitxer de text,
-de forma numerada. És aquest fitxer el que hauràs de pujar.
+Sobre la Base de Datos **REDIS** del Servidor del Instituto (dirección
+**89.36.214.106**) realizar las siguientes operaciones, tanto para guardar una serie
+de datos, como para recuperarlos. Siempre pondremos en las llavas el prefijo
+**9999x_** , donde como siempre debe sustituir 9999 por las 4 últimas cifras del
+su DNI, y la x por la letra del NIF. Copialas en un único archivo de texto,
+de forma numerada. Es este archivo el que tendrás que subir.
 
-  1. Crea la clau **9999x_Nom** amb el teu nom
-  2. Crea la clau **9999x_Cognoms** amb els teus cognoms. Una de les dues almenys, nom o cognoms, ha de constar de més d'una paraula.
-  3. Mostra totes les claus teues, i únicament les teues.
-  4. Dóna un temps de vida a la clau **9999x_Nom** de **200 segons**. Comprova el temps de vida que li queda. Posteriorment fes-la **permanent**.
-  5. Crea la clau **9999x_Adreca** , de tipus Hash, amb els subcamps **carrer** , **numero** i **cp**. No importa que les dades siguen falses. Pots fer-lo en una sentència o en més d'una.
-  6. Afegeix a l'anterior el subcamp **poblacio**
-  7. Mostra tota la informació de la teua adreça (només la informació, no les subclaus)****
-  8. Crea la clau **9999x_Moduls_ASIX** o **9999x_Moduls_DAM** o **9999x_Moduls_DAW** , depenent del teu cicle. Ha de ser de tipus Set, amb tots els mòduls del teu cicle, que es detallen a continuació. Pots fer-lo en una o en més d'una sentència. 
-     * **ASIX** : ISO, PAX, FH, GBD, LM, FOL, ASO, SXI, IAW, ASGBD, SAD, EIE, PROJ i FCT
-     * **DAW** : SI, BD, PR, LM, ED, FOL, DWEC, DWES, DAW, DIW, EIE, PROJ i FCT
-     * **DAM** : SI, BD, PR, LM, ED, FOL, AD, PMDM, DI, PSP, SGE, EIE, PROJ i FCT.
-  9. Crea la clau **9999x_Moduls_meus** , de tipus Set, amb tots els mòduls als quals estàs matriculat. Pots fer-lo en una o en més d'una sentència.
-  10. Guarda en la clau **9999x_Moduls_altres** els mòduls en els quals no estàs matriculat actualment. Ha de ser per mig d'operacions de conjunts. Pots comprovar que el resultat és correcte amb **smembers**
-  11. Crea una llista amb el nom **9999x_Notes_BD** amb la nota de 4 exercicis de BD. Les notes seran: 7, 9, 6, 10. Han de quedar en aquest ordre (no en ordre invers)
-  12. Modifica la tercera nota, que passa de ser 6 a 8.
-  13. Crea un **Set Ordenat** (**zset**) anomenat **9999x_Carrera** amb els següents valors. Pots fer-lo en una o en més d'una sentència. I ves amb compte perquè els temps han de ser numèrics  
+  1. Crea la clave **9999x_Número** con tu número
+  2. Crea la clave **9999x_Apellidos** con tus apellidos. Una de las dos al menos, número o cogidos, debe constar de más de una palabra.
+  3. Muestra todas las claves tuyas, y únicamente las tuyas.
+  4. Da un tiempo de vida en la clave **9999x_Número** de **200 segundos**. Comprueba el tiempo de vida que le queda. Posteriormente hazla **permanente**.
+  5. Crea la clave **9999x_Adreca** , de tipo Hash, con los subcampos **calle** , **numero** y **cp**. No importa que las datos sean falsas. Puedes realizarlo en una o más sentencias.
+  6. Añade a lo anterior el subcampo **poblacio**
+  7. Muestra toda la información de tu dirección (solo la información, no las subclaves)****
+  8. Crea la clave **9999x_Moduls_ASIX** o **9999x_Moduls_DAM** o **9999x_Moduls_DAW** , dependiendo de ti ciclo. Debe ser de tipo Set, con todos los módulos de tu ciclo, que se detallan a continuación. Puedes realizarlo en una o más de una sentencia. 
+     * **ASIX** : ISO, PAX, FH, GBD, LM, FOL, ASO, SXI, IAW, ASGBD, SAD, EIE, PROJ y FCT
+     * **DAW** : SI, BD, PR, LM, ED, FOL, DWEC, DWES, DAW, DIW, EIE, PROJ y FCT
+     * **DAM** : SI, BD, PR, LM, ED, FOL, AD, PMDM, DI, PSP, SGE, EIE, PROJ y FCT.
+  9. Crea la clave **9999x_Moduls_meus** , de tipo Set, con todos los módulos en los que estás matriculado. Puedes realizarlo en una o más de una sentencia.
+  10. Guarda en la clave **9999x_Moduls_altres** los módulos en los que no estás matriculado actualmente. Debe ser mediante operaciones de conjuntos. Puedes comprobar que el resultado es correcto con **smembers**
+  11. Crea una lista con el número **9999x_Notes_BD** con la nota de 4 ejercicios de BD. Las notas serán: 7, 9, 6, 10. Deben quedar en este orden (no en orden inverso)
+  12. Modifica la tercera nota, que pasa de 6 a 8.
+  13. Crea un **Set Ordenado** (**zset**) llamado **9999x_Carrera** con los siguientes valores. Puedes realizarlo en una o más de una sentencia. Y ten cuidado porque los tiempos deben ser numéricos  
 
     
-        Sandra	12'52
-        Isabel	12'25
-        Marta 	12'10
-        Maria 	12'07
-        Rosa 	11'95
-        Bea		11'97
-        Balma  	11'90
-        Anna  	12'74
+        Sandra 12'52
+        Isabel 12'25
+        Marta 12'10
+        María 12'07
+        Rosa 11'95
+        Bea 11'97
+        Balma 11'90
+        Anna 12'74
 
-  14. Trau les participants de la carrera ordenades pel temps
-  15. Penalitza el temps de Bea amb 2 dècimes (0'2), i torna a traure les participants ordenades (Bea ha d'haver perdut 2 posicions, passant de tercera a cinquena posició)
-
-
+  14. Saca a las participantes de la carrera ordenadas por el tiempo
+  15. Penaliza el tiempo de Bea con 2 décimas (0'2), y vuelve a sacar a las participantes ordenadas (Bea debe haber perdido 2 posiciones, pasando de tercera a quinta posición)
 
 
 
-Llicenciat sota la  [Llicència Creative Commons Reconeixement NoComercial
-SenseObraDerivada 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/)
+
+
+Licenciado bajo la [Licencia Creative Commons Reconocimiento NoComercial
+SinObraDerivada 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/)
 

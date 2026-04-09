@@ -1,5 +1,7 @@
-# :pencil2: Exercicis
+---
+title: "Bases de Datos NoSQL"
+---
 
 
-Llicenciat sota la  [Llicència Creative Commons Reconeixement NoComercial
-SenseObraDerivada 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/)
+Licenciado bajo la [Licencia Creative Commons Reconocimiento NoComercial
+SinObraDerivada 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/)
