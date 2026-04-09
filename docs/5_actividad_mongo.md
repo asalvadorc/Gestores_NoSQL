@@ -1,4 +1,4 @@
-# 13 - Práctica Mongo
+# 13 - <span class="ejercicios-header">✏️ Práctica Mongo</span>
 
 1️⃣ **Diseño de la base de datos MongoDB:**
 

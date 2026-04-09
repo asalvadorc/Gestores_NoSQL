@@ -3,7 +3,7 @@ site_name: BBDD - NoSQL
 theme:
   name: material
   logo: assets/logocaminas.png
-  favicon: img/favicon.ico
+  favicon: assets/favicon.png
   features:
     - navigation.tabs
     - navigation.tabs.sticky
@@ -11,6 +11,7 @@ theme:
     - navigation.top
     - search.suggest
     - content.code.copy
+    - navigation.footer
     - toc.integrate
   palette:
     - scheme: default

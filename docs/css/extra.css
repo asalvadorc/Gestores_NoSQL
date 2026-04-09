@@ -63,10 +63,14 @@ p {
 /* Forzar títulos en negro y negrita para el modo claro */
 [data-md-color-scheme="default"] .md-typeset h1, 
 [data-md-color-scheme="default"] .md-typeset h2, 
-[data-md-color-scheme="default"] .md-typeset h3, 
-[data-md-color-scheme="default"] .md-typeset h4, 
 [data-md-color-scheme="default"] .md-typeset h5, 
 [data-md-color-scheme="default"] .md-typeset h6 {
+    color: #000000 !important;
+    font-weight: 400 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset h3, 
+[data-md-color-scheme="default"] .md-typeset h4 {
     color: #000000 !important;
     font-weight: bold !important;
 }
@@ -74,10 +78,13 @@ p {
 /* Forzar negrita para todos los títulos en cualquier modo */
 .md-typeset h1, 
 .md-typeset h2, 
-.md-typeset h3, 
-.md-typeset h4, 
 .md-typeset h5, 
 .md-typeset h6 {
+    font-weight: 400 !important;
+}
+
+.md-typeset h3, 
+.md-typeset h4 {
     font-weight: bold !important;
 }
 
@@ -219,6 +226,7 @@ p {
 
 .md-typeset td {
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    text-align: left;
 }
 
 /* Modo oscuro para tablas */
@@ -288,5 +296,25 @@ p {
 /* Leve efecto hover para el logo */
 .md-header__button.md-logo:hover img {
     transform: scale(1.05);
+}
+
+
+/* =========================================================
+   ESTILO ESPECIAL PARA CABECERAS DE EJERCICIOS
+   ========================================================= */
+.md-typeset .ejercicios-header {
+    color: #D88344 !important;
+    border: 2px solid #D88344;
+    padding: 4px 15px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Ajuste específico cuando está dentro de un h1 para que no se vea desproporcionado */
+.md-typeset h1 .ejercicios-header {
+    font-size: 0.9em; /* Relativo al h1 */
+    vertical-align: middle;
 }
 
