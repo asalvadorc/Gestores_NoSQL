@@ -3,10 +3,10 @@
    ========================================================= */
 [data-md-color-scheme="default"] {
   /* Colores Principales */
-  --md-primary-fg-color: #F7C30E;
-  --md-primary-fg-color--light: #F7C30E;
-  --md-primary-fg-color--dark: #F7C30E;
-  --md-accent-fg-color: #F7C30E;
+  --md-primary-fg-color: #D88344;
+  --md-primary-fg-color--light: #D88344;
+  --md-primary-fg-color--dark: #D88344;
+  --md-accent-fg-color: #D88344;
 
   /* Fondo de la web: Blanco muy limpio con un subtono cálido casi imperceptible */
   --md-default-bg-color: #fcfbfb; 
@@ -24,11 +24,11 @@
    TEMA SALMÓN RELAJADO - MODO OSCURO (SLATE)
    ========================================================= */
 [data-md-color-scheme="slate"] {
-  /* Acentos configurados a #F7C30E */
-  --md-primary-fg-color: #F7C30E;
-  --md-primary-fg-color--light: #F7C30E;
-  --md-primary-fg-color--dark: #F7C30E;
-  --md-accent-fg-color: #F7C30E;
+  /* Acentos configurados a #D88344 */
+  --md-primary-fg-color: #D88344;
+  --md-primary-fg-color--light: #D88344;
+  --md-primary-fg-color--dark: #D88344;
+  --md-accent-fg-color: #D88344;
   
   /* Texto en blanco puro para modo oscuro */
   --md-default-fg-color: #ffffff;
@@ -44,8 +44,8 @@
 
 /* Color principal para cabecera */
 .md-header, .md-tabs {
-  background: #F7C30E !important;
-  color: #000000 !important;
+  background: #D88344 !important;
+  color: #ffffff !important;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
 }
 
@@ -128,8 +128,19 @@ p {
 
 /* Colores de ayuda neutralizados */
 .rojo { color: #cc4d4d; font-weight: 600; }
-.azul { color: #4a86e8 !important; font-size: 16px; font-weight: 500; }
+.azul { color: #D88344 !important; font-size: 16px; font-weight: 600; }
 .verde { color: #50a14f !important; font-weight: 500; }
+
+/* Estilo para enlaces: azul y sin negrita */
+.md-typeset a {
+    color: #4a86e8 !important;
+    font-weight: 400 !important;
+    transition: color 0.2s ease;
+}
+
+.md-typeset a:hover {
+    color: #D88344 !important;
+}
 
 /* =========================================================
    BOTONES FLOTANTES PARA EL MENÚ DE NAVEGACIÓN
@@ -175,8 +186,8 @@ p {
 /* Destacar la página activa como botón rellenado */
 .md-nav__item--active > .md-nav__link {
     background-color: var(--md-primary-fg-color) !important;
-    color: #000000 !important;
-    box-shadow: 0 4px 12px rgba(247, 195, 14, 0.4) !important; /* Brillo #F7C30E */
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(216, 131, 68, 0.4) !important; /* Brillo #D88344 */
     border: none;
     transform: translateY(-1px);
 }
@@ -201,7 +212,7 @@ p {
 }
 
 .md-typeset th {
-    background-color: rgba(247, 195, 14, 0.1); /* Sutil toque del color primario */
+    background-color: rgba(216, 131, 68, 0.1); /* Sutil toque del color primario */
     border: 1px solid rgba(0, 0, 0, 0.15) !important;
     font-weight: 700;
 }

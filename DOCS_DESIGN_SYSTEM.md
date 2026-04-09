@@ -6,11 +6,11 @@ Este documento resume las decisiones de diseño, tokens de color y configuracion
 
 | Token | Valor (Claro) | Valor (Oscuro) | Uso |
 | :--- | :--- | :--- | :--- |
-| **Primario** | `#F7C30E` | `#F7C30E` | Cabeceras, acentos, botones activos |
+| **Primario** | `#D88344` | `#D88344` | Cabeceras, acentos, botones activos |
 | **Fondo** | `#FCFBFB` | `#1A1B1E` (Slate) | Fondo principal de la aplicación |
 | **Texto** | `#000000` | `#FFFFFF` | Cuerpo de texto y títulos |
 | **Código** | `#F7F5F4` | `#000000` | Fondo de bloques de código |
-| **Tablas (Th)** | `rgba(247, 195, 14, 0.1)` | `rgba(255, 255, 255, 0.05)` | Cabeceras de tabla |
+| **Tablas (Th)** | `rgba(216, 131, 68, 0.1)` | `rgba(255, 255, 255, 0.05)` | Cabeceras de tabla |
 
 ## 🛠️ Configuración MkDocs (`mkdocs.yml`)
 
@@ -34,7 +34,7 @@ Los enlaces del menú lateral no son simples textos, sino que se comportan como 
 - `border-radius: 8px`
 - `box-shadow` sutil en reposo.
 - Elevación (`translateY(-2px)`) y sombra más profunda en `hover`.
-- **Estado Activo**: Fondo de color primario (`#F7C30E`) con brillo exterior (glow).
+- **Estado Activo**: Fondo de color primario (`#D88344`) con brillo exterior (glow).
 
 ### 2. Iluminación de Menú Superior (Tabs)
 Las pestañas superiores se iluminan al pasar el ratón o al estar seleccionadas:
@@ -50,6 +50,11 @@ Para evitar que los datos se "pierdan" en el fondo blanco:
 - Fuentes modernas sans-serif (sistema).
 - Texto **justificado** en párrafos para un acabado más editorial.
 - Títulos forzados a **negro puro** en modo claro para mejorar la legibilidad.
+
+### 5. Enlaces (Links)
+- **Color**: Azul (`#4a86e8`) para mantener la semántica web.
+- **Grosor**: Forzado a **no negrita** (`font-weight: 400`) para una lectura más ligera.
+- **Interacción**: Cambio suave a color primario en `hover`.
 
 ---
 
