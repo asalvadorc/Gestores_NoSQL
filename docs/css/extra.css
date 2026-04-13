@@ -42,10 +42,12 @@
 
 .md-sidebar__scrollwrap,
 .md-sidebar__inner,
-.md-nav { background-color: var(--md-sidebar-bg) !important;}
+.md-nav {
+    background-color: var(--md-sidebar-bg) !important;
+}
 
 
-/* =========================================================
+//* =========================================================
    🧭 MENÚ LATERAL
    ========================================================= */
 .md-nav__link {
