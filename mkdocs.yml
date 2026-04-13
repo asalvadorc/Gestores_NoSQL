@@ -7,14 +7,22 @@ theme:
   features:
     - navigation.sections
     # - navigation.tabs
-    - navigation.tabs.sticky
+    # - navigation.tabs.sticky
     - navigation.top
+    - navigation.path
     - search.suggest
+    - search.highlight
     - content.code.copy
     - navigation.footer
     - toc.integrate
     
-  palette:
+hide:
+    - toc
+    - footer
+
+copyright: Licenciado bajo la icencia Creative Commons by-nc-nd
+
+palette:
     - scheme: default
       primary: custom
       accent: custom
