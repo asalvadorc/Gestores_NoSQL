@@ -1,4 +1,10 @@
 ---
+hide:
+  - navigation
+  - toc
+  - header
+---
+---
 title: "Bases de Datos NoSQL"
 ---
 
