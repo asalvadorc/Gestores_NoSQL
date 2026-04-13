@@ -134,7 +134,7 @@ p {
 
 /* Layout sin centrado */
 .md-grid {
-    max-width: 100% !important;
+    max-width: 95% !important;
     margin: 0 !important;
 }
 
