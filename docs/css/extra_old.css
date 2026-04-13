@@ -50,8 +50,7 @@
     left: 0 !important;
 }
 
-/* Eliminar cabecera gris */
-.md-nav--primary > .md-nav__title {
+.md-nav__title {
     display: none !important;
 }
 
@@ -61,33 +60,24 @@
 .md-nav__link {
     color: var(--md-default-fg-color);
     padding-left: 12px !important;
-    display: block;
-    line-height: 1.5;
 }
 
 [data-md-color-scheme="slate"] .md-nav__link {
     color: #d6e5e2 !important;
 }
 
-/* Hover claro */
-[data-md-color-scheme="default"] .md-nav__link:hover {
+.md-nav__link:hover {
     background-color: rgba(1, 62, 55, 0.08) !important;
     color: #013E37 !important;
 }
 
-/* Hover oscuro */
-[data-md-color-scheme="slate"] .md-nav__link:hover {
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    color: #ffffff !important;
-}
-
-.md-nav__item--active > .md-nav__link {
+.md-nav__item--active>.md-nav__link {
     background-color: rgba(1, 62, 55, 0.12) !important;
     border-left: 3px solid #013E37 !important;
     font-weight: 600;
 }
 
-[data-md-color-scheme="slate"] .md-nav__item--active > .md-nav__link {
+[data-md-color-scheme="slate"] .md-nav__item--active>.md-nav__link {
     color: #4fd1c5 !important;
 }
 
@@ -141,16 +131,23 @@ p {
 /* =========================================================
    📐 LAYOUT PRO (RESPONSIVE REAL)
    ========================================================= */
+
+/* Layout sin centrado */
 .md-grid {
-    max-width: 95% !important;
+    max-width: 100% !important;
     margin: 0 !important;
 }
+
+
+/* Contenido fluido según pantalla */
+
 
 .md-content__inner {
     max-width: clamp(1000px, 65vw, 1200px);
     margin: 0 auto;
-    padding-left: clamp(12px, 2vw, 32px);
+    padding-left: clamp(10px, 2vw, 30px);
 }
+
 
 /* =========================================================
    🧾 TABLAS
@@ -177,7 +174,7 @@ p {
     max-width: 100%;
 }
 
-.md-typeset pre > code {
+.md-typeset pre>code {
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.08);
 }
@@ -185,57 +182,4 @@ p {
 .md-typeset .admonition {
     border-radius: 4px;
     border-left: 4px solid #013E37;
-}
-
-/* =========================================================
-   🟢 MENÚ SUPERIOR (TABS)
-   ========================================================= */
-.md-tabs {
-    background: #013E37 !important;
-    box-shadow: none !important;
-}
-
-.md-tabs__list {
-    background: transparent !important;
-}
-
-.md-tabs__link {
-    color: #e6f1ef !important;
-    opacity: 0.85;
-    font-weight: 600;
-    border-radius: 4px;
-    margin: 0 4px;
-    padding: 6px 12px !important;
-    transition: all 0.2s ease;
-}
-
-.md-tabs__link:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    color: #ffffff !important;
-    opacity: 1;
-}
-
-.md-tabs__item--active .md-tabs__link {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    color: #ffffff !important;
-    opacity: 1;
-    font-weight: 700;
-}
-
-.md-header + .md-tabs {
-    border-top: none !important;
-}
-
-/* =========================================================
-   ✅ FIX LIMPIO SIDEBAR (SCROLL CORRECTO)
-   ========================================================= */
-.md-sidebar__scrollwrap,
-.md-sidebar__inner,
-.md-nav {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-}
-
-.md-sidebar__scrollwrap {
-    overflow-y: auto;
 }

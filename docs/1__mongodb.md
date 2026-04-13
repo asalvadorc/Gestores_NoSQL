@@ -1,6 +1,4 @@
----
-title: "Bases de Datos NoSQL"
----
+1. Introducción a MongoDB
 
 Seguramente **MongoDB** es el más famoso de los Sistemas Gestoras de Bases de Datos
 **NoSQL**.

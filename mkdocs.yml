@@ -1,18 +1,19 @@
-site_name: BBDD - NoSQL
+site_name: MongoDB
 
 theme:
   name: material
-  logo: assets/logocaminas.png
+  logo: assets/logo.png
   favicon: assets/favicon.png
   features:
-    - navigation.tabs
-    - navigation.tabs.sticky
     - navigation.sections
+    #- navigation.tabs
+    #- navigation.tabs.sticky
     - navigation.top
     - search.suggest
     - content.code.copy
     - navigation.footer
     - toc.integrate
+    
   palette:
     - scheme: default
       primary: custom
@@ -42,21 +43,31 @@ markdown_extensions:
       alternate_style: true
 
 nav:
-  - BBDD NoSQL: 1__introducci.md
-   # - 1 - BBDD CLAVE-VALOR:
-   # - BBDD Clave-Valor: 2__bases_de_dades_clauvalor.md
-   # - Ejercicios Redis: exercicis_redis.md
+  #- BBDD NoSQL: 1__introducci.md
+  #- Introducción: 1__introducci.md
+  #- BBDD CLAVE-VALOR:
+  #- BBDD Clave-Valor: 2__bases_de_dades_clauvalor.md
+  #- Ejercicios Redis: exercicis_redis.md
   - MONGODB:
-    - 1 - Introducción a MongoDB: 3__mongodb.md
-    - 2 - Estructura JSON: 3.2__estructura_json.md
-    - 3 - Instalación de MongoDB: 3.3__instalacion.md
-    - 4 - Utilización de variables: 3.4__variables.md
-    - 5 - Tipo de datos: 3.5__tipo_datos.md
-    - 6 - Operaciones CRUD Básicas: 3.6__crud.md
-    - 7 - Operadores de actualización: 3.7__operadores_actualizacion.md
-    - 8 - Operadores de consulta: 3.8__operadores_consulta.md
-    - 9 - Agregación: 3.9__agregacion.md
-    - 10 - Resumen Comandos: 3.10__resumen.md
+    - 1 - Introducción: 1__mongodb.md
+    - 2 - Estructura JSON: 2__estructura_json.md
+    - 3 - Instalación:
+        - 3.1 En Linux: 3.1__Linux.md
+        - 3.2 En Windows: 3.2__Windows.md
+        - 3.3 Con Docker: 3.3__Docker.md 
+    - 4 - Funcionamiento: 4__funcionamiento.md
+    - 5 - Variables: 5__variables.md
+    - 6 - Tipo de datos: 6__tipo_datos.md
+    - 7 - Operaciones CRUD: 7__crud.md
+    - 8 - Operadores:
+        - 8.1 Actualización: 8.1__operadores_actualizacion.md
+        - 8.2 Consulta: 8.2__operadores_consulta.md
+    - 9 - Agregación: 9__agregacion.md
+    - 10 - Resumen Comandos: 10__resumen.md
     - 11 - Ejercicios: exercicis_mongo.md
-    - 12 - Relaciones en MongoDB: 4_relaciones_mongo.md
-    - 13 - Práctica Mongo: 5_actividad_mongo.md
+    - 12 - Relaciones: 12__relaciones_mongo.md
+    - 13 - Práctica Mongo: 13__actividad_mongo.md
+  #- Ejercicios: 
+  #  - exercicis_mongo.md
+  #- Práctica: 
+  #  - 13__actividad_mongo.md
