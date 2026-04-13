@@ -7,7 +7,7 @@ MongoDB, al ser una base de datos NoSQL, no maneja relaciones de la misma forma 
 
 Cada enfoque tiene ventajas y desventajas, según el caso de uso.
 
-## 12.1 - Relación con Documentos Embebidos
+## 11.1 - Relación con Documentos Embebidos
 Este enfoque **anida las datos relacionados dentro del mismo documento**.  
 Se usa cuando las datos relacionados se consultan frecuentemente juntos y no crecen demasiado en tamaño.
 

@@ -61,7 +61,7 @@ nav:
         - 3.3 Con Docker: 3.3__Docker.md 
     - 4 - Funcionamiento: 4__funcionamiento.md
     - 5 - Variables: 5__variables.md
-    - 6 - Tipo de datos: 6__tipo_datos.md
+    - 6 - Tipos de datos: 6__tipo_datos.md
     - 7 - Operaciones CRUD: 7__crud.md
     - 8 - Operadores:
         - 8.1 Actualización: 8.1__operadores_actualizacion.md
