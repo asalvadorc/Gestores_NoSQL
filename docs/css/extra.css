@@ -136,9 +136,9 @@ p {
 }
 
 .md-content__inner {
-    max-width: 900px;
-    margin: 0 auto;
-    padding-left: 20px;
+    margin: 0;
+    padding: 1.5rem;
+    max-width: none;
 }
 
 /* =========================================================
