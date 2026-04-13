@@ -142,8 +142,8 @@ p {
    📐 LAYOUT PRO (RESPONSIVE REAL)
    ========================================================= */
 .md-grid {
-    max-width: 95% !important;
-    margin: 0 !important;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .md-content__inner {
