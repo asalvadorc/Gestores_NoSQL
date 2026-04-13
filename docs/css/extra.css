@@ -241,3 +241,23 @@ p {
 .md-sidebar__scrollwrap {
     overflow-y: auto;
 }
+
+/* =========================================================
+   📱 SIDEBAR RESPONSIVE CORRECTO
+   ========================================================= */
+
+/* SOLO en pantallas grandes (desktop real) */
+@media screen and (min-width: 76.25em) {
+    .md-sidebar {
+        width: clamp(220px, 18vw, 260px);
+        left: 0;
+    }
+}
+
+/* En pantallas medianas/pequeñas → comportamiento nativo */
+@media screen and (max-width: 76.25em) {
+    .md-sidebar {
+        width: auto !important;
+        left: -100% !important;
+    }
+}
