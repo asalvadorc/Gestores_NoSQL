@@ -5,8 +5,8 @@ theme:
   logo: assets/logo.png
   favicon: assets/favicon.png
   features:
-    # - navigation.sections
-    #- navigation.tabs
+    - navigation.sections
+    # - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top
     - search.suggest
