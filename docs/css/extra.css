@@ -47,15 +47,10 @@
 }
 
 
-//* =========================================================
+/* =========================================================
    🧭 MENÚ LATERAL
    ========================================================= */
-.md-nav__link {
-    color: var(--md-default-fg-color);
-    padding-left: 12px !important;
-    display: block;
-    line-height: 1.5;
-}
+
 
 [data-md-color-scheme="slate"] .md-nav__link {
     color: #d6e5e2 !important;
