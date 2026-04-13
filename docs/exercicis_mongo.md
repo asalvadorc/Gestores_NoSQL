@@ -1,4 +1,4 @@
-# 11 - <span class="ejercicios-header">✏️ Ejercicios</span>
+# <span class="ejercicios-header">✏️ Ejercicios</span>
 
 ### Ejercicio 1
 

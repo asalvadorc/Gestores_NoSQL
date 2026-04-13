@@ -1,4 +1,4 @@
-# 10 - Resumen Comandos
+# 10. Resumen Comandos
 
 Para cualquier operación debe ponerse **db** seguido del nombre de la colección,
 y después la operación que queremos realizar.

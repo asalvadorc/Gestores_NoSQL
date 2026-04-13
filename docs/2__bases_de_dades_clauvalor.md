@@ -1,5 +1,5 @@
 
-# 12 - Práctica Mongo  
+# 12. Práctica Mongo  
 
 **🔑 Característica principal:** La clave debe ser **única**, ya que de lo contrario no se podría recuperar correctamente la información.  
 

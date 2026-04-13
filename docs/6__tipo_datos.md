@@ -1,4 +1,4 @@
-# 5 - Tipo de datos
+# 6. Tipos de datos
 
 Los valores de los elementos, es decir de las parejas clave valor, pueden ser de unos
 cuántos tipos. Hagamos un rápido repaso.

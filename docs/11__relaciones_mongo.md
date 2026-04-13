@@ -1,4 +1,4 @@
-# 12 - Relaciones
+# 11 - Relaciones
 
 MongoDB, al ser una base de datos NoSQL, no maneja relaciones de la misma forma que SQL. Sin embargo, permite representar relaciones entre documentos utilizando dos enfoques principales:
 
@@ -35,7 +35,7 @@ Se usa cuando las datos relacionados se consultan frecuentemente juntos y no cre
 
 None
 
-## 12.2 - Relación con Referencias
+## 11.2 - Relación con Referencias
 En este enfoque, los documentos **almacenan solo referencias (IDs) de documentos en otras colecciones**.  
 Se usa cuando las datos son reutilizados en múltiples documentos o crecen mucho en tamaño.  
 Estas referencias pueden ser de dos tipos; referencias manuales o miedo DBRefs.
@@ -77,7 +77,7 @@ None
 
 None
 
-## 12.3 - Relaciones en MongoDB con `$lookup`
+## 11.3 - Relaciones en MongoDB con `$lookup`
 
 En **MongoDB**, la agregación con **$lookup** permite realizar joins entre colecciones.  
 Es útil cuando seguimos un enfoque de **modelado de datos con referencias**, donde almacenamos sólo el **ObjectId** en lugar de los documentos embebidos.
@@ -403,7 +403,7 @@ Cada usuario tiene un array con sus pedidos, pero si queremos hacer un segundo $
 Ahora, cada usuario tiene múltiples documentos, uno por cada pedido, lo que permite realizar otro $lookup con detalles_pedido.
 
 ----
-## 12.4 - Ejercicios de Relaciones
+## 11.4 - Ejercicios de Relaciones
 
 Intenta implementar en MongoDB parte de la Base de Datos relacional [**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/), concretamente, comienza por las tablas CATEGORÍA y ARTÍCULO, que las tendrás que
 representar como documentos de 2 colecciones (colección **categoría** y colección **articulo**).

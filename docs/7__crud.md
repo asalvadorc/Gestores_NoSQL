@@ -1,4 +1,4 @@
-# 6 - Operaciones CRUD
+# 8. Operaciones CRUD
 
 En este punto vamos a ver las operaciones más básicas, para poder trabajar
 sobre ejemplos prácticos, y así disponer ya de unos datos iniciales para

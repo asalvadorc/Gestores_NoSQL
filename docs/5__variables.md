@@ -1,4 +1,4 @@
-# 4 - Utilización de variables
+# 5. Utilización de variables
 
 Especialmente interesante son las variables que pueden contener un documento
 JSON.

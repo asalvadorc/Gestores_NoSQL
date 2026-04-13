@@ -5,24 +5,20 @@ theme:
   logo: assets/logo.png
   favicon: assets/favicon.png
   features:
-    - navigation.sections
-    # - navigation.tabs
-    # - navigation.tabs.sticky
+    - navigation.tabs
+    - navigation.tabs.sticky
+    #- navigation.sections
     - navigation.top
+    - navigation.footer
     - navigation.path
     - search.suggest
     - search.highlight
     - content.code.copy
-    - navigation.footer
     - toc.integrate
     
-hide:
-    - toc
-    - footer
+  copyright: Licenciado bajo la licencia Creative Commons by-nc-nd
 
-copyright: Licenciado bajo la icencia Creative Commons by-nc-nd
-
-palette:
+  palette:
     - scheme: default
       primary: custom
       accent: custom
@@ -72,10 +68,9 @@ nav:
         - 8.2 Consulta: 8.2__operadores_consulta.md
     - 9 - Agregación: 9__agregacion.md
     - 10 - Resumen Comandos: 10__resumen.md
-    - 11 - Ejercicios: exercicis_mongo.md
-    - 12 - Relaciones: 12__relaciones_mongo.md
-    - 13 - Práctica Mongo: 13__actividad_mongo.md
-  #- Ejercicios: 
-  #  - exercicis_mongo.md
-  #- Práctica: 
-  #  - 13__actividad_mongo.md
+    - 11 - Relaciones: 11__relaciones_mongo.md
+    #- 11 - Ejercicios: exercicis_mongo.md
+    
+    #- 13 - Práctica Mongo: 13__actividad_mongo.md
+  - Ejercicios: exercicis_mongo.md
+  - Práctica: 13__actividad_mongo.md

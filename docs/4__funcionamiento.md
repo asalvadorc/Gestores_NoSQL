@@ -1,4 +1,4 @@
-# Funcionamiento
+# 4. Funcionamiento
 
 Recuerde que tendremos dos teminales:
 

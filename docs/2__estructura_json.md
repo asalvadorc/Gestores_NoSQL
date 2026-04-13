@@ -1,4 +1,4 @@
-# 2 - Estructura JSON
+# 2. Estructura JSON
 
 Con JSON podremos representar:
 

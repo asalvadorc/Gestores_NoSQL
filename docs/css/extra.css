@@ -39,22 +39,11 @@
 /* =========================================================
    🧱 SIDEBAR (SIN ROMPER FUNCIONAMIENTO)
    ========================================================= */
-.md-sidebar,
+
 .md-sidebar__scrollwrap,
 .md-sidebar__inner,
-.md-nav {
-    background-color: var(--md-sidebar-bg) !important;
-}
+.md-nav { background-color: var(--md-sidebar-bg) !important;}
 
-/* Quitar cabecera gris */
-.md-nav--primary > .md-nav__title {
-    display: none !important;
-}
-
-/* Scroll correcto */
-.md-sidebar__scrollwrap {
-    overflow-y: auto;
-}
 
 /* =========================================================
    🧭 MENÚ LATERAL
@@ -62,6 +51,7 @@
 .md-nav__link {
     color: var(--md-default-fg-color);
     padding-left: 12px !important;
+    display: block;
     line-height: 1.5;
 }
 
@@ -69,20 +59,30 @@
     color: #d6e5e2 !important;
 }
 
-/* Hover */
+/* Hover claro */
 [data-md-color-scheme="default"] .md-nav__link:hover {
-    background-color: rgba(1, 62, 55, 0.08);
+    background-color: rgba(1, 62, 55, 0.08) !important;
+    color: #013E37 !important;
 }
 
+/* Hover oscuro */
 [data-md-color-scheme="slate"] .md-nav__link:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
 }
 
-/* Activo */
 .md-nav__item--active > .md-nav__link {
-    background-color: rgba(1, 62, 55, 0.12);
-    border-left: 3px solid #013E37;
+    background-color: rgba(1, 62, 55, 0.12) !important;
+    border-left: 3px solid #013E37 !important;
     font-weight: 600;
+}
+
+[data-md-color-scheme="slate"] .md-nav__item--active > .md-nav__link {
+    color: #4fd1c5 !important;
+}
+
+.md-nav__icon {
+    margin-left: auto;
 }
 
 /* =========================================================
@@ -142,6 +142,8 @@ p {
     max-width: none;
 }
 
+
+
 /* =========================================================
    🧾 TABLAS
    ========================================================= */
@@ -181,3 +183,42 @@ p {
     margin: 0 auto;
 }
 
+/* =========================================================
+   🚀 LAYOUT PRO (TIPO NOTION / DOCUMENTACIÓN MODERNA)
+   ========================================================= */
+
+/* Mantener layout base estable */
+.md-grid {
+    max-width: 1220px;
+    margin: 0 auto;
+}
+
+/* Contenido base */
+.md-content__inner {
+    margin: 0;
+    padding: 2rem 2rem;
+}
+
+/* Contenido centrado y agradable */
+.md-typeset {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* En pantallas grandes → más aire */
+@media screen and (min-width: 1400px) {
+    .md-typeset {
+        max-width: 1000px;
+    }
+}
+
+/* En pantallas pequeñas → mejor ajuste */
+@media screen and (max-width: 900px) {
+    .md-content__inner {
+        padding: 1.5rem 1rem;
+    }
+
+    .md-typeset {
+        max-width: 100%;
+    }
+}

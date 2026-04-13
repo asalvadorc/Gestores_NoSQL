@@ -1,4 +1,4 @@
-# 9 - Agregación
+# 9. Agregación
 
 ![alto texto](image-1.png)
 
