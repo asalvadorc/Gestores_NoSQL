@@ -289,3 +289,23 @@ p {
 .md-header__button.md-logo:hover img {
     transform: scale(1.05);
 }
+
+/* =========================================================
+   📱 FIX RESPONSIVE SIDEBAR (MÓVIL)
+   ========================================================= */
+
+/* SOLO aplicar sidebar fijo en pantallas grandes */
+@media screen and (min-width: 76.25em) {
+    .md-sidebar {
+        width: clamp(220px, 18vw, 260px);
+        left: 0;
+    }
+}
+
+/* En pantallas pequeñas → comportamiento normal */
+@media screen and (max-width: 76.25em) {
+    .md-sidebar {
+        width: auto !important;
+        left: auto !important;
+    }
+}
