@@ -1,4 +1,4 @@
-site_name: MongoDB
+site_name: Bases de Datos NoSQL
 
 theme:
   name: material
@@ -49,13 +49,9 @@ markdown_extensions:
       alternate_style: true
 
 nav:
-  #- BBDD NoSQL: 1__introducci.md
-  #- Introducción: 1__introducci.md
-  #- BBDD CLAVE-VALOR:
-  #- BBDD Clave-Valor: 2__bases_de_dades_clauvalor.md
-  #- Ejercicios Redis: exercicis_redis.md
+ 
   - MONGODB:
-    - 1 - Introducción: 1__mongodb.md
+    - 1 - MongoDB: 1__mongodb.md
     - 2 - Estructura JSON: 2__estructura_json.md
     - 3 - Instalación:
         - 3.1 En Linux: 3.1__Linux.md
@@ -71,8 +67,14 @@ nav:
     - 9 - Agregación: 9__agregacion.md
     - 10 - Resumen Comandos: 10__resumen.md
     - 11 - Relaciones: 11__relaciones_mongo.md
-    #- 11 - Ejercicios: exercicis_mongo.md
-    
+    #- 11 - Ejercicios: exercicis_mongo.md  
     #- 13 - Práctica Mongo: 13__actividad_mongo.md
-  - Ejercicios: exercicis_mongo.md
-  - Práctica: 13__actividad_mongo.md
+  - Ejercicios MongoDB: exercicis_mongo.md
+  #- Práctica: 13__actividad_mongo.md
+   
+  #- BBDD NoSQL: 1__introducci.md
+  #- Introducción: 1__introducci.md:
+  
+ # - REDIS:
+    #- Introducción: 2__bases_de_dades_clauvalor.md
+  #- Ejercicios Redis: exercicis_redis.md

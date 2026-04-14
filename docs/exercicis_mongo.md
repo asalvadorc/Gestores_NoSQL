@@ -1,6 +1,6 @@
-# <span class="ejercicios-header">✏️ Ejercicios</span>
+# Ejercicios
 
-### Ejercicio 1
+## 📚 Ejercicio 1
 
 Sobre tu Base de Datos **MONGODB** trabajaremos sobre la colección
 **libro**, la misma que hemos utilizado en los ejemplos. Si no la tienes
@@ -22,7 +22,7 @@ creada, ejecuta las sentencias del principio de la pregunta **3.8 - Operadores d
 
 
 
-### Ejercicio 2
+## 📚 Ejercicio 2
 
 Este ejercicio debes realizarlo sobre tu BD de MongoDB (colección **pelicula**).
     
@@ -98,6 +98,43 @@ Este ejercicio debes realizarlo sobre tu BD de MongoDB (colección **pelicula**)
   16. Eliminar la película **"Pee Wee Herman's Big Adventure"**
   17. Eliminar la película **"Avatar"**
     
+## 💻Actividad
+
+1️⃣ **Diseño de la base de datos MongoDB:**
+
+Diseña una base de datos MongoDB que sea adecuada para un escenario de tu elección. Describe la estructura de la base de datos, incluyendo las colecciones y los documentos que la componen (al menos 3 colecciones relacionadas). Incorpora una imagen ilustrando la BD.
+
+2️⃣ **Creación y población de la base de datos MongoDB:**
+    
+Crea la base de datos y las colecciones necesarias en MongoDB, utilizando los comandos adecuados. 
+Inserta datos en la base de datos, asegurándose de que los documentos cumplan con la estructura definida en el diseño. 
+
+3️⃣ **Operaciones CRUD en MongoDB:** 
+   
+Muestra y realiza ejemplos concretos de cómo realizar operaciones de inserción, consulta, actualización y eliminación de documentos en la base de datos. 
+
+4️⃣ **Consultas y filtros en MongoDB:** 
+
+Realiza consultas en la base de datos MongoDB para obtener información mediante el uso de la función aggregate.
+
+Por tanto, Mongo no tiene tablas. Veamos algunos ejemplos de documentos JSON para
+guardar información del libro y del autor. Dependen de cómo tengas que acceder
+la información que podemos considerar guardar los libros con sus autores, o
+salvar a los autores, con sus libros. Incluso podríamos salvarlos
+dos, para poder acceder de todos modos, aunque sea a costa de duplicar
+la información 
+
+5️⃣ **Gestión de índices en MongoDB:** 
+
+Investiga sobre la importancia de los índices en MongoDB y cómo pueden mejorar el rendimiento de las consultas.  
+Crea y gestiona índices en la base de datos MongoDB, utilizando los comandos adecuados. 
+  
+
+6️⃣ **Entrega**
+   
+Deberás entregar un documento en formato digital que funcionará como tutorial. Puedes utilizar cualquier recurso educativo abierto, incluso puedes utilizar varios, por ejemplo pdf, infografía, presentación, ebook, mapa mental, mural digital, vídeo, etc. Cada apartado contendrá una explicación de lo que se pide y vendrá acompañado de capturas de pantalla o el código que has utilizado para su consecución.
+
+
 
 Licenciado bajo la [Licencia Creative Commons Reconocimiento NoComercial
 SinObraDerivada 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/)
