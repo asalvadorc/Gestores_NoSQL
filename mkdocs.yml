@@ -19,13 +19,15 @@ theme:
   copyright: Licenciado bajo la licencia Creative Commons by-nc-nd
 
   palette:
-    - scheme: default
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       primary: custom
       accent: custom
       toggle:
         icon: material/brightness-7
         name: Cambiar a modo oscuro
-    - scheme: slate
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
       primary: custom
       accent: custom
       toggle:
