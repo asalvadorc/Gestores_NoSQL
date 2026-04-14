@@ -402,38 +402,4 @@ Cada usuario tiene un array con sus pedidos, pero si queremos hacer un segundo $
 
 Ahora, cada usuario tiene múltiples documentos, uno por cada pedido, lo que permite realizar otro $lookup con detalles_pedido.
 
-----
-## 11.4 - Ejercicios de Relaciones
-
-Intenta implementar en MongoDB parte de la Base de Datos relacional [**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/), concretamente, comienza por las tablas CATEGORÍA y ARTÍCULO, que las tendrás que
-representar como documentos de 2 colecciones (colección **categoría** y colección **articulo**).
-En los documentos de la colección **categoría**, el código de categoría será el
-**_id** , mientras que en los documentos de la colección **articulo**, el código de
-el artículo será el **_id**.
-
-  1. Inserta los documentos correspondiente a las categorías del ejercicio **Ex_1** ([**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)).
-  2. Inserta los documentos correspondiente a los artículos del ejercicio **Ex_2** ([**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)).
-  3. Haz una consulta en la que aparezcan todos los artículos con su descripción y también la descripción de su categoría.
-  4. Modifica lo anterior para que aparezcan sólo las descripciones del artículo y de la categoría.
-    * Debido a que las datos del documento reunido, que en este caso es categoría, podemos utilizar **$unwind** para "desconstruir" este array.
-    * Una vez deconstruido el array es cuando podremos proyectar sobre la descripción del artículo (directamente) y sobre la descripción de la categoría renombrando el campo y subcampo.
-  5. Realiza una consulta donde aparezca la descripción de cada categoría, con el número de artículos de cada categoría y el precio medio.
-  6. Inserta los documentos correspondiente a los clientes del ejercicio **Ex_3** ([**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)). No nos importará el código de población.
-  7. Inserta las facturas correspondiente a los ejercicios **Ex_4** ([**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)) y **Ex_5** ([**facturas**](https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/)). Observa que la mejor forma de introducir las líneas de factura está dentro de la misma, en un array.
-  8. Haz una consulta para sacar el número de factura y su total.
-
-      ![](T8_Exer_8_1.png)
-
-  9. Modifica lo anterior para sacar también el número del cliente de la factura
-
-      ![](T8_Exer_8_2.png)
-
-  10. Saca un listado de clientes, al menos con su número, y de los artículos que ha comprado, al menos con la descripción del artículo
-
-    ![](T8_Exer_8_3.png)
-
-Licenciado bajo la [Licencia Creative Commons Reconocimiento NoComercial
-SinObraDerivada 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/)
-   
-
 

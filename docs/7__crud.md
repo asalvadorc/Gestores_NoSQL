@@ -10,13 +10,13 @@ Hay dos formas de crear una colección:
 
 - Utilizando createCollection():
 
-        db.createCollection("posts")
+        db.createCollection("ejemplo")
 
-- Con el mando inserto:
+- Con el mando insert:
 
-        db.posts.insertOne(object)
+        db.ejemplo.insertOne(object)
 
-Esto creará la colección "posts" si todavía no existe.  
+Esto creará la colección **ejemplo** si todavía no existe.  
 
 ### Creación: insert
 
@@ -30,10 +30,7 @@ MongoDB proporciona los siguientes métodos para insertar documentos en una cole
 
 La función **insert** añadirá documentos a una colección. En el parámetro ponemos
 el documento directamente, o una variable que contenga el documento. Si la
-colección no existía, la creará y después añadirá el documento. En la siguiente
-sentencia estamos trabajando sobre la colección **ejemplo** , que seguramente ya
-existirá de cuándo hicimos la pregunta 3.1 de instalación de MongoDB, que para
-probamos insertamos un documento. Pero si no existía, la va a crear sin problemas.
+colección no existía, la creará y después añadirá el documento.
 
     > db.ejemplo.insertOne({ msg : "Hola, ¿qué tal?"})  
       
@@ -160,75 +157,6 @@ En todos los casos podemos comprobar que es cierto lo que veníamos afirmando, q
 creado automáticamente el elemento **_id** para cada documento guardado.
 Evidentemente, cada uno de nosotros tendrá unos valores diferentes.
 
-#### Operadores de campo
-
-Se utilizan para validar la estructura o el tipo de datos dentro de los documentos.
-
-* **$exists**: Comprueba si un campo existe o no.
-* **$type**: Comprueba el tipo de dato de un campo.
-
-**$exists**{.azul}
-
-Servirá para saber los documentos que tienen un campo determinado.
-
-    clave : { $exists : _boolean_ }
-
-Dependiendo del valor _boolean_ , el funcionamiento será:
-
-  * **true** : devuelve los documentos en los que existe el campo, aunque su valor sea nulo
-  * **false** : devuelve los documentos que no tienen el campo.
-
-Como sacamos los libros que tienen el campo **paginas** :
-
-    > db.libro.find( { paginas: {$exists:true} } , {titulo:1 , paginas:1} )  
-
-    { "_id" : "9788408117117", "titulo" : "Circo Máximo", "paginas" : 1100 }  
-    { "_id" : "9788401342158", "titulo" : "El juego de Ripper", "paginas" : 480 }  
-    { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "paginas" : 793 }  
-    { "_id" : "9788499088075", "titulo" : "El ladrón de libros", "paginas" : 544 }  
-    { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "paginas" : 290 }  
-    { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "paginas" : null }
-
-Observe cómo nos aparece también el ultimo libro, que tiene el campo **paginas** con
-el valor **nul**. En cambio, si hubiéramos hecho la consulta preguntando por los que son
-diferentes de nulo, no aparecería este último libro:
-
-    > db.libro.find( { paginas: {$ne:null} } , {titulo:1 , paginas:1} )  
-
-    { "_id" : "9788408117117", "titulo" : "Circo Máximo", "paginas" : 1100 }  
-    { "_id" : "9788401342158", "titulo" : "El juego de Ripper", "paginas" : 480 }  
-    { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "paginas" : 793 }  
-    { "_id" : "9788499088075", "titulo" : "El ladrón de libros", "paginas" : 544 }  
-    { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "paginas" : 290 }
-
-Y si ponemos **false** al valor en el **$exists** , únicamente nos aparecerá el
-libro que no tiene el campo:
-
-    > db.libro.find( { paginas: {$exists:false} } , {titulo:1 , paginas:1} )  
-
-    { "_id" : "9788415140054", "titulo" : "La princesa de hielo" }
-
-Y por la misma razón que antes, si sacamos a los que tienen paginas a null,
-nos saldrá tanto quien no tiene el campo, como quien lo tiene pero con valor nulo:
-
-    > db.libro.find( { paginas: null } , {titulo:1 , paginas:1} )  
-
-    { "_id" : "9788415140054", "titulo" : "La princesa de hielo" }  
-    { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "paginas" : null}
-
-Por tanto, para según qué cosas, nos interesa el operador **$exists** , en
-cuidado de jugar con el nulo.
-
-**$type**{.azul}
-
-Comprueba el tipo de dato de un campo.
-
-Selecciona los documentos donde el campo paginas es de tipo entero
-
-    db.libro.find(
-    { paginas: { $type: "int" } },
-    { titulo: 1, paginas: 1 }
-    )
 
 ### Eliminación: delete
 

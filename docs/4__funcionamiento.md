@@ -1,11 +1,10 @@
 # 4. Funcionamiento
-
+<!--
 Recuerde que tendremos dos teminales:
 
   * Una con el servidor en marcha (y que no debemos cerrar): **mongod**
   * Otra con el cliente que se conecta al servidor: **mongosh**
-
-**Probar el funcionamiento**{.azul}
+-->
 
 Para probar su funcionamiento, vamos a realizar algunos comandos: 
 
