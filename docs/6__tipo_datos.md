@@ -1,16 +1,9 @@
 # 6. Tipos de datos
 
-Los valores de los elementos, es decir de las parejas clave valor, pueden ser de unos
-cuántos tipos. Hagamos un rápido repaso.
+Los valores de los elementos, es decir de las parejas clave valor, pueden ser de unos cuántos tipos. Hagamos un rápido repaso.
 
-En los ejemplos que van a continuación definimos sencillamente parejas clave-valor
-de los distintos tipos, o en todo caso nos lo guardamos en variables, pero no
-guardaremos aún en la Base de Datos (lo haremos en la siguiente pregunta).
+En los ejemplos que van a continuación definimos sencillamente parejas clave-valor de los distintos tipos, o en todo caso nos lo guardamos en variables, pero no guardaremos aún en la Base de Datos (lo haremos en la siguiente pregunta).
 
-Cuando guardamos en una variable se mostrará el prompt, la definición de la
-variable y después el resultado de haber guardado la variable. Utilizaremos
-recuadros blancos. Los recuadros amarillos son únicamente de la definición de una
-clave-valor de un determinado tipo
 
 **NULL**{.azul}
 
@@ -39,9 +32,11 @@ deberemos indicar expresamente. Así los dos siguientes valores son float:
 Si queremos que sea estrictamente entero, por ejemplo, deberemos utilizar una
 función de conversión:
 
-    { "x" : NumberDouble("3.14") }
+    { "x" : Double(3.14) }
 
-    { "y" : NumberInt("3") }
+    { "y" : Int32(3) }
+
+    { "z" : Long(1) }
 
 **STRING**{.azul}
 
@@ -57,9 +52,7 @@ la hora internacional.
 
     { x : ISODate("2022-01-16T11:15:27.471Z") }
 
-Normalmente utilizaremos funciones de tratamiento de la fecha-hora. Lo anterior era
-para convertir el string en fecha hora. La siguiente es para obtener la fecha-
-hora actual:
+Normalmente utilizaremos funciones de tratamiento de la fecha-hora. Lo anterior erapara convertir el string en fecha hora. La siguiente es para obtener la fecha-hora actual:
 
     { x : new Date() }
 

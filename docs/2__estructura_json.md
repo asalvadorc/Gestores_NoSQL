@@ -131,7 +131,7 @@ diferentes puntos (en el momento de hacer los apuntes se consulta en la direcci�
       }  
     ]
 
-Como puede comprobar, la raíz no es un objeto, sino un **Array**. En el array
+Como puedes comprobar, la raíz no es un objeto, sino un **Array**. En el array
 sólo nos interesa el primer elemento que es un objeto con un único miembro, 
 **ocupacion** (en el ejemplo no hay más elementos, pero pueden haber más en
 momento determinado, cuando quieren hacer avisos). Y **ocupacion es un array** ,
@@ -139,6 +139,17 @@ con **un objeto por cada estación de bicicas** , con las parejas clave valor
 **id** , **punto** , **puestos** (las bicicletas que caben), **ocupados**
 (cuantas bicicletas hay colocadas en ese momento), **latitud** y
 **longitud** (las coordenadas), ...
+
+También debemos hacer constar que en un documento, que será de tipo JSON
+(prácticamente), será un conjunto de parejas clave-valor, con algunas
+restricciones:
+
+  * El documento (que muchas veces lo asociaremos a objeto de JSON) va entre claves ( **{ }** )
+  * Los elementos de un objeto van separados por comas, y son parejas clave-valor.
+  * La clave no puede ser nula, ni repetirse en el mismo objeto (sí en diferentes objetos, claro)
+  * Los valores son de los tipos que veremos en el apartado siguiente.
+  * Un documento guardado debe contener obligatoriamente un campo llamado **_id** , y que contendrá un valor único en la colección y servirá para identificarlo. Si al guardar un documento no le hemos puesto campo **_id** , lo generará automáticamente MongoDB.
+
 
 !!!Note "Nota"
     En realidad nos aparecerá toda la información mucho más pegada, porque

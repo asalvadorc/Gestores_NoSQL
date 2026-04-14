@@ -56,12 +56,3 @@ Y si ahora intentamos sacar el contenido de la variable:
     }  
     >
 
-También debemos hacer constar que en un documento, que será de tipo JSON
-(prácticamente), será un conjunto de parejas clave-valor, con algunas
-restricciones:
-
-  * El documento (que muchas veces lo asociaremos a objeto de JSON) va entre claves ( **{ }** )
-  * Los elementos de un objeto van separados por comas, y son parejas clave-valor.
-  * La clave no puede ser nula, ni repetirse en el mismo objeto (sí en diferentes objetos, claro)
-  * Los valores son de los tipos que veremos en el apartado siguiente.
-  * Un documento guardado debe contener obligatoriamente un campo llamado **_id** , y que contendrá un valor único en la colección y servirá para identificarlo. Si al guardar un documento no le hemos puesto campo **_id** , lo generará automáticamente MongoDB.
