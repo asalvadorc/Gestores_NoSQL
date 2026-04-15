@@ -276,56 +276,56 @@ Este ejercicio debes realizarlo sobre la BD cine (colección **pelicula**).
 2. Insertar todos los siguientes datos. Debe ser **obligatoriamente** con una única sentencia, para lo que puedes utilizar variables, una para cada documento.
     
     
-    title : Fight Club
-    writer : Chuck Palahniuk
-    year : 1999
-    actores : [
-      Brad Pitt
-      Edward Norton ]
-    
-    
-    title : Pulp Fiction
-    writer : Quentin Tarantino
-    year : 1994
-    actores : [
-      John Travolta
-      Uma Thurman ]
-    
-    
-    
-    title : Inglorious Basterds
-    writer : Quentin Tarantino
-    year : 2009
-    actores : [
-      Brad Pitt
-      Diane Kruger
-      Eli Roth ]
-    
-    
-    title : The Hobbit: An Unexpected Journey
-    writer : J.R.R. Tolkein
-    year : 2012
-    franquicia : The Hobbit
-    
-    
-    title : The Hobbit: The Desolation of Smaug
-    writer : J.R.R. Tolkein
-    year : 2013
-    franquicia : The Hobbit
-    
-    
-    title : The Hobbit: The Battle of the Five Armies
-    writer : J.R.R. Tolkein
-    year : 2012
-    franquicia : The Hobbit
-    synopsis : Bilbo y compañía se vende obligados a participar en una guerra contra una serie de combatientes y evitar que la Lonely Mountain caiga en manos de una oscuridad creciente.
-    
-    
-    
-    title : Pee Wee Herman's Big Adventure
-    
-    
-    title : Avatar
+        title : Fight Club
+        writer : Chuck Palahniuk
+        year : 1999
+        actores : [
+        Brad Pitt
+        Edward Norton ]
+        
+        
+        title : Pulp Fiction
+        writer : Quentin Tarantino
+        year : 1994
+        actores : [
+        John Travolta
+        Uma Thurman ]
+        
+        
+        
+        title : Inglorious Basterds
+        writer : Quentin Tarantino
+        year : 2009
+        actores : [
+        Brad Pitt
+        Diane Kruger
+        Eli Roth ]
+        
+        
+        title : The Hobbit: An Unexpected Journey
+        writer : J.R.R. Tolkein
+        year : 2012
+        franquicia : The Hobbit
+        
+        
+        title : The Hobbit: The Desolation of Smaug
+        writer : J.R.R. Tolkein
+        year : 2013
+        franquicia : The Hobbit
+        
+        
+        title : The Hobbit: The Battle of the Five Armies
+        writer : J.R.R. Tolkein
+        year : 2012
+        franquicia : The Hobbit
+        synopsis : Bilbo y compañía se vende obligados a participar en una guerra contra una serie de combatientes y evitar que la Lonely Mountain caiga en manos de una oscuridad creciente.
+        
+        
+        
+        title : Pee Wee Herman's Big Adventure
+        
+        
+        title : Avatar
 
   
   3. Consultar todos los documentos
