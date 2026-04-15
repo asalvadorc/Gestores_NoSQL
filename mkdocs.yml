@@ -64,6 +64,7 @@ nav:
     - 8 - Operadores:
         - 8.1 Actualización: 8.1__operadores_actualizacion.md
         - 8.2 Consulta: 8.2__operadores_consulta.md
+        - 8.3 Ejercicios: 8.3__operadores_ejercicios.md
     - 9 - Agregación: 9__agregacion.md
     - 10 - Resumen Comandos: 10__resumen.md
     - 11 - Relaciones: 11__relaciones_mongo.md

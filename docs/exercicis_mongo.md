@@ -2,15 +2,81 @@
 
 ## 📚 Ejercicio 1
 
- En la base de datos cine realiza los siguuientes ejercicios:
+ Este ejercicio debes realizarlo sobre la BD cine (colección **pelicula**).
 
-  9. Obtener las películas estrenadas entre 2000 y 2010.
-  10. Agregar a un actor llamado **"Samuel L. Jackson"** en la película "Pulp Fiction"
-  11. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"**
-  12. Encontrar las películas que en la sinopsis contengan la palabra **"Gandalf"**
-  13. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"** y no la palabra **"Gandalf"**. Se aconseja utilizar el operador **$and**
-  14. Encontrar las películas que en la sinopsis contengan la palabra **"enanos"** o **"hobbit"**
-  15. Encontrar las películas que en la sinopsis contengan las palabras **"oro"** y **"dragón"**
+1. Crear la BD cine
+2. Insertar todos los siguientes datos. Debe ser **obligatoriamente** con una única sentencia, para lo que puedes utilizar variables, una para cada documento.
+    
+    
+        title : Fight Club
+        writer : Chuck Palahniuk
+        year : 1999
+        actores : [
+        Brad Pitt
+        Edward Norton ]
+        
+        
+        title : Pulp Fiction
+        writer : Quentin Tarantino
+        year : 1994
+        actores : [
+        John Travolta
+        Uma Thurman ]
+        
+        
+        
+        title : Inglorious Basterds
+        writer : Quentin Tarantino
+        year : 2009
+        actores : [
+        Brad Pitt
+        Diane Kruger
+        Eli Roth ]
+        
+        
+        title : The Hobbit: An Unexpected Journey
+        writer : J.R.R. Tolkein
+        year : 2012
+        franquicia : The Hobbit
+        
+        
+        title : The Hobbit: The Desolation of Smaug
+        writer : J.R.R. Tolkein
+        year : 2013
+        franquicia : The Hobbit
+        
+        
+        title : The Hobbit: The Battle of the Five Armies
+        writer : J.R.R. Tolkein
+        year : 2012
+        franquicia : The Hobbit
+        synopsis : Bilbo y compañía se vende obligados a participar en una guerra contra una serie de combatientes y evitar que la Lonely Mountain caiga en manos de una oscuridad creciente.
+        
+        
+        
+        title : Pee Wee Herman's Big Adventure
+        
+        
+        title : Avatar
+
+  
+  3. Consultar todos los documentos
+  4. Obtener los documentos con **writer** igual a **"Quentin Tarantino"**
+  5. Obtener los documentos con **actores** que incluyan a **"Brad Pitt"**
+  6. Obtener los documentos con **franchise** igual a **"The Hobbit"**
+  7. Añadir sinopsis a **"The Hobbit: An Unexpected Journey"** : 
+     * "Un hobbit reacio, Bilbo Baggins, se dirige a Lonely Mountain con un enérgico grupo de enanos para reclamar su hogar en la montaña, y el oro que contiene, del dragón Smaug".
+  8. Añadir sinopsis a **"The Hobbit: The Desolation of Smaug**": 
+     * "Los enanos, junto con Bilbo Baggins y Gandalf the Grey, continúan su búsqueda para recuperar a Erebor, su tierra natal, de manos de Smaug. Bilbo Baggins está en posesión de un anillo misterioso y mágico".
+  9. Eliminar la película **"Pee Wee Herman's Big Adventure"**
+  10. Eliminar la película **"Avatar"**
+  11. Obtener las películas estrenadas entre 2000 y 2010.
+  12. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"**
+  13. Encontrar las películas que en la sinopsis contengan la palabra **"Gandalf"**
+  14. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"** y no la palabra **"Gandalf"**. Se aconseja utilizar el operador **$and**
+  15. Encontrar las películas que en la sinopsis contengan la palabra **"enanos"** o **"hobbit"**
+  16. Encontrar las películas que en la sinopsis contengan las palabras **"oro"** y **"dragón"**
+  17. Agregar a un actor llamado **"Samuel L. Jackson"** en la película "Pulp Fiction"
 
 
 ## 📚 Ejercicio 2
@@ -32,19 +98,6 @@ Sobre tu Base de Datos **MONGODB** trabajaremos sobre la colección
   11. Sacar el año del libro, a partir de la **fecha** (será un campo calculado llamado **año**).
   12. Aprovecha el campo anterior para sacar los libros estrictamente anteriores al año 2013. Visualiza **titulo** , **fecha** y **año**.
 
-
-
-## 📚 Ejercicio 1
-
- En la base de datos cine realiza los siguuientes ejercicios:
-
-  9. Obtener las películas estrenadas entre 2000 y 2010.
-  10. Agregar a un actor llamado **"Samuel L. Jackson"** en la película "Pulp Fiction"
-  11. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"**
-  12. Encontrar las películas que en la sinopsis contengan la palabra **"Gandalf"**
-  13. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"** y no la palabra **"Gandalf"**. Se aconseja utilizar el operador **$and**
-  14. Encontrar las películas que en la sinopsis contengan la palabra **"enanos"** o **"hobbit"**
-  15. Encontrar las películas que en la sinopsis contengan las palabras **"oro"** y **"dragón"**
 
 
 ## 📚 Ejercicio 3
