@@ -1,4 +1,4 @@
-# 8. Operaciones CRUD
+# 7. Operaciones CRUD
 
 En este punto vamos a ver las operaciones más básicas, para poder trabajar
 sobre ejemplos prácticos, y así disponer ya de unos datos iniciales para
@@ -265,3 +265,82 @@ El documento de sustitución puede tener campos distintos de los del documento o
       { "msg" : "Hola, ¿qué tal?" },
       { "msg" : "Hola, ¿qué tal?" , "título2" : "Mensaje 2" }
     )
+
+
+
+### Ejercicios
+
+Este ejercicio debes realizarlo sobre la BD cine (colección **pelicula**).
+
+1. Crear la BD cine
+2. Insertar todos los siguientes datos. Debe ser **obligatoriamente** con una única sentencia, para lo que puedes utilizar variables, una para cada documento.
+    
+    
+    title : Fight Club
+    writer : Chuck Palahniuk
+    year : 1999
+    actores : [
+      Brad Pitt
+      Edward Norton ]
+    
+    
+    title : Pulp Fiction
+    writer : Quentin Tarantino
+    year : 1994
+    actores : [
+      John Travolta
+      Uma Thurman ]
+    
+    
+    
+    title : Inglorious Basterds
+    writer : Quentin Tarantino
+    year : 2009
+    actores : [
+      Brad Pitt
+      Diane Kruger
+      Eli Roth ]
+    
+    
+    title : The Hobbit: An Unexpected Journey
+    writer : J.R.R. Tolkein
+    year : 2012
+    franquicia : The Hobbit
+    
+    
+    title : The Hobbit: The Desolation of Smaug
+    writer : J.R.R. Tolkein
+    year : 2013
+    franquicia : The Hobbit
+    
+    
+    title : The Hobbit: The Battle of the Five Armies
+    writer : J.R.R. Tolkein
+    year : 2012
+    franquicia : The Hobbit
+    synopsis : Bilbo y compañía se vende obligados a participar en una guerra contra una serie de combatientes y evitar que la Lonely Mountain caiga en manos de una oscuridad creciente.
+    
+    
+    
+    title : Pee Wee Herman's Big Adventure
+    
+    
+    title : Avatar
+
+  
+  3. Consultar todos los documentos
+  4. Obtener los documentos con **writer** igual a **"Quentin Tarantino"**
+  5. Obtener los documentos con **actores** que incluyan a **"Brad Pitt"**
+  6. Obtener los documentos con **franchise** igual a **"The Hobbit"**
+  7. Añadir sinopsis a **"The Hobbit: An Unexpected Journey"** : 
+     * "Un hobbit reacio, Bilbo Baggins, se dirige a Lonely Mountain con un enérgico grupo de enanos para reclamar su hogar en la montaña, y el oro que contiene, del dragón Smaug".
+  8. Añadir sinopsis a **"The Hobbit: The Desolation of Smaug**": 
+     * "Los enanos, junto con Bilbo Baggins y Gandalf the Grey, continúan su búsqueda para recuperar a Erebor, su tierra natal, de manos de Smaug. Bilbo Baggins está en posesión de un anillo misterioso y mágico".
+
+  9. Eliminar la película **"Pee Wee Herman's Big Adventure"**
+  10. Eliminar la película **"Avatar"**
+  
+
+
+  
+  
