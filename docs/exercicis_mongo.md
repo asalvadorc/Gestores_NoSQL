@@ -2,6 +2,19 @@
 
 ## 📚 Ejercicio 1
 
+ En la base de datos cine realiza los siguuientes ejercicios:
+
+  9. Obtener las películas estrenadas entre 2000 y 2010.
+  10. Agregar a un actor llamado **"Samuel L. Jackson"** en la película "Pulp Fiction"
+  11. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"**
+  12. Encontrar las películas que en la sinopsis contengan la palabra **"Gandalf"**
+  13. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"** y no la palabra **"Gandalf"**. Se aconseja utilizar el operador **$and**
+  14. Encontrar las películas que en la sinopsis contengan la palabra **"enanos"** o **"hobbit"**
+  15. Encontrar las películas que en la sinopsis contengan las palabras **"oro"** y **"dragón"**
+
+
+## 📚 Ejercicio 2
+
 Sobre tu Base de Datos **MONGODB** trabajaremos sobre la colección
 **libro**, la misma que hemos utilizado en los ejemplos. Realiza las siguientes consultas. Cópialas en un único archivo de texto, de forma numerada. Es este archivo el que tendrás que subir.
 
@@ -21,7 +34,7 @@ Sobre tu Base de Datos **MONGODB** trabajaremos sobre la colección
 
 
 
-## 📚 Ejercicio 2
+## 📚 Ejercicio 1
 
  En la base de datos cine realiza los siguuientes ejercicios:
 
