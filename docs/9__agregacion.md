@@ -7,7 +7,7 @@ complicado pero muy potente. Nos dará una potencia casi como la del SQL cuando
 empezamos a utilizar el GROUP BY y HAVING.
 
 La técnica que se utiliza es la del _**pipeline**_ , es decir hacer una serie de
-comandos, cada uno toma los datos que proporciona lo anterior ya su
+comandos, cada uno toma los datos que proporciona el anterior y a su
 vez proporciona los datos al siguiente comando. De esta forma se tratará
 un conjunto de documentos y se harán "operaciones" sobre ellos secuencialmente en
 bloques: filtrado, proyección, agrupaciones, ordenación, limitación y _skipping_

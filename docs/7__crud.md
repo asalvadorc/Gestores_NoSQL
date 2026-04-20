@@ -12,7 +12,7 @@ Hay dos formas de crear una colección:
 
         db.createCollection("ejemplo")
 
-- Con el mando insert:
+- Con el comando insert:
 
         db.ejemplo.insertOne(object)
 
@@ -100,11 +100,11 @@ el identificador.
 **Inserción múltiple**{.azul}
 
 Cuando los documentos que queremos insertar son sencillos, podemos insertar más de uno en la
-vez, poniendo dis del **insertMany()** un **array** con todos los elementos. En el
+vez, poniendo dentro del **insertMany()** un **array** con todos los elementos. En el
 siguiente ejemplo creamos varios números primos en la colección del mismo
 nombre:
 
-    > db.númerosprimers.insertMany( [ {_id:2} , {_id:3} , {_id:5} , {_id:7} , {_id:11}
+    > db.numerosprimos.insertMany( [ {_id:2} , {_id:3} , {_id:5} , {_id:7} , {_id:11}
     > , {_id:13} , {_id:17} , {_id:19} ] )  
     
     BulkWriteResult({  
@@ -121,7 +121,7 @@ nombre:
 
 Nos avisa que ha realizado 8 inserciones, y aquí los tenemos:
 
-    > db.númerosprimeros.find()  
+    > db.numerosprimos.find()  
     { "_id" : 2 }  
     { "_id" : 3 }  
     { "_id" : 5 }  
@@ -139,7 +139,7 @@ MongoDB ofrece los siguientes métodos para leer documentos de una colección:
 
   - db.collection.**find()**
  
-recuperará todos los documentos de la colección, aunque podremos poner criterios para que nos devuelva todos los documentos que cumplan estos criterios (lo veremos más adelante).
+recupera todos los documentos de la colección. No obstante, es posible especificar criterios de búsqueda para obtener únicamente aquellos documentos que los cumplan (lo veremos más adelante).
  
 
 ![](T8_find.png)
@@ -153,7 +153,7 @@ Ejemplo:
     >
 
 
-En todos los casos podemos comprobar que es cierto lo que veníamos afirmando, que debe
+En todos los casos podemos comprobar que es cierto lo que veníamos afirmando, que se ha
 creado automáticamente el elemento **_id** para cada documento guardado.
 Evidentemente, cada uno de nosotros tendrá unos valores diferentes.
 
@@ -169,7 +169,7 @@ Para borrar un documento de una colección utilizaremos la función **deleteOne*
 
 ![](T8_delete.png)
 
-    > db.númerosprimeros.deleteOne( {"_id" : 19} )  
+    > db.numerosprimos.deleteOne( {"_id" : 19} )  
     
 
 Nos avisa de que ha borrado un documento.
@@ -184,7 +184,7 @@ También tenemos la posibilidad de borrar toda una colección con la función
 **drop()**. Presta atención porque es muy sencilla de eliminar, y por tanto,
 potencialmente muy peligrosa.
 
-    > db.númerosprimeros.drop()  
+    > db.numerosprimos.drop()  
     true  
     >
 
@@ -255,7 +255,7 @@ contenido del documento podríamos ahorrarnos el primer paso.
 
 **Reemplazar un documento**{.azul}
 
-Para reemplazar todo el contenido de un documento excepto el _id, pase un documento completamente nuevo como segundo argumento en Collection.**replaceOne()**.
+Para reemplazar todo el contenido de un documento excepto el _id, pasa un documento completamente nuevo como segundo argumento en Collection.**replaceOne()**.
 
 Al reemplazar un documento, éste debe constar únicamente de pares campo-valor. No puede incluir expresiones de operadores de actualización.  
 
@@ -273,7 +273,7 @@ El documento de sustitución puede tener campos distintos de los del documento o
 Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **pelicula**).
 
 1- Crear la BD cine  
-2- Insertar todos los siguientes datos. Debe ser **obligatoriamente** con una única sentencia, para lo que puedes utilizar variables, una para cada documento.  
+2- Insertar los siguientes datos. Debe ser **obligatoriamente** con una única sentencia, para lo que puedes utilizar variables, una para cada documento.  
     
     
         title : Fight Club

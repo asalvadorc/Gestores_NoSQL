@@ -5,7 +5,7 @@
 Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **pelicula**).
 
 1. Crear la BD cine
-2. Insertar todos los siguientes datos. Debe ser **obligatoriamente** con una única sentencia, para lo que puedes utilizar variables, una para cada documento.
+2. Insertar los siguientes datos. Debe ser **obligatoriamente** con una única sentencia, para lo que puedes utilizar variables, una para cada documento.
     
     
         title : Fight Club

@@ -312,18 +312,20 @@ La idea es obtener una lista de usuarios con sus pedidos, y dentro de cada pedid
         ]
 
 ---
-🎯 Explicación del Pipeline  
+
+**Explicación del Pipeline**
 
 
-Podríamos haber ejecutado directamente **redis-server** haciéndole doble-clic desde
-de un explorador de archivos, por ejemplo, pero entonces no podríamos pararlo y en
-definitiva controlarlo tan cómodamente.
+- $lookup (usuarios → pedidos): Une los pedidos a cada usuario.  
+- $unwind (pedidos): Descompone la lista de pedidos para poder hacer otro $lookup.  
+- $lookup (pedidos → detalles_pedido): Une los detalles a cada pedido.  
+- $group: Vuelve a agrupar los datos para reconstruir la estructura.  
 
 ### El operador `$unwind`
   
 El operador **$unwind** en MongoDB descompone un array dentro de un documento en múltiples documentos, cada uno con un solo elemento del array.
 
-Es especialmente útil cuando trabajamos con **$lookup**, porque las consultas de agregación en MongoDB manejan arrays, ya veces es necesario convertirlos en documentos individuales para hacer más joins o transformaciones.
+Es especialmente útil cuando trabajamos con **$lookup**, porque las consultas de agregación en MongoDB manejan arrays, y a veces es necesario convertirlos en documentos individuales para hacer más joins o transformaciones.
 
 **¿Cuándo se usa $unwind?**  
 
