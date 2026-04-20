@@ -69,8 +69,8 @@ nav:
     - 9 - Agregación: 9__agregacion.md
     - 10 - Relaciones: 10__relaciones_mongo.md
     - 11 - Resumen Comandos: 11__resumen.md
-  #- Ejercicios MongoDB: exercicis_mongo.md
-  #- Práctica: 13__actividad_mongo.md
+  - Ejercicios: exercicis_mongo.md
+  - Actividad: 13__actividad_mongo.md
    
   #- BBDD NoSQL: 1__introducci.md
   #- Introducción: 1__introducci.md:
