@@ -9,12 +9,12 @@ theme:
     - navigation.tabs.sticky
     #- navigation.sections
     - navigation.top
-    - navigation.footer
-    - navigation.path
     - search.suggest
     - search.highlight
     - content.code.copy
     - toc.integrate
+    - navigation.footer
+    - navigation.path
     
   copyright: Licenciado bajo la licencia Creative Commons by-nc-nd
 
@@ -66,11 +66,9 @@ nav:
         - 8.2 Consulta: 8.2__operadores_consulta.md
         - 8.3 Ejercicios: 8.3__operadores_ejercicios.md
     - 9 - Agregación: 9__agregacion.md
-    - 10 - Resumen Comandos: 10__resumen.md
-    - 11 - Relaciones: 11__relaciones_mongo.md
-    #- 11 - Ejercicios: exercicis_mongo.md  
-    #- 13 - Práctica Mongo: 13__actividad_mongo.md
-  - Ejercicios MongoDB: exercicis_mongo.md
+    - 10 - Relaciones: 10__relaciones_mongo.md
+    - 11 - Resumen Comandos: 11__resumen.md
+  #- Ejercicios MongoDB: exercicis_mongo.md
   #- Práctica: 13__actividad_mongo.md
    
   #- BBDD NoSQL: 1__introducci.md

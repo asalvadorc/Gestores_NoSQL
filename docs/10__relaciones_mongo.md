@@ -1,4 +1,4 @@
-# 11 - Relaciones
+# 10 - Relaciones
 
 MongoDB, al ser una base de datos NoSQL, no maneja relaciones de la misma forma que SQL. Sin embargo, permite representar relaciones entre documentos utilizando dos enfoques principales:
 
@@ -7,7 +7,7 @@ MongoDB, al ser una base de datos NoSQL, no maneja relaciones de la misma forma 
 
 Cada enfoque tiene ventajas y desventajas, según el caso de uso.
 
-## 11.1 - Relación con Documentos Embebidos
+## 10.1 - Relación con Documentos Embebidos
 Este enfoque **anida las datos relacionados dentro del mismo documento**.  
 Se usa cuando las datos relacionados se consultan frecuentemente juntos y no crecen demasiado en tamaño.
 
@@ -35,7 +35,7 @@ Se usa cuando las datos relacionados se consultan frecuentemente juntos y no cre
 
 None
 
-## 11.2 - Relación con Referencias
+## 10.2 - Relación con Referencias
 En este enfoque, los documentos **almacenan solo referencias (IDs) de documentos en otras colecciones**.  
 Se usa cuando las datos son reutilizados en múltiples documentos o crecen mucho en tamaño.  
 Estas referencias pueden ser de dos tipos; referencias manuales o miedo DBRefs.
@@ -77,7 +77,7 @@ None
 
 None
 
-## 11.3 - Relaciones en MongoDB con `$lookup`
+## 10.3 - Relaciones en MongoDB con `$lookup`
 
 En **MongoDB**, la agregación con **$lookup** permite realizar joins entre colecciones.  
 Es útil cuando seguimos un enfoque de **modelado de datos con referencias**, donde almacenamos sólo el **ObjectId** en lugar de los documentos embebidos.
