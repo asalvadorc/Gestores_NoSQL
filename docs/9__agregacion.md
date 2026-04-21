@@ -331,3 +331,23 @@ En el ejemplo anterior, ahora saltamos los 3 primeros:
     
     { "_id" : { "año" : 2011 }, "media precios" : 9.5 }  
     { "_id" : { "año" : 2009 }, "media precios" : 9.45 }
+
+
+### 📚 **Ejercicio 2**
+
+Sobre tu Base de Datos **MONGODB** trabajaremos sobre la colección
+**libro**, la misma que hemos utilizado en los ejemplos. Realiza las siguientes consultas. Cópialas en un único archivo de texto, de forma numerada. Es este archivo el que tendrás que subir.
+
+  1.  Busca los libros de la editorial Planeta. Ver únicamente título y editorial.
+  2. Busca los libros con más de 500 páginas. Ver _id, título y número de páginas.
+  3. Busca los libros del año 2014. Ver únicamente título y fecha.
+  4. Busca los libros de la editorial Planeta de más de 500 páginas. Ver únicamente título, editorial y páginas.
+  5. Busca los libros sin editorial. Ver únicamente título y editorial.
+  6. Busca los libros que en el resumen contienen la palabra **caballo**. Visualiza el resumen para comprobarlo. Tienen que salir 2 libros, **Circo máximo** y **Las carreras de Escorpio**.
+  7. Utilizando la función **aggregate** , saca la editorial y la media de páginas de aquellas editoriales que tienen una media de páginas superior a 500. Saldrán 3 editoriales.
+
+  8. Incrementar el precio de los libros de la editorial Planeta en 2€ (recuerde que para modificar más de un documento, debemos poner como tercer parámetro la opción **{multi:true}**).
+  9. Crear el campo editorial con el valor nulo, para todos aquellos documentos que carezcan del campo editorial.
+  10. Realizar la operación inversa: eliminar el campo editorial para todos aquellos que lo tengan nulo.
+  11. Sacar el año del libro, a partir de la **fecha** (será un campo calculado llamado **año**).
+  12. Aprovecha el campo anterior para sacar los libros estrictamente anteriores al año 2013. Visualiza **titulo** , **fecha** y **año**.

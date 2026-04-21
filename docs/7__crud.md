@@ -268,7 +268,7 @@ El documento de sustitución puede tener campos distintos de los del documento o
 
 
 
-### 📚 **Ejercicios**
+### 📚 **Ejercicio 1**
 
 Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **pelicula**).
 
