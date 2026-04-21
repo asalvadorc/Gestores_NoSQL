@@ -237,7 +237,7 @@ La idea es obtener una lista de usuarios con sus pedidos, y dentro de cada pedid
 
           db.usuarios.aggregate([
           {
-            "$búsqueda": {
+            "$lookup": {
               "de": "órdenes",
               "localField": "_id",
               "foreignField": "user_id",
@@ -248,7 +248,7 @@ La idea es obtener una lista de usuarios con sus pedidos, y dentro de cada pedid
             "$unwind": "$orders" // Desenrolla la matriz de pedidos
           },
           {
-            "$búsqueda": {
+            "$lookup": {
               "de": "order_detail",
               "localField": "pedidos._id",
               "foreignField": "order_id",
