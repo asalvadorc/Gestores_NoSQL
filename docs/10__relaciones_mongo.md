@@ -426,10 +426,10 @@ el artículo será el **_id**.
 
       ![](T8_Exer_8_1.png)
 
-  9. Modifica lo anterior para sacar también el número del cliente de la factura
+  9. Modifica lo anterior para sacar también el número del cliente de la factura.
 
       ![](T8_Exer_8_2.png)
 
-  10. Saca un listado de clientes, al menos con su número, y de los artículos que ha comprado, al menos con la descripción del artículo
+  10. Saca un listado de clientes, al menos con su número, y de los artículos que ha comprado, al menos con la descripción del artículo.
 
     ![](T8_Exer_8_3.png)

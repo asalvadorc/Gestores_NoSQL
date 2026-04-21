@@ -60,23 +60,23 @@ Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **p
         title : Avatar
 
   
-  3. Consultar todos los documentos
-  4. Obtener los documentos con **writer** igual a **"Quentin Tarantino"**
-  5. Obtener los documentos con **actores** que incluyan a **"Brad Pitt"**
-  6. Obtener los documentos con **franchise** igual a **"The Hobbit"**
+  3. Consultar todos los documentos.
+  4. Obtener los documentos con **writer** igual a **"Quentin Tarantino"**.
+  5. Obtener los documentos con **actores** que incluyan a **"Brad Pitt"**.
+  6. Obtener los documentos con **franchise** igual a **"The Hobbit"**.
   7. Añadir sinopsis a **"The Hobbit: An Unexpected Journey"** : 
      * "Un hobbit reacio, Bilbo Baggins, se dirige a Lonely Mountain con un enérgico grupo de enanos para reclamar su hogar en la montaña, y el oro que contiene, del dragón Smaug".
   8. Añadir sinopsis a **"The Hobbit: The Desolation of Smaug**": 
      * "Los enanos, junto con Bilbo Baggins y Gandalf the Grey, continúan su búsqueda para recuperar a Erebor, su tierra natal, de manos de Smaug. Bilbo Baggins está en posesión de un anillo misterioso y mágico".
-  9. Eliminar la película **"Pee Wee Herman's Big Adventure"**
-  10. Eliminar la película **"Avatar"**
+  9. Eliminar la película **"Pee Wee Herman's Big Adventure"**.
+  10. Eliminar la película **"Avatar"**.
   11. Obtener las películas estrenadas entre 2000 y 2010.
-  12. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"**
-  13. Encontrar las películas que en la sinopsis contengan la palabra **"Gandalf"**
-  14. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"** y no la palabra **"Gandalf"**. Se aconseja utilizar el operador **$and**
-  15. Encontrar las películas que en la sinopsis contengan la palabra **"enanos"** o **"hobbit"**
-  16. Encontrar las películas que en la sinopsis contengan las palabras **"oro"** y **"dragón"**
-  17. Agregar a un actor llamado **"Samuel L. Jackson"** en la película "Pulp Fiction"
+  12. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"**.
+  13. Encontrar las películas que en la sinopsis contengan la palabra **"Gandalf"**.
+  14. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"**. y no la palabra **"Gandalf"**. Se aconseja utilizar el operador **$and**.
+  15. Encontrar las películas que en la sinopsis contengan la palabra **"enanos"** o **"hobbit"**.
+  16. Encontrar las películas que en la sinopsis contengan las palabras **"oro"** y **"dragón"**.
+  17. Agregar a un actor llamado **"Samuel L. Jackson"** en la película "Pulp Fiction".
 
 
 ## 📚 Ejercicio 2
