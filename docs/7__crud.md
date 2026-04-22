@@ -1,30 +1,27 @@
 # 7. Operaciones CRUD
 
-En este punto vamos a ver las operaciones más básicas, para poder trabajar
-sobre ejemplos prácticos, y así disponer ya de unos datos iniciales para
-practicar.
+En este punto vamos a ver las operaciones más básicas, para la **creación, consulta, actualización y eliminación** de **documentos** de una colección. 
 
-### Colección
+### Crear una Colección
 
 Hay dos formas de crear una colección:
 
-- Utilizando createCollection():
+-1) Utilizando createCollection():
 
         db.createCollection("ejemplo")
 
-- Con el comando insert:
+-2) Con el comando insert, creará la colección **ejemplo** si todavía no existe:
 
         db.ejemplo.insertOne(object)
 
-Esto creará la colección **ejemplo** si todavía no existe.  
 
-### Creación: insert
+### Creación: insert()
 
 MongoDB proporciona los siguientes métodos para insertar documentos en una colección:
   
-  - db.collection.**insertOne()**, para insetar un solo documento.
+  **- db.nomcolecc.insertOne({documento})**, para insetar un solo documento.
 
-  - db.collection.**insertMany()**, para insertar un conjunto de documentos.
+  **- db.nomcolecc.insertMany([{documento1},{documento2},...])​**, para insertar un conjunto de documentos.
 
 ![](T8_insert.png)
 
@@ -44,12 +41,12 @@ Insertamos otro documento:
 
         > db.ejemplo.insertOne({ msg2 : "¿Cómo va la cosa?"})  
 
-Y en este ejemplo nos guardamos el documento en la variable **doc**, y después
+Y en este ejemplo nos guardamos el documento en la **variable doc**, y después
 lo insertamos
 
-    > doc = { msg3 : "Por aquí no podemos quejarnos..."}  
+    > **doc =** { msg3 : "Por aquí no podemos quejarnos..."}  
 
-    > db.ejemplo.insertOne(doc)  
+    > db.ejemplo.insertOne(**doc**)  
     
 
 También nos indica que ha insertado un documento. Y habrá creado también el campo
@@ -100,8 +97,9 @@ el identificador.
 **Inserción múltiple**{.azul}
 
 Cuando los documentos que queremos insertar son sencillos, podemos insertar más de uno en la
-vez, poniendo dentro del **insertMany()** un **array** con todos los elementos. En el
-siguiente ejemplo creamos varios números primos en la colección del mismo
+vez, poniendo dentro del **insertMany()** un **array []** con todos los elementos. 
+
+En el siguiente ejemplo creamos varios números primos en la colección del mismo
 nombre:
 
     > db.numerosprimos.insertMany( [ {_id:2} , {_id:3} , {_id:5} , {_id:7} , {_id:11}
@@ -132,19 +130,30 @@ Nos avisa que ha realizado 8 inserciones, y aquí los tenemos:
     { "_id" : 19 }  
     >
 
+### Lectura: find()
 
-### Lectura: find
-
-MongoDB ofrece los siguientes métodos para leer documentos de una colección:
-
-  - db.collection.**find()**
- 
-recupera todos los documentos de la colección. No obstante, es posible especificar criterios de búsqueda para obtener únicamente aquellos documentos que los cumplan (lo veremos más adelante).
- 
+La función **find()** se ha comparado tradicionalmente con la sentencia SELECT de SQL. Siempre devolverá un conjunto de documentos, que pueden variar desde no devolver ningún documento, a devolver todos los de la colección.
 
 ![](T8_find.png)
 
-Ejemplo:
+La función **find()** puede tener dos parámetros: el filtro y la proyección. Cada uno de estos paŕametros viene dada en forma de documento (u objeto) JSON. Esta sería la sintaxis:
+
+**    db.coleccion.find(FILTRO,PROYECCIÓN)​
+**
+  
+  *1)  FILTRO:
+  
+  El primero indica un **filtro o criterio de búsqueda**, y devolverá aquellos documentos de la colección que cumplan el filtro o criterio indicado. Este filtro viene dada en forma de documento (u objeto) JSON, y también se utilizará en las sentencias **update() y delete()**.
+  
+En este ejemplo, devolverá todos los documentos de la colección **alumnos** que tengan el campo **nombre** y que en él tengan el valor **Rebeca**. 
+
+        > db.alumnos.find( { nombre : "Rebeca" } )
+
+En este ejemplo, el filtro está utilizando únicamente un criterio de busqueda, pero este filtro puede tener más de un criterio de búsqueda utilizando los diferentes operadores, como veremos más adelante. 
+
+    Si queremos que **devuelva todos los documentos**, no ponemos nada como parámetro de filtro **find()** , o aún mejor, le pasamos un documento (objeto) vacío **find({})** .
+
+En este ejemplo, devolverán todos los documentos de la colección ejemplo.
 
     > db.ejemplo.find()  
     { "_id" : ObjectId("56ce310bc61e04ba81def50b"), "msg" : "Hola, ¿qué tal?" }  
@@ -152,10 +161,30 @@ Ejemplo:
     { "_id" : ObjectId("56ce3237c61e04ba81def50d"), "msg3" : "Por aquí no podemos quejarnos ..." }  
     >
 
+  *2) PROYECCIÓN:
+  
+  El segundo parámetro, nos servirá para **delimitar los campos de los documentos que se devolverán**. También tendrá el formato JSON de un objeto al que le pondremos como claves los distintos campos que queremos que aparezcan o no, y como **valor 1 **para que sí aparezcan y **valor 0** para que no aparezcan.
 
-En todos los casos podemos comprobar que es cierto lo que veníamos afirmando, que se ha
-creado automáticamente el elemento **_id** para cada documento guardado.
-Evidentemente, cada uno de nosotros tendrá unos valores diferentes.
+Si ponemos algún campo a que sí que aparezca (es decir, con el valor 1), los únicos que aparecerán serán éstos, además del **_id** que por defecto siempre aparece.
+
+    > db.alumnos.find({},{nombre:1})  
+  
+    { "_id" : ObjectId("56debe3017bf4ed437dc77c8"), "nombre" : "Abel" }  
+    { "_id" : ObjectId("56dfdbd136d8b095cb6bd57a"), "nombre" : "Berta" }
+
+Por tanto si no queremos que aparezca **_id** pondremos **_id:0**:
+
+    > db.alumnos.find({},{_id:0})  
+   
+    { "nombre" : "Abel", "apellidos" : "Bernat Cantera", "edad" : 22, "dirección" : {"calle" : "Mayor", "numero" : 7, "cp" : "12502" }, "nota" : [ 9.5, 9 ] }  
+    { "nombre" : "Berta", "apellidos" : "Bernat Cantero" }
+
+Por ejemplo, si queremos mostrar únicamente el nombre:
+
+    > db.alumnos.find({},{nombre:1,_id:0})  
+  
+    { "nombre" : "Abel" }  
+    { "nombre" : "Berta" }
 
 
 ### Eliminación: delete
