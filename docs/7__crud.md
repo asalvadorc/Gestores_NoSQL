@@ -150,7 +150,7 @@ En este ejemplo, devolverá todos los documentos de la colección alumnos que te
 
 En este ejemplo, el filtro está utilizando únicamente un criterio de busqueda, pero el parámtro filtro puede tener más de un criterio de búsqueda, para ello se utilizará los diferentes **operadores**, como veremos más adelante. 
 
-    Si queremos que **devuelva todos los documentos**, no ponemos nada como parámetro de filtro **find()** , o aún mejor, le pasamos un documento (objeto) vacío **find({})** .
+Si queremos que **devuelva todos los documentos**, no ponemos nada como parámetro de filtro **find()** , o aún mejor, le pasamos un documento (objeto) vacío **find({})** .
 
 En este ejemplo, devolverán todos los documentos de la colección ejemplo.
 
