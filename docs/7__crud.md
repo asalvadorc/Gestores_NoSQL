@@ -101,9 +101,7 @@ Este comportamiento es automático y obligatorio, ya que MongoDB necesita siempr
 
 **Clave _id manual**{.azul}
 
-En los documentos que hemos ido insertando hasta ahora no hemos especificado la clave **_id**, por lo que MongoDB la ha generado automáticamente con un valor de tipo ObjectId. 
-
-No obstante, también podemos **definir manualmente la clave _id y asignarle el valor que queramos**. Eso sí, debemos asegurarnos de que dicho valor no esté repetido en ningún otro documento de la colección, ya que en caso contrario MongoDB devolverá un error.
+No obstante, también podemos definir manualmente la clave _id y **asignarle el valor que queramos**. En este caso, debemos asegurarnos de que dicho valor no esté repetido en ningún otro documento de la colección, ya que el **campo _id debe ser único**. Si se repite, MongoDB devolverá un error.
 
 Veamos un ejemplo: 
 
