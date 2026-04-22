@@ -1,4 +1,4 @@
-# 7. Operaciones CRUD
+****# 7. Operaciones CRUD
 
 En este punto vamos a ver las operaciones más básicas, para la **creación, consulta, actualización y eliminación** de **documentos** de una colección. 
 
@@ -29,9 +29,11 @@ MongoDB proporciona los siguientes métodos para insertar documentos en una cole
 
         db.coleccion.insertMany([{documento1},{documento2},...])​
 
-​-**insertOne()​**: Inserta un único documento en una colección.​ Se utiliza cuando se quiere añadir un solo registro de forma puntual.​
+​- **insertOne()​**: Inserta un único documento en una colección.​ Se utiliza cuando se quiere añadir un solo registro de forma puntual.​
 
--**insertMany([])**: Inserta varios documentos simultáneamente en una colección. Los documentos deben indicarse dentro de un array de objetos []. Es más eficiente cuando se necesita insertar múltiples registros.​
+- **insertMany([])**: Inserta varios documentos simultáneamente en una colección. Los documentos deben indicarse dentro de un array de objetos []. Es más eficiente cuando se necesita insertar múltiples registros.​
+
+**Parámetros: **
 
 Ambos métodos utilizan un único parámetro:
 
@@ -144,6 +146,8 @@ La sintaxis general es la siguiente:
 
         db.coleccion.find(FILTRO,PROYECCIÓN)
 
+**Parámetros: **
+
 A continuación, veremos en detalle la función de cada uno de estos parámetros:
   
 1) FILTRO (opcional): Determina qué documentos de la colección se devolverán. MongoDB solo mostrará aquellos documentos que cumplan los criterios de búsqueda indicados. Este parámetro equivale a la **cláusula WHERE** de una sentencia SELECT en SQL. Además, el filtro también se utiliza en otras operaciones como **update() y delete()**.
@@ -205,9 +209,11 @@ MongoDB ofrece los siguientes métodos para eliminar documentos de una colecció
 
         db.coleccion.deleteMany(FILTRO)
     
-**deleteOne()​**: Elimina un único documento que cumpla el criterio indicado en el filtro. Si hay varios documentos que coinciden, solo se borra el primero que encuentre MongoDB.
+- **deleteOne()​**: Elimina un único documento que cumpla el criterio indicado en el filtro. Si hay varios documentos que coinciden, solo se borra el primero que encuentre MongoDB.
 
-**deleteMany()​**: Elimina todos los documentos que cumplan el criterio del filtro. Pero no elimina la colección.​
+- **deleteMany()​**: Elimina todos los documentos que cumplan el criterio del filtro. Pero no elimina la colección.​
+
+**Parámetros: **
 
 Utiliza un único parámetro:
 
@@ -243,9 +249,11 @@ MongoDB ofrece los siguientes métodos para actualizar los documentos de una col
 
         db.coleccion.updateMany(FILTRO,MODIFICADOR)
 
-**updateOne()​** : Actualiza un único documento que cumpla la condición indicada en el filtro. Si varios documentos coinciden, solo se modifica el primero que encuentra MongoDB.
+- **updateOne()​** : Actualiza un único documento que cumpla la condición indicada en el filtro. Si varios documentos coinciden, solo se modifica el primero que encuentra MongoDB.
 
-**updateMany()​**: Actualiza todos los documentos que cumplan el criterio del filtro. Modifica varios documentos​
+- **updateMany()​**: Actualiza todos los documentos que cumplan el criterio del filtro. Modifica varios documentos​
+
+**Parámetros: **
 
 Tendrá dos parámetros:
 
