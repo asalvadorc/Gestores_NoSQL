@@ -395,16 +395,20 @@ Para ello, MongoDB proporciona los **operadores de consulta (query operators)**,
 
 Los operadores de comparación permiten comparar el valor de un campo con un valor concreto. Gracias a estos operadores, podemos ir más allá de la igualdad y realizar consultas que busquen valores mayores, menores, distintos o dentro de un rango.
 
-* **`$eq`**: Los valores son iguales
-* **`$ne`**: Los valores no son iguales
-* **`$gt`**: El valor es mayor que otro valor
-* **`$gte`**: El valor es mayor o igual que otro valor
-* **`$lt`**: El valor es menor que otro valor
-* **`$lte`**: El valor es menor o igual que otro valor
+Estos operadores se utilizan dentro de los filtros de las sentencias find(), update() y delete(), y se expresan mediante documentos JSON.
+
+Operadores:
+
+* **`$eq`** → comprueba si los valores son iguales
+* **`$ne`** → comprueba si los valores son distintos
+* **`$gt`**  → comprueba si el valor es mayor que otro
+* **`$gte`** → comprueba si el valor es mayor o igual que otro
+* **`$lt`**  → comprueba si el valor es menor que otro
+* **`$lte`** → comprueba si el valor es menor o igual que otro
 
 Sintaxis:
 
-        campo: { $operador: valor }
+        clave: { $operador: valor }
 
 Así por ejemplo, la siguiente consulta muestra los libros cuyo precio es superior a 10 €:
 
@@ -445,20 +449,91 @@ Es importante tener en cuenta que las comparaciones deben realizarse siempre ent
 
 
     > var d = new ISODate("2013-01-01T00:00:00Z")  
+    
     > db.libro.find( {fecha:{$gte:d} } , {fecha:1} )  
  
     { "_id" : "9788408117117", "hecha" : ISODate("2013-08-29T00:00:00Z") }  
     { "_id" : "9788401342158", "hecha" : ISODate("2014-03-01T00:00:00Z") }  
     { "_id" : "9788408113331", "hecha" : ISODate("2013-06-04T00:00:00Z") }  
     { "_id" : "9788468738895", "hecha" : ISODate("2014-02-06T00:00:00Z") }
+
 ---
 
 #### Operadores Lógicos:
 
-* **`$and`**: Devuelve los documentos donde ambas consultas coinciden
-* **`$or`**: Devuelve los documentos donde alguna de las consultas coincide
-* **`$nor`**: Devuelve los documentos donde ninguna de las consultas coincide
-* **`$not`**: Devuelve los documentos donde la consulta no coincide
+Los operadores lógicos permiten combinar varias condiciones dentro de un mismo filtro. Gracias a ellos, podemos construir consultas más complejas en las que se evalúen varias condiciones a la vez.
+
+Estos operadores se utilizan dentro de los filtros de las sentencias find(), update() y delete(), y se expresan mediante documentos JSON.
+
+Operadores: 
+
+* **`$or`** → devuelve los documentos que cumplen **alguna** de las condiciones
+* **`$nor`** → devuelve los documentos que no cumplen **ninguna** de las condiciones
+* **`$not`** → devuelve los documentos que **no cumplen la condición** concreta
+* **`$and`** → devuelve los documentos que **cumplen todas** las condiciones
+
+Sintaxis:
+
+        clave: { $operador: valor }
+
+- La sintaxis sigue siempre la estructura de los documentos JSON. 
+- En el caso de operadores que combinan varias condiciones (como $or), se utiliza un array de condiciones.
+
+**`$or`**{.azul}
+
+El operador **`$or`** permite que la consulta sea válida si se cumple al menos una de las condiciones indicadas.
+
+Sintaxis:
+
+        $or: [
+            { clave1: valor1 },
+            { clave2: valor2 },  ...
+        ]
+
+Por ejemplo, la siguiente consulta muestra los libros que no están en stock o que no tienen editorial:
+
+
+        db.libro.find(
+          { $or: [ { enstock: false }, { editorial: null } ] },
+          { titulo: 1, enstock: 1, editorial: 1 }
+        )
+ 
+    { "_id" : "9788499088075", "titulo" : "El ladrón de libros", "editorial" : "Debolsillo", "enstock" : false }  
+    { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "editorial" : "Planeta", "enstock" : false }  
+    { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "enstock" : true}
+
+En este caso, el documento se devuelve si se cumple al menos una de las condiciones del operador $or.
+
+
+**`$not`**{.azul}
+
+El operador $not se utiliza para negar una condición. Devuelve los documentos que no cumplen la condición indicada.
+
+Sintaxis:
+
+        $not : { condición }
+
+Veamos el ejemplo de la consulta que muestra los libros que no pertenecen a la editorial “Planeta”:
+           
+       >  db.libro.find(
+          { editorial: { $not: { $eq: "Planeta" } } },
+          { titulo: 1, editorial: 1 }
+        )
+ 
+
+    { "_id" : "9788401342158", "titulo" : "El juego de Ripper", "editorial" : "Plaza & Janes" }  
+    { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "editorial" : "Gigamesh" }  
+    { "_id" : "9788499088075", "titulo" : "El ladrón de libros", "editorial" : "Debolsillo" }  
+    { "_id" : "9788415140054", "titulo" : "La princesa de hielo", "editorial" : "Embolsillo" }  
+    { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }  
+
+Nota: En este caso sería más sencillo utilizar el operador $ne (distinto), pero el ejemplo sirve para comprender el funcionamiento del operador $not. Esta sentencia sería equivalente.
+
+        db.libro.find(
+          { editorial: { $ne: "Planeta" } },
+          { titulo: 1, editorial: 1 }
+        )
+
 
 ---
 
