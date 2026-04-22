@@ -56,7 +56,7 @@ Por último, insertamos un tercer documento, pero esta vez guardamos previamente
 
         > doc = { msg3 : "Por aquí no podemos quejarnos..."}  
 
-        > db.ejemplo.insertOne(**doc**)  
+        > db.ejemplo.insertOne(doc)  
     
 En este caso, también nos indica que ha insertado un documento. 
 
