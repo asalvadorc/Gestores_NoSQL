@@ -381,8 +381,8 @@ Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **p
   
 ***
 
-### Filtros avanzados
-
+**### Filtros avanzados
+**
 Hasta ahora, en las sentencias find(), update() y delete() hemos utilizado filtros basados principalmente en comparaciones de igualdad, es decir, hemos comprobado si el valor de un campo coincide con un valor concreto.
 
 Sin embargo, en muchos casos es necesario definir criterios de búsqueda más complejos, como comparar valores mayores o menores, trabajar con rangos o combinar varias condiciones en una misma consulta.
@@ -420,6 +420,8 @@ Así por ejemplo, la siguiente consulta muestra los libros cuyo precio es superi
     { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "precio" : 17.23 }  
     { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "precio" : 15.9 }
 
+**Comparaciones por rango**
+
 Es posible combinar varios operadores de comparación sobre un mismo campo.
 
 Por ejemplo, para obtener los libros cuyo precio esté entre 10 y 20 €:
@@ -435,11 +437,12 @@ Por ejemplo, para obtener los libros cuyo precio esté entre 10 y 20 €:
     { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "precio" : 17.23 }  
     { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "precio" : 15.9}
 
-Es especialmente útil para las fechas, ya que difícilmente encontraremos una fecha (y
-hora) exacta, y querremos casi siempre los documentos anteriores a una fecha, o
-posteriores, o entre dos fechas. Tendremos que tener cuidado para el tratamiento
-especial de las fechas: debemos comparar cosas del mismo tipo, y por tanto la
-fecha con la que queremos comparar la tendremos que tener en forma de fecha:
+**Comparaciones con fechas**
+
+Los operadores de comparación son especialmente útiles cuando trabajamos con fechas, ya que normalmente no buscamos una fecha y hora exactas, sino documentos anteriores, posteriores o comprendidos entre dos fechas.
+
+Es importante tener en cuenta que las comparaciones deben realizarse siempre entre valores del mismo tipo, por lo que la fecha con la que queremos comparar debe estar en** formato fecha (ISODate)**.
+
 
     > var d = new ISODate("2013-01-01T00:00:00Z")  
     > db.libro.find( {fecha:{$gte:d} } , {fecha:1} )  
