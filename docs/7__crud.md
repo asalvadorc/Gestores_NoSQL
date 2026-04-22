@@ -536,36 +536,6 @@ Por ejemplo, la siguiente consulta muestra los libros que no están en stock o q
 
 En este caso, el documento se devuelve si se cumple al menos una de las condiciones del operador $or.
 
-
-**`$not`**{.azul}
-
-El operador $not se utiliza para negar una condición. Devuelve los documentos que no cumplen la condición indicada.
-
-Sintaxis:
-
-        clave : { $not: { operador: valor } }
-        
-Veamos el ejemplo de la consulta que muestra los libros que no pertenecen a la editorial “Planeta”:
-           
-       >  db.libro.find(
-          { editorial: { $not: { $eq: "Planeta" } } },
-          { titulo: 1, editorial: 1 }
-        )
- 
-
-    { "_id" : "9788401342158", "titulo" : "El juego de Ripper", "editorial" : "Plaza & Janes" }  
-    { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "editorial" : "Gigamesh" }  
-    { "_id" : "9788499088075", "titulo" : "El ladrón de libros", "editorial" : "Debolsillo" }  
-    { "_id" : "9788415140054", "titulo" : "La princesa de hielo", "editorial" : "Embolsillo" }  
-    { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }  
-
-Nota: En este caso sería más sencillo utilizar el operador $ne (distinto), pero el ejemplo sirve para comprender el funcionamiento del operador $not. Esta sentencia sería equivalente.
-
-        db.libro.find(
-          { editorial: { $ne: "Planeta" } },
-          { titulo: 1, editorial: 1 }
-        )
-
 **`$and`**{.azul}
 
 El operador $and se utiliza para combinar varias condiciones dentro de un mismo filtro. MongoDB solo devolverá los documentos que cumplan todas las condiciones indicadas. 
@@ -600,6 +570,7 @@ En este ejemplo, la consulta muestra los libros que tienen un precio superior a 
 **Uso implícito de $and utilizando la coma**
 
 MongoDB permite omitir el operador $and cuando las condiciones afectan a campos distintos, ya que lo aplica de forma implícita.
+
 Por ejemplo, la consulta anterior se puede escribir también así:
 
         db.libro.find(
@@ -609,10 +580,7 @@ Por ejemplo, la consulta anterior se puede escribir también así:
 
 Ambas consultas son equivalentes desde el punto de vista del resultado. No obstante, la forma implícita (separando las condiciones mediante comas) suele resultar más legible en consultas sencillas.
 
-Como recomendación general, es aconsejable utilizar el operador $and de forma explícita cuando:
-- se desea mejorar la claridad de la consulta,
-- se combinan operadores lógicos como $or, $not o $nor,
-- o se trabajan condiciones más complejas que pueden dificultar la lectura si se escriben de forma implícita.
+Como recomendación general, es aconsejable utilizar el operador $and de forma explícita cuando: se desea mejorar la claridad de la consulta, se combinan operadores lógicos como $or, $not o $nor, o se trabajan condiciones más complejas que pueden dificultar la lectura si se escriben de forma implícita.
 
 ---
 
@@ -694,20 +662,28 @@ Veamos el ejemplo que selecciona los documentos donde el campo paginas es de tip
 
 #### Expresiones regulares
 
-Mongo acepta las expresiones regulares de forma nativa, lo que da mucha
-potencia para poder buscar información diversa.
+MongoDB admite expresiones regulares de forma nativa, lo que permite realizar búsquedas de texto flexibles y potentes dentro de los documentos de una colección.
 
-Las expresiones regulares en Mongo tienen la misma sintaxis que en Perl, y que
-es muy parecida a la mayor parte de lenguajes de programación.
+Las expresiones regulares en MongoDB utilizan la misma sintaxis que Perl, muy similar a la que se emplea en la mayoría de lenguajes de programación. Gracias a ello, podemos definir patrones de búsqueda para localizar textos que cumplan determinadas condiciones.
 
-Veamos algunos ejemplos. Los libros dentro de los cuales está la palabra **juego** :
+Las expresiones regulares se utilizan directamente en el filtro de las sentencias find(), update y delete.
+
+Veamos algunos ejemplos:
+
+**Búsqueda de una palabra dentro de un texto**
+
+El siguiente ejemplo muestra los libros cuyo título contiene la palabra “juego”:
 
     > db.libro.find( { titulo: /juego/ } , {titulo:1} )  
 
     { "_id" : "9788401342158", "titulo" : "El juego de Ripper" }  
     { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }
 
-Ahora que tienen la palabra **juego** sin importar mayúsculas o minúsculas:
+En este caso, la búsqueda distingue entre mayúsculas y minúsculas.
+
+**Búsqueda sin distinguir mayúsculas y minúsculas**
+
+Para realizar una búsqueda sin tener en cuenta las mayúsculas y minúsculas, se utiliza el modificador **i (ignore case)**:
 
     > db.libro.find( { titulo: /juego/i } , {titulo:1} )  
 
@@ -715,14 +691,21 @@ Ahora que tienen la palabra **juego** sin importar mayúsculas o minúsculas:
     { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1" }  
     { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }
 
-Y ahora que tienen la palabra **juego** sólo al principio.
+**Búsqueda al inicio del texto**
+
+El símbolo ^ indica que el patrón debe encontrarse al comienzo del texto.
+
+Por ejemplo, para obtener los libros cuyo título empieza por la palabra “juego”:
 
     > db.libro.find( { titulo: /^juego/i } , {titulo:1} )  
 
     { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1" }
 
-Y ahora los libros que en el resumen (**resumen**) tienen la palabra **amiga** o
-**amigo** , es decir **amig** seguido de una **a** o una **o** :
+**Definir alternativas dentro de un patrón**
+
+Las expresiones regulares permiten definir patrones más avanzados. Como la utilización de los corchetes [] permiten definir alternativas dentro de un patrón.
+
+En el siguiente ejemplo se buscan los libros cuyo resumen contiene la palabra “amiga” o “amigo”, es decir, la cadena amig seguida de una a o una o:
 
     > db.libro.find( { resumen: /amig[ao]/i } , {titulo:1} )  
 
