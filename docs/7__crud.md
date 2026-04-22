@@ -657,10 +657,10 @@ Y ahora los libros que en el resumen (**resumen**) tienen la palabra **amiga** o
 
 Siguiendo con la base de datos cine, realiza los siguientes ejercicios:
 
-11- Encontrar las películas estrenadas entre 2000 y 2010.
-12- Encontrar las películas que en la sinopsis contengan la palabra "Bilbo".
-13- Encontrar las películas que en la sinopsis contengan la palabra "Gandalf".
-14- Encontrar las películas que en la sinopsis contengan la palabra "Bilbo" y no la palabra "Gandalf". Se aconseja utilizar el operador $and.
-15- Encontrar las películas que en la sinopsis contengan la palabra "enanos" o "hobbit".
-16- Encontrar las películas que en la sinopsis contengan las palabras "oro" y "dragón".
+- 11- Encontrar las películas estrenadas entre 2000 y 2010.
+- 12- Encontrar las películas que en la sinopsis contengan la palabra "Bilbo".
+- 13- Encontrar las películas que en la sinopsis contengan la palabra "Gandalf".
+- 14- Encontrar las películas que en la sinopsis contengan la palabra "Bilbo" y no la palabra "Gandalf". Se aconseja utilizar el operador $and.
+- 15- Encontrar las películas que en la sinopsis contengan la palabra "enanos" o "hobbit".
+- 16- Encontrar las películas que en la sinopsis contengan las palabras "oro" y "dragón".
 
