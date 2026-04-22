@@ -383,31 +383,79 @@ Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **p
 
 ### Filtros avanzados
 
-En MongoDB, los filtros permiten especificar condiciones para seleccionar únicamente los documentos que cumplen determinados criterios. Estos filtros se utilizan principalmente en el método **find()**, aunque también aparecen en operaciones como **update() y delete()**.
+Hasta ahora, en las sentencias find(), update() y delete() hemos utilizado filtros basados principalmente en comparaciones de igualdad, es decir, hemos comprobado si el valor de un campo coincide con un valor concreto.
 
-Los filtros se expresan mediante documentos JSON, y pueden incluir los llamados _**query operators**_, que permiten realizar _comparaciones, combinaciones lógicas y búsquedas más avanzadas._
+Sin embargo, en muchos casos es necesario definir criterios de búsqueda más complejos, como comparar valores mayores o menores, trabajar con rangos o combinar varias condiciones en una misma consulta.
+
+Para ello, MongoDB proporciona los **operadores de consulta (query operators)**, que se utilizan dentro de los filtros y permiten realizar _comparaciones, combinaciones lógicas y búsquedas más avanzadas_, ampliando así las posibilidades de consulta sobre las colecciones.
 
 ---
 
 #### Operadores de comparación
 
-Los operadores de comparación permiten comparar el valor de un campo con un valor concreto.
+Los operadores de comparación permiten comparar el valor de un campo con un valor concreto. Gracias a estos operadores, podemos ir más allá de la igualdad y realizar consultas que busquen valores mayores, menores, distintos o dentro de un rango.
 
-* **$eq**: Los valores son iguales
-* **$ne**: Los valores no son iguales
-* **$gt**: El valor es mayor que otro valor
-* **$gte**: El valor es mayor o igual que otro valor
-* **$lt**: El valor es menor que otro valor
-* **$lte**: El valor es menor o igual que otro valor
+* **`$eq`**: Los valores son iguales
+* **`$ne`**: Los valores no son iguales
+* **`$gt`**: El valor es mayor que otro valor
+* **`$gte`**: El valor es mayor o igual que otro valor
+* **`$lt`**: El valor es menor que otro valor
+* **`$lte`**: El valor es menor o igual que otro valor
 
+Sintaxis:
+
+        campo: { $operador: valor }
+
+Así por ejemplo, la siguiente consulta muestra los libros cuyo precio es superior a 10 €:
+
+        db.libro.find(
+          { precio: { $gt: 10 } },
+          { titulo: 1, precio: 1 }
+        )
+
+  
+    { "_id" : "9788408117117", "titulo" : "Circo Máximo", "precio" : 21.75 }  
+    { "_id" : "9788401342158", "titulo" : "El juego de Ripper", "precio" : 21.75 }  
+    { "_id" : "9788415140054", "titulo" : "La princesa de hielo", "precio" : 11 }  
+    { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "precio" : 17.23 }  
+    { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "precio" : 15.9 }
+
+Es posible combinar varios operadores de comparación sobre un mismo campo.
+
+Por ejemplo, para obtener los libros cuyo precio esté entre 10 y 20 €:
+
+        > db.libro.find(
+          { precio: { $gt: 10, $lt: 20 } },
+          { titulo: 1, precio: 1 }
+        )
+
+    > db.libro.find( { precio : { $gt : 10 , $lt:20 } } , { titulo:1 , precio:1 })
+  
+    { "_id" : "9788415140054", "titulo" : "La princesa de hielo", "precio" : 11 }  
+    { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "precio" : 17.23 }  
+    { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "precio" : 15.9}
+
+Es especialmente útil para las fechas, ya que difícilmente encontraremos una fecha (y
+hora) exacta, y querremos casi siempre los documentos anteriores a una fecha, o
+posteriores, o entre dos fechas. Tendremos que tener cuidado para el tratamiento
+especial de las fechas: debemos comparar cosas del mismo tipo, y por tanto la
+fecha con la que queremos comparar la tendremos que tener en forma de fecha:
+
+    > var d = new ISODate("2013-01-01T00:00:00Z")  
+    > db.libro.find( {fecha:{$gte:d} } , {fecha:1} )  
+ 
+    { "_id" : "9788408117117", "hecha" : ISODate("2013-08-29T00:00:00Z") }  
+    { "_id" : "9788401342158", "hecha" : ISODate("2014-03-01T00:00:00Z") }  
+    { "_id" : "9788408113331", "hecha" : ISODate("2013-06-04T00:00:00Z") }  
+    { "_id" : "9788468738895", "hecha" : ISODate("2014-02-06T00:00:00Z") }
 ---
 
 #### Operadores Lógicos:
 
-* **$and**: Devuelve los documentos donde ambas consultas coinciden
-* **$or**: Devuelve los documentos donde alguna de las consultas coincide
-* **$nor**: Devuelve los documentos donde ninguna de las consultas coincide
-* **$not**: Devuelve los documentos donde la consulta no coincide
+* **`$and`**: Devuelve los documentos donde ambas consultas coinciden
+* **`$or`**: Devuelve los documentos donde alguna de las consultas coincide
+* **`$nor`**: Devuelve los documentos donde ninguna de las consultas coincide
+* **`$not`**: Devuelve los documentos donde la consulta no coincide
 
 ---
 
@@ -478,9 +526,9 @@ Sintaxis:
 
         clave: { $type: tipo }
 
-Donde tipo indica el tipo de dato que debe tener el campo para que el documento sea seleccionado. Los tipos de datos más usados son:  "int", "double", "string", "bool", "date", "array", "object", "objectId", "null".
+Donde tipo indica el tipo de dato que debe tener el campo para que el documento sea seleccionado. Los tipos de datos más usados son:  **"int", "double", "string", "bool", "date", "array", "object", "objectId", "null".**
 
-Veamos el ejemplo que selecciona los documentos donde el campo **paginas es de tipo entero**
+Veamos el ejemplo que selecciona los documentos donde el campo paginas es de tipo entero.
 
         > db.libro.find(
                 { paginas: { $type: "int" } },
