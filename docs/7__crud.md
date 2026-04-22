@@ -413,28 +413,26 @@ Los operadores de comparación permiten comparar el valor de un campo con un val
 
 #### Operadores de campo
 
-Los operadores de campo se utilizan para **validar la estructura de los documentos** o el **tipo de datos** de un campo. Los operadores disponibles son:
+Los operadores de campo se utilizan para **validar la estructura de los documentos** o el **tipo de datos** de un campo. 
 
-- **`$exists`**: comprueba si un campo existe o no.
-- **`$type`**: comprueba el tipo de dato de un campo.
+Los operadores disponibles son: **`$exists`** y **`$type`**
 
 ---
 
-##### `$exists`{.azul}
+**`$exists`{.azul}**
 
 El operador **`$exists`** permite saber qué documentos **contienen o no un campo determinado**, independientemente de su valor.
 
 Sintaxis:
 
-```
-clave: { $exists: boolean }
+        clave: { $exists: boolean }
 
 Dependiendo del valor _boolean_ , el funcionamiento será:
 
   * **true** : devuelve los documentos en los que existe el campo, aunque su valor sea nulo
   * **false** : devuelve los documentos donde el campo no existe
 
-Veamos el ejemplo, que muestra los libros que tienen el campo paginas:
+Veamos el ejemplo de consulta que muestra los **libros que tienen el campo paginas**:
 
     > db.libro.find( { paginas: {$exists:true} } , {titulo:1 , paginas:1} )  
 
@@ -447,7 +445,7 @@ Veamos el ejemplo, que muestra los libros que tienen el campo paginas:
 
  Observa que el último libro aparece porque el campo paginas existe, aunque su valor sea **null**.
 
-En cambio, si buscamos los libros con páginas distintas de nulo, no aparecerá es último libro:
+En cambio, si buscamos los libros con** páginas distintas de null**, no aparecerá este último libro:
 
     > db.libro.find( { paginas: {$ne:null} } , {titulo:1 , paginas:1} )  
 
@@ -457,28 +455,34 @@ En cambio, si buscamos los libros con páginas distintas de nulo, no aparecerá 
     { "_id" : "9788499088075", "titulo" : "El ladrón de libros", "paginas" : 544 }  
     { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "paginas" : 290 }
 
-Y si usamos $exists: false, solo aparecerán los documentos que no tienen el campo paginas:
+Y si usamos **$exists: false**, solo aparecerán los documentos que **no tienen el campo paginas**:
 
     > db.libro.find( { paginas: {$exists:false} } , {titulo:1 , paginas:1} )  
 
     { "_id" : "9788415140054", "titulo" : "La princesa de hielo" }
 
-Buscar directamente **paginas: null** devuelve tanto documentos sin el campo como documentos con valor nulo.
+Por último, si realizamos la búsqueda directamente con **paginas: null** MongoDB devolverá tanto documentos **que no tienen el campo** como aquellos que **sí lo tienen con valor nulo**:
 
     > db.libro.find( { paginas: null } , {titulo:1 , paginas:1} )  
 
     { "_id" : "9788415140054", "titulo" : "La princesa de hielo" }  
     { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "paginas" : null}
 
-Por tanto, para según qué casos, es preferible utilizar el operador **$exists**.
+Por lo que para muchos casos prácticos, es preferible utilizar el operador $exists en lugar de comparar directamente con null.
 
-**$type**{.azul}
+**`$type`{.azul}**
 
-Comprueba el tipo de dato de un campo.
+El operador $type permite filtrar documentos en función del tipo de dato de un campo.
 
-Selecciona los documentos donde el campo paginas es de tipo entero
+Sintaxis:
 
-    db.libro.find(
-    { paginas: { $type: "int" } },
-    { titulo: 1, paginas: 1 }
-    )
+        clave: { $type: tipo }
+
+Donde tipo indica el tipo de dato que debe tener el campo para que el documento sea seleccionado. Los tipos de datos más usados son:  "int", "double", "string", "bool", "date", "array", "object", "objectId", "null".
+
+Veamos el ejemplo que selecciona los documentos donde el campo **paginas es de tipo entero**
+
+        > db.libro.find(
+                { paginas: { $type: "int" } },
+                { titulo: 1, paginas: 1 }
+                )
