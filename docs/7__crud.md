@@ -29,7 +29,7 @@ MongoDB proporciona los siguientes métodos para insertar documentos en una cole
 
         db.coleccion.insertMany([{documento1},{documento2},...])​
 
-​- **insertOne()​**: Inserta un único documento en una colección.​ Se utiliza cuando se quiere añadir un solo registro de forma puntual.​
+- **insertOne()​**: Inserta un único documento en una colección.​ Se utiliza cuando se quiere añadir un solo registro de forma puntual.​
 
 - **insertMany([])**: Inserta varios documentos simultáneamente en una colección. Los documentos deben indicarse dentro de un array de objetos []. Es más eficiente cuando se necesita insertar múltiples registros.​
 
