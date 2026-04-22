@@ -93,15 +93,15 @@ Nos avisa que ha realizado 8 inserciones, y aquí los tenemos:
 
 **Clave _id automática**{.azul}
 
-Durante el proceso de inserción de documentos, MongoDB crea automáticamente el campo **_id** para cada documento insertado cuando no se especifica explícitamente.
+Durante el proceso de inserción de documentos, MongoDB crea automáticamente la clave **_id** para cada documento insertado cuando no se especifica explícitamente.
 
-Este campo toma un valor de tipo **_ObjectId_** y actúa como identificador único, lo que permite distinguir cada documento del resto dentro de la colección.
+Esta clave toma un valor de tipo **_ObjectId_** y actúa como identificador único, lo que permite distinguir cada documento del resto dentro de la colección.
 
 Este comportamiento es automático y obligatorio, ya que MongoDB necesita siempre un identificador para gestionar los documentos.
 
 **Clave _id manual**{.azul}
 
-No obstante, también podemos definir manualmente la clave _id y **asignarle el valor que queramos**. En este caso, debemos asegurarnos de que dicho valor no esté repetido en ningún otro documento de la colección, ya que el **campo _id debe ser único**. Si se repite, MongoDB devolverá un error.
+No obstante, también podemos definir manualmente la clave _id y **asignarle el valor que queramos**. En este caso, debemos asegurarnos de que dicho valor no esté repetido en ningún otro documento de la colección, ya que el **clave _id debe ser único**. Si se repite, MongoDB devolverá un error.
 
 Veamos un ejemplo: 
 
@@ -109,7 +109,7 @@ Vamos a insertar información de varios alumnos en una nueva colección llamada 
 
         > db.alumnos.insertOne ({_id: 51 , nombre: "Rebeca" , apellidos: "Martí Peral"})  
     
-La inserción se realiza correctamente. Si consultamos ahora los documentos de la colección, comprobaremos que MongoDB ha respetado el valor del campo _id indicado:
+La inserción se realiza correctamente. Si consultamos ahora los documentos de la colección, comprobaremos que MongoDB ha respetado el valor de la clave _id indicado:
 
         > db.alumnos.find()  
          { "_id" : 51, "nombre" : "Rebeca", "apellidos" : "Martí Peral" }  
@@ -150,7 +150,7 @@ A continuación, veremos en detalle la función de cada uno de estos parámetros
   
 1) FILTRO (opcional): Determina qué documentos de la colección se devolverán. MongoDB solo mostrará aquellos documentos que cumplan los criterios de búsqueda indicados. Este parámetro equivale a la **cláusula WHERE** de una sentencia SELECT en SQL. Además, el filtro también se utiliza en otras operaciones como **update() y delete()**.
   
-Por ejemplo, la siguiente consulta devuelve todos los documentos de la colección alumnos cuyo campo nombre tenga el valor "Rebeca":
+Por ejemplo, la siguiente consulta devuelve todos los documentos de la colección alumnos cuya clave nombre tenga el valor "Rebeca":
 
         > db.alumnos.find( { nombre : "Rebeca" } )
 
@@ -169,23 +169,23 @@ Ambas opciones producen el mismo resultado. Por ejemplo:
     { "_id" : ObjectId("56ce3237c61e04ba81def50d"), "msg3" : "Por aquí no podemos quejarnos ..." }  
     >
 
-2) PROYECCIÓN (opcional): Se utiliza para indicar qué campos de los documentos se mostrarán en el resultado. Para cada campo se indica **1** si el campo se muestra, o un **0** si el campo no se muestra. Hay que tener en cuenta que el campo **_id** aparece siempre por defecto, por lo que si no queremos que se muestre, debemos indicarlo explícitamente con **{_id: 0}**. Este parámetro equivale a la cláusula **SELECT** de una sentencia SELECT en SQL, donde indicamos qué columnas queremos visualizar.
+2) PROYECCIÓN (opcional): Se utiliza para indicar qué claves de los documentos se mostrarán en el resultado. Para cada clave se indica **1** si la clave se muestra, o un **0** si no se muestra. Hay que tener en cuenta que la clave **_id** aparece siempre por defecto, por lo que si no queremos que se muestre, debemos indicarlo explícitamente con **{_id: 0}**. Este parámetro equivale a la cláusula **SELECT** de una sentencia SELECT en SQL, donde indicamos qué columnas queremos visualizar.
   
-Por ejemplo, la siguiente consulta devuelve únicamente el campo nombre de los documentos de la colección alumnos:
+Por ejemplo, la siguiente consulta devuelve únicamente la clave nombre de los documentos de la colección alumnos:
 
     > db.alumnos.find({},{nombre:1})  
   
     { "_id" : ObjectId("56debe3017bf4ed437dc77c8"), "nombre" : "Abel" }  
     { "_id" : ObjectId("56dfdbd136d8b095cb6bd57a"), "nombre" : "Berta" }
 
-Como se observa, el campo _id aparece siempre por defecto, por tanto si no queremos que aparezca **_id** pondremos **_id:0**:
+Como se observa, la clave _id aparece siempre por defecto, por tanto si no queremos que aparezca **_id** pondremos **_id:0**:
 
     > db.alumnos.find({},{_id:0})  
    
     { "nombre" : "Abel", "apellidos" : "Bernat Cantera", "edad" : 22, "dirección" : {"calle" : "Mayor", "numero" : 7, "cp" : "12502" }, "nota" : [ 9.5, 9 ] }  
     { "nombre" : "Berta", "apellidos" : "Bernat Cantero" }
 
-Por último, si queremos mostrar únicamente el campo nombre, sin que aparezca el _id, podemos combinar ambas opciones:
+Por último, si queremos mostrar únicamente la clave nombre, sin que aparezca el _id, podemos combinar ambas opciones:
 
     > db.alumnos.find({},{nombre:1,_id:0})  
   
