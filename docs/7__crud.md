@@ -140,7 +140,7 @@ Esta sería la sintaxis:
 
         db.coleccion.find(FILTRO,PROYECCIÓN)
   
-#### FILTRO:
+**- FILTRO:**
   
   El primero indica un **filtro**, y devolverá aquellos documentos de la colección que **cumplan con los criterios de búsqueda indicado**. Viene a ser la parte del WHERE dentro de un SELECT. El filtro también se utiliza en las sentencias **update() y delete()**.
   
@@ -160,7 +160,7 @@ En este ejemplo, devolverán todos los documentos de la colección ejemplo.
     { "_id" : ObjectId("56ce3237c61e04ba81def50d"), "msg3" : "Por aquí no podemos quejarnos ..." }  
     >
 
-#### PROYECCIÓN:
+**- PROYECCIÓN:**
   
   El segundo parámetro, nos servirá para **delimitar las claves de los documentos que se devolverán**. Los valores que pondremos a las distintos claves será, según si queremos que aparezcan será **1** o un **0** para que no aparezca.
 Viene a ser la parte de la cláusula SELECT, donde indicamos qué columnas queremos visualizar en la consulta SELECT.
