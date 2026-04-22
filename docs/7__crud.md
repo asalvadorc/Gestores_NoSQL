@@ -402,7 +402,7 @@ Los operadores de comparación permiten comparar el valor de un campo con un val
 
 ---
 
-Lógicos:
+#### Operadores Lógicos:
 
 * **$and**: Devuelve los documentos donde ambas consultas coinciden
 * **$or**: Devuelve los documentos donde alguna de las consultas coincide
@@ -428,3 +428,57 @@ El operador **`$exists`** permite saber qué documentos **contienen o no un camp
 
 ```js
 clave: { $exists: boolean }
+
+Dependiendo del valor _boolean_ , el funcionamiento será:
+
+  * **true** : devuelve los documentos en los que existe el campo, aunque su valor sea nulo
+  * **false** : devuelve los documentos donde el campo no existe
+
+Veamos el ejemplo, que muestra los libros que tienen el campo paginas:
+
+    > db.libro.find( { paginas: {$exists:true} } , {titulo:1 , paginas:1} )  
+
+    { "_id" : "9788408117117", "titulo" : "Circo Máximo", "paginas" : 1100 }  
+    { "_id" : "9788401342158", "titulo" : "El juego de Ripper", "paginas" : 480 }  
+    { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "paginas" : 793 }  
+    { "_id" : "9788499088075", "titulo" : "El ladrón de libros", "paginas" : 544 }  
+    { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "paginas" : 290 }  
+    { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "paginas" : null }
+
+ Observa que el último libro aparece porque el campo paginas existe, aunque su valor sea **null**.
+
+En cambio, si buscamos los libros con páginas distintas de nulo, no aparecerá es último libro:
+
+    > db.libro.find( { paginas: {$ne:null} } , {titulo:1 , paginas:1} )  
+
+    { "_id" : "9788408117117", "titulo" : "Circo Máximo", "paginas" : 1100 }  
+    { "_id" : "9788401342158", "titulo" : "El juego de Ripper", "paginas" : 480 }  
+    { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "paginas" : 793 }  
+    { "_id" : "9788499088075", "titulo" : "El ladrón de libros", "paginas" : 544 }  
+    { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "paginas" : 290 }
+
+Y si usamos $exists: false, solo aparecerán los documentos que no tienen el campo paginas:
+
+    > db.libro.find( { paginas: {$exists:false} } , {titulo:1 , paginas:1} )  
+
+    { "_id" : "9788415140054", "titulo" : "La princesa de hielo" }
+
+Buscar directamente **paginas: null** devuelve tanto documentos sin el campo como documentos con valor nulo.
+
+    > db.libro.find( { paginas: null } , {titulo:1 , paginas:1} )  
+
+    { "_id" : "9788415140054", "titulo" : "La princesa de hielo" }  
+    { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "paginas" : null}
+
+Por tanto, para según qué casos, es preferible utilizar el operador **$exists**.
+
+**$type**{.azul}
+
+Comprueba el tipo de dato de un campo.
+
+Selecciona los documentos donde el campo paginas es de tipo entero
+
+    db.libro.find(
+    { paginas: { $type: "int" } },
+    { titulo: 1, paginas: 1 }
+    )
