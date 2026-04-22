@@ -17,7 +17,7 @@ Hay dos formas de crear una colección:
 
 ### Creación: insert
 
-La sentencia **insert()** se ha comparado tradicionalmente con la sentencia **INSERT INTO ... VALUES de SQL**. 
+La sentencia **insert()** se ha comparado tradicionalmente con la sentencia **INSERT de SQL**. 
 
 
 ![](T8_insert.png)
@@ -33,79 +33,31 @@ MongoDB proporciona los siguientes métodos para insertar documentos en una cole
 
 **insertMany([])**: Inserta varios documentos simultáneamente en una colección. Los documentos deben indicarse dentro de un array de objetos []. Es más eficiente cuando se necesita insertar múltiples registros.​
 
-Esta sentencia utiliza un único parámetro:
+Ambos métodos utilizan un único parámetro:
 
-1) DOCUMENTO o ARRAY DE DOCUMENTOS (obligatorio): En el parámetro ponemos el documento directamente, o a través de una variable que contenga el documento.**Si la colección no existía, la creará y después añadirá el documento.**
+1) DOCUMENTO o ARRAY DE DOCUMENTOS (obligatorio): En este parámetro se indica el documento que se desea insertar o un array de documentos. El documento puede escribirse directamente en la sentencia o almacenarse previamente en una **variable**. Si la colección no existía previamente, MongoDB la creará automáticamente y, a continuación, insertará el documento o los documentos indicados.
+
+Veamos a continuación varios ejemplos de inserción de documentos en una colección utilizando el método insertOne().
 
         > db.ejemplo.insertOne({ msg : "Hola, ¿qué tal?"})  
       
-Acabamos de insertar un nuevo documento, y así nos lo avisa ( **{ "nInserted" : 1
-}** , se ha insertado un documento). Automáticamente habrá creado un elemento **_id**
-de tipo **ObjectId** , ya que le hace falta para identificar el documento entre
-todos los demás de la colección.
+Acabamos de insertar un nuevo documento en la colección ejemplo. El resultado de la ejecución nos indica que la operación se ha realizado correctamente, mostrando que se ha insertado un documento. ( **{ "nInserted" : 1 }**  
 
-Insertamos otro documento:
+A continuación, insertamos un segundo documento en la misma colección:
 
         > db.ejemplo.insertOne({ msg2 : "¿Cómo va la cosa?"})  
 
-Y en este ejemplo nos guardamos el documento en la **variable doc**, y después
-lo insertamos
+Por último, insertamos un tercer documento, pero esta vez guardamos previamente el contenido en una **variable** llamada _**doc**_ y después lo insertamos utilizando insertOne():
 
         > doc = { msg3 : "Por aquí no podemos quejarnos..."}  
 
         > db.ejemplo.insertOne(**doc**)  
     
+En este caso, también nos indica que ha insertado un documento. 
 
-También nos indica que ha insertado un documento. Y habrá creado también la clave
-**_id** como veremos en el siguiente punto.
+Sin embargo, cuando los documentos que queremos insertar son sencillos, podemos insertar varios a la vez utilizando el método **insertMany()**, pasando como argumento un array ([]) que contenga todos los documentos.
 
-**Inserción especificando el id**{.azul}
-
-En el documento que hemos insertado hasta el momento, no hemos especificado la clave
-**_id** , y Mongo lo ha generado automáticamente de tipo **ObjectId**.
-
-Pero nosotros podremos poner esta clave **_id** con el valor que queramos. Esto
-sí, deberemos estar seguros de que este valor no lo coge ningún otro documento de la
-colección, o nos va a dar un error.
-
-Así por ejemplo vamos a insertar la información de unos alumnos. Los pondremos en
-una colección nueva llamada **alumnos** , y les intentaremos poner un **_id**
-personal. Por ejemplo pondremos los números 51, 52, 53, ...
-
-        > db.alumnos.insertOne ({_id: 51 , nombre: "Rebeca" , apellidos: "Martí Peral"})  
-    
-Ha ido bien, y si miramos los documentos que tenemos en la colección, comprobaremos
-que nos ha respetado el **_id** :
-
-        > db.alumnos.find()  
-         { "_id" : 51, "nombre" : "Rebeca", "apellidos" : "Martí Peral" }  
-    
-
-Pero si intentamos insertar otro documento con el mismo **_id** (51), nos
-dará error:
-
-            > db.alumnos.insertOne ({_id: 51 , nombre: "Raquel" , apellidos: "Gomis Arnau"})  
-           
-            WriteResult({  
-            "nInserted" : 0,  
-            "writeError" : {  
-                "code" : 11000,  
-                "errmsg" : "E11000 duplicate key error collection: test.alumnos index: _id_
-                dup key: { : 51.0 }"  
-              }  
-            })  
-       
-
-Nos avisa que estamos duplicando la _clave_ _principal_ , es decir
-el identificador.
-
-**Inserción múltiple**{.azul}
-
-Cuando los documentos que queremos insertar son sencillos, podemos insertar más de uno en la
-vez, poniendo dentro del **insertMany()** un **array []** con todos los documentos. 
-
-En el siguiente ejemplo creamos varios números primos en la colección del mismo
-nombre:
+En el siguiente ejemplo insertamos varios números primos en la colección del mismo nombre:
 
     > db.numerosprimos.insertMany( [ {_id:2} , {_id:3} , {_id:5} , {_id:7} , {_id:11}
     > , {_id:13} , {_id:17} , {_id:19} ] )  
@@ -133,6 +85,41 @@ Nos avisa que ha realizado 8 inserciones, y aquí los tenemos:
     { "_id" : 17 }  
     { "_id" : 19 }  
     >
+
+**Clave _id automática**{.azul}
+
+Durante el proceso de inserción de documentos, MongoDB crea automáticamente el campo **_id** para cada documento insertado cuando no se especifica explícitamente.
+Este campo toma un valor de tipo **_ObjectId_** y actúa como identificador único, lo que permite distinguir cada documento del resto dentro de la colección.
+Este comportamiento es automático y obligatorio, ya que MongoDB necesita siempre un identificador para gestionar los documentos.
+
+**Clave _id manual**{.azul}
+
+En los documentos que hemos ido insertando hasta ahora no hemos especificado la clave **_id**, por lo que MongoDB la ha generado automáticamente con un valor de tipo ObjectId. No obstante, también podemos **definir manualmente la clave _id y asignarle el valor que queramos**. Eso sí, debemos asegurarnos de que dicho valor no esté repetido en ningún otro documento de la colección, ya que en caso contrario MongoDB devolverá un error.
+
+Veamos un ejemplo. Vamos a insertar información de varios alumnos en una nueva colección llamada alumnos, asignando manualmente un _id personalizado (por ejemplo, valores numéricos: 51, 52, 53, …):
+
+        > db.alumnos.insertOne ({_id: 51 , nombre: "Rebeca" , apellidos: "Martí Peral"})  
+    
+La inserción se realiza correctamente. Si consultamos ahora los documentos de la colección, comprobaremos que MongoDB ha respetado el valor del campo _id indicado:
+
+        > db.alumnos.find()  
+         { "_id" : 51, "nombre" : "Rebeca", "apellidos" : "Martí Peral" }  
+    
+Sin embargo, si intentamos insertar otro documento utilizando el mismo _id (51), MongoDB devolverá un error:
+
+            > db.alumnos.insertOne ({_id: 51 , nombre: "Raquel" , apellidos: "Gomis Arnau"})  
+           
+            WriteResult({  
+            "nInserted" : 0,  
+            "writeError" : {  
+                "code" : 11000,  
+                "errmsg" : "E11000 duplicate key error collection: test.alumnos index: _id_
+                dup key: { : 51.0 }"  
+              }  
+            })  
+       
+
+MongoDB nos indica que se ha producido un error por **clave duplicada**, ya que estamos intentando repetir la clave principal, es decir, el identificador único del documento.
 
 ### Lectura: find
 
