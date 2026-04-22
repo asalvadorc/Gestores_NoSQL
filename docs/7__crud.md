@@ -140,9 +140,7 @@ Esta sería la sintaxis:
 
         db.coleccion.find(FILTRO,PROYECCIÓN)
   
-**- FILTRO:**
-  
-  El primero indica un **filtro**, y devolverá aquellos documentos de la colección que **cumplan con los criterios de búsqueda indicado**. Viene a ser la parte del WHERE dentro de un SELECT. El filtro también se utiliza en las sentencias **update() y delete()**.
+1) FILTRO: El primero indica un **filtro**, y devolverá aquellos documentos de la colección que **cumplan con los criterios de búsqueda indicado**. Viene a ser la parte del WHERE dentro de un SELECT. El filtro también se utiliza en las sentencias **update() y delete()**.
   
 En este ejemplo, devolverá todos los documentos de la colección alumnos que tengan la clave nombre y que en él tengan el valor Rebeca. 
 
@@ -160,9 +158,7 @@ En este ejemplo, devolverán todos los documentos de la colección ejemplo.
     { "_id" : ObjectId("56ce3237c61e04ba81def50d"), "msg3" : "Por aquí no podemos quejarnos ..." }  
     >
 
-**- PROYECCIÓN:**
-  
-  El segundo parámetro, nos servirá para **delimitar las claves de los documentos que se devolverán**. Los valores que pondremos a las distintos claves será, según si queremos que aparezcan será **1** o un **0** para que no aparezca.
+2) PROYECCIÓN: El segundo parámetro, nos servirá para **delimitar las claves de los documentos que se devolverán**. Los valores que pondremos a las distintos claves será, según si queremos que aparezcan será **1** o un **0** para que no aparezca.
 Viene a ser la parte de la cláusula SELECT, donde indicamos qué columnas queremos visualizar en la consulta SELECT.
   
 Si ponemos alguna clave a que sí que aparezca (es decir, con el valor 1), los únicos que aparecerán serán éstos, además del **_id** que por defecto siempre aparece.
@@ -233,6 +229,7 @@ La sentencia **update** servirá para actualizar sobre una colección ya creada.
 Tendrá dos parámetros:
 
 1) FILTRO: El primer parámetro será el criterio de búsqueda para encontrar el documento a actualizar. Ya visto en sentencias find() y delete().
+
 2) MODIFICADOR: Define los cambios que se aplicarán a los documentos seleccionados.​ Se utiliza operadores de actualización o modificadores como: $set, $inc, $unset​ que veremos más adelante. 
 
 MongoDB ofrece los siguientes métodos para actualizar los documentos de una colección:
