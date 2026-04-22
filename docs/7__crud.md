@@ -381,8 +381,8 @@ Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **p
   
 ***
 
-**### Filtros avanzados
-**
+### Filtros avanzados
+
 Hasta ahora, en las sentencias find(), update() y delete() hemos utilizado filtros basados principalmente en comparaciones de igualdad, es decir, hemos comprobado si el valor de un campo coincide con un valor concreto.
 
 Sin embargo, en muchos casos es necesario definir criterios de búsqueda más complejos, como comparar valores mayores o menores, trabajar con rangos o combinar varias condiciones en una misma consulta.
