@@ -306,6 +306,8 @@ contenido del documento podríamos ahorrarnos el primer paso.
     }  
     >
 
+***
+
 ### 📚 **Ejercicio 1**
 
 Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **pelicula**).
@@ -377,7 +379,52 @@ Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **p
   - 9- Eliminar la película **"Pee Wee Herman's Big Adventure"**.  
   - 10- Eliminar la película **"Avatar"**.  
   
+***
 
+### Filtros avanzados
 
-  
-  
+En MongoDB, los filtros permiten especificar condiciones para seleccionar únicamente los documentos que cumplen determinados criterios. Estos filtros se utilizan principalmente en el método **find()**, aunque también aparecen en operaciones como **update() y delete()**.
+
+Los filtros se expresan mediante documentos JSON, y pueden incluir los llamados _**query operators**_, que permiten realizar _comparaciones, combinaciones lógicas y búsquedas más avanzadas._
+
+---
+
+#### Operadores de comparación
+
+Los operadores de comparación permiten comparar el valor de un campo con un valor concreto.
+
+* **$eq**: Los valores son iguales
+* **$ne**: Los valores no son iguales
+* **$gt**: El valor es mayor que otro valor
+* **$gte**: El valor es mayor o igual que otro valor
+* **$lt**: El valor es menor que otro valor
+* **$lte**: El valor es menor o igual que otro valor
+
+---
+
+Lógicos:
+
+* **$and**: Devuelve los documentos donde ambas consultas coinciden
+* **$or**: Devuelve los documentos donde alguna de las consultas coincide
+* **$nor**: Devuelve los documentos donde ninguna de las consultas coincide
+* **$not**: Devuelve los documentos donde la consulta no coincide
+
+---
+
+#### Operadores de campo
+
+Los operadores de campo se utilizan para **validar la estructura de los documentos** o el **tipo de datos** de un campo. Los operadores disponibles son:
+
+- **`$exists`**: comprueba si un campo existe o no.
+- **`$type`**: comprueba el tipo de dato de un campo.
+
+---
+
+### `$exists`{.azul}
+
+El operador **`$exists`** permite saber qué documentos **contienen o no un campo determinado**, independientemente de su valor.
+
+#### Sintaxis
+
+```js
+clave: { $exists: boolean }
