@@ -12,16 +12,16 @@ Hay dos formas de crear una colección:
 
 -2) Con el comando insert, creará la colección **ejemplo** si todavía no existe:
 
-        db.ejemplo.insertOne(object)
+        > db.ejemplo.insertOne(object)
 
 
 ### Creación: insert()
 
 MongoDB proporciona los siguientes métodos para insertar documentos en una colección:
   
-  **- db.nomcolecc.insertOne({documento})**, para insetar un solo documento.
+        db.coleccion.insertOne({documento})
 
-  **- db.nomcolecc.insertMany([{documento1},{documento2},...])​**, para insertar un conjunto de documentos.
+        db.coleccion.insertMany([{documento1},{documento2},...])​
 
 ![](T8_insert.png)
 
@@ -29,7 +29,7 @@ La función **insert** añadirá documentos a una colección. En el parámetro p
 el documento directamente, o una variable que contenga el documento. Si la
 colección no existía, la creará y después añadirá el documento.
 
-    > db.ejemplo.insertOne({ msg : "Hola, ¿qué tal?"})  
+        > db.ejemplo.insertOne({ msg : "Hola, ¿qué tal?"})  
       
 
 Acabamos de insertar un nuevo documento, y así nos lo avisa ( **{ "nInserted" : 1
@@ -44,9 +44,9 @@ Insertamos otro documento:
 Y en este ejemplo nos guardamos el documento en la **variable doc**, y después
 lo insertamos
 
-    > **doc =** { msg3 : "Por aquí no podemos quejarnos..."}  
+        > doc = { msg3 : "Por aquí no podemos quejarnos..."}  
 
-    > db.ejemplo.insertOne(**doc**)  
+        > db.ejemplo.insertOne(**doc**)  
     
 
 También nos indica que ha insertado un documento. Y habrá creado también el campo
@@ -65,31 +65,29 @@ Así por ejemplo vamos a insertar la información de unos alumnos. Los pondremos
 una colección nueva llamada **alumnos** , y les intentaremos poner un **_id**
 personal. Por ejemplo pondremos los números 51, 52, 53, ...
 
-    > db.alumnos.insertOne ({_id: 51 , nombre: "Rebeca" , apellidos: "Martí Peral"})  
+        > db.alumnos.insertOne ({_id: 51 , nombre: "Rebeca" , apellidos: "Martí Peral"})  
     
-
 Ha ido bien, y si miramos los documentos que tenemos en la colección, comprobaremos
 que nos ha respetado el **_id** :
 
-    > db.alumnos.find()  
-
-    { "_id" : 51, "nombre" : "Rebeca", "apellidos" : "Martí Peral" }  
+        > db.alumnos.find()  
+         { "_id" : 51, "nombre" : "Rebeca", "apellidos" : "Martí Peral" }  
     
 
 Pero si intentamos insertar otro documento con el mismo **_id** (51), nos
 dará error:
 
-    > db.alumnos.insertOne ({_id: 51 , nombre: "Raquel" , apellidos: "Gomis Arnau"})  
-   
-    WriteResult({  
-    "nInserted" : 0,  
-    "writeError" : {  
-        "code" : 11000,  
-        "errmsg" : "E11000 duplicate key error collection: test.alumnos index: _id_
-        dup key: { : 51.0 }"  
-      }  
-    })  
-    >
+            > db.alumnos.insertOne ({_id: 51 , nombre: "Raquel" , apellidos: "Gomis Arnau"})  
+           
+            WriteResult({  
+            "nInserted" : 0,  
+            "writeError" : {  
+                "code" : 11000,  
+                "errmsg" : "E11000 duplicate key error collection: test.alumnos index: _id_
+                dup key: { : 51.0 }"  
+              }  
+            })  
+       
 
 Nos avisa que estamos duplicando la _clave_ _principal_ , es decir
 el identificador.
@@ -115,8 +113,7 @@ nombre:
         "nRemoved" : 0,  
         "upserted" : [ ]  
     })  
-    >
-
+ 
 Nos avisa que ha realizado 8 inserciones, y aquí los tenemos:
 
     > db.numerosprimos.find()  
@@ -138,10 +135,9 @@ La función **find()** se ha comparado tradicionalmente con la sentencia SELECT 
 
 La función **find()** puede tener dos parámetros: el filtro y la proyección. Cada uno de estos paŕametros viene dada en forma de documento (u objeto) JSON. Esta sería la sintaxis:
 
-**    db.coleccion.find(FILTRO,PROYECCIÓN)​
-**
+        db.coleccion.find(FILTRO,PROYECCIÓN)
   
-  *1)  FILTRO:
+#### FILTRO:
   
   El primero indica un **filtro o criterio de búsqueda**, y devolverá aquellos documentos de la colección que cumplan el filtro o criterio indicado. Este filtro viene dada en forma de documento (u objeto) JSON, y también se utilizará en las sentencias **update() y delete()**.
   
@@ -161,7 +157,7 @@ En este ejemplo, devolverán todos los documentos de la colección ejemplo.
     { "_id" : ObjectId("56ce3237c61e04ba81def50d"), "msg3" : "Por aquí no podemos quejarnos ..." }  
     >
 
-  *2) PROYECCIÓN:
+#### PROYECCIÓN:
   
   El segundo parámetro, nos servirá para **delimitar los campos de los documentos que se devolverán**. También tendrá el formato JSON de un objeto al que le pondremos como claves los distintos campos que queremos que aparezcan o no, y como **valor 1 **para que sí aparezcan y **valor 0** para que no aparezcan.
 
