@@ -420,7 +420,7 @@ Los operadores de campo se utilizan para **validar la estructura de los document
 
 ---
 
-### `$exists`{.azul}
+##### `$exists`{.azul}
 
 El operador **`$exists`** permite saber qué documentos **contienen o no un campo determinado**, independientemente de su valor.
 
