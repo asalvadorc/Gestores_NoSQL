@@ -467,17 +467,44 @@ Estos operadores se utilizan dentro de los filtros de las sentencias find(), upd
 
 Operadores: 
 
+* **`$not`** → devuelve los documentos que **no cumplen la condición** concreta
 * **`$or`** → devuelve los documentos que cumplen **alguna** de las condiciones
 * **`$nor`** → devuelve los documentos que no cumplen **ninguna** de las condiciones
-* **`$not`** → devuelve los documentos que **no cumplen la condición** concreta
 * **`$and`** → devuelve los documentos que **cumplen todas** las condiciones
+
+Hay que tener en cuenta:
+- El operador $not se aplica a un **campo** concreto y siempre envuelve a otro operador.
+- Los operadores $or, $nor y $and trabajan con **arrays de condiciones**, no se asocian a un campo, sino que combinan condiciones completas.
+
+
+**`$not`**{.azul}
+
+El operador $not se utiliza para negar una condición. Devuelve los documentos que no cumplen la condición indicada.
 
 Sintaxis:
 
-        clave: { $operador: valor }
+        clave : { $not: { operador: valor } }
+        
+Veamos el ejemplo de la consulta que muestra los libros que no pertenecen a la editorial “Planeta”:
+           
+       >  db.libro.find(
+          { editorial: { $not: { $eq: "Planeta" } } },
+          { titulo: 1, editorial: 1 }
+        )
+ 
 
-- La sintaxis sigue siempre la estructura de los documentos JSON. 
-- En el caso de operadores que combinan varias condiciones (como $or), se utiliza un array de condiciones.
+    { "_id" : "9788401342158", "titulo" : "El juego de Ripper", "editorial" : "Plaza & Janes" }  
+    { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "editorial" : "Gigamesh" }  
+    { "_id" : "9788499088075", "titulo" : "El ladrón de libros", "editorial" : "Debolsillo" }  
+    { "_id" : "9788415140054", "titulo" : "La princesa de hielo", "editorial" : "Embolsillo" }  
+    { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }  
+
+Nota: En este caso sería más sencillo utilizar el operador $ne (distinto), pero el ejemplo sirve para comprender el funcionamiento del operador $not. Esta sentencia sería equivalente.
+
+        db.libro.find(
+          { editorial: { $ne: "Planeta" } },
+          { titulo: 1, editorial: 1 }
+        )
 
 **`$or`**{.azul}
 
@@ -485,10 +512,15 @@ El operador **`$or`** permite que la consulta sea válida si se cumple al menos 
 
 Sintaxis:
 
-        $or: [
-            { clave1: valor1 },
-            { clave2: valor2 },  ...
-        ]
+El operador $or trabaja siempre con un **array de condiciones**, donde cada elemento es un filtro independiente:
+
+        {
+          $or: [
+            { campo1: valor1 },
+            { campo2: valor2 }
+          ]
+        }
+
 
 Por ejemplo, la siguiente consulta muestra los libros que no están en stock o que no tienen editorial:
 
@@ -511,8 +543,8 @@ El operador $not se utiliza para negar una condición. Devuelve los documentos q
 
 Sintaxis:
 
-        $not : { condición }
-
+        clave : { $not: { operador: valor } }
+        
 Veamos el ejemplo de la consulta que muestra los libros que no pertenecen a la editorial “Planeta”:
            
        >  db.libro.find(
@@ -534,8 +566,53 @@ Nota: En este caso sería más sencillo utilizar el operador $ne (distinto), per
           { titulo: 1, editorial: 1 }
         )
 
-**`$not`**{.azul}
+**`$and`**{.azul}
 
+El operador $and se utiliza para combinar varias condiciones dentro de un mismo filtro. MongoDB solo devolverá los documentos que cumplan todas las condiciones indicadas. 
+
+Sintaxis:
+
+El operador $and trabaja siempre con un **array de condiciones**, donde cada elemento es un filtro independiente:
+
+
+        {
+          $and: [
+            { campo1: valor1 },
+            { campo2: valor2 },
+            ...
+          ]
+        }
+
+Un documento será devuelto solo si se cumplen todas las condiciones del array.
+
+En este ejemplo, la consulta muestra los libros que tienen un precio superior a 10 € y están en stock:
+
+        db.libro.find(
+          {
+            $and: [
+              { precio: { $gt: 10 } },
+              { enstock: true }
+            ]
+          },
+          { titulo: 1, precio: 1, enstock: 1 }
+        )
+
+**Uso implícito de $and utilizando la coma**
+
+MongoDB permite omitir el operador $and cuando las condiciones afectan a campos distintos, ya que lo aplica de forma implícita.
+Por ejemplo, la consulta anterior se puede escribir también así:
+
+        db.libro.find(
+          { precio: { $gt: 10 }, enstock: true },
+          { titulo: 1, precio: 1, enstock: 1 }
+        )
+
+Ambas consultas son equivalentes desde el punto de vista del resultado. No obstante, la forma implícita (separando las condiciones mediante comas) suele resultar más legible en consultas sencillas.
+
+Como recomendación general, es aconsejable utilizar el operador $and de forma explícita cuando:
+- se desea mejorar la claridad de la consulta,
+- se combinan operadores lógicos como $or, $not o $nor,
+- o se trabajan condiciones más complejas que pueden dificultar la lectura si se escriben de forma implícita.
 
 ---
 
