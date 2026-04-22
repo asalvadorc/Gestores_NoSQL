@@ -534,6 +534,8 @@ Nota: En este caso sería más sencillo utilizar el operador $ne (distinto), per
           { titulo: 1, editorial: 1 }
         )
 
+**`$not`**{.azul}
+
 
 ---
 
@@ -612,3 +614,40 @@ Veamos el ejemplo que selecciona los documentos donde el campo paginas es de tip
                 { paginas: { $type: "int" } },
                 { titulo: 1, paginas: 1 }
                 )
+
+#### Expresiones regulares
+
+Mongo acepta las expresiones regulares de forma nativa, lo que da mucha
+potencia para poder buscar información diversa.
+
+Las expresiones regulares en Mongo tienen la misma sintaxis que en Perl, y que
+es muy parecida a la mayor parte de lenguajes de programación.
+
+Veamos algunos ejemplos. Los libros dentro de los cuales está la palabra **juego** :
+
+    > db.libro.find( { titulo: /juego/ } , {titulo:1} )  
+
+    { "_id" : "9788401342158", "titulo" : "El juego de Ripper" }  
+    { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }
+
+Ahora que tienen la palabra **juego** sin importar mayúsculas o minúsculas:
+
+    > db.libro.find( { titulo: /juego/i } , {titulo:1} )  
+
+    { "_id" : "9788401342158", "titulo" : "El juego de Ripper" }  
+    { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1" }  
+    { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }
+
+Y ahora que tienen la palabra **juego** sólo al principio.
+
+    > db.libro.find( { titulo: /^juego/i } , {titulo:1} )  
+
+    { "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1" }
+
+Y ahora los libros que en el resumen (**resumen**) tienen la palabra **amiga** o
+**amigo** , es decir **amig** seguido de una **a** o una **o** :
+
+    > db.libro.find( { resumen: /amig[ao]/i } , {titulo:1} )  
+
+    { "_id" : "9788415140054", "titulo" : "La princesa de hielo" }  
+    { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }
