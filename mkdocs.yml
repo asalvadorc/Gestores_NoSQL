@@ -65,10 +65,10 @@ nav:
         - 8.1 Actualización: 8.1__operadores_actualizacion.md
         - 8.2 Consulta: 8.2__operadores_consulta.md
        #- 📚 Ejercicio 1 (parte 2): 8.3__operadores_ejercicios.md
-        - 8.4 Arrays: 8.4__Arrays.md
-    - 9 - Agregación: 9__agregacion.md
-    - 10 - Relaciones: 10__relaciones_mongo.md
-    - 11 - Resumen Comandos: 11__resumen.md
+    - 9 - Arrays: 8.4__Arrays.md
+    - 10 - Agregación: 9__agregacion.md
+    - 11 - Relaciones: 10__relaciones_mongo.md
+    - 12 - Resumen Comandos: 11__resumen.md
   - Ejercicios: exercicis_mongo.md
   - Actividad: 13__actividad_mongo.md
    
