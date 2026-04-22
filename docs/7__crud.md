@@ -139,13 +139,13 @@ La función **find()** puede tener dos parámetros: el filtro y la proyección. 
   
 #### FILTRO:
   
-  El primero indica un **filtro o criterio de búsqueda**, y devolverá aquellos documentos de la colección que cumplan el filtro o criterio indicado. Este filtro viene dada en forma de documento (u objeto) JSON, y también se utilizará en las sentencias **update() y delete()**.
+  El primero indica un **filtro**, y devolverá aquellos documentos de la colección que cumplan con los criterios de búsqueda indicado. Este filtro viene dada en forma de documento (u objeto) JSON, y también se utilizará en las sentencias **update() y delete()**.
   
 En este ejemplo, devolverá todos los documentos de la colección **alumnos** que tengan el campo **nombre** y que en él tengan el valor **Rebeca**. 
 
         > db.alumnos.find( { nombre : "Rebeca" } )
 
-En este ejemplo, el filtro está utilizando únicamente un criterio de busqueda, pero este filtro puede tener más de un criterio de búsqueda utilizando los diferentes operadores, como veremos más adelante. 
+En este ejemplo, el filtro está utilizando únicamente un criterio de busqueda, pero este filtro puede tener más de un criterio de búsqueda, para ello se utilizará los diferentes operadores, como veremos más adelante. 
 
     Si queremos que **devuelva todos los documentos**, no ponemos nada como parámetro de filtro **find()** , o aún mejor, le pasamos un documento (objeto) vacío **find({})** .
 
