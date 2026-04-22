@@ -308,7 +308,7 @@ contenido del documento podríamos ahorrarnos el primer paso.
 
 ***
 
-### 📚 **Ejercicio 1**
+### 📚 **Ejercicio 1 (parte 1)**
 
 Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **pelicula**).
 
@@ -651,3 +651,16 @@ Y ahora los libros que en el resumen (**resumen**) tienen la palabra **amiga** o
 
     { "_id" : "9788415140054", "titulo" : "La princesa de hielo" }  
     { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }
+
+
+### 📚 **Ejercicio 1 (parte 2)**
+
+Siguiendo con la base de datos cine, realiza los siguientes ejercicios:
+
+11- Encontrar las películas estrenadas entre 2000 y 2010.
+12- Encontrar las películas que en la sinopsis contengan la palabra "Bilbo".
+13- Encontrar las películas que en la sinopsis contengan la palabra "Gandalf".
+14- Encontrar las películas que en la sinopsis contengan la palabra "Bilbo" y no la palabra "Gandalf". Se aconseja utilizar el operador $and.
+15- Encontrar las películas que en la sinopsis contengan la palabra "enanos" o "hobbit".
+16- Encontrar las películas que en la sinopsis contengan las palabras "oro" y "dragón".
+
