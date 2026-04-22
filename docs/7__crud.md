@@ -456,9 +456,9 @@ Estos operadores se utilizan dentro de los filtros de las sentencias find(), upd
 
 Operadores: 
 
-* **`$not`** → devuelve los documentos que **no cumplen la condición** concreta
-* **`$or`** → devuelve los documentos que cumplen **alguna** de las condiciones
-* **`$nor`** → devuelve los documentos que no cumplen **ninguna** de las condiciones
+* **`$not`** → devuelve los documentos que **no cumplen una condición concreta**
+* **`$or`** → devuelve los documentos que **cumplen alguna** de las condiciones
+* **`$nor`** → devuelve los documentos que **no cumplen ninguna** de las condiciones
 * **`$and`** → devuelve los documentos que **cumplen todas** las condiciones
 
 Hay que tener en cuenta:
@@ -524,6 +524,43 @@ Por ejemplo, la siguiente consulta muestra los libros que no están en stock o q
     { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "enstock" : true}
 
 En este caso, el documento se devuelve si se cumple al menos una de las condiciones del operador $or.
+
+**`$nor`**{.azul}
+
+El operador $nor se utiliza para combinar varias condiciones y devolver únicamente los documentos que no cumplen ninguna de ellas. Es decir, un documento será seleccionado solo si todas las condiciones indicadas resultan falsas.
+
+El operador $nor resulta útil cuando queremos: excluir documentos que cumplan cualquiera de varias condiciones, evitar combinaciones complejas de $not y $or, expresar de forma clara que ninguna condición debe cumplirse. 
+
+Sintaxis
+
+El operador $nor trabaja siempre con un array de condiciones:
+
+        {
+          $nor: [
+            { campo1: valor1 },
+            { campo2: valor2 },
+            ...
+          ]
+        }
+
+Un documento será devuelto solo si no cumple ninguna de las condiciones del array.
+
+Ejemplo:  La siguiente consulta muestra los libros que no están en stock ni pertenecen a la editorial “Planeta”:
+
+        db.libro.find(
+          {
+            $nor: [
+              { enstock: true },
+              { editorial: "Planeta" }
+            ]
+          },
+          { titulo: 1, enstock: 1, editorial: 1 }
+        )
+
+En este caso, MongoDB devolverá únicamente los documentos que no estén en stock y tampoco tengan como editorial “Planeta”. Si un libro cumple alguna de esas condiciones, no aparecerá en el resultado.
+
+
+
 
 **`$and`**{.azul}
 
