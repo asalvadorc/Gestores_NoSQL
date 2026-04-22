@@ -2,7 +2,7 @@
 
 En este punto vamos a ver las operaciones más básicas, para la **creación, consulta, actualización y eliminación** de **documentos** de una colección. 
 
-### Crear una Colección
+### Colección
 
 Hay dos formas de crear una colección:
 
@@ -15,7 +15,7 @@ Hay dos formas de crear una colección:
         > db.ejemplo.insertOne(object)
 
 
-### Creación: insert
+### Create: insert
 
 La sentencia **insert()** se ha comparado tradicionalmente con la sentencia **INSERT de SQL**. 
 
@@ -130,7 +130,7 @@ Sin embargo, si intentamos insertar otro documento utilizando el mismo _id (51),
 
 MongoDB nos indica que se ha producido un error por **clave duplicada**, ya que estamos intentando repetir la clave principal, es decir, el identificador único del documento.
 
-### Lectura: find
+### Read: find
 
 La sentencia **find()** se ha comparado tradicionalmente con la sentencia **SELECT de SQL**. 
 
@@ -192,50 +192,7 @@ Por último, si queremos mostrar únicamente la clave nombre, sin que aparezca e
     { "nombre" : "Abel" }  
     { "nombre" : "Berta" }
 
-
-### Eliminación: delete
-
-Para borrar un documento de una colección utilizaremos la sentencia **deleteOne()** o **deleteMany()** para eliminar más de uno. 
-
-Esta sentencia, sólo admite como único parámetro el **filtro**, que hará de criterio de búsqueda para encontrar los documentos a eliminar. En el caso de que no se pase ningún filtro, se eliminarán todos los documentos de la colección.
-
-![](T8_delete.png)
-
-MongoDB ofrece los siguientes métodos para eliminar documentos de una colección:
-
-        db.coleccion.deleteOne(FILTRO)
-
-        db.coleccion.deleteMany(FILTRO)
-    
-- **deleteOne()​**: Elimina un único documento que cumpla el criterio indicado en el filtro. Si hay varios documentos que coinciden, solo se borra el primero que encuentre MongoDB.
-
-- **deleteMany()​**: Elimina todos los documentos que cumplan el criterio del filtro. Pero no elimina la colección.​
-
-**Parámetros:**
-
-Utiliza un único parámetro:
-
-1) FILTRO (opcional): Será el criterio de búsqueda para encontrar el documento a eliminar. Si no se utiliza filtro, se eliminarán todos los documentos de la colección. Ya visto en sentencias find().
-   
-Por ejemplo, si realizamos esta ejecución:
-
-    > db.numerosprimos.deleteOne( {"_id" : 19} )  
-    
-Nos avisa de que ha borrado un documento.
-
-La condición no debe ser sobre la clave **_id**. Puede ser sobre cualquiera
-clave, **y borrará todos los que coinciden**.
-
-    > db.ejemplo.deleteMany( {"msg3" : "Por aquí no podemos quejarnos ..."} )  
-    
-También tenemos la posibilidad de **borrar toda una colección, NO SOLO LOS DOCUMENTOS** con la sentencia
-**drop()**. Presta atención porque es muy sencilla de eliminar, y por tanto, potencialmente muy peligrosa.
-
-    > db.numerosprimos.drop()  
-    true  
-    >
-
-### Actualización - update
+### Update: update
 
 La sentencia **update** servirá para actualizar sobre una colección ya creada.
 
@@ -304,6 +261,48 @@ contenido del documento podríamos ahorrarnos el primer paso.
       "msg" : "Hola, ¿qué tal?",  
       "título" : "Mensaje 1"  
     }  
+    >
+
+### Delete: delete
+
+Para borrar un documento de una colección utilizaremos la sentencia **deleteOne()** o **deleteMany()** para eliminar más de uno. 
+
+Esta sentencia, sólo admite como único parámetro el **filtro**, que hará de criterio de búsqueda para encontrar los documentos a eliminar. En el caso de que no se pase ningún filtro, se eliminarán todos los documentos de la colección.
+
+![](T8_delete.png)
+
+MongoDB ofrece los siguientes métodos para eliminar documentos de una colección:
+
+        db.coleccion.deleteOne(FILTRO)
+
+        db.coleccion.deleteMany(FILTRO)
+    
+- **deleteOne()​**: Elimina un único documento que cumpla el criterio indicado en el filtro. Si hay varios documentos que coinciden, solo se borra el primero que encuentre MongoDB.
+
+- **deleteMany()​**: Elimina todos los documentos que cumplan el criterio del filtro. Pero no elimina la colección.​
+
+**Parámetros:**
+
+Utiliza un único parámetro:
+
+1) FILTRO (opcional): Será el criterio de búsqueda para encontrar el documento a eliminar. Si no se utiliza filtro, se eliminarán todos los documentos de la colección. Ya visto en sentencias find().
+   
+Por ejemplo, si realizamos esta ejecución:
+
+    > db.numerosprimos.deleteOne( {"_id" : 19} )  
+    
+Nos avisa de que ha borrado un documento.
+
+La condición no debe ser sobre la clave **_id**. Puede ser sobre cualquiera
+clave, **y borrará todos los que coinciden**.
+
+    > db.ejemplo.deleteMany( {"msg3" : "Por aquí no podemos quejarnos ..."} )  
+    
+También tenemos la posibilidad de **borrar toda una colección, NO SOLO LOS DOCUMENTOS** con la sentencia
+**drop()**. Presta atención porque es muy sencilla de eliminar, y por tanto, potencialmente muy peligrosa.
+
+    > db.numerosprimos.drop()  
+    true  
     >
 
 ***
@@ -459,7 +458,7 @@ Es importante tener en cuenta que las comparaciones deben realizarse siempre ent
 
 ---
 
-#### Operadores Lógicos:
+#### Operadores lógicos
 
 Los operadores lógicos permiten combinar varias condiciones dentro de un mismo filtro. Gracias a ellos, podemos construir consultas más complejas en las que se evalúen varias condiciones a la vez.
 
