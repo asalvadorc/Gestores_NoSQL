@@ -33,7 +33,7 @@ MongoDB proporciona los siguientes métodos para insertar documentos en una cole
 
 - **insertMany([])**: Inserta varios documentos simultáneamente en una colección. Los documentos deben indicarse dentro de un array de objetos []. Es más eficiente cuando se necesita insertar múltiples registros.​
 
-**Parámetros: **
+**Parámetros:**
 
 Ambos métodos utilizan un único parámetro:
 
@@ -146,7 +146,7 @@ La sintaxis general es la siguiente:
 
         db.coleccion.find(FILTRO,PROYECCIÓN)
 
-**Parámetros: **
+**Parámetros:**
 
 A continuación, veremos en detalle la función de cada uno de estos parámetros:
   
@@ -213,7 +213,7 @@ MongoDB ofrece los siguientes métodos para eliminar documentos de una colecció
 
 - **deleteMany()​**: Elimina todos los documentos que cumplan el criterio del filtro. Pero no elimina la colección.​
 
-**Parámetros: **
+**Parámetros:**
 
 Utiliza un único parámetro:
 
@@ -253,7 +253,7 @@ MongoDB ofrece los siguientes métodos para actualizar los documentos de una col
 
 - **updateMany()​**: Actualiza todos los documentos que cumplan el criterio del filtro. Modifica varios documentos​
 
-**Parámetros: **
+**Parámetros:**
 
 Tendrá dos parámetros:
 
