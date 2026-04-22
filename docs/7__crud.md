@@ -217,9 +217,8 @@ clave, **y borrará todos los que coinciden**.
     > db.ejemplo.deleteMany( {"msg3" : "Por aquí no podemos quejarnos ..."} )  
     
 
-También tenemos la posibilidad de borrar toda una colección con la sentencia
-**drop()**. Presta atención porque es muy sencilla de eliminar, y por tanto,
-potencialmente muy peligrosa.
+También tenemos la posibilidad de **borrar toda una colección, NO SOLO LOS DOCUMENTOS** con la sentencia
+**drop()**. Presta atención porque es muy sencilla de eliminar, y por tanto, potencialmente muy peligrosa.
 
     > db.numerosprimos.drop()  
     true  
@@ -229,23 +228,18 @@ potencialmente muy peligrosa.
 
 La sentencia **update** servirá para actualizar sobre una colección ya creada.
 
-        db.coleccion.updateOne(FILTRO,MODIFICADOR)
-
-        db.coleccion.updateMany(FILTRO,MODIFICADOR)
-
+![](T8_update.png)
 
 Tendrá dos parámetros:
 
 1) FILTRO: El primer parámetro será el criterio de búsqueda para encontrar el documento a actualizar. Ya visto en sentencias find() y delete().
 2) MODIFICADOR: Define los cambios que se aplicarán a los documentos seleccionados.​ Se utiliza operadores de actualización o modificadores como: $set, $inc, $unset​ que veremos más adelante. 
 
-![](T8_update.png)
-
 MongoDB ofrece los siguientes métodos para actualizar los documentos de una colección:
 
-  - db.collection.**updateOne()**
+        db.coleccion.updateOne(FILTRO,MODIFICADOR)
 
-  - db.collection.**updateMany()**
+        db.coleccion.updateMany(FILTRO,MODIFICADOR)
 
 **updateOne()​** : Actualiza un único documento que cumpla la condición indicada en el filtro. Si varios documentos coinciden, solo se modifica el primero que encuentra MongoDB.
 
