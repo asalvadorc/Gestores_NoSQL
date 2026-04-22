@@ -70,14 +70,12 @@ Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **p
      * "Los enanos, junto con Bilbo Baggins y Gandalf the Grey, continúan su búsqueda para recuperar a Erebor, su tierra natal, de manos de Smaug. Bilbo Baggins está en posesión de un anillo misterioso y mágico".
   9. Eliminar la película **"Pee Wee Herman's Big Adventure"**.
   10. Eliminar la película **"Avatar"**.
-  ### Operadores para filtros
   11. Encontrar las películas estrenadas entre 2000 y 2010.
   12. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"**.
   13. Encontrar las películas que en la sinopsis contengan la palabra **"Gandalf"**.
   14. Encontrar las películas que en la sinopsis contengan la palabra **"Bilbo"**. y no la palabra **"Gandalf"**. Se aconseja utilizar el operador **$and**.
   15. Encontrar las películas que en la sinopsis contengan la palabra **"enanos"** o **"hobbit"**.
   16. Encontrar las películas que en la sinopsis contengan las palabras **"oro"** y **"dragón"**.
-  ### Arrays
   17. Agregar a un actor llamado **"Samuel L. Jackson"** en la película "Pulp Fiction".
   18. Agregar los actores “Martin Freeman” y “Ian McKellen” en todas las películas del The Hobbit
   19. Mostrar las películas en las que actúe “Brad Pitt”.
