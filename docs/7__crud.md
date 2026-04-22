@@ -29,15 +29,16 @@ MongoDB proporciona los siguientes métodos para insertar documentos en una cole
 
         db.coleccion.insertMany([{documento1},{documento2},...])​
 
-​**insertOne()​**: Inserta un único documento en una colección.​ Se utiliza cuando se quiere añadir un solo registro de forma puntual.​
+​-**insertOne()​**: Inserta un único documento en una colección.​ Se utiliza cuando se quiere añadir un solo registro de forma puntual.​
 
-**insertMany([])**: Inserta varios documentos simultáneamente en una colección. Los documentos deben indicarse dentro de un array de objetos []. Es más eficiente cuando se necesita insertar múltiples registros.​
+-**insertMany([])**: Inserta varios documentos simultáneamente en una colección. Los documentos deben indicarse dentro de un array de objetos []. Es más eficiente cuando se necesita insertar múltiples registros.​
 
 Ambos métodos utilizan un único parámetro:
 
 1) DOCUMENTO o ARRAY DE DOCUMENTOS (obligatorio): En este parámetro se indica el documento que se desea insertar o un array de documentos. El documento puede escribirse directamente en la sentencia o almacenarse previamente en una **variable**. Si la colección no existía previamente, MongoDB la creará automáticamente y, a continuación, insertará el documento o los documentos indicados.
 
 Veamos a continuación varios ejemplos de inserción de documentos en una colección utilizando el método insertOne().
+
 
         > db.ejemplo.insertOne({ msg : "Hola, ¿qué tal?"})  
       
@@ -46,6 +47,8 @@ Acabamos de insertar un nuevo documento en la colección ejemplo. El resultado d
 A continuación, insertamos un segundo documento en la misma colección:
 
         > db.ejemplo.insertOne({ msg2 : "¿Cómo va la cosa?"})  
+
+En este caso, el resultado también indica que se ha insertado un documento correctamente.
 
 Por último, insertamos un tercer documento, pero esta vez guardamos previamente el contenido en una **variable** llamada _**doc**_ y después lo insertamos utilizando insertOne():
 
@@ -89,14 +92,20 @@ Nos avisa que ha realizado 8 inserciones, y aquí los tenemos:
 **Clave _id automática**{.azul}
 
 Durante el proceso de inserción de documentos, MongoDB crea automáticamente el campo **_id** para cada documento insertado cuando no se especifica explícitamente.
+
 Este campo toma un valor de tipo **_ObjectId_** y actúa como identificador único, lo que permite distinguir cada documento del resto dentro de la colección.
+
 Este comportamiento es automático y obligatorio, ya que MongoDB necesita siempre un identificador para gestionar los documentos.
 
 **Clave _id manual**{.azul}
 
-En los documentos que hemos ido insertando hasta ahora no hemos especificado la clave **_id**, por lo que MongoDB la ha generado automáticamente con un valor de tipo ObjectId. No obstante, también podemos **definir manualmente la clave _id y asignarle el valor que queramos**. Eso sí, debemos asegurarnos de que dicho valor no esté repetido en ningún otro documento de la colección, ya que en caso contrario MongoDB devolverá un error.
+En los documentos que hemos ido insertando hasta ahora no hemos especificado la clave **_id**, por lo que MongoDB la ha generado automáticamente con un valor de tipo ObjectId. 
 
-Veamos un ejemplo. Vamos a insertar información de varios alumnos en una nueva colección llamada alumnos, asignando manualmente un _id personalizado (por ejemplo, valores numéricos: 51, 52, 53, …):
+No obstante, también podemos **definir manualmente la clave _id y asignarle el valor que queramos**. Eso sí, debemos asegurarnos de que dicho valor no esté repetido en ningún otro documento de la colección, ya que en caso contrario MongoDB devolverá un error.
+
+Veamos un ejemplo: 
+
+Vamos a insertar información de varios alumnos en una nueva colección llamada alumnos, asignando manualmente un _id personalizado (por ejemplo, valores numéricos: 51, 52, 53, …):
 
         > db.alumnos.insertOne ({_id: 51 , nombre: "Rebeca" , apellidos: "Martí Peral"})  
     
@@ -124,28 +133,33 @@ MongoDB nos indica que se ha producido un error por **clave duplicada**, ya que 
 ### Lectura: find
 
 La sentencia **find()** se ha comparado tradicionalmente con la sentencia **SELECT de SQL**. 
+
 Siempre devolverá un conjunto de documentos, que pueden variar desde no devolver ningún documento, a devolver todos los de la colección.
 
 ![](T8_find.png)
 
-La sentencia **find()** puede tener dos parámetros: el **filtro** y la **proyección**, que no son obligatorios. Cada uno de estos paŕametros viene dada en forma de documento (u objeto) JSON. 
-Esta sería la sintaxis:
+Como se puede observar, la sentencia find() admite dos parámetros opcionales: el filtro (query criteria) y la proyección (projection). Ambos parámetros se especifican en forma de documentos JSON (objetos).
+
+La sintaxis general es la siguiente:
 
         db.coleccion.find(FILTRO,PROYECCIÓN)
 
-Esta sentencia utiliza dos parátros:
+A continuación, veremos en detalle la función de cada uno de estos parámetros:
   
-1) FILTRO (opcional): El primero indica un **filtro**, y devolverá aquellos documentos de la colección que **cumplan con los criterios de búsqueda indicado**. Viene a ser la parte del WHERE dentro de un SELECT. El filtro también se utiliza en las sentencias **update() y delete()**.
+1) FILTRO (opcional): Determina qué documentos de la colección se devolverán. MongoDB solo mostrará aquellos documentos que cumplan los criterios de búsqueda indicados. Este parámetro equivale a la **cláusula WHERE** de una sentencia SELECT en SQL. Además, el filtro también se utiliza en otras operaciones como **update() y delete()**.
   
-En este ejemplo, devolverá todos los documentos de la colección alumnos que tengan la clave nombre y que en él tengan el valor Rebeca. 
+Por ejemplo, la siguiente consulta devuelve todos los documentos de la colección alumnos cuyo campo nombre tenga el valor "Rebeca":
 
         > db.alumnos.find( { nombre : "Rebeca" } )
 
-En este ejemplo, el filtro está utilizando únicamente un criterio de busqueda, pero el parámtro filtro puede tener más de un criterio de búsqueda, para ello se utilizará los diferentes **operadores**, como veremos más adelante. 
+En este caso, el filtro contiene un único criterio de búsqueda. Sin embargo, el parámetro filtro puede incluir varios criterios, utilizando los distintos operadores de comparación y lógicos, que veremos más adelante.
 
-Si queremos que **devuelva todos los documentos**, no ponemos nada como parámetro de filtro **find()** , o aún mejor, le pasamos un documento (objeto) vacío **find({})** .
+Si queremos que la consulta **devuelva todos los documentos de la colección**, podemos:  
 
-En este ejemplo, devolverán todos los documentos de la colección ejemplo.
+- No indicar ningún filtro **find()**, o
+- Pasar un documento vacío como filtro: **find({})**
+
+Ambas opciones producen el mismo resultado. Por ejemplo:
 
     > db.ejemplo.find()  
     { "_id" : ObjectId("56ce310bc61e04ba81def50b"), "msg" : "Hola, ¿qué tal?" }  
@@ -153,24 +167,23 @@ En este ejemplo, devolverán todos los documentos de la colección ejemplo.
     { "_id" : ObjectId("56ce3237c61e04ba81def50d"), "msg3" : "Por aquí no podemos quejarnos ..." }  
     >
 
-2) PROYECCIÓN (opcional): El segundo parámetro, nos servirá para **delimitar las claves de los documentos que se devolverán**. Los valores que pondremos a las distintos claves será, según si queremos que aparezcan será **1** o un **0** para que no aparezca.
-Viene a ser la parte de la cláusula SELECT, donde indicamos qué columnas queremos visualizar en la consulta SELECT.
+2) PROYECCIÓN (opcional): Se utiliza para indicar qué campos de los documentos se mostrarán en el resultado. Para cada campo se indica **1** si el campo se muestra, o un **0** si el campo no se muestra. Hay que tener en cuenta que el campo **_id** aparece siempre por defecto, por lo que si no queremos que se muestre, debemos indicarlo explícitamente con **{_id: 0}**. Este parámetro equivale a la cláusula **SELECT** de una sentencia SELECT en SQL, donde indicamos qué columnas queremos visualizar.
   
-Si ponemos alguna clave a que sí que aparezca (es decir, con el valor 1), los únicos que aparecerán serán éstos, además del **_id** que por defecto siempre aparece.
+Por ejemplo, la siguiente consulta devuelve únicamente el campo nombre de los documentos de la colección alumnos:
 
     > db.alumnos.find({},{nombre:1})  
   
     { "_id" : ObjectId("56debe3017bf4ed437dc77c8"), "nombre" : "Abel" }  
     { "_id" : ObjectId("56dfdbd136d8b095cb6bd57a"), "nombre" : "Berta" }
 
-Por tanto si no queremos que aparezca **_id** pondremos **_id:0**:
+Como se observa, el campo _id aparece siempre por defecto, por tanto si no queremos que aparezca **_id** pondremos **_id:0**:
 
     > db.alumnos.find({},{_id:0})  
    
     { "nombre" : "Abel", "apellidos" : "Bernat Cantera", "edad" : 22, "dirección" : {"calle" : "Mayor", "numero" : 7, "cp" : "12502" }, "nota" : [ 9.5, 9 ] }  
     { "nombre" : "Berta", "apellidos" : "Bernat Cantero" }
 
-Por ejemplo, si queremos mostrar únicamente el nombre:
+Por último, si queremos mostrar únicamente el campo nombre, sin que aparezca el _id, podemos combinar ambas opciones:
 
     > db.alumnos.find({},{nombre:1,_id:0})  
   
