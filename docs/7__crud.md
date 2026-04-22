@@ -424,9 +424,9 @@ Los operadores de campo se utilizan para **validar la estructura de los document
 
 El operador **`$exists`** permite saber qué documentos **contienen o no un campo determinado**, independientemente de su valor.
 
-#### Sintaxis
+Sintaxis:
 
-```js
+```
 clave: { $exists: boolean }
 
 Dependiendo del valor _boolean_ , el funcionamiento será:
