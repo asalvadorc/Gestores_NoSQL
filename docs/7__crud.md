@@ -17,7 +17,13 @@ Hay dos formas de crear una colección:
 
 ### Creación: insert
 
-La sentencia **insert()** se ha comparado tradicionalmente con la sentencia **INSERT INTO ... VALUES de SQL**. MongoDB proporciona los siguientes métodos para insertar documentos en una colección:
+La sentencia **insert()** se ha comparado tradicionalmente con la sentencia **INSERT INTO ... VALUES de SQL**. 
+
+
+![](T8_insert.png)
+
+
+MongoDB proporciona los siguientes métodos para insertar documentos en una colección:
   
         db.coleccion.insertOne({documento})  
 
@@ -27,9 +33,9 @@ La sentencia **insert()** se ha comparado tradicionalmente con la sentencia **IN
 
 **insertMany([])**: Inserta varios documentos simultáneamente en una colección. Los documentos deben indicarse dentro de un array de objetos []. Es más eficiente cuando se necesita insertar múltiples registros.​
 
-![](T8_insert.png)
+Esta sentencia utiliza un único parámetro:
 
-La sentencia **insert** añadirá documentos a una colección. En el parámetro ponemos el documento directamente, o una variable que contenga el documento. Si la colección no existía, la creará y después añadirá el documento.
+1) DOCUMENTO o ARRAY DE DOCUMENTOS (obligatorio): En el parámetro ponemos el documento directamente, o a través de una variable que contenga el documento.**Si la colección no existía, la creará y después añadirá el documento.**
 
         > db.ejemplo.insertOne({ msg : "Hola, ¿qué tal?"})  
       
@@ -96,7 +102,7 @@ el identificador.
 **Inserción múltiple**{.azul}
 
 Cuando los documentos que queremos insertar son sencillos, podemos insertar más de uno en la
-vez, poniendo dentro del **insertMany()** un **array []** con todos los elementos. 
+vez, poniendo dentro del **insertMany()** un **array []** con todos los documentos. 
 
 En el siguiente ejemplo creamos varios números primos en la colección del mismo
 nombre:
