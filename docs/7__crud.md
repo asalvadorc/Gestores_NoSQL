@@ -1,5 +1,3 @@
-**** 7. Operaciones CRUD
-
 En este punto vamos a ver las operaciones más básicas, para la **creación, consulta, actualización y eliminación** de **documentos** de una colección. 
 
 ### Colección
@@ -22,8 +20,9 @@ La sentencia **insert()** se ha comparado tradicionalmente con la sentencia **IN
 
 ![](T8_insert.png)
 
+MongoDB proporciona los siguientes métodos para insertar documentos en una colección.
 
-MongoDB proporciona los siguientes métodos para insertar documentos en una colección:
+Sintaxis:
   
         db.coleccion.insertOne({documento})  
 
@@ -32,8 +31,6 @@ MongoDB proporciona los siguientes métodos para insertar documentos en una cole
 - **insertOne()​**: Inserta un único documento en una colección.​ Se utiliza cuando se quiere añadir un solo registro de forma puntual.​
 
 - **insertMany([])**: Inserta varios documentos simultáneamente en una colección. Los documentos deben indicarse dentro de un array de objetos []. Es más eficiente cuando se necesita insertar múltiples registros.​
-
-**Parámetros:**
 
 Ambos métodos utilizan un único parámetro:
 
@@ -144,8 +141,6 @@ La sintaxis general es la siguiente:
 
         db.coleccion.find(FILTRO,PROYECCIÓN)
 
-**Parámetros:**
-
 A continuación, veremos en detalle la función de cada uno de estos parámetros:
   
 1) FILTRO (opcional): Determina qué documentos de la colección se devolverán. MongoDB solo mostrará aquellos documentos que cumplan los criterios de búsqueda indicados. Este parámetro equivale a la **cláusula WHERE** de una sentencia SELECT en SQL. Además, el filtro también se utiliza en otras operaciones como **update() y delete()**.
@@ -198,7 +193,9 @@ La sentencia **update** servirá para actualizar sobre una colección ya creada.
 
 ![](T8_update.png)
 
-MongoDB ofrece los siguientes métodos para actualizar los documentos de una colección:
+MongoDB ofrece los siguientes métodos para actualizar los documentos de una colección.
+
+Sintaxis:
 
         db.coleccion.updateOne(FILTRO,MODIFICADOR)
 
@@ -207,8 +204,6 @@ MongoDB ofrece los siguientes métodos para actualizar los documentos de una col
 - **updateOne()​** : Actualiza un único documento que cumpla la condición indicada en el filtro. Si varios documentos coinciden, solo se modifica el primero que encuentra MongoDB.
 
 - **updateMany()​**: Actualiza todos los documentos que cumplan el criterio del filtro. Modifica varios documentos​
-
-**Parámetros:**
 
 Tendrá dos parámetros:
 
@@ -227,7 +222,6 @@ modificarlo: en el primer parámetro ponemos condición de búsqueda (sólo habr
 uno) y en el segundo ponemos el nuevo documento que sustituirá al anterior con el parámetro **$set**.
 
     > db.ejemplo.updateOne( {msg2:"¿Cómo va la cosa?"} , {$set: {msg2:"¿Qué? ¿Cómo va la cosa?"}}) 
-
 
 Observe que la contestación del **update****()** es que ha hecho **match** (
 ha habido coincidencia) con un documento, y que ha modificado uno. Si no encuentra
@@ -271,7 +265,9 @@ Esta sentencia, sólo admite como único parámetro el **filtro**, que hará de 
 
 ![](T8_delete.png)
 
-MongoDB ofrece los siguientes métodos para eliminar documentos de una colección:
+MongoDB ofrece los siguientes métodos para eliminar documentos de una colección.
+
+Sintaxis:
 
         db.coleccion.deleteOne(FILTRO)
 
@@ -280,8 +276,6 @@ MongoDB ofrece los siguientes métodos para eliminar documentos de una colecció
 - **deleteOne()​**: Elimina un único documento que cumpla el criterio indicado en el filtro. Si hay varios documentos que coinciden, solo se borra el primero que encuentre MongoDB.
 
 - **deleteMany()​**: Elimina todos los documentos que cumplan el criterio del filtro. Pero no elimina la colección.​
-
-**Parámetros:**
 
 Utiliza un único parámetro:
 
@@ -359,8 +353,7 @@ Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **p
         franquicia : The Hobbit
         synopsis : Bilbo y compañía se vende obligados a participar en una guerra contra una serie de combatientes y evitar que la Lonely Mountain caiga en manos de una oscuridad creciente.
         
-        
-        
+                
         title : Pee Wee Herman's Big Adventure
         
         
@@ -388,7 +381,6 @@ Sin embargo, en muchos casos es necesario definir criterios de búsqueda más co
 
 Para ello, MongoDB proporciona los **operadores de consulta (query operators)**, que se utilizan dentro de los filtros y permiten realizar _comparaciones, combinaciones lógicas y búsquedas más avanzadas_, ampliando así las posibilidades de consulta sobre las colecciones.
 
----
 
 #### Operadores de comparación
 
@@ -455,8 +447,6 @@ Es importante tener en cuenta que las comparaciones deben realizarse siempre ent
     { "_id" : "9788401342158", "hecha" : ISODate("2014-03-01T00:00:00Z") }  
     { "_id" : "9788408113331", "hecha" : ISODate("2013-06-04T00:00:00Z") }  
     { "_id" : "9788468738895", "hecha" : ISODate("2014-02-06T00:00:00Z") }
-
----
 
 #### Operadores lógicos
 
@@ -581,15 +571,11 @@ Ambas consultas son equivalentes desde el punto de vista del resultado. No obsta
 
 Como recomendación general, es aconsejable utilizar el operador $and de forma explícita cuando: se desea mejorar la claridad de la consulta, se combinan operadores lógicos como $or, $not o $nor, o se trabajan condiciones más complejas que pueden dificultar la lectura si se escriben de forma implícita.
 
----
-
 #### Operadores de campo
 
 Los operadores de campo se utilizan para **validar la estructura de los documentos** o el **tipo de datos** de un campo. 
 
 Los operadores disponibles son: **`$exists`** y **`$type`**
-
----
 
 **`$exists`{.azul}**
 
@@ -678,7 +664,7 @@ El siguiente ejemplo muestra los libros cuyo título contiene la palabra “jueg
     { "_id" : "9788401342158", "titulo" : "El juego de Ripper" }  
     { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }
 
-En este caso, la búsqueda distingue entre mayúsculas y minúsculas.
+En este caso, utiliza la **barra inclinada (slash) /**, en este caso la búsqueda distingue entre mayúsculas y minúsculas.
 
 **Búsqueda sin distinguir mayúsculas y minúsculas**
 
@@ -692,7 +678,7 @@ Para realizar una búsqueda sin tener en cuenta las mayúsculas y minúsculas, s
 
 **Búsqueda al inicio del texto**
 
-El símbolo ^ indica que el patrón debe encontrarse al comienzo del texto.
+El **símbolo ^** indica que el patrón debe encontrarse al comienzo del texto.
 
 Por ejemplo, para obtener los libros cuyo título empieza por la palabra “juego”:
 
@@ -702,7 +688,7 @@ Por ejemplo, para obtener los libros cuyo título empieza por la palabra “jueg
 
 **Definir alternativas dentro de un patrón**
 
-Las expresiones regulares permiten definir patrones más avanzados. Como la utilización de los corchetes [] permiten definir alternativas dentro de un patrón.
+Las expresiones regulares permiten definir patrones más avanzados. Como la utilización de los **corchetes []** permiten definir alternativas dentro de un patrón.
 
 En el siguiente ejemplo se buscan los libros cuyo resumen contiene la palabra “amiga” o “amigo”, es decir, la cadena amig seguida de una a o una o:
 
