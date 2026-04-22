@@ -6,32 +6,33 @@ En este punto vamos a ver las operaciones más básicas, para la **creación, co
 
 Hay dos formas de crear una colección:
 
--1) Utilizando createCollection():
+1) Utilizando createCollection():
 
         db.createCollection("ejemplo")
 
--2) Con el comando insert, creará la colección **ejemplo** si todavía no existe:
+2) Con el comando insert, creará la colección **ejemplo** si todavía no existe:
 
         > db.ejemplo.insertOne(object)
 
 
-### Creación: insert()
+### Creación: insert
 
-MongoDB proporciona los siguientes métodos para insertar documentos en una colección:
+La sentencia **insert()** se ha comparado tradicionalmente con la sentencia **INSERT INTO ... VALUES de SQL**. MongoDB proporciona los siguientes métodos para insertar documentos en una colección:
   
-        db.coleccion.insertOne({documento})
+        db.coleccion.insertOne({documento})  
 
         db.coleccion.insertMany([{documento1},{documento2},...])​
 
+​**insertOne()​**: Inserta un único documento en una colección.​ Se utiliza cuando se quiere añadir un solo registro de forma puntual.​
+
+**insertMany([])**: Inserta varios documentos simultáneamente en una colección. Los documentos deben indicarse dentro de un array de objetos []. Es más eficiente cuando se necesita insertar múltiples registros.​
+
 ![](T8_insert.png)
 
-La función **insert** añadirá documentos a una colección. En el parámetro ponemos
-el documento directamente, o una variable que contenga el documento. Si la
-colección no existía, la creará y después añadirá el documento.
+La sentencia **insert** añadirá documentos a una colección. En el parámetro ponemos el documento directamente, o una variable que contenga el documento. Si la colección no existía, la creará y después añadirá el documento.
 
         > db.ejemplo.insertOne({ msg : "Hola, ¿qué tal?"})  
       
-
 Acabamos de insertar un nuevo documento, y así nos lo avisa ( **{ "nInserted" : 1
 }** , se ha insertado un documento). Automáticamente habrá creado un elemento **_id**
 de tipo **ObjectId** , ya que le hace falta para identificar el documento entre
@@ -49,15 +50,15 @@ lo insertamos
         > db.ejemplo.insertOne(**doc**)  
     
 
-También nos indica que ha insertado un documento. Y habrá creado también el campo
+También nos indica que ha insertado un documento. Y habrá creado también la clave
 **_id** como veremos en el siguiente punto.
 
 **Inserción especificando el id**{.azul}
 
-En el documento que hemos insertado hasta el momento, no hemos especificado el campo
+En el documento que hemos insertado hasta el momento, no hemos especificado la clave
 **_id** , y Mongo lo ha generado automáticamente de tipo **ObjectId**.
 
-Pero nosotros podremos poner este campo **_id** con el valor que queramos. Esto
+Pero nosotros podremos poner esta clave **_id** con el valor que queramos. Esto
 sí, deberemos estar seguros de que este valor no lo coge ningún otro documento de la
 colección, o nos va a dar un error.
 
@@ -127,25 +128,27 @@ Nos avisa que ha realizado 8 inserciones, y aquí los tenemos:
     { "_id" : 19 }  
     >
 
-### Lectura: find()
+### Lectura: find
 
-La función **find()** se ha comparado tradicionalmente con la sentencia SELECT de SQL. Siempre devolverá un conjunto de documentos, que pueden variar desde no devolver ningún documento, a devolver todos los de la colección.
+La sentencia **find()** se ha comparado tradicionalmente con la sentencia **SELECT de SQL**. 
+Siempre devolverá un conjunto de documentos, que pueden variar desde no devolver ningún documento, a devolver todos los de la colección.
 
 ![](T8_find.png)
 
-La función **find()** puede tener dos parámetros: el filtro y la proyección. Cada uno de estos paŕametros viene dada en forma de documento (u objeto) JSON. Esta sería la sintaxis:
+La sentencia **find()** puede tener dos parámetros: el **filtro** y la **proyección**, que no son obligatorios. Cada uno de estos paŕametros viene dada en forma de documento (u objeto) JSON. 
+Esta sería la sintaxis:
 
         db.coleccion.find(FILTRO,PROYECCIÓN)
   
 #### FILTRO:
   
-  El primero indica un **filtro**, y devolverá aquellos documentos de la colección que cumplan con los criterios de búsqueda indicado. Este filtro viene dada en forma de documento (u objeto) JSON, y también se utilizará en las sentencias **update() y delete()**.
+  El primero indica un **filtro**, y devolverá aquellos documentos de la colección que **cumplan con los criterios de búsqueda indicado**. Viene a ser la parte del WHERE dentro de un SELECT. El filtro también se utiliza en las sentencias **update() y delete()**.
   
-En este ejemplo, devolverá todos los documentos de la colección **alumnos** que tengan el campo **nombre** y que en él tengan el valor **Rebeca**. 
+En este ejemplo, devolverá todos los documentos de la colección alumnos que tengan la clave nombre y que en él tengan el valor Rebeca. 
 
         > db.alumnos.find( { nombre : "Rebeca" } )
 
-En este ejemplo, el filtro está utilizando únicamente un criterio de busqueda, pero este filtro puede tener más de un criterio de búsqueda, para ello se utilizará los diferentes operadores, como veremos más adelante. 
+En este ejemplo, el filtro está utilizando únicamente un criterio de busqueda, pero el parámtro filtro puede tener más de un criterio de búsqueda, para ello se utilizará los diferentes **operadores**, como veremos más adelante. 
 
     Si queremos que **devuelva todos los documentos**, no ponemos nada como parámetro de filtro **find()** , o aún mejor, le pasamos un documento (objeto) vacío **find({})** .
 
@@ -159,9 +162,10 @@ En este ejemplo, devolverán todos los documentos de la colección ejemplo.
 
 #### PROYECCIÓN:
   
-  El segundo parámetro, nos servirá para **delimitar los campos de los documentos que se devolverán**. También tendrá el formato JSON de un objeto al que le pondremos como claves los distintos campos que queremos que aparezcan o no, y como **valor 1 **para que sí aparezcan y **valor 0** para que no aparezcan.
-
-Si ponemos algún campo a que sí que aparezca (es decir, con el valor 1), los únicos que aparecerán serán éstos, además del **_id** que por defecto siempre aparece.
+  El segundo parámetro, nos servirá para **delimitar las claves de los documentos que se devolverán**. Los valores que pondremos a las distintos claves será, según si queremos que aparezcan será **1** o un **0** para que no aparezca.
+Viene a ser la parte de la cláusula SELECT, donde indicamos qué columnas queremos visualizar en la consulta SELECT.
+  
+Si ponemos alguna clave a que sí que aparezca (es decir, con el valor 1), los únicos que aparecerán serán éstos, además del **_id** que por defecto siempre aparece.
 
     > db.alumnos.find({},{nombre:1})  
   
@@ -185,27 +189,35 @@ Por ejemplo, si queremos mostrar únicamente el nombre:
 
 ### Eliminación: delete
 
-Para borrar un documento de una colección utilizaremos la función **deleteOne**
-, pasándole como parámetro la condición del documento o documentos a borrar. MongoDB ofrece los siguientes métodos para eliminar documentos de una colección:
+Para borrar un documento de una colección utilizaremos la sentencia **deleteOne()** o **deleteMany()** para eliminar más de uno. 
 
-  - db.collection.**deleteOne()**
-
-  - db.collection.**deleteMany()**
+Esta sentencia, sólo admite como único parámetro el **filtro**, que hará de criterio de búsqueda para encontrar los documentos a eliminar. En el caso de que no se pase ningún filtro, se eliminarán todos los documentos de la colección.
 
 ![](T8_delete.png)
 
+MongoDB ofrece los siguientes métodos para eliminar documentos de una colección:
+
+        db.coleccion.deleteOne(FILTRO)
+
+        db.coleccion.deleteMany(FILTRO)
+    
+**deleteOne()​**: Elimina un único documento que cumpla el criterio indicado en el filtro. Si hay varios documentos que coinciden, solo se borra el primero que encuentre MongoDB.
+
+**deleteMany()​**: Elimina todos los documentos que cumplan el criterio del filtro. Pero no elimina la colección.​
+
+Por ejemplo, si realizamos esta ejecución:
+
     > db.numerosprimos.deleteOne( {"_id" : 19} )  
     
-
 Nos avisa de que ha borrado un documento.
 
-La condición no debe ser sobre el campo **_id**. Puede ser sobre cualquiera
-campo, **y borrará todos los que coinciden**.
+La condición no debe ser sobre la clave **_id**. Puede ser sobre cualquiera
+clave, **y borrará todos los que coinciden**.
 
     > db.ejemplo.deleteMany( {"msg3" : "Por aquí no podemos quejarnos ..."} )  
     
 
-También tenemos la posibilidad de borrar toda una colección con la función
+También tenemos la posibilidad de borrar toda una colección con la sentencia
 **drop()**. Presta atención porque es muy sencilla de eliminar, y por tanto,
 potencialmente muy peligrosa.
 
@@ -215,11 +227,19 @@ potencialmente muy peligrosa.
 
 ### Actualización - update
 
-La función _**update**_ servirá para actualizar un documento ya guardado.
+La sentencia **update** servirá para actualizar sobre una colección ya creada.
+
+        db.coleccion.updateOne(FILTRO,MODIFICADOR)
+
+        db.coleccion.updateMany(FILTRO,MODIFICADOR)
+
+
 Tendrá dos parámetros:
 
-  * El primer parámetro será la condición para encontrar el documento a actualizar.
-  * El segundo parámetro será el nuevo documento que sustituirá al anterior
+1) FILTRO: El primer parámetro será el criterio de búsqueda para encontrar el documento a actualizar. Ya visto en sentencias find() y delete().
+2) MODIFICADOR: Define los cambios que se aplicarán a los documentos seleccionados.​ Se utiliza operadores de actualización o modificadores como: $set, $inc, $unset​ que veremos más adelante. 
+
+![](T8_update.png)
 
 MongoDB ofrece los siguientes métodos para actualizar los documentos de una colección:
 
@@ -227,9 +247,10 @@ MongoDB ofrece los siguientes métodos para actualizar los documentos de una col
 
   - db.collection.**updateMany()**
 
-  - db.collection.**replaceOne()**
+**updateOne()​** : Actualiza un único documento que cumpla la condición indicada en el filtro. Si varios documentos coinciden, solo se modifica el primero que encuentra MongoDB.
 
-![](T8_update.png)
+**updateMany()​**: Actualiza todos los documentos que cumplan el criterio del filtro. Modifica varios documentos​
+
 
 Por ejemplo, si miramos los datos actuales:
 
@@ -277,21 +298,6 @@ contenido del documento podríamos ahorrarnos el primer paso.
       "título" : "Mensaje 1"  
     }  
     >
-
-**Reemplazar un documento**{.azul}
-
-Para reemplazar todo el contenido de un documento excepto el _id, pasa un documento completamente nuevo como segundo argumento en Collection.**replaceOne()**.
-
-Al reemplazar un documento, éste debe constar únicamente de pares campo-valor. No puede incluir expresiones de operadores de actualización.  
-
-El documento de sustitución puede tener campos distintos de los del documento original. En el documento de reemplazo, puede omitir el _id, ya que _id es inmutable. Sin embargo, si lo incluye _id, debe tener el mismo valor que el actual.
-
-    db.ejemplo.replaceOne(
-      { "msg" : "Hola, ¿qué tal?" },
-      { "msg" : "Hola, ¿qué tal?" , "título2" : "Mensaje 2" }
-    )
-
-
 
 ### 📚 **Ejercicio 1**
 
@@ -353,16 +359,16 @@ Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **p
         title : Avatar
 
   
-  3- Consultar todos los documentos.  
-  4- Obtener los documentos con **writer** igual a **"Quentin Tarantino"**.  
-  5- Obtener los documentos con **actores** que incluyan a **"Brad Pitt"**.  
-  6- Obtener los documentos con **franchise** igual a **"The Hobbit"**.  
-  7- Añadir sinopsis a **"The Hobbit: An Unexpected Journey"** :   
+  - 3- Consultar todos los documentos.  
+  - 4- Obtener los documentos con **writer** igual a **"Quentin Tarantino"**.  
+  - 5- Obtener los documentos con **actores** que incluyan a **"Brad Pitt"**.  
+  - 6- Obtener los documentos con **franchise** igual a **"The Hobbit"**.  
+  - 7- Añadir sinopsis a **"The Hobbit: An Unexpected Journey"** :   
         "Un hobbit reacio, Bilbo Baggins, se dirige a Lonely Mountain con un enérgico grupo de enanos para reclamar su hogar en la montaña, y el oro que contiene, del dragón Smaug".  
-  8- Añadir sinopsis a **"The Hobbit: The Desolation of Smaug**":   
+  - 8- Añadir sinopsis a **"The Hobbit: The Desolation of Smaug**":   
         "Los enanos, junto con Bilbo Baggins y Gandalf the Grey, continúan su búsqueda para recuperar a Erebor, su tierra natal, de manos de Smaug. Bilbo Baggins está en posesión de un anillo misterioso y mágico".  
-  9- Eliminar la película **"Pee Wee Herman's Big Adventure"**.  
-  10- Eliminar la película **"Avatar"**.  
+  - 9- Eliminar la película **"Pee Wee Herman's Big Adventure"**.  
+  - 10- Eliminar la película **"Avatar"**.  
   
 
 
