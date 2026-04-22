@@ -1,4 +1,4 @@
-****# 7. Operaciones CRUD
+**** 7. Operaciones CRUD
 
 En este punto vamos a ver las operaciones más básicas, para la **creación, consulta, actualización y eliminación** de **documentos** de una colección. 
 
