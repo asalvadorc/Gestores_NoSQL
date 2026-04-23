@@ -1,4 +1,4 @@
-# 10 - Relaciones
+
 
 MongoDB, al ser una base de datos NoSQL, no maneja relaciones de la misma forma que SQL. Sin embargo, permite representar relaciones entre documentos utilizando dos enfoques principales:
 

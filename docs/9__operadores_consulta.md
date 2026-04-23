@@ -1,4 +1,3 @@
-# 8.2 - Métodos de consulta
 
 Los métodos de consulta permiten recuperar la información almacenada en una colección de MongoDB. Mediante estos métodos podemos obtener documentos completos o parciales, aplicar filtros, ordenar los resultados y limitar la cantidad de documentos devueltos. 
 
@@ -6,11 +5,11 @@ El método principal de consulta en MongoDB es find(). Además, existen otros m�
 
 Estos métodos pueden utilizarse conjuntamente con find(), encadenándolos al final de la consulta y separados por un punto (.).
 
-De forma resumida:
-- **sort()** controla el orden de los resultados.
-- **limit()** controla cuántos documentos se devuelven.
-- **skip()** controla cuántos documentos se ignoran.
-- **pretty()** mejora la presentación del resultado por pantalla, sin modificar los datos.
+De forma resumida:  
+- **sort()** controla el orden de los resultados.  
+- **limit()** controla cuántos documentos se devuelven.  
+- **skip()** controla cuántos documentos se ignoran.  
+- **pretty()** mejora la presentación del resultado por pantalla, sin modificar los datos.  
 
 Estos métodos **no cambia el contenido de los documentos, ni afecta al rendimiento de la consulta**. Se pueden combinar libremente y son fundamentales para implementar paginación y listados ordenados.
 

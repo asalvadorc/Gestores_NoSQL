@@ -51,26 +51,25 @@ markdown_extensions:
 nav:
  
   - MONGODB:
-    - 1 - MongoDB: 1__mongodb.md
-    - 2 - Estructura JSON: 2__estructura_json.md
-    - 3 - Instalación:
+    - 1. MongoDB: 1__mongodb.md
+    - 2. Estructura JSON: 2__estructura_json.md
+    - 3. Instalación:
         - 3.1 En Linux: 3.1__Linux.md
         - 3.2 En Windows: 3.2__Windows.md
         - 3.3 Con Docker: 3.3__Docker.md 
-    - 4 - Funcionamiento: 4__funcionamiento.md
-    - 5 - Variables: 5__variables.md
-    - 6 - Tipos de datos: 6__tipo_datos.md
-    - 7 - Operaciones CRUD: 7__crud.md
-    - 8 - Operadores:
-        - 8.1 Actualización: 8.1__operadores_actualizacion.md
-        - 8.2 Consulta: 8.2__operadores_consulta.md
-       #- 📚 Ejercicio 1 (parte 2): 8.3__operadores_ejercicios.md
-    - 9 - Arrays: 8.4__Arrays.md
-    - 10 - Agregación: 9__agregacion.md
-    - 11 - Relaciones: 10__relaciones_mongo.md
-    - 12 - Resumen Comandos: 11__resumen.md
+    - 4. Funcionamiento: 4__funcionamiento.md
+    - 5. Variables: 5__variables.md
+    - 6. Tipos de datos: 6__tipo_datos.md
+    - 7. Operaciones CRUD: 7__crud.md
+    - 8. Filtros avanzados en consultas: 8__filtros_avanzados.md
+    - 9. Métodos en consultas: 9__operadores_consulta.md
+    - 10. Modificadores de actualización: 10__operadores_actualizacion.md
+    - 11. Arrays: 11__Arrays.md
+    - 12. Agregación: 12__agregacion.md
+    - 13. Relaciones: 13__relaciones_mongo.md
+    - 14. Resumen Comandos: 14__resumen.md
   - Ejercicios: exercicis_mongo.md
-  - Actividad: 13__actividad_mongo.md
+  - Actividad: Actividad_mongo.md
    
   #- BBDD NoSQL: 1__introducci.md
   #- Introducción: 1__introducci.md:

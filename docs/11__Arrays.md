@@ -405,7 +405,7 @@ Ahora vamos a borrar con **$pull** el elemento de valor **7.5**
     }
 
 
-## Ejercicio 1 (parte 3)
+## 📚 Ejercicio 1 (parte 3)
 
 Siguiendo con la base de datos **cine**, realiza los siguientes ejercicios:
 
