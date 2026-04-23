@@ -88,6 +88,7 @@ Operadores:
 * **`$and`** → devuelve los documentos que **cumplen todas** las condiciones
 
 Hay que tener en cuenta:
+
 - El operador $not se aplica a un **campo** concreto y siempre envuelve a otro operador.
 - Los operadores $or, $nor y $and trabajan con **arrays de condiciones**, no se asocian a un campo, sino que combinan condiciones completas.
 
