@@ -95,7 +95,7 @@ Hay que tener en cuenta:
 
 **`$not`**{.azul}
 
-El operador $not se utiliza para negar una condición. Devuelve los documentos que no cumplen la condición indicada.
+El operador **`$not`** se utiliza para negar una condición. Devuelve los documentos que no cumplen la condición indicada.
 
 Sintaxis:
 
@@ -115,7 +115,7 @@ Veamos el ejemplo de la consulta que muestra los libros que no pertenecen a la e
     { "_id" : "9788415140054", "titulo" : "La princesa de hielo", "editorial" : "Embolsillo" }  
     { "_id" : "9788468738895", "titulo" : "Las reglas del juego" }  
 
-Nota: En este caso sería más sencillo utilizar el operador $ne (distinto), pero el ejemplo sirve para comprender el funcionamiento del operador $not. Esta sentencia sería equivalente.
+Nota: En este caso sería más sencillo utilizar el operador **`$ne`** (distinto), pero el ejemplo sirve para comprender el funcionamiento del operador $not. Esta sentencia sería equivalente.
 
         db.libro.find(
           { editorial: { $ne: "Planeta" } },
@@ -128,7 +128,7 @@ El operador **`$or`** permite que la consulta sea válida si se cumple al menos 
 
 Sintaxis:
 
-El operador $or trabaja siempre con un **array de condiciones**, donde cada elemento es un filtro independiente:
+Este opreador trabaja siempre con un **array de condiciones**, donde cada elemento es un filtro independiente:
 
         {
           $or: [
@@ -154,9 +154,9 @@ En este caso, el documento se devuelve si se cumple al menos una de las condicio
 
 **`$nor`**{.azul}
 
-El operador $nor se utiliza para combinar varias condiciones y devolver únicamente los documentos que no cumplen ninguna de ellas. Es decir, un documento será seleccionado solo si todas las condiciones indicadas resultan falsas.
+El operador **`$nor`** se utiliza para combinar varias condiciones y devolver únicamente los documentos que no cumplen ninguna de ellas. Es decir, un documento será seleccionado solo si todas las condiciones indicadas resultan falsas.
 
-El operador $nor resulta útil cuando queremos: excluir documentos que cumplan cualquiera de varias condiciones, evitar combinaciones complejas de $not y $or, expresar de forma clara que ninguna condición debe cumplirse. 
+Este operador resulta útil cuando queremos: excluir documentos que cumplan cualquiera de varias condiciones, evitar combinaciones complejas de $not y $or, expresar de forma clara que ninguna condición debe cumplirse. 
 
 Sintaxis
 
@@ -186,16 +186,13 @@ Ejemplo:  La siguiente consulta muestra los libros que no están en stock ni per
 
 En este caso, MongoDB devolverá únicamente los documentos que no estén en stock y tampoco tengan como editorial “Planeta”. Si un libro cumple alguna de esas condiciones, no aparecerá en el resultado.
 
-
-
-
 **`$and`**{.azul}
 
-El operador $and se utiliza para combinar varias condiciones dentro de un mismo filtro. MongoDB solo devolverá los documentos que cumplan todas las condiciones indicadas. 
+El operador **`$and`** se utiliza para combinar varias condiciones dentro de un mismo filtro. MongoDB solo devolverá los documentos que cumplan todas las condiciones indicadas. 
 
 Sintaxis:
 
-El operador $and trabaja siempre con un **array de condiciones**, donde cada elemento es un filtro independiente:
+Este operador trabaja siempre con un **array de condiciones**, donde cada elemento es un filtro independiente:
 
 
         {
@@ -237,9 +234,7 @@ Como recomendación general, es aconsejable utilizar el operador $and de forma e
 
 #### Operadores de campo
 
-Los operadores de campo se utilizan para **validar la estructura de los documentos** o el **tipo de datos** de un campo. 
-
-Los operadores disponibles son: **`$exists`** y **`$type`**
+Los operadores de campo se utilizan para **validar la estructura de los documentos** o el **tipo de datos** de un campo. Los operadores disponibles son: **`$exists`** y **`$type`**
 
 **`$exists`{.azul}**
 
@@ -265,7 +260,7 @@ Veamos el ejemplo de consulta que muestra los **libros que tienen el campo pagin
     { "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "paginas" : 290 }  
     { "_id" : "9788468738895", "titulo" : "Las reglas del juego", "paginas" : null }
 
- Observa que el último libro aparece porque el campo paginas existe, aunque su valor sea **null**.
+Observa que el último libro aparece porque el campo paginas existe, aunque su valor sea **null**.
 
 En cambio, si buscamos los libros con** páginas distintas de null**, no aparecerá este último libro:
 
@@ -294,7 +289,7 @@ Por lo que para muchos casos prácticos, es preferible utilizar el operador $exi
 
 **`$type`{.azul}**
 
-El operador $type permite filtrar documentos en función del tipo de dato de un campo.
+El operador **`$type`** permite filtrar documentos en función del tipo de dato de un campo.
 
 Sintaxis:
 
