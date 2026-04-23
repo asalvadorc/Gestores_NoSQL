@@ -136,7 +136,9 @@ Los métodos de consulta en MongoDB pueden encadenarse para construir consultas 
 
 Por ejemplo: 
 
-        db.libro.find({ enstock: true }, { titulo: 1, precio: 1 })
+        db.libro.find(
+                { enstock: true }, 
+                { titulo: 1, precio: 1 } )
                 .sort({ precio: -1 })
                 .limit(3)
                 .pretty()
