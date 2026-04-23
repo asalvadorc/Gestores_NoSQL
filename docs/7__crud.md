@@ -1,6 +1,6 @@
 En este punto vamos a ver las operaciones más básicas, para la **creación, consulta, actualización y eliminación** de **documentos** de una colección. 
 
-### Colección
+## Colección
 
 Hay dos formas de crear una colección:
 
@@ -13,7 +13,7 @@ Hay dos formas de crear una colección:
         > db.ejemplo.insertOne(object)
 
 
-### Create: insert
+## Create: insert
 
 La sentencia **insert()** se ha comparado tradicionalmente con la sentencia **INSERT de SQL**. 
 
@@ -105,11 +105,26 @@ Veamos un ejemplo:
 Vamos a insertar información de varios alumnos en una nueva colección llamada alumnos, asignando manualmente un _id personalizado (por ejemplo, valores numéricos: 51, 52, 53, …):
 
         > db.alumnos.insertOne ({_id: 51 , nombre: "Rebeca" , apellidos: "Martí Peral"})  
+
+        > db.alumnos.insertOne ({_id: 52 , nombre : "Abel", apellidos : "Bernat Cantera", edad : 22, dirección : {calle : "Mayor", numero : 7, cp : "12502" }, nota : [ 9.5, 9 ] } )
     
 La inserción se realiza correctamente. Si consultamos ahora los documentos de la colección, comprobaremos que MongoDB ha respetado el valor de la clave _id indicado:
 
         > db.alumnos.find()  
-         { "_id" : 51, "nombre" : "Rebeca", "apellidos" : "Martí Peral" }  
+          
+            [
+            { _id: 51, nombre: 'Rebeca', apellidos: 'Martí Peral'
+            },    
+            {
+                _id: 52,
+                nombre: 'Abel',
+                apellidos: 'Bernat Cantera',
+                edad: 22,
+                'dirección': { calle: 'Mayor', numero: 7, cp: '12502' },
+                nota: [ 9.5, 9 ]
+            }    
+            ] 
+
     
 Sin embargo, si intentamos insertar otro documento utilizando el mismo _id (51), MongoDB devolverá un error:
 
@@ -127,7 +142,7 @@ Sin embargo, si intentamos insertar otro documento utilizando el mismo _id (51),
 
 MongoDB nos indica que se ha producido un error por **clave duplicada**, ya que estamos intentando repetir la clave principal, es decir, el identificador único del documento.
 
-### Read: find
+## Read: find
 
 La sentencia **find()** se ha comparado tradicionalmente con la sentencia **SELECT de SQL**. 
 
@@ -143,7 +158,7 @@ La sintaxis general es la siguiente:
 
 A continuación, veremos en detalle la función de cada uno de estos parámetros:
   
-1) FILTRO (opcional): Determina qué documentos de la colección se devolverán. MongoDB solo mostrará aquellos documentos que cumplan los criterios de búsqueda indicados. Este parámetro equivale a la **cláusula WHERE** de una sentencia SELECT en SQL. Además, el filtro también se utiliza en otras operaciones como **update() y delete()**.
+1) **FILTRO (opcional)**: Determina qué documentos de la colección se devolverán. MongoDB solo mostrará aquellos documentos que cumplan los criterios de búsqueda indicados. Este parámetro equivale a la **cláusula WHERE** de una sentencia SELECT en SQL. Además, el filtro también se utiliza en otras operaciones como **update() y delete()**.
   
 Por ejemplo, la siguiente consulta devuelve todos los documentos de la colección alumnos cuya clave nombre tenga el valor "Rebeca":
 
@@ -164,30 +179,30 @@ Ambas opciones producen el mismo resultado. Por ejemplo:
     { "_id" : ObjectId("56ce3237c61e04ba81def50d"), "msg3" : "Por aquí no podemos quejarnos ..." }  
     >
 
-2) PROYECCIÓN (opcional): Se utiliza para indicar qué claves de los documentos se mostrarán en el resultado. Para cada clave se indica **1** si la clave se muestra, o un **0** si no se muestra. Hay que tener en cuenta que la clave **_id** aparece siempre por defecto, por lo que si no queremos que se muestre, debemos indicarlo explícitamente con **{_id: 0}**. Este parámetro equivale a la cláusula **SELECT** de una sentencia SELECT en SQL, donde indicamos qué columnas queremos visualizar.
+2) **PROYECCIÓN (opcional)**: Se utiliza para indicar qué claves de los documentos se mostrarán en el resultado. Para cada clave se indica **1** si la clave se muestra, o un **0** si no se muestra. Hay que tener en cuenta que la clave **_id** aparece siempre por defecto, por lo que si no queremos que se muestre, debemos indicarlo explícitamente con **{_id: 0}**. Este parámetro equivale a la cláusula **SELECT** de una sentencia SELECT en SQL, donde indicamos qué columnas queremos visualizar.
   
 Por ejemplo, la siguiente consulta devuelve únicamente la clave nombre de los documentos de la colección alumnos:
 
     > db.alumnos.find({},{nombre:1})  
   
     { "_id" : ObjectId("56debe3017bf4ed437dc77c8"), "nombre" : "Abel" }  
-    { "_id" : ObjectId("56dfdbd136d8b095cb6bd57a"), "nombre" : "Berta" }
+    { "_id" : ObjectId("56dfdbd136d8b095cb6bd57a"), "nombre" : "Rebeca" }
 
 Como se observa, la clave _id aparece siempre por defecto, por tanto si no queremos que aparezca **_id** pondremos **_id:0**:
 
     > db.alumnos.find({},{_id:0})  
    
     { "nombre" : "Abel", "apellidos" : "Bernat Cantera", "edad" : 22, "dirección" : {"calle" : "Mayor", "numero" : 7, "cp" : "12502" }, "nota" : [ 9.5, 9 ] }  
-    { "nombre" : "Berta", "apellidos" : "Bernat Cantero" }
+    { "nombre" : "Rebeca", "apellidos" : "Martí Peral" }
 
 Por último, si queremos mostrar únicamente la clave nombre, sin que aparezca el _id, podemos combinar ambas opciones:
 
     > db.alumnos.find({},{nombre:1,_id:0})  
   
     { "nombre" : "Abel" }  
-    { "nombre" : "Berta" }
+    { "nombre" : "Rebeca" }
 
-### Update: update
+## Update: update
 
 La sentencia **update** servirá para actualizar sobre una colección ya creada.
 
@@ -207,27 +222,24 @@ Sintaxis:
 
 Tendrá dos parámetros:
 
-1) FILTRO (opcional): El primer parámetro será el criterio de búsqueda para encontrar el documento a actualizar. Si no se utiliza filtro, se actualizará sobre toda la colección. Ya visto en sentencias find() y delete().
+1) **FILTRO (opcional)**: El primer parámetro será el criterio de búsqueda para encontrar el documento a actualizar. Si no se utiliza filtro, se actualizará sobre toda la colección. Ya visto en sentencias find() y delete().
 
-2) MODIFICADOR (obligatorio): Define los cambios que se aplicarán a los documentos seleccionados.​ Se utiliza operadores de actualización o modificadores como: $set, $inc, $unset​ que veremos más adelante. 
+2) **MODIFICADOR (obliatorio)**: Define los cambios que se aplicarán a los documentos seleccionados.
 
-Por ejemplo, si miramos los datos actuales:
+Cuando utilizas modificadores (como $set, $inc, $push, etc.), le estás indicando a MongoDB que actualice solo ciertos campos del documento, manteniendo intacto todo lo demás. Es decir, haces una modificación parcial: cambias lo que necesitas y el resto del documento permanece igual.
+
+Por ejemplo, si miramos los datos de la colección ejemplo:
 
     > db.ejemplo.find()  
     { "_id" : ObjectId("56ce310bc61e04ba81def50b"), "msg" : "Hola, ¿qué tal?" }  
     { "_id" : ObjectId("56ce31f6c61e04ba81def50c"), "msg2" : "¿Cómo va la cosa?" }
 
-Podemos comprobar el contenido del segundo documento, el que tiene **msg2**. Vamos a
-modificarlo: en el primer parámetro ponemos condición de búsqueda (sólo habrá
-uno) y en el segundo ponemos el nuevo documento que sustituirá al anterior con el parámetro **$set**.
+Podemos comprobar el contenido del segundo documento, el que tiene **msg2**. Vamos a modificarlo: en el primer parámetro ponemos condición de búsqueda (sólo habrá uno) y en el segundo ponemos el nuevo documento que sustituirá al anterior con el parámetro **$set**.
 
     > db.ejemplo.updateOne( {msg2:"¿Cómo va la cosa?"} , {$set: {msg2:"¿Qué? ¿Cómo va la cosa?"}}) 
 
 Observe que la contestación del **update****()** es que ha hecho **match** (
-ha habido coincidencia) con un documento, y que ha modificado uno. Si no encuentra
-ninguna, no dará error, sencillamente dirá que ha hecho match con 0 documentos, y
-que ha modificado 0 documentos. Miramos cómo efectivamente ha cambiado el segundo
-documento
+ha habido coincidencia) con un documento, y que ha modificado uno. Si no encuentra ninguna, no dará error, sencillamente dirá que ha hecho match con 0 documentos, y que ha modificado 0 documentos. Miramos cómo efectivamente ha cambiado el segundo documento
 
     > db.ejemplo.find()  
     { "_id" : ObjectId("56ce310bc61e04ba81def50b"), "msg" : "Hola, ¿qué tal?" }  
@@ -235,10 +247,7 @@ documento
 
 Nos vendrán muy bien las variables para las actualizaciones, ya que en muchas
 ocasiones será modificar ligeramente el documento, cambiando o añadiendo alguno
-elemento. Podremos hacerlo cómodamente con la variable: primero guardamos el documento
-a modificar en una variable; después modificamos la variable; y por último hacemos
-la operación de actualización. Evidentemente si tenemos alguna variable con el
-contenido del documento podríamos ahorrarnos el primer paso.
+elemento. Podremos hacerlo cómodamente con la variable: primero guardamos el documento a modificar en una variable; después modificamos la variable; y por último hacemos la operación de actualización. Evidentemente si tenemos alguna variable con el contenido del documento podríamos ahorrarnos el primer paso.
 
     > doc1 = db.ejemplo.find()  
     { "_id" : ObjectId("56ce310bc61e04ba81def50b"), "msg" : "Hola, ¿qué tal?" }
@@ -255,9 +264,32 @@ contenido del documento podríamos ahorrarnos el primer paso.
       "msg" : "Hola, ¿qué tal?",  
       "título" : "Mensaje 1"  
     }  
-    >
+    
 
-### Delete: delete
+**ReplaceOne**: se puede entender como una variante del update orientada al reemplazo completo del documento. Es decir, elimina el documento original (excepto el _id, que se mantiene) y lo reemplaza por el que se proporciona.
+
+
+Lo vemos con un ejemplo en la colección alumnos:
+
+    > db.alumnos.find({},{_id:0})  
+    
+        { "nombre" : "Abel", "apellidos" : "Bernat Cantera", 
+        "edad" : 22, "dirección" : {"calle" : "Mayor", "numero" : 7, "cp" : "12502" }, "nota" : [ 9.5, 9 ] }  
+        { "nombre" : "Rebeca", "apellidos" : "Martí Peral" }
+
+queremos reemplazar todo el documento del alumno Abel y dejar solo la edad:
+
+        db.alumnos.replaceOne({ nombre: "Abel" },{ edad: 23 })
+
+el resultado sería este:
+
+     db.alumnos.find({},{_id:0})
+
+    [ { edad: 23 }, { nombre: 'Rebeca', apellidos: 'Martí Peral' } ]
+
+es decir, se pierde todo lo demás, el nombre, los apellidos,la dirección y la nota. **Reemplaza todo el documento**.    
+
+## Delete: delete
 
 Para borrar un documento de una colección utilizaremos la sentencia **deleteOne()** o **deleteMany()** para eliminar más de uno. 
 
@@ -301,7 +333,7 @@ También tenemos la posibilidad de **borrar toda una colección, NO SOLO LOS DOC
 
 ***
 
-### 📚 **Ejercicio 1 (parte 1)**
+## 📚 **Ejercicio 1 (parte 1)**
 
 Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **pelicula**).
 

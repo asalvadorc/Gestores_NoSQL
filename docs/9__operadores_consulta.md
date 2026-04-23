@@ -248,4 +248,11 @@ Por ejemplo, todos los alumnos de Castellón (el código postal debe empezar por
         ]  
     }
 
-  
+### 📚 **Ejercicio 1 (parte 3)**
+
+* 17- Obtener todas las películas ordenadas por año ascendente
+* 18- Mostrar solo las 3 primeras películas
+* 19- Saltar las 2 primeras películas y mostrar el resto
+* 20- Películas de Tarantino ordenadas por año
+* 21- Últimas 2 películas más recientes
+* 22- Buscar "Hobbit", ordenar y limitar a 2.

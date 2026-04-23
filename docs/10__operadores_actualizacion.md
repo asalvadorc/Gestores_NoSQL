@@ -350,3 +350,13 @@ El valor de puntuación se actualiza a 7 porque es menor que el valor actual de 
 
 El operador $mul multiplica el campo puntuación por 2.
 
+### 📚 **Ejercicio 1 (parte 4)**
+
+* 23- Cambiar el año de Fight Club a 2000
+* 24- Añadir el campo rating con valor 9 a Pulp Fiction
+* 25- Incrementar el año en +1 a todas las películas de The Hobbit
+* 26- Añadir un actor a Fight Club
+* 27- Eliminar el campo rating de Pulp Fiction
+* 28- Añadir varios actores a Inglorious Basterds
+* 29- Añadir campo genero a todas las películas
+* 30- Cambiar "J.R.R. Tolkein" por "J.R.R. Tolkien"

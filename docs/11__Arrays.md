@@ -405,21 +405,21 @@ Ahora vamos a borrar con **$pull** el elemento de valor **7.5**
     }
 
 
-## 📚 Ejercicio 1 (parte 3)
+## 📚 Ejercicio 1 (parte 5)
 
 Siguiendo con la base de datos **cine**, realiza los siguientes ejercicios:
 
-- 17- Agregar un actor llamado "Samuel L. Jackson" en la película "Pulp Fiction".  
-- 18- Agregar los actores “Martin Freeman” y “Ian McKellen” en todas las películas del The Hobbit
-- 19- Mostrar las películas en las que actúe “Brad Pitt”.
-- 20- Mostrar las películas donde actúen “Brad Pitt” y “Edward Norton”.
-- 21- Mostrar películas donde actúe “Brad Pitt” o “Uma Thurman”.
-- 22- Mostrar el último actor de cada película.
-- 23-Mostrar el segundo actor de cada película (si existe).
-- 24-Mostrar las películas que no tienen el campo actores.
-- 25-Mostrar las películas que tengan exactamente dos actores.
-- 26-Mostrar solo: título, año, y actores (solo los dos primeros)
-- 27-Añadir el actor “Helena Bonham Carter” a la película “Fight Club”.
-- 28-Eliminar el último actor de la película “Inglorious Basterds”.
-- 29-Eliminar al actor “Brad Pitt” de todas las películas en las que aparezca.
-- 30-Eliminar el primer actor de la película “Pulp Fiction”.
+- 31- Agregar un actor llamado "Samuel L. Jackson" en la película "Pulp Fiction".  
+- 32- Agregar los actores “Martin Freeman” y “Ian McKellen” en todas las películas del The Hobbit
+- 33- Mostrar las películas en las que actúe “Brad Pitt”.
+- 34- Mostrar las películas donde actúen “Brad Pitt” y “Edward Norton”.
+- 35- Mostrar películas donde actúe “Brad Pitt” o “Uma Thurman”.
+- 36- Mostrar el último actor de cada película.
+- 37-Mostrar el segundo actor de cada película (si existe).
+- 38-Mostrar las películas que no tienen el campo actores.
+- 39-Mostrar las películas que tengan exactamente dos actores.
+- 40-Mostrar solo: título, año, y actores (solo los dos primeros)
+- 41-Añadir el actor “Helena Bonham Carter” a la película “Fight Club”.
+- 42-Eliminar el último actor de la película “Inglorious Basterds”.
+- 43-Eliminar al actor “Brad Pitt” de todas las películas en las que aparezca.
+- 44-Eliminar el primer actor de la película “Pulp Fiction”.
