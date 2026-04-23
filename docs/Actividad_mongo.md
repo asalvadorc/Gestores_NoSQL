@@ -24,12 +24,6 @@ Muestra y realiza ejemplos concretos de cómo realizar operaciones de inserción
 
 Realiza consultas en la base de datos MongoDB para obtener información mediante el uso de la función aggregate.
 
-Por tanto, Mongo no tiene tablas. Veamos algunos ejemplos de documentos JSON para
-guardar información del libro y del autor. Dependen de cómo tengas que acceder
-la información que podemos considerar guardar los libros con sus autores, o
-salvar a los autores, con sus libros. Incluso podríamos salvarlos
-dos, para poder acceder de todos modos, aunque sea a costa de duplicar
-la información 
 
 5️⃣ **Gestión de índices en MongoDB:** 
 
