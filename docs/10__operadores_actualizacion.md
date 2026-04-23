@@ -326,29 +326,46 @@ será **5.25** :
         "puntuación" : 5.25  
     }
 
-### $min {.azul}
-
-Actualiza el valor del campo a un valor especificado si éste es menor que el valor actual del campo.
-
-    db.alumnos..updateOne( { nombre:"Abel"}, { $min: { puntuacion: 1 } } )
-
-El valor de puntuación se actualiza a 1 porque es menor que el valor actual de 5.  
-
-### $max {.azul}
-
-Actualiza el valor del campo a un valor especificado si éste es mayor que el valor actual del campo.
-
-    db.alumnos..updateOne( { nombre:"Abel"}, { $max: { puntuacion: 7 } } )
-
-El valor de puntuación se actualiza a 7 porque es menor que el valor actual de 1.  
-
 ### $mul {.azul}
  
- Multiplica el valor de un campo por un número., $currentDate
+Multiplica el valor de un campo por un número. 
+ 
+Ejemplo:
 
         db.alumnos.updateOne({ nombre:"Abel"},{ $mul: {puntuacion: 2}})
 
-El operador $mul multiplica el campo puntuación por 2.
+El operador $mul multiplica el valor del campo puntuación por 2.  Ahora la puntuación tendrá un valor de 10.5.
+
+
+### $min {.azul}
+
+El operador $min se utiliza para actualizar el valor de un campo solo si el nuevo valor es menor que el valor actual almacenado en el documento. MongoDB realiza internamente una comparación previa entre el valor actual del campo y el valor indicado.
+
+- Si el valor indicado es menor, el campo se actualiza.
+- Si el valor indicado es mayor o igual, el campo no se modifica.
+
+Ejemplo:
+
+    db.alumnos.updateOne( { nombre:"Abel"}, { $min: { puntuacion: 1 } } )
+
+En este caso, el campo puntuacion **se actualiza a 1** porque dicho valor es menor que el valor actual (10.5). Si el valor actual hubiera sido menor o igual que 1, la actualización no se habría realizado.
+
+En resumen, el operador $min no sustituye siempre el valor, solo lo cambia si el nuevo es más pequeño.
+
+### $max {.azul}
+
+El operador $max se utiliza para actualizar el valor de un campo únicamente si el nuevo valor es mayor que el valor actual almacenado en el documento. AL igual que en el operador $min, MongoDB realiza internamente una comparación previa entre el valor actual del campo y el valor indicado:
+
+- Si el valor indicado es mayor, el campo se actualiza.
+- Si el valor indicado es menor o igual, el campo no se modifica.
+
+Ejemplo:
+
+    db.alumnos.updateOne( { nombre:"Abel"}, { $max: { puntuacion: 7 } } )
+
+En este caso, el campo puntuacion **se actualiza a 7** porque dicho valor es mayor que el valor actual (1). Si el valor actual hubiera sido mayor o igual que 7, la actualización no se habría realizado.
+
+En resumen, $max no sustituye siempre el valor, solo lo cambia si el nuevo es más grande.
 
 ### 📚 **Ejercicio 1 (parte 4)**
 
