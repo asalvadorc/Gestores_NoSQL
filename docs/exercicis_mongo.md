@@ -86,9 +86,9 @@ Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **p
   23. Actualizar el año de estreno de la película "Fight Club" para que pase a ser 2000.
   24. Añadir a la película "Pulp Fiction" un nuevo campo llamado **_rating_** con el valor 9.
   25. Incrementar en una unidad (+1) el año de estreno de todas las películas de "The Hobbit".
-  26. Añadir un nuevo actor al listado de actores de la película "Fight Club".
+  26. Añadir a la película "Fight Club" dos nuevos campos: **oscar** con valor true y **numOscar** con valor 2.
   27. Eliminar el campo rating de la película "Pulp Fiction".
-  28. Añadir varios actores al listado de actores de la película "Inglorious Basterds".
+  28. Actualizar la película "Fight Club" para disminuir en una unidad (−1) el valor del campo numOscar.
   29. Añadir el campo genero a todas las películas de la colección.
   30. Corregir el nombre del autor "J.R.R. Tolkein", sustituyéndolo por "J.R.R. Tolkien" en los documentos donde aparezca.
   31. Agregar un actor llamado "Samuel L. Jackson" en la película "Pulp Fiction".  
