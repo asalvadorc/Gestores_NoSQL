@@ -77,20 +77,20 @@ Estos ejercicios debes realizarlos sobre una BD llamada **cine** (colección **p
    **"Bilbo"** y no la palabra **"Gandalf"**. Se aconseja utilizar el operador **$and**.  
   15. Encontrar las películas que en la sinopsis contengan la palabra **"enanos"** o **"hobbit"**.  
   16. Encontrar las películas que en la sinopsis contengan las palabras **"oro"** y **"dragón"**.  
-  17. Obtener todas las películas ordenadas por año ascendente
-  18. Mostrar solo las 3 primeras películas
-  19. Saltar las 2 primeras películas y mostrar el resto
-  20. Películas de Tarantino ordenadas por año
-  21. Últimas 2 películas más recientes
-  22. Buscar "Hobbit", ordenar y limitar a 2.
-  23. Cambiar el año de Fight Club a 2000
-  24. Añadir el campo rating con valor 9 a Pulp Fiction
-  25. Incrementar el año en +1 a todas las películas de The Hobbit 
-  26. Añadir un actor a Fight Club
-  27. Eliminar el campo rating de Pulp Fiction
-  28. Añadir varios actores a Inglorious Basterds
-  29. Añadir campo genero a todas las películas
-  30. Cambiar "J.R.R. Tolkein" por "J.R.R. Tolkien"
+  17. Obtener el listado completo de películas ordenadas por año de estreno en orden ascendente (de la más antigua a la más reciente).
+  18. Mostrar únicamente las tres primeras películas del resultado de la consulta.
+  19. Omitir las dos primeras películas y mostrar todas las restantes.
+  20. Obtener las películas dirigidas por Quentin Tarantino, ordenadas por año de estreno.
+  21. Mostrar las dos películas más recientes según el año de estreno.
+  22. Buscar las películas cuyo título contenga la palabra "Hobbit", ordenarlas por título y limitar el resultado a dos documentos.
+  23. Actualizar el año de estreno de la película "Fight Club" para que pase a ser 2000.
+  24. Añadir a la película "Pulp Fiction" un nuevo campo llamado **_rating_** con el valor 9.
+  25. Incrementar en una unidad (+1) el año de estreno de todas las películas de "The Hobbit".
+  26. Añadir un nuevo actor al listado de actores de la película "Fight Club".
+  27. Eliminar el campo rating de la película "Pulp Fiction".
+  28. Añadir varios actores al listado de actores de la película "Inglorious Basterds".
+  29. Añadir el campo genero a todas las películas de la colección.
+  30. Corregir el nombre del autor "J.R.R. Tolkein", sustituyéndolo por "J.R.R. Tolkien" en los documentos donde aparezca.
   31. Agregar un actor llamado "Samuel L. Jackson" en la película "Pulp Fiction".  
   32. Agregar los actores “Martin Freeman” y “Ian McKellen” en todas las películas del The Hobbit
   33. Mostrar las películas en las que actúe “Brad Pitt”.
