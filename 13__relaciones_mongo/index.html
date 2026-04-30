@@ -1,0 +1,1584 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../12__agregacion/">
+      
+      
+        <link rel="next" href="../14__resumen/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>13. Relaciones - BD - Gestores NoSQL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#101-relacion-con-documentos-embebidos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="BD - Gestores NoSQL" class="md-header__button md-logo" aria-label="BD - Gestores NoSQL" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BD - Gestores NoSQL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              13. Relaciones
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../1__mongodb/" class="md-tabs__link">
+          
+  
+  
+  MONGODB
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../exercicis_mongo/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Ejercicios
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Actividad_mongo/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Actividad
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="BD - Gestores NoSQL" class="md-nav__button md-logo" aria-label="BD - Gestores NoSQL" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    BD - Gestores NoSQL
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONGODB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MONGODB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1__mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2__estructura_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Estructura JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Instalación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Instalación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.1__Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1 En Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.2__Windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 En Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.3__Docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.3 Con Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4__funcionamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Funcionamiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5__variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6__tipo_datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Tipos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7__crud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Operaciones CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8__filtros_avanzados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Filtros avanzados en consultas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9__operadores_consulta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Métodos en consultas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10__operadores_actualizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Modificadores de actualización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11__Arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12__agregacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Agregación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Relaciones
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Relaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#101-relacion-con-documentos-embebidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 - Relación con Documentos Embebidos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-relacion-con-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 - Relación con Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103-relaciones-en-mongodb-con-lookup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 - Relaciones en MongoDB con $lookup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3 - Relaciones en MongoDB con $lookup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lookup-anidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        $lookup anidado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-operador-unwind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El operador $unwind
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Ejercicio 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14__resumen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Resumen Comandos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercicis_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Actividad_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>13. Relaciones</h1>
+
+<p>MongoDB, al ser una base de datos NoSQL, no maneja relaciones de la misma forma que SQL. Sin embargo, permite representar relaciones entre documentos utilizando dos enfoques principales:</p>
+<p>1️⃣ Relaciones mediante documentos embebidos.<br />
+2️⃣ Relaciones mediante referencias.</p>
+<p>Cada enfoque tiene ventajas y desventajas, según el caso de uso.</p>
+<h2 id="101-relacion-con-documentos-embebidos">10.1 - Relación con Documentos Embebidos</h2>
+<p>Este enfoque <strong>anida las datos relacionados dentro del mismo documento</strong>.<br />
+Se usa cuando las datos relacionados se consultan frecuentemente juntos y no crecen demasiado en tamaño.</p>
+<p><strong><u>Ejemplo</u>:</strong> Cliente con sus Pedidos embebidos</p>
+<pre><code>{
+  "_id": 1,
+  "número": "Juan",
+  "email": "juan@email.com",
+  "pedidos": [
+    { "producto": "Laptop", "total": 1200},
+    { "producto": "Mouse", "total": 25 }
+  ]
+}
+</code></pre>
+<p>✅ <strong>Ventajas</strong><br />
+✔ Rápida recuperación de datos (no requiere <code>JOINs</code>).<br />
+✔ Menos consultas en la base de datos.<br />
+✔ Buena opción si las datos no crecen demasiado.  </p>
+<p>❌ <strong>Desventajas</strong><br />
+✖ Si los pedidos crecen mucho, el documento se hace muy grande.<br />
+✖ No se pueden actualizar pedidos de forma independiente sin modificar el cliente.  </p>
+<p>None</p>
+<h2 id="102-relacion-con-referencias">10.2 - Relación con Referencias</h2>
+<p>En este enfoque, los documentos <strong>almacenan solo referencias (IDs) de documentos en otras colecciones</strong>.<br />
+Se usa cuando las datos son reutilizados en múltiples documentos o crecen mucho en tamaño.<br />
+Estas referencias pueden ser de dos tipos; referencias manuales o miedo DBRefs.</p>
+<p><strong><u>Ejemplo</u>:</strong> Cliente y Pedidos en colecciones separadas con referencia </p>
+<p><strong>Colección <code>clientes</code></strong></p>
+<pre><code>{
+  "_id": 1,
+  "número": "Juan",
+  "email": "juan@email.com",
+  pedidos: [101, 102] // Referencias a pedidos
+}
+</code></pre>
+<p><strong>Colección <code>pedidos</code></strong></p>
+<pre><code>[
+  { "_id": 101, "cliente_id": 1, "producto": "Laptop", "total": 1200 },
+  { "_id": 102, "cliente_id": 1, "producto": "Mouse", "total": 25 }
+]
+</code></pre>
+<p>✅ <strong>Ventajas</strong><br />
+✔ Evita documentos muy grandes.<br />
+✔ Permite reutilizar datos sin duplicarlos.<br />
+✔ Se pueden actualizar las referencias sin modificar el documento original.  </p>
+<p>❌ <strong>Desventajas</strong><br />
+✖ Se necesitan consultes adicionales (<code>$lookup</code>) para sacar las datos completos.<br />
+✖ Puede ser más lento en consultas frecuentes.  </p>
+<p>None</p>
+<div class="admonition tip">
+<p class="admonition-title">Regla general</p>
+<ul>
+<li><strong>Si las datos relacionados son de uso frecuente y pequeños →</strong> Usa documentos embebidos.  </li>
+<li><strong>Si las datos crecen mucho o se usan en varias colecciones →</strong> Usa referencias con <code>$lookup</code>.  </li>
+</ul>
+</div>
+<p>None</p>
+<h2 id="103-relaciones-en-mongodb-con-lookup">10.3 - Relaciones en MongoDB con <code>$lookup</code></h2>
+<p>En <strong>MongoDB</strong>, la agregación con <strong>$lookup</strong> permite realizar joins entre colecciones.<br />
+Es útil cuando seguimos un enfoque de <strong>modelado de datos con referencias</strong>, donde almacenamos sólo el <strong>ObjectId</strong> en lugar de los documentos embebidos.</p>
+<div class="admonition note">
+<p class="admonition-title">Sintaxis</p>
+<pre><code>{   
+$lookup: {       
+  from: &lt;collection_to_join&gt;,     
+  localField: &lt;field_from_the_input_documents&gt;,       
+  foreignField: &lt;field_from_collection&gt;,
+  as: &lt;output_array_field&gt;     
+}
+</code></pre>
+<p>}</p>
+</div>
+<p><strong><u>Ejemplo 1</u>:</strong> Relacionar la coleción Usuarios con sus Pedidos</p>
+<ul>
+<li>
+<p><strong>Colección <code>usuarios</code></strong>  </p>
+<pre><code>[
+  { "_id": 1, "número": "Carlos", "email": "carlos@example.com" },
+  { "_id": 2, "número": "Ana", "email": "ana@example.com" }
+]
+</code></pre>
+</li>
+<li>
+<p><strong>Colección <code>pedidos</code></strong></p>
+<pre><code>[
+  { "_id": 101, "usuario_id": 1, "producto": "Laptop", "precio": 1200 },
+  { "_id": 102, "usuario_id": 1, "producto": "Mouse", "precio": 50 },
+  { "_id": 103, "usuario_id": 2, "producto": "Teclado", "precio": 80 }
+]
+</code></pre>
+</li>
+<li>
+<p><strong>Consulta</strong> con <strong><code>$lookup</code></strong> para unir usuarios con sus pedidos</p>
+<pre><code>db.usuarios.aggregate([
+  {
+    "$lookup": {
+      "from": "pedidos", // Colección a unir
+      "localField": "_id", // Campo en la colección actual (usuarios)
+      "foreignField": "usuario_id", // Campo en la otra colección (pedidos)
+      "as": "pedidos" // Número del campo de salida con los pedidos
+    }
+  }
+])
+</code></pre>
+</li>
+<li>
+<p><strong>Resultado</strong> esperado</p>
+<pre><code>[
+  {
+    "_id": 1,
+    "número": "Carlos",
+    "email": "carlos@example.com",
+    "pedidos": [
+      { "_id": 101, "usuario_id": 1, "producto": "Laptop", "precio": 1200 },
+      { "_id": 102, "usuario_id": 1, "producto": "Mouse", "precio": 50 }
+    ]
+  },
+  {
+    "_id": 2,
+    "número": "Ana",
+    "email": "ana@example.com",
+    "pedidos": [
+      { "_id": 103, "usuario_id": 2, "producto": "Teclado", "precio": 80 }
+    ]
+  }
+]
+</code></pre>
+</li>
+</ul>
+<p><strong><u>Ejemplo 2</u></strong>: Realcionar la colección autores con sus libros.</p>
+<pre><code>    db.createCollection("authors");
+    db.createCollection("books");
+
+    // Primera instrucción
+    db.authors.insertOne({
+      número: "Diego",
+      email: "dcortes@example.com",
+      age: 25
+    });
+
+    // Segunda instrucción (Se debe obtener el ID del autor y remplazar)
+    db.books.insertMany([
+      {
+        name: "Philosopher's Stone",
+        author_id: ObjectId("id_of_author")
+      },
+      {
+        nombre: "Secreto de programación",
+        author_id: ObjectId("id_of_author")
+      }
+    ]);
+
+
+    db.getCollection("authors").aggregate([{
+      $lookup: {
+        from: "books",
+        localField: "_id",
+        foreignField: "author_id",
+        as: "books"
+      }
+    }]);
+</code></pre>
+<ul>
+<li><strong>Resultado</strong> esperado<pre><code>{
+    "_id" : ObjectId("64a8397a001cd56690c6a9cd"),
+    "name" : "Diego",
+    "email" : "dcortes@example.com",
+    "age" : NumberInt(25),
+    "books" : [
+        {
+            "_id" : ObjectId("64a839a7001cd56690c6a9ce"),
+            "name" : "Philosopher's Stone",
+            "author_id" : ObjectId("64a8397a001cd56690c6a9cd")
+        },
+        {
+            "_id" : ObjectId("64a839a7001cd56690c6a9cf"),
+            "name" : "Secret of programming",
+            "author_id" : ObjectId("64a8397a001cd56690c6a9cd")
+        }
+    ]
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="lookup-anidado">$lookup anidado</h3>
+<p>Siguiendo con el ejemplo de usuarios y sus pedidos, si cada pedido tiene detalles en una tercera colección <strong>detalles_pedido</strong>, podemos anidar otro $lookup:</p>
+<p><strong><u>Ejemplo</u>:</strong> Relacionar Usuarios con Pedidos y detalles_pedido</p>
+<ul>
+<li>
+<p><strong>Colección <code>usuarios</code></strong></p>
+<pre><code>[
+  { "_id": 1, "número": "Carlos", "email": "carlos@example.com" },
+  { "_id": 2, "número": "Ana", "email": "ana@example.com" }
+]
+</code></pre>
+</li>
+<li>
+<p><strong>Colección <code>pedidos</code></strong></p>
+<pre><code>[
+  { "_id": 101, "usuario_id": 1, "producto": "Laptop", "precio": 1200 },
+  { "_id": 102, "usuario_id": 1, "producto": "Mouse", "precio": 50 },
+  { "_id": 103, "usuario_id": 2, "producto": "Teclado", "precio": 80 }
+]
+</code></pre>
+</li>
+<li>
+<p><strong>Colección <code>detalles_pedido</code></strong></p>
+<pre><code>[
+  { "_id": 201, "pedido_id": 101, "cantidad": 1, "garantía": "2 años" },
+  { "_id": 202, "pedido_id": 102, "cantidad": 2, "garantía": "1 año" },
+  { "_id": 203, "pedido_id": 103, "cantidad": 1, "garantía": "3 años" }
+]
+</code></pre>
+</li>
+<li>
+<p>Consulta con <strong><code>$lookup</code> anidado</strong> </p>
+</li>
+</ul>
+<p>La idea es obtener una lista de usuarios con sus pedidos, y dentro de cada pedido, los detalles de ese pedido.</p>
+<pre><code>      db.usuarios.aggregate([
+      {
+        "$lookup": {
+          "de": "órdenes",
+          "localField": "_id",
+          "foreignField": "user_id",
+          "como": "órdenes"
+        }
+      },
+      {
+        "$unwind": "$orders" // Desenrolla la matriz de pedidos
+      },
+      {
+        "$lookup": {
+          "de": "order_detail",
+          "localField": "pedidos._id",
+          "foreignField": "order_id",
+          "como": "pedidos.detalles"
+        }
+      },
+      {
+        "$grupo": {
+          "_id": "$_id",
+          "número": { "$primero": "$número" },
+          "correo electrónico": { "$primero": "$correo electrónico" },
+          "pedidos": { "$push": "$pedidos" }
+        }
+      }
+    ])
+</code></pre>
+<ul>
+<li><strong>Resultado</strong> esperado<pre><code>[
+  {
+    "_id": 1,
+    "número": "Carlos",
+    "email": "carlos@example.com",
+    "pedidos": [
+      {
+        "_id": 101,
+        "usuario_id": 1,
+        "producto": "Laptop",
+        "precio": 1200,
+        detalles: [
+          { "_id": 201, "pedido_id": 101, "cantidad": 1, "garantía": "2 años" }
+        ]
+      },
+      {
+        "_id": 102,
+        "usuario_id": 1,
+        "producto": "Mouse",
+        "precio": 50,
+        detalles: [
+          { "_id": 202, "pedido_id": 102, "cantidad": 2, "garantía": "1 año" }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": 2,
+    "número": "Ana",
+    "email": "ana@example.com",
+    "pedidos": [
+      {
+        "_id": 103,
+        "usuario_id": 2,
+        "producto": "Teclado",
+        "precio": 80,
+        detalles: [
+          { "_id": 203, "pedido_id": 103, "cantidad": 1, "garantía": "3 años" }
+        ]
+      }
+    ]
+  }
+]
+</code></pre>
+</li>
+</ul>
+<hr />
+<p><strong>Explicación del Pipeline</strong></p>
+<ul>
+<li>$lookup (usuarios → pedidos): Une los pedidos a cada usuario.  </li>
+<li>$unwind (pedidos): Descompone la lista de pedidos para poder hacer otro $lookup.  </li>
+<li>$lookup (pedidos → detalles_pedido): Une los detalles a cada pedido.  </li>
+<li>$group: Vuelve a agrupar los datos para reconstruir la estructura.  </li>
+</ul>
+<h3 id="el-operador-unwind">El operador <code>$unwind</code></h3>
+<p>El operador <strong>$unwind</strong> en MongoDB descompone un array dentro de un documento en múltiples documentos, cada uno con un solo elemento del array.</p>
+<p>Es especialmente útil cuando trabajamos con <strong>$lookup</strong>, porque las consultas de agregación en MongoDB manejan arrays, y a veces es necesario convertirlos en documentos individuales para hacer más joins o transformaciones.</p>
+<p><strong>¿Cuándo se usa $unwind?</strong>  </p>
+<p>✔ Cuando necesitas descomponer arrays en documentos individuales.<br />
+  ✔ Para hacer joins en múltiples niveles (como unir detalles_pedido a cada pedido).<br />
+  ✔ Para realizar cálculos en elementos individuales de un array, como contar cuántos productos ha comprado un usuario.</p>
+<div class="admonition note">
+<p class="admonition-title">Ejemplo sin $unwind</p>
+<pre><code>  db.usuarios.aggregate([
+    {
+      "$lookup": {
+        "from": "pedidos",
+        "localField": "_id",
+        "foreignField": "usuario_id",
+        "as": "pedidos"
+      }
+    }
+  ])
+</code></pre>
+<p><strong>Resultado</strong></p>
+<pre><code>    [
+      {
+        "_id": 1,
+        "número": "Carlos",
+        "pedidos": [
+          { "_id": 101, "usuario_id": 1, "producto": "Laptop", "precio": 1200 },
+          { "_id": 102, "usuario_id": 1, "producto": "Mouse", "precio": 50 }
+        ]
+      },
+      {
+        "_id": 2,
+        "número": "Ana",
+        "pedidos": [
+          { "_id": 103, "usuario_id": 2, "producto": "Teclado", "precio": 80 }
+        ]
+      }
+    ]
+</code></pre>
+</div>
+<p>Cada usuario tiene un array con sus pedidos, pero si queremos hacer un segundo $lookup (por ejemplo, para unir detalles de los pedidos), MongoDB no puede unir arrays directamente.</p>
+<div class="admonition note">
+<p class="admonition-title">Ejemplo con $unwind</p>
+<pre><code>  db.usuarios.aggregate([
+    {
+      "$lookup": {
+        "from": "pedidos",
+        "localField": "_id",
+        "foreignField": "usuario_id",
+        "as": "pedidos"
+      }
+    },
+    {
+      "$unwind": "$pedidos"
+    }
+  ])
+</code></pre>
+<p><strong>Resultado</strong></p>
+<pre><code>    [
+      {
+        "_id": 1,
+        "número": "Carlos",
+        "pedidos": { "_id": 101, "usuario_id": 1, "producto": "Laptop", "precio": 1200 }
+      },
+      {
+        "_id": 1,
+        "número": "Carlos",
+        "pedidos": { "_id": 102, "usuario_id": 1, "producto": "Mouse", "precio": 50 }
+      },
+      {
+        "_id": 2,
+        "número": "Ana",
+        "pedidos": { "_id": 103, "usuario_id": 2, "producto": "Teclado", "precio": 80 }
+      }
+    ]
+</code></pre>
+</div>
+<p>Ahora, cada usuario tiene múltiples documentos, uno por cada pedido, lo que permite realizar otro $lookup con detalles_pedido.</p>
+<h2 id="ejercicio-3">📚 Ejercicio 3</h2>
+<p>Intenta implementar en MongoDB parte de la Base de Datos relacional <a href="https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/"><strong>facturas</strong></a>, concretamente, comienza por las tablas CATEGORÍA y ARTÍCULO, que las tendrás que
+representar como documentos de 2 colecciones (colección <strong>categoría</strong> y colección <strong>articulo</strong>).
+En los documentos de la colección <strong>categoría</strong>, el código de categoría será el
+<strong>_id</strong> , mientras que en los documentos de la colección <strong>articulo</strong>, el código de
+el artículo será el <strong>_id</strong>.</p>
+<ol>
+<li>Inserta los documentos correspondiente a las categorías del ejercicio <strong>Ex_1</strong> (<a href="https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/"><strong>facturas</strong></a>).</li>
+<li>Inserta los documentos correspondiente a los artículos del ejercicio <strong>Ex_2</strong> (<a href="https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/"><strong>facturas</strong></a>).</li>
+<li>Haz una consulta en la que aparezcan todos los artículos con su descripción y también la descripción de su categoría.</li>
+<li>Modifica lo anterior para que aparezcan sólo las descripciones del artículo y de la categoría.<ul>
+<li>Debido a que las datos del documento reunido, que en este caso es categoría, podemos utilizar <strong>$unwind</strong> para "desconstruir" este array.</li>
+<li>Una vez deconstruido el array es cuando podremos proyectar sobre la descripción del artículo (directamente) y sobre la descripción de la categoría renombrando el campo y subcampo.</li>
+</ul>
+</li>
+<li>Realiza una consulta donde aparezca la descripción de cada categoría, con el número de artículos de cada categoría y el precio medio.</li>
+<li>Inserta los documentos correspondiente a los clientes del ejercicio <strong>Ex_3</strong> (<a href="https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/"><strong>facturas</strong></a>). No nos importará el código de población.</li>
+<li>Inserta las facturas correspondiente a los ejercicios <strong>Ex_4</strong> (<a href="https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/"><strong>facturas</strong></a>) y <strong>Ex_5</strong> (<a href="https://asalvadorc.github.io/BBDD_PostgreSQL_DML/exercicis_de_tot_el_tema/"><strong>facturas</strong></a>). Observa que la mejor forma de introducir las líneas de factura está dentro de la misma, en un array.</li>
+<li>
+<p>Haz una consulta para sacar el número de factura y su total.</p>
+<p><img alt="" src="../T8_Exer_8_1.png" /></p>
+</li>
+<li>
+<p>Modifica lo anterior para sacar también el número del cliente de la factura.</p>
+<p><img alt="" src="../T8_Exer_8_2.png" /></p>
+</li>
+<li>
+<p>Saca un listado de clientes, al menos con su número, y de los artículos que ha comprado, al menos con la descripción del artículo.</p>
+<p><img alt="" src="../T8_Exer_8_3.png" /></p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../12__agregacion/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 12. Agregación">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                12. Agregación
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../14__resumen/" class="md-footer__link md-footer__link--next" aria-label="Next: 14. Resumen Comandos">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                14. Resumen Comandos
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.integrate", "navigation.footer", "navigation.path"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

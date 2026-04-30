@@ -1,0 +1,221 @@
+/* =========================================================
+   🌿 TEMA VERDE PROFESIONAL (ESTABLE + RESPONSIVE REAL)
+   ========================================================= */
+
+/* ===================== MODO CLARO ===================== */
+
+[data-md-color-scheme="default"] {
+    --md-primary-fg-color: #013E37;
+    --md-primary-fg-color--light: #0b5c52;
+    --md-primary-fg-color--dark: #012e29;
+    --md-accent-fg-color: #0b5c52;
+
+    --md-default-bg-color: #ffffff;
+    --md-default-fg-color: #1a1a1a;
+    --md-default-fg-color--light: #555;
+    --md-default-fg-color--lighter: #888;
+
+    --md-sidebar-bg: #f2f7f6;
+    --md-code-bg-color: #f5f5f5;
+}
+
+/* ===================== MODO OSCURO ===================== */
+[data-md-color-scheme="slate"] {
+    --md-primary-fg-color: #0f766e;
+    --md-primary-fg-color--light: #14b8a6;
+    --md-primary-fg-color--dark: #0a4f48;
+    --md-accent-fg-color: #14b8a6;
+
+    --md-default-bg-color: #0f1f1d;
+
+    --md-default-fg-color: #e6f1ef;
+    --md-default-fg-color--light: #b8c7c4;
+    --md-default-fg-color--lighter: #7f9a95;
+
+    --md-sidebar-bg: #132826;
+    --md-code-bg-color: #1b2e2c;
+}
+
+/* =========================================================
+   🧱 SIDEBAR (SIN ROMPER FUNCIONAMIENTO)
+   ========================================================= */
+
+.md-sidebar__scrollwrap,
+.md-sidebar__inner,
+.md-nav {
+    background-color: var(--md-sidebar-bg) !important;
+}
+
+
+/* =========================================================
+   🧭 MENÚ LATERAL
+   ========================================================= */
+
+
+[data-md-color-scheme="slate"] .md-nav__link {
+    color: #d6e5e2 !important;
+}
+
+/* Hover claro */
+[data-md-color-scheme="default"] .md-nav__link:hover {
+    background-color: rgba(1, 62, 55, 0.08) !important;
+    color: #013E37 !important;
+}
+
+/* Hover oscuro */
+[data-md-color-scheme="slate"] .md-nav__link:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+}
+
+.md-nav__item--active > .md-nav__link {
+    background-color: rgba(1, 62, 55, 0.12) !important;
+    border-left: 3px solid #013E37 !important;
+    font-weight: 600;
+}
+
+[data-md-color-scheme="slate"] .md-nav__item--active > .md-nav__link {
+    color: #4fd1c5 !important;
+}
+
+.md-nav__icon {
+    margin-left: auto;
+}
+
+/* =========================================================
+   🔝 HEADER
+   ========================================================= */
+.md-header {
+    background: #013E37 !important;
+    color: #ffffff !important;
+    box-shadow: none;
+}
+
+/* =========================================================
+   🔗 LINKS
+   ========================================================= */
+.md-typeset a {
+    color: #0f766e;
+    text-decoration: none;
+}
+
+.md-typeset a:hover {
+    color: #0b5c52;
+    text-decoration: underline;
+}
+
+/* =========================================================
+   📝 TIPOGRAFÍA
+   ========================================================= */
+body,
+p,
+li,
+ul,
+ol,
+blockquote,
+pre,
+code,
+table {
+    font-size: 15px !important;
+    line-height: 1.7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+p {
+    text-align: justify;
+}
+
+/* =========================================================
+   📐 LAYOUT (SEGURO Y RESPONSIVE)
+   ========================================================= */
+.md-grid {
+    max-width: 1220px; /* valor estándar Material */
+    margin: 0 auto;
+}
+
+.md-content__inner {
+    margin: 0;
+    padding: 1.5rem;
+    max-width: none;
+}
+
+
+
+/* =========================================================
+   🧾 TABLAS
+   ========================================================= */
+.md-typeset table {
+    border-collapse: collapse;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.md-typeset th {
+    background-color: rgba(1, 62, 55, 0.08);
+}
+
+/* =========================================================
+   🧠 DETALLES EXTRA
+   ========================================================= */
+.md-typeset img {
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.md-typeset pre > code {
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.md-typeset .admonition {
+    border-radius: 4px;
+    border-left: 4px solid #013E37;
+}
+
+/* Limitar ancho del contenido sin romper layout */
+.md-typeset {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   🚀 LAYOUT PRO (TIPO NOTION / DOCUMENTACIÓN MODERNA)
+   ========================================================= */
+
+/* Mantener layout base estable */
+.md-grid {
+    max-width: 1220px;
+    margin: 0 auto;
+}
+
+/* Contenido base */
+.md-content__inner {
+    margin: 0;
+    padding: 2rem 2rem;
+}
+
+/* Contenido centrado y agradable */
+.md-typeset {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* En pantallas grandes → más aire */
+@media screen and (min-width: 1400px) {
+    .md-typeset {
+        max-width: 1000px;
+    }
+}
+
+/* En pantallas pequeñas → mejor ajuste */
+@media screen and (max-width: 900px) {
+    .md-content__inner {
+        padding: 1.5rem 1rem;
+    }
+
+    .md-typeset {
+        max-width: 100%;
+    }
+}

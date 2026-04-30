@@ -1,0 +1,1389 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../8__filtros_avanzados/">
+      
+      
+        <link rel="next" href="../10__operadores_actualizacion/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>9. Métodos en consultas - BD - Gestores NoSQL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sort" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="BD - Gestores NoSQL" class="md-header__button md-logo" aria-label="BD - Gestores NoSQL" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BD - Gestores NoSQL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              9. Métodos en consultas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../1__mongodb/" class="md-tabs__link">
+          
+  
+  
+  MONGODB
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../exercicis_mongo/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Ejercicios
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Actividad_mongo/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Actividad
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="BD - Gestores NoSQL" class="md-nav__button md-logo" aria-label="BD - Gestores NoSQL" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    BD - Gestores NoSQL
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONGODB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MONGODB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1__mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2__estructura_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Estructura JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Instalación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Instalación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.1__Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1 En Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.2__Windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 En Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.3__Docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.3 Con Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4__funcionamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Funcionamiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5__variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6__tipo_datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Tipos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7__crud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Operaciones CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8__filtros_avanzados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Filtros avanzados en consultas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Métodos en consultas
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Métodos en consultas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sort()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        limit()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        skip()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pretty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pretty()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encadenamiento-de-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encadenamiento de métodos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#busquedas-en-documentos-embebidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Búsquedas en documentos embebidos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-parte-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Ejercicio 1 (parte 3)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10__operadores_actualizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Modificadores de actualización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11__Arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12__agregacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Agregación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13__relaciones_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Relaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14__resumen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Resumen Comandos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercicis_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Actividad_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>9. Métodos en consultas</h1>
+
+<p>Los métodos de consulta permiten recuperar la información almacenada en una colección de MongoDB. Mediante estos métodos podemos obtener documentos completos o parciales, aplicar filtros, ordenar los resultados y limitar la cantidad de documentos devueltos. </p>
+<p>El método principal de consulta en MongoDB es find(). Además, existen otros métodos que complementan y amplían su funcionamiento, como <strong>sort(), limit(), skip() y pretty()</strong>.</p>
+<p>Estos métodos pueden utilizarse conjuntamente con find(), encadenándolos al final de la consulta y separados por un punto (.).</p>
+<p>De forma resumida:<br />
+- <strong>sort()</strong> controla el orden de los resultados.<br />
+- <strong>limit()</strong> controla cuántos documentos se devuelven.<br />
+- <strong>skip()</strong> controla cuántos documentos se ignoran.<br />
+- <strong>pretty()</strong> mejora la presentación del resultado por pantalla, sin modificar los datos.  </p>
+<p>Estos métodos <strong>no cambia el contenido de los documentos, ni afecta al rendimiento de la consulta</strong>. Se pueden combinar libremente y son fundamentales para implementar paginación y listados ordenados.</p>
+<p>Sintaxis general:</p>
+<pre><code>    db.coleccion.find(filtro, proyeccion)
+                .sort(criterio)
+                .limit(numero)
+                .skip(numero)
+                .pretty()
+    ``
+</code></pre>
+<h4 id="sort">sort()</h4>
+<p>El método sort() se utiliza para ordenar los documentos devueltos por una consulta según el valor de uno o varios campos.
+Como parámetro recibe un documento JSON, donde:</p>
+<ul>
+<li>1 indica orden ascendente</li>
+<li>-1 indica orden descendente</li>
+</ul>
+<p>Si se indican varios campos, MongoDB ordenará: primero por el primer campo, en caso de empate, por el segundo, y así sucesivamente.</p>
+<p>Ejemplo: ordenar por precio (ascendente)</p>
+<pre><code>&gt; db.libro.find({} , {titulo:1 , precio:1 , editorial:1}).sort({precio:1})
+
+{ "_id" : "9788499088075", "titulo" : "El ladrón de libros", "editorial" : "Debolsillo", "precio" : 9.45 }  
+{ "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "editorial" : "Gigamesh", "precio" : 9.5 }  
+{ "_id" : "9788415140054", "titulo" : "La princesa de hielo", "editorial" : "Embolsillo", "precio" : 11 }  
+{ "_id" : "9788468738895", "titulo" : "Las reglas del juego", "precio" : 15.9 }  
+{ "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "editorial" : "Planeta", "precio" : 17.23 }  
+{ "_id" : "9788408117117", "titulo" : "Circo Máximo", "editorial" : "Planeta", "precio" : 21.75 }  
+{ "_id" : "9788401342158", "titulo" : "El juego de Ripper", "editorial" : "Plaza &amp; Janes", "precio" : 21.75 }
+</code></pre>
+<p>Devuelve una lista con todos los campos y sus valores de la clave. La secuencia es: campo1 valor1 campo2 valor2 ... 
+Pero no podemos fiarnos de que el orden sea el mismo orden que cuando lo definimos.</p>
+<p>Ejemplo: Ordenación por varios campos, editorial  (ascendente) y precio  (descendente)</p>
+<pre><code>&gt; db.libro.find({} , {titulo:1 , precio:1 , editorial:1}).sort({editorial:1 , precio:-1})
+
+{ "_id" : "9788468738895", "titulo" : "Las reglas del juego", "precio" : 15.9 }  
+{ "_id" : "9788499088075", "titulo" : "El ladrón de libros", "editorial" : "Debolsillo", "precio" : 9.45 }  
+{ "_id" : "9788415140054", "titulo" : "La princesa de hielo", "editorial" : "Embolsillo", "precio" : 11 }  
+{ "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "editorial" : "Gigamesh", "precio" : 9.5 }  
+{ "_id" : "9788408117117", "titulo" : "Circo Máximo", "editorial" : "Planeta", "precio" : 21.75 }  
+{ "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "editorial" : "Planeta", "precio" : 17.23 }  
+{ "_id" : "9788401342158", "titulo" : "El juego de Ripper", "editorial" : "Plaza &amp; Janes", "precio" : 21.75 }
+</code></pre>
+<p>Observe cómo el primero es el que no tiene editorial (equivalente a null). Y cómo que hay dos de la editorial Planeta, aparece primero el más caro, y después el más barato (ya que el precio está en orden descendente).</p>
+<h4 id="limit">limit()</h4>
+<p>El método limit() limita el número de documentos devueltos por la consulta a n documentos.</p>
+<p>Ejemplo: </p>
+<pre><code>&gt; db.libro.find(
+      {},
+      { titulo: 1, precio: 1, editorial: 1 }
+    ).limit(3)
+
+
+{ "_id" : "9788408117117", "titulo" : "Circo Máximo", "editorial" : "Planeta", "precio" : 21.75 }  
+{ "_id" : "9788401342158", "titulo" : "El juego de Ripper", "editorial" : "Plaza &amp; Janes", "precio" : 21.75 }  
+{ "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "editorial" : "Gigamesh", "precio" : 9.5 }
+</code></pre>
+<p>Si el número de documentos que cumple la consulta es menor que n, se devolverán todos los disponibles. </p>
+<p>En el siguiente ejemplo:</p>
+<pre><code>&gt; db.libro.find({editorial:"Planeta"} , {titulo:1 , precio:1 , &gt; editorial:1}).limit(3)
+
+{ "_id" : "9788408117117", "titulo" : "Circo Máximo", "editorial" : "Planeta", "precio" : 21.75 }  
+{ "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "editorial": "Planeta", "precio" : 17.23 }
+</code></pre>
+<p>Vemos que el resultado de la consulta es de dos documentos, aunque ponemos límite(3), se devolverá 2 documentos, ya que de la editorial Planeta sólo hay dos libros.</p>
+<h4 id="skip">skip()</h4>
+<p>El método skip() permite omitir los primeros n documentos del resultado. Si hubiera menos documentos de los que se salten, pues no se mostraría ninguna.</p>
+<pre><code>&gt; db.libro.find({} , {titulo:1 , precio:1 , editorial:1}).skip(2)
+
+{ "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "editorial" : "Gigamesh", "precio" : 9.5 }  
+{ "_id" : "9788499088075", "titulo" : "El ladrón de libros", "editorial" : "Debolsillo", "precio" : 9.45 }  
+{ "_id" : "9788415140054", "titulo" : "La princesa de hielo", "editorial" : "Embolsillo", "precio" : 11 }  
+{ "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "editorial" : "Planeta", "precio" : 17.23 }  
+{ "_id" : "9788468738895", "titulo" : "Las reglas del juego", "precio" : 15.9 }
+</code></pre>
+<p>MongoDB ignorará los dos primeros documentos y mostrará el resto.</p>
+<h4 id="pretty">pretty()</h4>
+<p>El método pretty() se utiliza para mejorar la presentación del resultado de una consulta en MongoDB. Hace que los documentos devueltos por un find() se muestren de forma más legible y ordenada, con saltos de línea e indentación.</p>
+<p>Es no modifica los datos ni la consulta, únicamente afecta a cómo se muestran los resultados por pantalla.</p>
+<p>Lo aplicaremos a los libros, donde tenemos más documentos. Y no mostramos todos los campos, para una mejor lectura:</p>
+<pre><code>    &gt;  db.libro.find(      { editorial: "Planeta" },      { titulo: 1, precio: 1, editorial: 1 }    ).pretty()
+</code></pre>
+<p>Este sería el resultado utilizando el método pretty():</p>
+<pre><code>    {
+      "_id" : "9788408117117",
+      "titulo" : "Circo Máximo",
+      "editorial" : "Planeta",
+      "precio" : 21.75
+    }
+    {
+      "_id" : "9788408113331",
+      "titulo" : "Las carreras de Escorpio",
+      "editorial" : "Planeta",
+      "precio" : 17.23
+    }
+</code></pre>
+<h4 id="encadenamiento-de-metodos"><strong>Encadenamiento de métodos</strong></h4>
+<p>Los métodos de consulta en MongoDB pueden encadenarse para construir consultas más completas y precisas. El encadenamiento consiste en aplicar varios métodos consecutivamente sobre el resultado de un find().</p>
+<p>Por ejemplo: </p>
+<pre><code>    db.libro.find(
+            { enstock: true }, 
+            { titulo: 1, precio: 1 } )
+            .sort({ precio: -1 })
+            .limit(3)
+            .pretty()
+</code></pre>
+<p>Esta consulta realiza las siguientes operaciones, en orden:</p>
+<ol>
+<li>Filtra los libros que están en stock.</li>
+<li>Muestra únicamente los campos titulo y precio.</li>
+<li>Ordena los resultados por precio de forma descendente.</li>
+<li>Limita el resultado a 3 documentos.</li>
+<li>Mejora la presentación del resultado mediante pretty().</li>
+</ol>
+<p><strong>Combinación de sort(), skip() y limit()</strong></p>
+<p>Los métodos sort(), skip() y limit() pueden combinarse para obtener subconjuntos concretos de resultados, lo que resulta especialmente útil para paginación o para seleccionar posiciones concretas dentro de un listado ordenado.</p>
+<p>Nota importante: Aunque estos métodos pueden combinarse libremente, el orden lógico es relevante. En la práctica, primero se debe ordenar (sort()), y después saltar (skip()) y limitar (limit()) resultados.</p>
+<p>Ejemplo: Obtener el segundo y tercer libro más caro.</p>
+<pre><code>&gt; db.libro.find({} , {titulo:1 , precio:1 , &gt; editorial:1}).sort({precio:-1}).skip(1).limit(2)
+
+{ "_id" : "9788401342158", "titulo" : "El juego de Ripper", "editorial" : "Plaza &amp; Janes", "precio" : 21.75 }  
+{ "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "editorial" : "Planeta", "precio" : 17.23 }
+</code></pre>
+<p>En este caso: 
+- Se ordenan los libros por precio de mayor a menor.
+- Se descarta el primero (el más caro).
+- Se recuperan los dos siguientes.</p>
+<h3 id="busquedas-en-documentos-embebidos"><strong>Búsquedas en documentos embebidos</strong></h3>
+<p>Para realizar búsquedas en campos que a su vez son objetos (o documentos
+dentro de documentos, en la terminología de Mongo), sólo debemos poner la ruta de
+las llaves separando por medio de puntos, y cuidar de ponerla entre comillas.</p>
+<p>Así, por ejemplo, vamos a hacer una consulta sobre la colección de alumnos, que
+eran unos documentos en los que existía algún campo de tipo objeto.</p>
+<pre><code>&gt; db.alumnos.find().pretty()
+
+{  
+    "_id" : ObjectId("56debe3017bf4ed437dc77c8"),  
+    "nombre" : "Abel",  
+    "apellidos" : "Bernat Cantera",  
+    "edad" : 22,  
+    "dirección" : {  
+    "calle" : "Mayor",  
+    "numero" : 7,  
+    "cp" : "12502"  
+    },  
+    "nota" : [  
+        9.5,  
+        9  
+    ]  
+}  
+{  
+"_id" : ObjectId("56dfdbd136d8b095cb6bd57a"),  
+"nombre" : "Berta",  
+"apellidos" : "Bernat Cantero"  
+}
+</code></pre>
+<p>Se podrían mostrar los documentos (los alumnos) que viven en el código postal
+12502. Nos debe salir el único alumno del que tenemos la dirección, que justamente tiene
+este código postal. Recuerde que en la clave (realmente clave.subclave), debe ir
+entre comillas. Hemos puesto al final <strong>pretty()</strong> para una mejor lectura, pero
+evidentemente no es necesario.</p>
+<pre><code>&gt; db.alumnos.find({"dirección.cp": "12502"}).pretty()
+
+{  
+    "_id" : ObjectId("56debe3017bf4ed437dc77c8"),  
+    "nombre" : "Abel",  
+    "apellidos" : "Bernat Cantera",  
+    "edad" : 22,  
+    "dirección" : {  
+        "calle" : "Mayor",  
+        "numero" : 7,  
+        "cp" : "12502"  
+    },  
+    "nota" : [  
+        9.5,  
+        9  
+    ]  
+}
+</code></pre>
+<p>Y funcionaría igual con cualquier número de subniveles, es decir, documentos
+que tienen objetos, los cuales tienen objetos, ... Y también con otros tipos
+de operadores, o expresiones regulares, ...</p>
+<p>Por ejemplo, todos los alumnos de Castellón (el código postal debe empezar por
+12 y contener 3 cifras más, es decir, carácter del 0 al 9 y 3 veces.</p>
+<pre><code>&gt; db.alumnos.find({"dirección.cp": /^12[0-9]{3}/}).pretty()
+
+{  
+    "_id" : ObjectId("56debe3017bf4ed437dc77c8"),  
+    "nombre" : "Abel",  
+    "apellidos" : "Bernat Cantera",  
+    "edad" : 22,  
+    "dirección" : {  
+        "calle" : "Mayor",  
+        "numero" : 7,  
+        "cp" : "12502"  
+    },  
+    "nota" : [  
+        9.5,  
+        9  
+    ]  
+}
+</code></pre>
+<h3 id="ejercicio-1-parte-3">📚 <strong>Ejercicio 1 (parte 3)</strong></h3>
+<ul>
+<li>17- Obtener el listado completo de películas ordenadas por año de estreno en orden ascendente (de la más antigua a la más reciente).</li>
+<li>18- Mostrar únicamente las tres primeras películas del resultado de la consulta.</li>
+<li>19- Omitir las dos primeras películas y mostrar todas las restantes.</li>
+<li>20- Obtener las películas dirigidas por Quentin Tarantino, ordenadas por año de estreno.</li>
+<li>21- Mostrar las dos películas más recientes según el año de estreno.</li>
+<li>22- Buscar las películas cuyo título contenga la palabra "Hobbit", ordenarlas por el título y limitar el resultado a dos documentos.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../8__filtros_avanzados/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 8. Filtros avanzados en consultas">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                8. Filtros avanzados en consultas
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../10__operadores_actualizacion/" class="md-footer__link md-footer__link--next" aria-label="Next: 10. Modificadores de actualización">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                10. Modificadores de actualización
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.integrate", "navigation.footer", "navigation.path"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

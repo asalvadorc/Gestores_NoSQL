@@ -1,0 +1,1476 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../11__Arrays/">
+      
+      
+        <link rel="next" href="../13__relaciones_mongo/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>12. Agregación - BD - Gestores NoSQL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#match" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="BD - Gestores NoSQL" class="md-header__button md-logo" aria-label="BD - Gestores NoSQL" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BD - Gestores NoSQL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              12. Agregación
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../1__mongodb/" class="md-tabs__link">
+          
+  
+  
+  MONGODB
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../exercicis_mongo/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Ejercicios
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Actividad_mongo/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Actividad
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="BD - Gestores NoSQL" class="md-nav__button md-logo" aria-label="BD - Gestores NoSQL" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    BD - Gestores NoSQL
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONGODB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MONGODB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1__mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2__estructura_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Estructura JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Instalación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Instalación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.1__Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1 En Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.2__Windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 En Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.3__Docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.3 Con Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4__funcionamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Funcionamiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5__variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6__tipo_datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Tipos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7__crud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Operaciones CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8__filtros_avanzados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Filtros avanzados en consultas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9__operadores_consulta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Métodos en consultas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10__operadores_actualizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Modificadores de actualización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11__Arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Agregación
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Agregación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#match" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        $match
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        $project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        $group
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        $sort
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        $limit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        $skip
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Ejercicio 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13__relaciones_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Relaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14__resumen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Resumen Comandos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercicis_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Actividad_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>12. Agregación</h1>
+
+<p><img alt="alto texto" src="../image-1.png" /></p>
+<p>La agregación nos permitirá realizar consultas muy avanzadas. Es un proceso un poco
+complicado pero muy potente. Nos dará una potencia casi como la del SQL cuando
+empezamos a utilizar el GROUP BY y HAVING.</p>
+<p>La técnica que se utiliza es la del <em><strong>pipeline</strong></em> , es decir hacer una serie de
+comandos, cada uno toma los datos que proporciona el anterior y a su
+vez proporciona los datos al siguiente comando. De esta forma se tratará
+un conjunto de documentos y se harán "operaciones" sobre ellos secuencialmente en
+bloques: filtrado, proyección, agrupaciones, ordenación, limitación y <em>skipping</em>
+(saltar algunos).</p>
+<pre><code>db.collectionName.aggregate(pipeline, options),
+</code></pre>
+<p>donde:<br />
+- collectionName - es el número de una colección,<br />
+- pipeline - es un array que contiene las etapas de agregación,<br />
+- options - parámetros opcionales para la agregación   </p>
+<pre><code>pipeline=  
+  _operador $match_,
+  _operador $project_,
+  _operador $group_ , 
+  _operador $sort_ , 
+  _operador $limit_ , 
+  _operador $skip_
+</code></pre>
+<p>Cada parámetro del aggregate, es decir, cada operador tendrá formato JSON, y por tanto siempre será del estilo:</p>
+<pre><code>{ $operador : { clave: valor , ... } }
+</code></pre>
+<p>El orden de los operadores puede cambiar, pero debemos tener en cuenta que los
+comandos se ejecutan en el orden en que los ponemos (de izquierda a derecha). Así,
+por ejemplo, puede ser muy conveniente poner el primer operador el $match, que
+es el de seleccionar documentos, así las demás operaciones se realizarán sobre
+menos documentos e irán más rápidas.</p>
+<h4 class="azul" id="match">$match</h4>
+<p>Servirá para filtrar los documentos. Entonces, la agregación sólo afectará a los
+documentos seleccionados. Se pueden utilizar todos los operadores que hemos ido
+estudiante.</p>
+<p>El siguiente ejemplo selecciona los documentos de la editorial Planeta. Lo hace por
+medio de <strong>aggregate</strong> , pero como no hacemos nada más, sencillamente selecciona los
+documentos.</p>
+<pre><code>&gt; db.libro.aggregate({$match:{editorial:"Planeta"}})
+</code></pre>
+<p>En el siguiente ejemplo, además de seleccionar los de la editorial Planeta después
+aplicamos una proyección sobre los campos título y editorial, para poder
+visualizar mejor el resultado.</p>
+<pre><code>&gt; db.libro.aggregate({$match:{editorial:"Planeta"}},{$project:{titulo:1,editorial:1}})
+
+{ "_id" : "9788408117117", "titulo" : "Circo Máximo", "editorial" : "Planeta"}  
+{ "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "editorial": "Planeta" }
+</code></pre>
+<h4 class="azul" id="project">$project</h4>
+<p>Nos permite proyectar sobre determinados campos del documento, pero es mucho más
+completo que en la proyección "normal" que habíamos hecho hasta ahora, puesto que permite
+también renombrar campos, realizar cálculos, etc.</p>
+<p><strong>Proyección</strong></p>
+<p>La forma más sencilla, evidentemente es proyectar sobre algunos campos de los
+existentes, y el funcionamiento es idéntico al de la otra vez (valores 1 para
+que aparezcan, 0 para que no aparezcan; por defecto<strong>_id</strong> siempre aparece):</p>
+<pre><code>&gt; db.libro.aggregate({$project:{titulo:1,editorial:1}})
+
+{ "_id" : "9788408117117", "titulo" : "Circo Máximo", "editorial" : "Planeta" }  
+{ "_id" : "9788401342158", "titulo" : "El juego de Ripper", "editorial" : "Plaza &amp; Janes" }  
+{ "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "editorial" : "Gigamesh" }  
+{ "_id" : "9788499088075", "titulo" : "El ladrón de libros", "editorial" : "Debolsillo" }  
+{ "_id" : "9788415140054", "titulo" : "La princesa de hielo", "editorial" : "Embolsillo" }  
+{ "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "editorial" : "Planeta" }  
+{ "_id" : "9788468738895", "titulo" : "Las reglas del juego" }
+</code></pre>
+<p><strong class="azul">Renombrar</strong></p>
+<p><strong>$project</strong> también nos permite renombrar campos existentes (después veremos que también
+cálculos). La forma será poner de este modo:</p>
+<pre><code>{ $project : { "nombre_nuevo" : "$camp_viejo" }}
+</code></pre>
+<p>El secreto está en el dólar que va frente al campo viejo, ya que de ésta
+modo nos referimos al valor de este campo. Así por ejemplo renombramos el campo
+<strong>enstock</strong> a <strong>disponible</strong> , aparte de sacar el título:</p>
+<pre><code>&gt; db.libro.aggregate({$project:{titulo:1 , disponible:"$enstock"}})
+
+{ "_id" : "9788408117117", "titulo" : "Circo Máximo", "disponible" : true }  
+{ "_id" : "9788401342158", "titulo" : "El juego de Ripper", "disponible" : true }  
+{ "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1" disponible" : true }  
+{ "_id" : "9788499088075", "titulo" : "El ladrón de libros", "disponible" : false }  
+{ "_id" : "9788415140054", "titulo" : "La princesa de hielo", "disponible" : true }  
+{ "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "disponible" : false }  
+{ "_id" : "9788468738895", "titulo" : "Las reglas del juego", "disponible" : true }
+</code></pre>
+<p><strong class="azul">Campos calculados</strong></p>
+<p>Con este nombre genérico nos referiremos a todos los cálculos, expresiones y más
+cosas que podremos poner para transformar lo que ya tenemos. Como vemos, esto es
+mucho más potente que la proyección normal.</p>
+<ul>
+<li><strong>Expresiones matemáticas</strong> : Podremos aplicar fórmulas para sumar (<strong>$add</strong>), restar (<strong>$subtract</strong>), multiplicar (<strong>$multiply</strong>), dividir (<strong>$divide</strong>) y más cosas (potencia, raíz cuadrada, valor absoluto, módulo, ...). Cada operación tiene su operador que será una palabra precedida por el dólar, y con la sintaxis de JSON, donde pondremos a los operandos en un array. </li>
+</ul>
+<p>Por ejemplo, sacaremos título del libro, precio y precio en pesetas (multiplicante
+por 166.386)</p>
+<pre><code>&gt; db.libro.aggregate({$project:{titulo:1 , precio:1 , precio_pesetas:{$multiply:["$precio" , 166.386]}}})
+
+{ "_id" : "9788408117117", "titulo" : "Circo Máximo", "precio" : 21.75, "precio_pesetas" : 3618.8955 }  
+{ "_id" : "9788401342158", "titulo" : "El juego de Ripper", "precio" : 21.75, "precio_pesetas" : 3618.8955 }  
+{ "_id" : "9788496208919", "titulo" : "Juego de tronos: Canción de hielo y fuego 1", "precio" : 9.5, "precio_pesetas" : 1580.667 }  
+{ "_id" : "9788499088075", "titulo" : "La ladrona de libros", "precio" : 9.45, "precio_pesetas" : 1572.34769999999998 }  
+{ "_id" : "9788415140054", "titulo" : "La princesa de hielo", "precio" : 11, "precio_pesetas" : 1830.24599999999999 }  
+{ "_id" : "9788408113331", "titulo" : "Las carreras de Escorpio", "precio" : 17.23, "precio_pesetas" : 2866.83078 }  
+{ "_id" : "9788468738895", "titulo" : "Las reglas del juego", "precio" : 15.9, "precio_pesetas" : 2645.5374 }
+</code></pre>
+<ul>
+<li><strong>Expresiones de fechas</strong> : Ya veremos y ya podemos ir intuyendo que muchas agregaciones estarán basadas en el tiempo, para poder realizar consultas de documentos de la semana pasada, o el mes pasado, ... Para poder realizar estas agregaciones, hay un conjunto de expresiones que permiten extraer fácilmente de una fecha su día, mes, año, ... en forma de número</li>
+</ul>
+<p>Son las expresiones: <strong>$year, $month, $week, $dayOfMonth, $DayOfWeek,
+$dayOfYear, $hour, $minute</strong> y <strong>$second</strong>.</p>
+<p>En el siguiente ejemplo sacaremos todos los documentos, proyectando por la fecha, año
+y mas:</p>
+<pre><code>&gt; db.libro.aggregate({$project : {fecha:1 , año:{$year:"$fecha"} , mes:{$month:"$fecha"}}})
+
+{ "_id" : "9788408117117", "hecha" : ISODate("2013-08-29T00:00:00Z"), "año" : 2013, "mes" : 8 }  
+{ "_id" : "9788401342158", "hecha" : ISODate("2014-03-01T00:00:00Z"), "año" : 2014, "mes" : 3 }  
+{ "_id" : "9788496208919", "hecha" : ISODate("2011-11-24T00:00:00Z"), "año" : 2011, "mes" : 11 }  
+{ "_id" : "9788499088075", "hecha" : ISODate("2009-01-09T00:00:00Z"), "año" : 2009, "mes" : 1 }  
+{ "_id" : "9788415140054", "hecha" : ISODate("2012-10-30T00:00:00Z"), "año" : 2012, "mes" : 10 }  
+{ "_id" : "9788408113331", "hecha" : ISODate("2013-06-04T00:00:00Z"), "año" : 2013, "mes" : 6 }  
+{ "_id" : "9788468738895", "hecha" : ISODate("2014-02-06T00:00:00Z"), "año" : 2014, "mes" : 2 }
+</code></pre>
+<ul>
+<li>
+<p><strong>Expresiones de strings</strong> : Nos permiten manipular los strings para extraer subcadenas, concatenar, pasar a mayúsculas o minúsculas. Éstas son algunas de las funciones:</p>
+<blockquote>
+<ul>
+<li><strong>$substr : [exp , inicio , longitud]</strong> : extrae una subcadena del string del primer parámetro, desde la posición que indica el segundo parámetro (o primer carácter) y tantos caracteres como el tercer parámetro</li>
+<li><strong>$concat : [ exp1 , exp2 , ...]</strong> : concatena las expresiones que hay en el array</li>
+<li><strong>$toLower : exp</strong> y <strong>$toUpper : exp</strong> : convierten la expresión a mayúsculas y minúsculas respectivamente</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>Por ejemplo, vamos a sacar el título de los libros con el autor entre paréntesis:</p>
+<pre><code>&gt; db.libro.aggregate({$project: { "Libro:" : {$concat : ["$titulo" , " (" , "$autor" , ")"]}}})
+
+{ "_id" : "9788408117117", "Libro:" : "Circo Máximo (Santiago Posteguillo)" }  
+{ "_id" : "9788401342158", "Libro:" : "El juego de Ripper (Isabel Allende)" }  
+{ "_id" : "9788496208919", "Libro:" : "Juego de tronos: Canción de hielo y fuego 1 (George R.R. Martin)" }  
+{ "_id" : "9788499088075", "Libro:" : "El ladrón de libros (Markus Zusak)" }  
+{ "_id" : "9788415140054", "Libro:" : "La princesa de hielo (Camilla Lackberg)" }  
+{ "_id" : "9788408113331", "Libro:" : "Las carreras de Escorpio (Maggie Stiefvater)" }  
+{ "_id" : "9788468738895", "Libro:" : "Las reglas del juego (Anna Casanovas)"}
+</code></pre>
+<p>Y ahora lo mismo, pero con el título en mayúsculas:</p>
+<pre><code>&gt; db.libro.aggregate({$project: { "Libro:" : {$concat : [{$toUpper:"$titulo"}, " (" , "$autor" , ")"]}}})
+
+{ "_id" : "9788408117117", "Libro:" : "CIRCO MáXIMO (Santiago Posteguillo)" }  
+{ "_id" : "9788401342158", "Libro:" : "EL JUEGO DE RIPPER (Isabel Allende)" }  
+{ "_id" : "9788496208919", "Libro:" : "JUEGO DE TRONOS: CANCIóN DE HIELO Y FUEGO 1 (George R.R. Martin)" }  
+{ "_id" : "9788499088075", "Libro:" : "LA LADRONA DE LIBROS (Markus Zusak)" }  
+{ "_id" : "9788415140054", "Libro:" : "LA PRINCESA DE HIELO (Camilla Lackberg)" }  
+{ "_id" : "9788408113331", "Libro:" : "LAS CARRERAS DE ESCORPIO (Maggie Stiefvater)" }  
+{ "_id" : "9788468738895", "Libro:" : "LAS REGLAS DEL JUEGO (Anna Casanovas)" }
+</code></pre>
+<h4 class="azul" id="group">$group</h4>
+<p>Realiza grupos sobre los documentos seleccionados previamente, para valores
+iguales del campo o expresiones que determinemos. Posteriormente, con los grupos,
+podremos realizar operaciones, como sumar o sacar la media de alguna cantidad
+de los documentos del grupo, o el máximo o mínimo, ...</p>
+<p>Para poder agrupar, deberemos definir como <strong>_id</strong> del grupo el campo o campos
+por cuyos valores queremos agrupar. Por ejemplo, si queremos agrupar los
+libros para la editorial, deberemos definir el <strong>_id</strong> del grupo el campo
+editorial</p>
+<pre><code>$group : { "_id" : _campo o campos_ }
+</code></pre>
+<p>Si agrupamos por un único campo, sencillamente lo ponemos con un dólar frente y entre
+comillas. Si es más de un campo, los ponemos como objeto. Por ejemplo, agrupamos
+por editorial:</p>
+<pre><code>&gt; db.libro.aggregate( { $group : { "_id" : "$editorial" } } )
+
+{ "_id" : "Debolsillo" }  
+{ "_id" : null }  
+{ "_id" : "Gigamesh" }  
+{ "_id" : "Embolsillo" }  
+{ "_id" : "Plaza &amp; Janes" }  
+{ "_id" : "Planeta" }
+</code></pre>
+<p>Podemos observar cómo existe algún libro que no tiene editorial.</p>
+<p>Ahora agrupamos por año de publicación (lo extraeremos del campo <strong>fecha</strong>):</p>
+<pre><code>&gt; db.libro.aggregate( { $group : { "_id" : { "año" : { $year : "$fecha" } } }} )
+
+{ "_id" : { "año" : 2012 } }  
+{ "_id" : { "año" : 2009 } }  
+{ "_id" : { "año" : 2011 } }  
+{ "_id" : { "año" : 2014 } }  
+{ "_id" : { "año" : 2013 } }
+</code></pre>
+<p>Y ahora agrupamos por editorial y año de publicación (los dos libros de Planeta
+son del 2013)</p>
+<pre><code>&gt; db.libro.aggregate( { $group : { "_id" : { "Editorial" : "$editorial" , "año" : { $year : "$fecha" } } } } )
+
+{ "_id" : { "Editorial" : "Embolsillo", "año" : 2012 } }  
+{ "_id" : { "año" : 2014 } }  
+{ "_id" : { "Editorial" : "Debolsillo", "año" : 2009 } }  
+{ "_id" : { "Editorial" : "Gigamesh", "año" : 2011 } }  
+{ "_id" : { "Editorial" : "Plaza &amp; Janes", "año" : 2014 } }  
+{ "_id" : { "Editorial" : "Planeta", "año" : 2013 } }
+</code></pre>
+<p><strong class="azul">Operadores de agrupación</strong></p>
+<p>Nos permitirán realizar alguna operación sobre los documentos del grupo. Se ponen como
+segundo parámetro del grupo (después de la definición del <strong>_id</strong>).</p>
+<ul>
+<li><strong>$sum : valor</strong> : sumará el valor de todos los documentos del grupo. El valor puede ser un campo numérico, o algo más complicado.</li>
+<li><strong>$avg : valor</strong> : calculará la media de los valores para los documentos del grupo</li>
+<li><strong>$max : valor</strong> : máximo</li>
+<li><strong>$min : valor</strong> : mínimo</li>
+<li><strong>$first : exp</strong> : tomará el primer valor de la expresión del grupo, ignorando las demás del grupo</li>
+<li><strong>$last : exp</strong> : cogerá el último</li>
+</ul>
+<p>La documentación dice que también existe el operador <strong>$count</strong> , pero a partir
+de una determinada versión. Se puede sustituir su utilización por el operador
+<strong>$sum</strong> , sumando la cantidad 1.</p>
+<p>Por ejemplo, la suma de los precios de los libros de cada editorial:</p>
+<pre><code>&gt; db.libro.aggregate( { $group : { "_id" : "$editorial" , "suma_precios" : {$sum : "$precio"} } } )
+
+{ "_id" : "Debolsillo", "suma_precios" : 9.45 }  
+{ "_id" : null, "suma_precios" : 15.9 }  
+{ "_id" : "Gigamesh", "suma_precios" : 9.5 }  
+{ "_id" : "Embolsillo", "suma_precios" : 11 }  
+{ "_id" : "Plaza &amp; Janes", "suma_precios" : 21.75 }  
+{ "_id" : "Planeta", "suma_precios" : 38.980000000000004 }
+</code></pre>
+<p>O la media de los precios de cada año:</p>
+<pre><code>&gt; db.libro.aggregate( { $group : { "_id" : { "año" : { $year : "$fecha" } } , "media precios" : { $avg : "$precio" } } } )
+
+{ "_id" : { "año" : 2012 }, "media precios" : 11 }  
+{ "_id" : { "año" : 2009 }, "media precios" : 9.45 }  
+{ "_id" : { "año" : 2011 }, "media precios" : 9.5 }  
+{ "_id" : { "año" : 2014 }, "media precios" : 18.825 }  
+{ "_id" : { "año" : 2013 }, "media precios" : 19.490000000000002 }
+</code></pre>
+<p>Y ahora intentamos contar la cantidad de libros de cada editorial:</p>
+<pre><code>&gt; db.libro.aggregate( { $group : { "_id" : "$editorial" , "cuántos" : { $sum : 1} } } )
+
+{ "_id" : "Debolsillo", "cuántos" : 1 }  
+{ "_id" : null, "cuántos" : 1 }  
+{ "_id" : "Gigamesh", "cuántos" : 1 }  
+{ "_id" : "Embolsillo", "cuántos" : 1 }  
+{ "_id" : "Plaza &amp; Janes", "cuántos" : 1 }  
+{ "_id" : "Planeta", "cuántos" : 2 }
+</code></pre>
+<h4 class="azul" id="sort">$sort</h4>
+<p>Sirve para ordenar y sigue la misma sintaxis que en las consultas normal
+(1: orden ascendente; -1: orden descendente). Podremos ordenar por los campos normales
+o por campos clalculados.</p>
+<p>Por ejemplo ordenamos por la suma de precios de cada editorial:</p>
+<pre><code>&gt; db.libro.aggregate( { $group : { "_id" : "$editorial" , "suma_precios" : { $sum : "$precio"} } } , { $sort : { suma_precios : 1 } })
+
+{ "_id" : "Debolsillo", "suma_precios" : 9.45 }  
+{ "_id" : "Gigamesh", "suma_precios" : 9.5 }  
+{ "_id" : "Embolsillo", "suma_precios" : 11 }  
+{ "_id" : null, "suma_precios" : 15.9 }  
+{ "_id" : "Plaza &amp; Janes", "suma_precios" : 21.75 }  
+{ "_id" : "Planeta", "suma_precios" : 38.980000000000004 }
+</code></pre>
+<p>Y ahora ordenamos de forma descendente por la media de precios de cada año:</p>
+<pre><code>&gt; db.libro.aggregate( { $group : { "_id" : {"año":{$year:"$fecha"}} , "media precios":{$avg:"$precio"} } } , {$sort:{"media precios":-1}})
+
+{ "_id" : { "año" : 2013 }, "media precios" : 19.490000000000002 }  
+{ "_id" : { "año" : 2014 }, "media precios" : 18.825 }  
+{ "_id" : { "año" : 2012 }, "media precios" : 11 }  
+{ "_id" : { "año" : 2011 }, "media precios" : 9.5 }  
+{ "_id" : { "año" : 2009 }, "media precios" : 9.45 }
+</code></pre>
+<h4 class="azul" id="limit">$limit</h4>
+<p>Limita el resultado del agregado al número indicado.</p>
+<p>Por ejemplo, los tres años en promedio de precios más cara. Es como el último
+ejemplo, añadiendo el límite:</p>
+<pre><code>&gt; db.libro.aggregate({$group:{"_id":{"año":{$year:"$fecha"}},"media precios":{$avg:"$precio"}}} , {$sort:{"media precios":-1}} , {$limit:3})
+
+{ "_id" : { "año" : 2013 }, "media precios" : 19.490000000000002 }  
+{ "_id" : { "año" : 2014 }, "media precios" : 18.825 }  
+{ "_id" : { "año" : 2012 }, "media precios" : 11 }
+</code></pre>
+<h4 class="azul" id="skip">$skip</h4>
+<p>Salta el número indicado</p>
+<p>En el ejemplo anterior, ahora saltamos los 3 primeros:</p>
+<pre><code>&gt; db.libro.aggregate({$group:{"_id":{"año":{$year:"$fecha"}},"media precios":{$avg:"$precio"}}} , {$sort:{"media precios":-1}} , {$skip:3})
+
+{ "_id" : { "año" : 2011 }, "media precios" : 9.5 }  
+{ "_id" : { "año" : 2009 }, "media precios" : 9.45 }
+</code></pre>
+<h3 id="ejercicio-2">📚 <strong>Ejercicio 2</strong></h3>
+<p>Sobre tu Base de Datos <strong>MONGODB</strong> trabajaremos sobre la colección
+<strong>libro</strong>, la misma que hemos utilizado en los ejemplos. Realiza las siguientes consultas. Cópialas en un único archivo de texto, de forma numerada. Es este archivo el que tendrás que subir.</p>
+<ol>
+<li>Busca los libros de la editorial Planeta. Ver únicamente título y editorial.</li>
+<li>Busca los libros con más de 500 páginas. Ver _id, título y número de páginas.</li>
+<li>Busca los libros del año 2014. Ver únicamente título y fecha.</li>
+<li>Busca los libros de la editorial Planeta de más de 500 páginas. Ver únicamente título, editorial y páginas.</li>
+<li>Busca los libros sin editorial. Ver únicamente título y editorial.</li>
+<li>Busca los libros que en el resumen contienen la palabra <strong>caballo</strong>. Visualiza el resumen para comprobarlo. Tienen que salir 2 libros, <strong>Circo máximo</strong> y <strong>Las carreras de Escorpio</strong>.</li>
+<li>
+<p>Utilizando la función <strong>aggregate</strong> , saca la editorial y la media de páginas de aquellas editoriales que tienen una media de páginas superior a 500. Saldrán 3 editoriales.</p>
+</li>
+<li>
+<p>Incrementar el precio de los libros de la editorial Planeta en 2€ (recuerde que para modificar más de un documento, debemos poner como tercer parámetro la opción <strong>{multi:true}</strong>).</p>
+</li>
+<li>Crear el campo editorial con el valor nulo, para todos aquellos documentos que carezcan del campo editorial.</li>
+<li>Realizar la operación inversa: eliminar el campo editorial para todos aquellos que lo tengan nulo.</li>
+<li>Sacar el año del libro, a partir de la <strong>fecha</strong> (será un campo calculado llamado <strong>año</strong>).</li>
+<li>Aprovecha el campo anterior para sacar los libros estrictamente anteriores al año 2013. Visualiza <strong>titulo</strong> , <strong>fecha</strong> y <strong>año</strong>.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../11__Arrays/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 11. Arrays">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                11. Arrays
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../13__relaciones_mongo/" class="md-footer__link md-footer__link--next" aria-label="Next: 13. Relaciones">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                13. Relaciones
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.integrate", "navigation.footer", "navigation.path"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

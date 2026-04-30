@@ -1,0 +1,1521 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../10__operadores_actualizacion/">
+      
+      
+        <link rel="next" href="../12__agregacion/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>11. Arrays - BD - Gestores NoSQL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#acceso-utilizacion-del-punto-y-las-comillas-dobles" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="BD - Gestores NoSQL" class="md-header__button md-logo" aria-label="BD - Gestores NoSQL" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BD - Gestores NoSQL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              11. Arrays
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../1__mongodb/" class="md-tabs__link">
+          
+  
+  
+  MONGODB
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../exercicis_mongo/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Ejercicios
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Actividad_mongo/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Actividad
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="BD - Gestores NoSQL" class="md-nav__button md-logo" aria-label="BD - Gestores NoSQL" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    BD - Gestores NoSQL
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MONGODB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MONGODB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1__mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2__estructura_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Estructura JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Instalación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3. Instalación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.1__Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1 En Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.2__Windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 En Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.3__Docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.3 Con Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4__funcionamiento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Funcionamiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5__variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6__tipo_datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Tipos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7__crud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Operaciones CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8__filtros_avanzados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Filtros avanzados en consultas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9__operadores_consulta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Métodos en consultas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10__operadores_actualizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Modificadores de actualización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Arrays
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#acceso-utilizacion-del-punto-y-las-comillas-dobles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceso: utilización del punto (.) y las comillas dobles (")
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consultas-in-nin-all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consultas: $in, $nin, $all
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizacion-y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actualización: $ y $[]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insercion-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inserción: $push
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminacion-pop-y-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eliminación: $pop y $pull
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-parte-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Ejercicio 1 (parte 5)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12__agregacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Agregación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13__relaciones_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Relaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14__resumen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Resumen Comandos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercicis_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Actividad_mongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>11. Arrays</h1>
+
+<h2 id="acceso-utilizacion-del-punto-y-las-comillas-dobles">Acceso: utilización del punto (.) y las comillas dobles (")</h2>
+<p>Para acceder directamente a un elemento de un array de un determinado documento se
+puede utilizar la siguiente sintaxis:</p>
+<pre><code>"array.index"
+</code></pre>
+<p>Debemos tener en cuenta en los arrays en MongoDB <strong>comienzan en el índice 0,</strong> es decir, el primer elemento siempre tiene subíndice 0. </p>
+<p>Al acceder a un elemento concreto del array mediante su índice, es obligatorio <strong>encerrar la clave completa entre comillas dobles</strong> para que MongoDB pueda interpretarla correctamente. </p>
+<p>Si se indica un subíndice que no existe en el array, la operación no devolverá ningún resultado (en consultas) o no se realizará ninguna modificación (en actualizaciones).</p>
+<p>_Por ejemplo, vamos a subir un punto la primera nota del alumno que estamos
+_utilizando en todos los ejemplos (debemos utilizar la opearción sw actualización CRUD update()):</p>
+<pre><code>&gt;db.alumnos.**updateOne**( {nombre:"Abel"} , { $inc : { **"nota.0"** : 1 } } )
+
+&gt; db.alumnos.find()  
+{  
+    "_id" : ObjectId("56df11d778549bdfbf2125e3"),  
+    "nombre" : "Abel",  
+    "apellidos" : "Bernat Carrera",  
+    "edad" : 22,  
+    "dirección" : {  
+        "calle" : "Mayor",  
+        "numero" : 7,  
+        "cp" : "12502"  
+    },  
+    "nota" : [  
+        9.5,  
+        7.5,  
+        9  
+    ]  
+}
+</code></pre>
+<h2 id="consultas-in-nin-all">Consultas: $in, $nin, $all</h2>
+<p><strong class="azul">sin operador</strong></p>
+<p>Las consultas dentro de arrays de Mongo son muy sencillas.</p>
+<p>La más sencilla es cuando buscamos un valor de un tipo sencillo, y en ese caso
+lo que hará Mongo es buscar en todo el array por si está ese valor. Es decir,
+exactamente igual que lo que hemos hecho hasta ahora.</p>
+<pre><code>    db.collection.find ( { clave_array : valor } )
+</code></pre>
+<p>Mirémoslo en un ejemplo. Vamos a crear dos documentos que tengan un array
+cada uno, por ejemplo de colores. Lo creamos en una colección nueva, llamada
+<strong>colores</strong> , en dos documentos con el mismo campo de tipo array, <strong>color</strong> ,
+pero con datos diferentes:</p>
+<pre><code>&gt; db.colores.insert({color: ["rojo","azul","amarillo"]})  
+&gt; db.colores.insert({color: ["negro","blanco","rojo"]})  
+&gt; db.colores.find()
+{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "rojo", "azul", "amarillo" ] }  
+{ "_id" : ObjectId("56e14398f6663c8169030e0a"), "color" : [ "negro", "blanco", "rojo" ] }
+</code></pre>
+<p>Como se ve en la sintaxis, elegir los documentos que tienen un campo (en este caso
+de array) que contenga un valor, es igual de sencillo que cuando se trata de un
+campo de tipo string, por ejemplo:</p>
+<pre><code>&gt; db.colores.find({color:"rojo"})
+
+{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "rojo", "azul", "amarillo" ] }  
+{ "_id" : ObjectId("56e14398f6663c8169030e0a"), "color" : [ "negro", "blanco", "rojo" ] }
+</code></pre>
+<p>También se pueden utilizar <strong>expresiones regulares</strong> :</p>
+<p><em>Por ejemplo, buscar colores que contengan ro (como el <strong>ro</strong>jo , el neg<strong>ro</strong>):</em></p>
+<pre><code>&gt; db.colores.find({color: /ro/ })
+
+{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "rojo", "azul", "amarillo" ] }  
+{ "_id" : ObjectId("56e14398f6663c8169030e0a"), "color" : [ " Siguiendo con la base de datos **cine**, realiza los siguientes ejercicios:negro", "blanco", "rojo" ] }
+</code></pre>
+<p>También podemos utilizar los siguientes operadores:</p>
+<p><strong class="azul">$in</strong></p>
+<p>Busca documentos cuyo array contenga al menos uno de los valores indicados. <strong>Equivale a un OR​</strong>. La sitaxis es:</p>
+<pre><code>clave : { $in : [valor1 , valor2 , ... , valorN] }
+</code></pre>
+<p>En el ejemplo, mostrará los documentos que contiene el color amarillo o el lila.</p>
+<blockquote>
+<p>db.colores.find({color: {$in : ["amarillo","lila"]} })</p>
+</blockquote>
+<pre><code>{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "rojo", "azul", "amarillo" ] }
+</code></pre>
+<p><strong class="azul">$nin</strong></p>
+<p>Busca documentos cuyo array no contenga ninguno de los valores indicados. Es lo contrario a $in. La sintaxis es:</p>
+<pre><code>&gt; db.colores.find({color: {$nin : ["negro"]} })
+
+{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "rojo", "azul", "amarillo" ] }
+</code></pre>
+<p><strong class="azul">$ all</strong></p>
+<p>Busca documentos cuyo array contenga <strong>todos</strong> los valores indicados. <strong>Equivale a un AND.</strong>​</p>
+<p>_Por ejemplo, vamos a buscar los documentos que tienen el color rojo y azul.
+_
+    &gt; db.colores.find({color : { $all : ["rojo","azul"]} })  </p>
+<pre><code>{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "rojo", "azul", "amarillo" ] }
+</code></pre>
+<p><strong class="azul">Subíndice</strong></p>
+<p>Si queremos mirar exactamente una determinada posición del array, podemos
+especificar la posición inmediatamente después de la clave, <strong>separada por un
+punto</strong>. Recuerde que la primera posición es la <strong>0</strong>. Debemos poner <strong>entre
+comillas dobles la clave y la posición</strong>, sino no sabrá encontrarla.</p>
+<p>__Por ejemplo, buscamos los documentos que tienen el rojo en la primera posición.
+_
+    &gt; db.colores.find({"color.0" : "rojo"} )  </p>
+<pre><code>{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "rojo", "azul", "amarillo" ] }
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Acceder a una determinada posición es fácil, pero no es tan fácil acceder a una
+posición calculada, por ejemplo en la última posición. Ya hace falta conocimientos uno
+poco más avanzados de JavaScript, para poner dentro del <strong>find()</strong> una función en
+JavaScript, y actuar dentro de ésta.</p>
+</div>
+<hr />
+<p><strong class="azul">$size</strong></p>
+<p>El operador <strong>$size</strong> nos servirá para hacer condiciones sobre el número
+elementos de un array.</p>
+<p>Por ejemplo, incorporamos 2 documentos nuevos, con 2 y 4 elementos respectivamente, para poder
+comprobarlo:</p>
+<pre><code>&gt; db.colores.insertOne({color: ["negro","blanco"]})
+
+&gt; db.colores.insertOne({color: ["naranja","gris","lila","verde"]})
+
+&gt; db.colores.find()
+
+{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "rojo", "azul", "amarillo" ] }  
+{ "_id" : ObjectId("56e14398f6663c8169030e0a"), "color" : [ "negro", "blanco", "rojo" ] }  
+{ "_id" : ObjectId("56e16972aa3c92aaed389da6"), "color" : [ "negro", "blanco" ] }  
+{ "_id" : ObjectId("56e16990aa3c92aaed389da7"), "color" : [ "naranja", "gris", "lila", "verde" ] }
+</code></pre>
+<p>Ahora vamos a seleccionar los documentos que tienen 4 colores</p>
+<pre><code>&gt; db.colores.find({color:{$size:4}})
+
+{ "_id" : ObjectId("56e16990aa3c92aaed389da7"), "color" : [ "naranja", "gris", "lila", "verde" ] }
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>El operador <strong>$size</strong> sólo admite un valor numérico, y no se pueden concatenar
+expresiones con otros operadores, como por ejemplo intentar la condición de que el
+tamaño del array sea menor o igual a un determinado valor. </p>
+</div>
+<p><strong class="azul">$slice</strong></p>
+<p>El operador <strong>$slice</strong> no es un operador que pueda ponerse en las condiciones
+(criterios), sino que servirá para extraer determinados elementos del array,
+por el número de orden de estos elementos en el array. Sólo podremos ponerlo, pero
+tanto, en el segundo parámetro del <strong>find()</strong>.</p>
+<p>La sintaxis es:</p>
+<pre><code>clave : {$slice : x }
+</code></pre>
+<p>Los valores que puede tomar <strong>x</strong> son:</p>
+<ul>
+<li>Números positivos: será el número de elementos del principio (por la izquierda)</li>
+<li>Números negativos: será el número de elementos del final (por la derecha)</li>
+<li>Un array de 2 elementos (<strong>[x,y]</strong>): mostrará a partir de la posición <strong>x</strong> (0 es el primero), tantos elementos como indique <strong>y</strong></li>
+</ul>
+<p>Por ejemplo, vamos a mostrar los dos primeros colores de cada documento:</p>
+<pre><code>&gt; db.colores.find({} , {color:{$slice:2} })
+
+{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "rojo", "azul" ] }  
+{ "_id" : ObjectId("56e14398f6663c8169030e0a"), "color" : [ "negro", "blanco" ] }  
+{ "_id" : ObjectId("56e16972aa3c92aaed389da6"), "color" : [ "negro", "blanco" ] }  
+{ "_id" : ObjectId("56e16990aa3c92aaed389da7"), "color" : [ "naranja", "gris" ] }
+</code></pre>
+<p>O mostrar el último color:</p>
+<pre><code>&gt; db.colores.find({} , {color:{$slice:-1 }})
+
+{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "amarillo" ] }  
+{ "_id" : ObjectId("56e14398f6663c8169030e0a"), "color" : [ "rojo" ] }  
+{ "_id" : ObjectId("56e16972aa3c92aaed389da6"), "color" : [ "blanco" ] }  
+{ "_id" : ObjectId("56e16990aa3c92aaed389da7"), "color" : [ "verde" ] }
+</code></pre>
+<p>O mostrar el tercer elemento, tengan los que tengan. Recuerde que el segundo
+elemento, es el de la posición 2, y queremos mostrar 1.</p>
+<pre><code>&gt; db.colores.find({} , {color:{$slice:[2,1] }})
+
+{ "_id" : ObjectId("56e1438ff6663c8169030e09"), "color" : [ "amarillo" ] }  
+{ "_id" : ObjectId("56e14398f6663c8169030e0a"), "color" : [ "rojo" ] }  
+{ "_id" : ObjectId("56e16972aa3c92aaed389da6"), "color" : [ ] }  
+{ "_id" : ObjectId("56e16990aa3c92aaed389da7"), "color" : [ "lila" ] }
+</code></pre>
+<h2 id="actualizacion-y">Actualización: $ y $[]</h2>
+<p><strong class="azul">$</strong></p>
+<p>Identifica un elemento en un array para actualizar sin especificar explícitamente la posición del elemento en un array.</p>
+<p>Ejemplo: Modificar la primera nota mayor a 8 en el array nota </p>
+<pre><code>db.alumnos.updateOne(
+  { "_id": ObjectId("56df11d778549bdfbf2125e3"), "nota": { $gt: 8 } },
+  { $set: { "nota.$": 10 } }
+</code></pre>
+<p>)</p>
+<p><strong class="azul">$[]</strong></p>
+<p>El operador $[] se utiliza para actualizar todos los elementos en un array.</p>
+<p>Ejemplo: Aumentar en 1 punto todas las notas en el array nota</p>
+<pre><code>db.alumnos.updateOne(
+    { "_id": ObjectId("56df11d778549bdfbf2125e3") },
+    { $inc: { "nota.$[]": 1 } }
+)
+</code></pre>
+<h2 id="insercion-push">Inserción: $push</h2>
+<p>La forma más sencilla de introducir un elemento en un array es utilizar
+<strong>$push</strong> sin más. Si existía el array, introducirá el o los nuevos elementos en el
+final. Si no existía el array, lo creará con éste o estos elementos.</p>
+<p>La sintaxis es:</p>
+<pre><code>{ $push : { clave : elemento } }
+</code></pre>
+<p>Por ejemplo vamos a añadir una nota al alumno de siempre, y pongámosla diferente
+para ver que se introduce al final:</p>
+<pre><code>&gt; db.alumnos.updateOne( {nombre:"Abel"} , { $push : { nota : 7 } } )
+
+
+&gt; db.alumnos.find()  
+{  
+    "_id" : ObjectId("56df11d778549bdfbf2125e3"),  
+    "nombre" : "Abel",  
+    "apellidos" : "Bernat Carrera",  
+    "edad" : 22,  
+    "dirección" : {  
+        "calle" : "Mayor",  
+        "numero" : 7,  
+        "cp" : "12502"  
+    },  
+    "nota" : [  
+        9.5,  
+        7.5,  
+        9,  
+        7  
+    ]  
+}
+</code></pre>
+<h2 class="azul" id="eliminacion-pop-y-pull">Eliminación: $pop y $pull</h2>
+<p>Hay más de una forma de eliminar elementos de un array.</p>
+<p><strong class="azul">$pop</strong></p>
+<p>Si queremos eliminar el primer elemento o el último, el modificador adecuado es
+<strong>$pop</strong>. La sintaxis es</p>
+<pre><code>{ $pop : { clave : posición } }
+</code></pre>
+<p>Donde en posición podremos poner:</p>
+<ul>
+<li>-1 , y borrará el primer elemento</li>
+<li>1 , y borrará el último</li>
+</ul>
+<p>En los siguientes ejemplos se borran primero el último elemento y después el
+primero.</p>
+<pre><code>&gt; db.alumnos.find()  
+{  
+    "_id" : ObjectId("56df11d778549bdfbf2125e3"),  
+    "nombre" : "Abel",  
+    "apellidos" : "Bernat Carrera",  
+    "edad" : 22,  
+    "dirección" : {  
+          "calle" : "Mayor",  
+          "numero" : 7,  
+          "cp" : "12502"  
+    },  
+    "nota" : [  
+          5,  
+  Siguiendo con la base de datos **cine**, realiza los siguientes ejercicios:         9.5,  
+          7.5,  
+          9,  
+          7  
+    ]  
+}
+
+&gt; db.alumnos.updateOne( {nombre:"Abel"} , { $pop : { nota : 1 } } )
+
+&gt; db.alumnos.find()  
+{  
+      "_id" : ObjectId("56df11d778549bdfbf2125e3"),  
+      "nombre" : "Abel",  
+      "apellidos" : "Bernat Carrera",  
+      "edad" : 22,  
+      "dirección" : {  
+            "calle" : "Mayor",  
+            "numero" : 7,  
+            "cp" : "12502"  
+      },  
+      "nota" : [  
+              5,  
+              9.5,  
+              7.5,  
+              9  
+      ]  
+}
+
+&gt; db.alumnos.updateOne( {nombre:"Abel"} , { $pop : { nota : -1 } } )
+
+&gt; db.alumnos.find()  
+{  
+      "_id" : ObjectId("56df11d778549bdfbf2125e3"),  
+      "nombre" : "Abel",  
+      "apellidos" : "Bernat Carrera",  
+      "edad" : 22,  
+      "dirección" : {  
+            "calle" : "Mayor",  
+            "numero" : 7,  
+            "cp" : "12502"  
+      },  
+      "nota" : [  
+            9.5,  
+            7.5,  
+            9  
+      ]  
+}
+</code></pre>
+<p><strong class="azul">$pull</strong></p>
+<p>Con este modificador borraremos los elementos del array que coincidan
+con una condición, estén en la posición que estemos. Observe cómo se puede
+eliminar más de un elemento.</p>
+<p>Para poder comprobarlo bien, primero insertamos otro elemento al final de
+el array, con el valor <strong>7.5</strong> (si ha seguido los mismos ejemplos que en
+estos apuntes, ese valor ya se encuentra en la segunda posición).</p>
+<pre><code>&gt; db.alumnos.updateOne( {nombre:"Abel"} , { $push : { nota : 7.5 } } )
+
+ &gt; db.alumnos.find()  
+{  
+    "_id" : ObjectId("56debe3017bf4ed437dc77c8"),  
+    "nombre" : "Abel",  
+    "apellidos" : "Bernat Carrera",  
+    "edad" : 22,  
+    "dirección" : {  
+        "calle" : "Mayor",  
+        "numero" : 7,  
+        "cp" : "12502"  
+    },  
+    "nota" : [  
+        9.5,  
+        7.5,  
+        9,  
+        7.5  
+    ]  
+}
+</code></pre>
+<p>Ahora vamos a borrar con <strong>$pull</strong> el elemento de valor <strong>7.5</strong></p>
+<pre><code>&gt; db.alumnos.update( {nombre:"Abel"} , { $pull : { nota : 7.5 } } )
+
+&gt; db.alumnos.find()  
+{  
+      "_id" : ObjectId("56debe3017bf4ed437dc77c8"),  
+      "nombre" : "Abel",  
+      "apellidos" : "Bernat Carrera",  
+      "edad" : 22,  
+      "dirección" : {  
+        "calle" : "Mayor",  
+        "numero" : 7,  
+        "cp" : "12502"  
+      },  
+      "nota" : [  
+          9.5,  
+          9  
+      ]  
+}
+</code></pre>
+<h2 id="ejercicio-1-parte-5">📚 Ejercicio 1 (parte 5)</h2>
+<p>Siguiendo con la base de datos <strong>cine</strong>, realiza los siguientes ejercicios:</p>
+<ul>
+<li>31- Agregar un actor llamado "Samuel L. Jackson" en la película "Pulp Fiction".  </li>
+<li>32- Agregar los actores “Martin Freeman” y “Ian McKellen” en todas las películas del The Hobbit</li>
+<li>33- Mostrar las películas en las que actúe “Brad Pitt”.</li>
+<li>34- Mostrar las películas donde actúen “Brad Pitt” y “Edward Norton”.</li>
+<li>35- Mostrar películas donde actúe “Brad Pitt” o “Uma Thurman”.</li>
+<li>36- Mostrar el último actor de cada película.</li>
+<li>37-Mostrar el segundo actor de cada película (si existe).</li>
+<li>38-Mostrar las películas que no tienen el campo actores.</li>
+<li>39-Mostrar las películas que tengan exactamente dos actores.</li>
+<li>40-Mostrar solo: título, año, y actores (solo los dos primeros)</li>
+<li>41-Añadir el actor “Helena Bonham Carter” a la película “Fight Club”.</li>
+<li>42-Eliminar el último actor de la película “Inglorious Basterds”.</li>
+<li>43-Eliminar al actor “Brad Pitt” de todas las películas en las que aparezca.</li>
+<li>44-Eliminar el primer actor de la película “Pulp Fiction”.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../10__operadores_actualizacion/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 10. Modificadores de actualización">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                10. Modificadores de actualización
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../12__agregacion/" class="md-footer__link md-footer__link--next" aria-label="Next: 12. Agregación">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                12. Agregación
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.integrate", "navigation.footer", "navigation.path"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
