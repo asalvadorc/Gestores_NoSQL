@@ -252,9 +252,9 @@ Por ejemplo, todos los alumnos de Castellón (el código postal debe empezar por
 
 ### 📚 **Ejercicio 1 (parte 3)**
 
-* 17- Obtener todas las películas ordenadas por año ascendente
-* 18- Mostrar solo las 3 primeras películas
-* 19- Saltar las 2 primeras películas y mostrar el resto
-* 20- Películas de Tarantino ordenadas por año
-* 21- Últimas 2 películas más recientes
-* 22- Buscar "Hobbit", ordenar y limitar a 2.
+* 17- Obtener el listado completo de películas ordenadas por año de estreno en orden ascendente (de la más antigua a la más reciente).
+* 18- Mostrar únicamente las tres primeras películas del resultado de la consulta.
+* 19- Omitir las dos primeras películas y mostrar todas las restantes.
+* 20- Obtener las películas dirigidas por Quentin Tarantino, ordenadas por año de estreno.
+* 21- Mostrar las dos películas más recientes según el año de estreno.
+* 22- Buscar las películas cuyo título contenga la palabra "Hobbit", ordenarlas por el título y limitar el resultado a dos documentos.

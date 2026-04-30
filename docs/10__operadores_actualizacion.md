@@ -369,11 +369,11 @@ En resumen, $max no sustituye siempre el valor, solo lo cambia si el nuevo es m�
 
 ### 📚 **Ejercicio 1 (parte 4)**
 
-* 23- Cambiar el año de Fight Club a 2000
-* 24- Añadir el campo rating con valor 9 a Pulp Fiction
-* 25- Incrementar el año en +1 a todas las películas de The Hobbit
-* 26- Añadir un actor a Fight Club
-* 27- Eliminar el campo rating de Pulp Fiction
-* 28- Añadir varios actores a Inglorious Basterds
-* 29- Añadir campo genero a todas las películas
-* 30- Cambiar "J.R.R. Tolkein" por "J.R.R. Tolkien"
+- 23- Actualizar el año de estreno de la película "Fight Club" para que pase a ser 2000.
+- 24- Añadir a la película "Pulp Fiction" un nuevo campo llamado rating con el valor 9.
+- 25- Incrementar en una unidad (+1) el año de estreno de todas las películas de "The Hobbit".
+- 26- Añadir a la película "Fight Club" dos nuevos campos: **oscar** con valor true y **numOscar** con valor 2.
+- 27- Eliminar el campo rating de la película "Pulp Fiction".
+- 28- Actualizar la película "Fight Club" para disminuir en una unidad (−1) el valor del campo **numOscar**.
+- 29- Añadir el campo genero a todas las películas de la colección.
+- 30- Corregir el nombre del autor "J.R.R. Tolkein", sustituyéndolo por "J.R.R. Tolkien" en los documentos donde aparezca.
